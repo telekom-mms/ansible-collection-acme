@@ -1,0 +1,32 @@
+---
+- name: set fact for acme_directory
+  set_fact: acme_directory="https://acme-v02.api.letsencrypt.org/directory"
+  when:
+    - letsencrypt_use_acme_live_directory | bool
+
+- name: create directories for letsencrypt
+  delegate_to: localhost
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0750
+  loop:
+    - "{{ letsencrypt_conf_dir }}"
+    - "{{ letsencrypt_cert_dir }}"
+  become: true
+  become_user: "{{ letsencrypt_conf_dir_user }}"
+
+- name: run certificate generation
+  include: create-keys.yml
+  when:
+    - letsencrypt_create_private_keys | bool
+
+- name: do http challenge
+  include: http-challenge.yml
+  when:
+    - letsencrypt_do_http_challenge | bool
+
+- name: do dns challenge
+  include: dns-challenge.yml
+  when:
+    - letsencrypt_do_dns_challenge | bool
