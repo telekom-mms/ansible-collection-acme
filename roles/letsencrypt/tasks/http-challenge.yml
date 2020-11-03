@@ -38,6 +38,8 @@
       copy:
         dest: "acme-challenge.{{ domain.common_name }}"
         content: "{{ challenge['challenge_data'][domain.common_name]['http-01']['resource_value'] }}"
+        owner: "{{ letsencrypt_conf_dir_user }}"
+        group: "{{ letsencrypt_conf_dir_group }}"
       register: challenge_file
       when:
         # only runs if the challenge is run the first time, because then there is challenge_data
@@ -47,6 +49,8 @@
       copy:
         dest: "acme-challenge.{{ item }}"
         content: "{{ challenge['challenge_data'][item]['http-01']['resource_value'] }}"
+        owner: "{{ letsencrypt_conf_dir_user }}"
+        group: "{{ letsencrypt_conf_dir_group }}"
       loop: "{{ domain.subject_alt_name }}"
       when:
         - domain.subject_alt_name is defined
