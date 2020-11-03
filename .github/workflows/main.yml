@@ -1,0 +1,62 @@
+---
+name: ansible-test
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on: [push, pull_request]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  ansible-sanity-tests:
+    name: Sanity (Ⓐ${{ matrix.ansible }}+py${{ matrix.python }})
+    strategy:
+      matrix:
+        ansible:
+          # It's important that Sanity is tested against all stable-X.Y branches
+          # Testing against `devel` may fail as new tests are added.
+          - stable-2.9
+          - stable-2.10
+        python:
+          - 2.7
+          - 3.7
+          - 3.8
+        exclude:
+          - python: 3.8  # blocked by ansible/ansible#70155
+    runs-on: ubuntu-latest
+    steps:
+      # ansible-test requires the collection to be in a directory in the form
+      # .../ansible_collections/NAMESPACE/COLLECTION_NAME/
+
+      - name: Check out code
+        uses: actions/checkout@v2
+        with:
+          path: ansible_collections/t_systems_mms/letsencrypt
+
+      - name: Set up Python ${{ matrix.ansible }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python }}
+
+      # Install the head of the given branch (devel, stable-2.10)
+      - name: Install ansible-base (${{ matrix.ansible }})
+        run: python -m pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
+
+      # run ansible-test sanity inside of Docker.
+      # The docker container has all the pinned dependencies that are required.
+      # Explicity specify the version of Python we want to test
+      - name: Run sanity tests
+        run: ansible-test sanity --docker -v --color --python ${{ matrix.python }}
+        working-directory: ./ansible_collections/t_systems_mms/letsencrypt
+
+  linting:
+    name: Ansible Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+        with:
+          path: ansible_collections/t_systems_mms/letsencrypt
+
+      - name: Run Linting
+        uses: ansible/ansible-lint-action@master
+        with: ./ansible_collections/t_systems_mms/letsencrypt/roles

@@ -1,4 +1,5 @@
 # Let's Encrypt Collection for Ansible
+**NOT STABLE - DO NOT USE IN PRODUCTION ENVIRONMENTS**
 
 This role issues Let's Encrypt certificates. Currently DNS-01 and HTTP-01 challenges are supported
 
