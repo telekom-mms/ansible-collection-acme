@@ -5,8 +5,9 @@ readme: README.md
 authors:
   - Sebastian Gumprich <sebastian.gumprich@t-systems.com>
   - Andreas Hering <andreas.hering@t-systems.com>
-description:
-  This collection contains a role for issuing ssl certificates from Let's Encrypt via dns- or http-challenge
+description: >-
+  This collection contains a role for issuing ssl certificates from Let's
+  Encrypt via dns- or http-challenge
 license:
   - GPL-2.0-or-later
 license_file: ''
