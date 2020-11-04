@@ -61,4 +61,4 @@ jobs:
         uses: ansible/ansible-lint-action@master
         with:
           targets: ansible_collections/t_systems_mms/letsencrypt/roles/letsencrypt
-          args: "-c ansible_collections/t_systems_mms/letsencrypt .ansible-lint"
+          args: "-c ansible_collections/t_systems_mms/letsencrypt/.ansible-lint"
