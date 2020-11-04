@@ -17,7 +17,6 @@ jobs:
           - stable-2.9
           - stable-2.10
         python:
-          - 2.7
           - 3.7
           - 3.8
         exclude:
@@ -59,4 +58,6 @@ jobs:
 
       - name: Run Linting
         uses: ansible/ansible-lint-action@master
-        with: ./ansible_collections/t_systems_mms/letsencrypt/roles
+        with:
+          targets: ansible_collections/t_systems_mms/letsencrypt/roles/letsencrypt
+          args: "-c ansible_collections/t_systems_mms/letsencrypt/.ansible-lint"
