@@ -17,3 +17,9 @@ repository: 'https://github.com/T-Systems-MMS/ansible-collection-letsencrypt'
 documentation: 'https://github.com/T-Systems-MMS/ansible-collection-letsencrypt'
 homepage: 'https://github.com/T-Systems-MMS/ansible-collection-letsencrypt'
 issues: 'https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/issues'
+build_ignore:
+  - .ansible-lint
+  - .gitattributes
+  - .github
+  - .yamllint.cfg
+  - tests
