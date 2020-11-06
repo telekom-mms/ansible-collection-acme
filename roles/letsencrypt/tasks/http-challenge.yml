@@ -11,18 +11,18 @@
 
 - name: Create CSR for certificate
   openssl_csr:
-    path: "{{ csr_path }}"
-    privatekey_path: "{{ private_key_path }}"
+    path: "{{ temp_certficate_dir.path }}/{{ domain.certificate_name }}.csr"
+    privatekey_path: "{{ temp_certficate_dir.path }}/{{ domain.certificate_name }}.key"
     email_address: "{{ domain.email_address }}"
     common_name: "{{ domain.common_name }}"
     subject_alt_name: "DNS:{{ domain.subject_alt_name | join(',DNS:') }}"
 
 - name: Create a challenge for {{ domain.common_name }} using a account key file.
   acme_certificate:
-    account_key_src: "{{ account_key_path }}"
+    account_key_src: "{{ temp_certficate_dir.path }}/letsencrypt_account.pem"
     account_email: "{{ account_email }}"
-    csr: "{{ csr_path }}"
-    cert: "{{ cert_path }}"
+    csr: "{{ temp_certficate_dir.path }}/{{ domain.certificate_name }}.csr"
+    cert: "{{ temp_certficate_dir.path }}/{{ domain.certificate_name }}.pem"
     challenge: http-01
     force: "{{ force_renewal | default(false) }}"
     acme_directory: "{{ acme_directory }}"
@@ -38,8 +38,8 @@
       copy:
         dest: "acme-challenge.{{ domain.common_name }}"
         content: "{{ challenge['challenge_data'][domain.common_name]['http-01']['resource_value'] }}"
-        owner: "{{ letsencrypt_conf_dir_user }}"
-        group: "{{ letsencrypt_conf_dir_group }}"
+        owner: "{{ letsencrypt_temp_cert_dir_user }}"
+        group: "{{ letsencrypt_temp_cert_dir_group }}"
       register: challenge_file
       when:
         # only runs if the challenge is run the first time, because then there is challenge_data
@@ -49,8 +49,8 @@
       copy:
         dest: "acme-challenge.{{ item }}"
         content: "{{ challenge['challenge_data'][item]['http-01']['resource_value'] }}"
-        owner: "{{ letsencrypt_conf_dir_user }}"
-        group: "{{ letsencrypt_conf_dir_group }}"
+        owner: "{{ letsencrypt_temp_cert_dir_user }}"
+        group: "{{ letsencrypt_temp_cert_dir_group }}"
       loop: "{{ domain.subject_alt_name }}"
       when:
         - domain.subject_alt_name is defined
@@ -90,12 +90,12 @@
     # validate certficate
     - name: Let the challenge be validated and retrieve the cert and intermediate certificate
       acme_certificate:
-        account_key_src: "{{ account_key_path }}"
+        account_key_src: "{{ temp_certficate_dir.path }}/letsencrypt_account.pem"
         account_email: "{{ account_email }}"
-        csr: "{{ csr_path }}"
-        cert: "{{ cert_path }}"
-        fullchain: "{{ fullchain_path }}"
-        chain: "{{ intermediate_path }}"
+        csr: "{{ temp_certficate_dir.path }}/{{ domain.certificate_name }}.csr"
+        cert: "{{ temp_certficate_dir.path }}/{{ domain.certificate_name }}.pem"
+        fullchain: "{{ temp_certficate_dir.path }}/{{ domain.certificate_name }}_fullchain.pem"
+        chain: "{{ temp_certficate_dir.path }}/{{ domain.certificate_name }}_intermediate.pem"
         challenge: http-01
         force: "{{ force_renewal | default(false) }}"
         acme_directory: "{{ acme_directory }}"

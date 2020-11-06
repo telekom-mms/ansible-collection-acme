@@ -1,21 +1,21 @@
 ---
 - name: Create RSA key to be used for acme account
   openssl_privatekey:
-    path: "{{ account_key_path }}"
+    path: "{{ temp_certficate_dir.path }}/letsencrypt_account.pem"
     size: 4096
     type: RSA
   no_log: true
 
 - name: Create RSA key to be used for certificate
   openssl_privatekey:
-    path: "{{ private_key_path }}"
+    path: "{{ temp_certficate_dir.path }}/{{ domain.certificate_name }}.key"
   when:
     - private_key_content is not defined
   no_log: true
 
 - name: create private key file from private_key_content-variable
   copy:
-    dest: "{{ private_key_path }}"
+    path: "{{ temp_certficate_dir.path }}/{{ domain.certificate_name }}.key"
     content: "{{ private_key_content }}"
     mode: 0400
   when:

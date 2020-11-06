@@ -2,16 +2,13 @@
 
 ### global
 letsencrypt_use_acme_live_directory: false
-# overwrite letsencrypt_conf_dir if you want to use a directory
-# which is accessible from all team members to allow running playbook
-# independend while using the same data
-letsencrypt_conf_dir: "{{ lookup('env','HOME') }}/letsencrypt"
-letsencrypt_cert_dir: "{{ letsencrypt_conf_dir }}/certs"
+# set path of temporary directory for certificate creation
+letsencrypt_temp_certficate_dir: "/var/tmp"
 ## set user and group of conf dirs to values of running user of the playbook
 # overwrite in vars to allow usage of another user
-letsencrypt_conf_dir_user: "{{ lookup('env', 'USER') }}"
+letsencrypt_temp_cert_dir_user: "{{ lookup('env', 'USER') }}"
 # overwrite in vars to allow usage of another group which may consist of more members
-letsencrypt_conf_dir_group: "{{ lookup('env', 'GROUP') }}"
+letsencrypt_temp_cert_dir_group: "{{ lookup('env', 'GROUP') }}"
 # set packagemanager to use for localhost connections (yum, apt)
 letsencrypt_prerequisites_packagemanager: "yum"
 # region for s3 bucket when
@@ -19,10 +16,4 @@ letsencrypt_s3_config_region: "eu-west-1"
 
 ### http challenge / dns challenge
 acme_directory: "https://acme-staging-v02.api.letsencrypt.org/directory"
-account_key_path: "{{ letsencrypt_conf_dir }}/letsencrypt_account.pem"
-csr_path: "{{ letsencrypt_cert_dir }}/{{ domain.certificate_name }}.csr"
-cert_path: "{{ letsencrypt_cert_dir }}/{{ domain.certificate_name }}.pem"
-intermediate_path: "{{ letsencrypt_cert_dir }}/{{ domain.certificate_name }}_intermediate.pem"
-fullchain_path: "{{ letsencrypt_cert_dir }}/{{ domain.certificate_name }}_fullchain.pem"
-private_key_path: "{{ letsencrypt_cert_dir }}/{{ domain.certificate_name }}.key"
 remaining_days: "30"

@@ -61,7 +61,6 @@ Currently the role only supports the InternetX autodns API. Feel free to contrib
 | email_address                       | yes      |         | mail address which is used for the certificate (reminder mails are sent here)
 | **configuration options**           |          |         |
 | private_key_content                 | no       |         | content of the created private key for the certificate (allows reuse of keys)
-| letsencrypt_create_private_keys     | no       | false   | create private keys
 | letsencrypt_do_http_challenge       | yes      | false   | use http challenge
 | letsencrypt_do_dns_challenge        | yes      | false   | use dns challenge
 | letsencrypt_use_acme_live_directory | no       | false   | choose if production certificates should be created, the staging directory of LE will be used by default
@@ -84,20 +83,14 @@ Currently the role only supports the InternetX autodns API. Feel free to contrib
 
 ## global role variables
 
-| Variable                                 | Required | Default                              | Description
-|------------------------------------------|----------|--------------------------------------|------------
-| letsencrypt_conf_dir                     | no       | $HOME                                | overwrite letsencrypt_conf_dir if you want to use a dir which is accessible from multiple users
-| letsencrypt_conf_dir_user                | yes      | $USER                                | you can overwrite letsencrypt_conf_dir_user with a user who should be used when a group readable directory is used
-| letsencrypt_conf_dir_group               | yes      | $GROUP                               | you can overwrite letsencrypt_conf_dir_group with a group which consists of multiple users if ansible role is used in subteams
-| letsencrypt_prerequisites_packagemanager | yes      | yum                                  | set the packagemanager which is used of the ansible_host. Possible values are all supported package managers from ansible package module
-| acme_directory                           | yes      | acme-staging-v02.api.letsencrypt.org | acme directory which will be used for certificate challenge
-| account_key_path                         | yes      | $letsencrypt_conf_dir                | path for account key of letsencrypt
-| csr_path                                 | yes      | $letsencrypt_conf_dir/certs          | path for csr which is created for challenge
-| cert_path                                | yes      | $letsencrypt_conf_dir/certs          | path for issued certificate
-| intermediate_path                        | yes      | $letsencrypt_conf_dir/certs          | path for intermediate chain
-| fullchain_path                           | yes      | $letsencrypt_conf_dir/certs          | path for full chain file (certificate + intermediate)
-| private_key_path                         | yes      | $letsencrypt_conf_dir/certs          | path for private key
-| remaining_days                           | yes      | 30                                   | min days remaining before certificate will be renewed
+| Variable                                 | Required | Default                                | Description
+|------------------------------------------|----------|----------------------------------------|------------
+| letsencrypt_temp_cert_dir                | no       | /var/tmp                               | set path of temporary directory for certificate creation
+| letsencrypt_temp_cert_dir_user           | yes      | $USER                                  | you can overwrite letsencrypt_temp_cert_dir_user with a user who should be used when a group readable directory is used
+| letsencrypt_temp_cert_dir_group          | yes      | $GROUP                                 | you can overwrite letsencrypt_temp_cert_dir_group with a group which consists of multiple users if ansible role is used in subteams
+| letsencrypt_prerequisites_packagemanager | yes      | yum                                    | set the packagemanager which is used of the ansible_host. Possible values are all supported package managers from ansible package module
+| acme_directory                           | yes      | acme-staging-v02.api.letsencrypt.org   | acme directory which will be used for certificate challenge
+| remaining_days                           | yes      | 30                                     | min days remaining before certificate will be renewed
 
 ### Usage
 
