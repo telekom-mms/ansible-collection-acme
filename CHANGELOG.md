@@ -4,9 +4,14 @@
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.1...0.0.2)
 
+**Closed issues:**
+
+- Remove unwanted files from release-tarball  [\#4](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/issues/4)
+
 **Merged pull requests:**
 
 - remove variable letsencrypt\_create\_private\_keys [\#7](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/7) ([avalor1](https://github.com/avalor1))
+- add build\_ignore to filter unwanted files from release-tarball [\#6](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/6) ([avalor1](https://github.com/avalor1))
 
 ## [0.0.1](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.1) (2020-11-04)
 
