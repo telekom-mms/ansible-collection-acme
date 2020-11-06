@@ -61,7 +61,6 @@ Currently the role only supports the InternetX autodns API. Feel free to contrib
 | email_address                       | yes      |         | mail address which is used for the certificate (reminder mails are sent here)
 | **configuration options**           |          |         |
 | private_key_content                 | no       |         | content of the created private key for the certificate (allows reuse of keys)
-| letsencrypt_create_private_keys     | no       | false   | create private keys
 | letsencrypt_do_http_challenge       | yes      | false   | use http challenge
 | letsencrypt_do_dns_challenge        | yes      | false   | use dns challenge
 | letsencrypt_use_acme_live_directory | no       | false   | choose if production certificates should be created, the staging directory of LE will be used by default
@@ -161,7 +160,6 @@ ansible-playbook playbooks/letsencrypt.yml --ask-vault
       email_address: "ssl-admin@example.com"
       subject_alt_name:
         - domain2.example.com
-    letsencrypt_create_private_keys: true
     letsencrypt_do_http_challenge: true
     letsencrypt_do_dns_challenge: false
     letsencrypt_use_acme_live_directory: false
@@ -193,7 +191,6 @@ ansible-playbook playbooks/letsencrypt.yml --ask-vault
       email_address: "ssl-admin@example.com"
       subject_alt_name:
         - "example.com"
-    letsencrypt_create_private_keys: true
     letsencrypt_do_http_challenge: false
     letsencrypt_do_dns_challenge: true
     letsencrypt_use_acme_live_directory: false

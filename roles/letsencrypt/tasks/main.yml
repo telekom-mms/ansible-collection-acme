@@ -18,8 +18,6 @@
 
 - name: run certificate generation
   include: create-keys.yml
-  when:
-    - letsencrypt_create_private_keys | bool
 
 - name: do http challenge
   include: http-challenge.yml
