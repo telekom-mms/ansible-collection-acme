@@ -16,13 +16,22 @@ letsencrypt_conf_dir_group: "{{ lookup('env', 'GROUP') }}"
 letsencrypt_prerequisites_packagemanager: "yum"
 # region for s3 bucket when
 letsencrypt_s3_config_region: "eu-west-1"
+# convert certificate to other format
+convert_certificate: false
 
 ### http challenge / dns challenge
 acme_directory: "https://acme-staging-v02.api.letsencrypt.org/directory"
+acme_live_directory: "https://acme-v02.api.letsencrypt.org/directory"
 account_key_path: "{{ letsencrypt_conf_dir }}/letsencrypt_account.pem"
 csr_path: "{{ letsencrypt_cert_dir }}/{{ domain.certificate_name }}.csr"
 cert_path: "{{ letsencrypt_cert_dir }}/{{ domain.certificate_name }}.pem"
+pfx_cert_path: "{{ letsencrypt_cert_dir }}/{{ domain.certificate_name }}.pfx"
 intermediate_path: "{{ letsencrypt_cert_dir }}/{{ domain.certificate_name }}_intermediate.pem"
 fullchain_path: "{{ letsencrypt_cert_dir }}/{{ domain.certificate_name }}_fullchain.pem"
 private_key_path: "{{ letsencrypt_cert_dir }}/{{ domain.certificate_name }}.key"
 remaining_days: "30"
+
+# upload certificate
+upload_certificate: false
+azure_rm_keyvault_certificate_file: "{{ pfx_cert_path }}"
+azure_rm_keyvault_certificate_name: "{{ domain.certificate_name }}"
