@@ -9,6 +9,7 @@
     records:
       - entry: "{{ challenge['challenge_data'][domain.common_name]['dns-01']['resource_value'] }}"
 
+# split top_level for zone_name and if subdomain is defined add subdomain to relative_name
 - name: add a new TXT record to the SAN top-level domains
   azure_rm_dnsrecordset:
     resource_group: "{{ azure_resource_group }}"
@@ -22,6 +23,7 @@
   loop: "{{ domain.subject_alt_name.top_level }}"
   when: domain.subject_alt_name.top_level is defined
 
+# split second_level for zone_name and if subdomain is defined add subdomain to relative_name
 - name: add a new TXT record to the SAN second-level domains
   azure_rm_dnsrecordset:
     resource_group: "{{ azure_resource_group }}"

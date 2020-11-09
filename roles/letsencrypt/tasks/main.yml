@@ -1,31 +1,25 @@
 ---
-# - name: preconditions
-#   include_tasks: letsencrypt_preconditions.yml
+- name: preconditions
+  include_tasks: letsencrypt_preconditions.yml
 
-# - name: run certificate generation
-#   include_tasks: create-keys.yml
+- name: run certificate generation
+  include_tasks: create-keys.yml
 
-# # http challenge
-# - name: do http challenge
-#   include_tasks: http-challenge.yml
-#   when:
-#     - letsencrypt_do_http_challenge | bool
-
-# # dns challenge
-# - name: do dns challenge
-#   include_tasks: dns-challenge.yml
-#   when:
-#     - letsencrypt_do_dns_challenge | bool
-
-# # convert to other format
-# - name: convert certificate
-#   include_tasks: convert_certificate.yml
-#   when:
-#     - convert_certificate | bool
-#     - convert_to is defined
-
-# upload certificate to keystore
-- name: upload certificate to keystore
-  include_tasks: upload_certificate.yml
+# http challenge
+- name: do http challenge
+  include_tasks: http-challenge.yml
   when:
-    - upload_certificate | bool
+    - letsencrypt_do_http_challenge | bool
+
+# dns challenge
+- name: do dns challenge
+  include_tasks: dns-challenge.yml
+  when:
+    - letsencrypt_do_dns_challenge | bool
+
+# convert to other format
+- name: convert certificate
+  include_tasks: convert_certificate.yml
+  when:
+    - convert_certificate | bool
+    - convert_to is defined

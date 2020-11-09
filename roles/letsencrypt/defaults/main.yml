@@ -30,8 +30,3 @@ intermediate_path: "{{ letsencrypt_cert_dir }}/{{ domain.certificate_name }}_int
 fullchain_path: "{{ letsencrypt_cert_dir }}/{{ domain.certificate_name }}_fullchain.pem"
 private_key_path: "{{ letsencrypt_cert_dir }}/{{ domain.certificate_name }}.key"
 remaining_days: "30"
-
-# upload certificate
-upload_certificate: false
-azure_rm_keyvault_certificate_file: "{{ pfx_cert_path }}"
-azure_rm_keyvault_certificate_name: "{{ domain.certificate_name }}"

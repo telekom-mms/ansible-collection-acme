@@ -1,5 +1,0 @@
----
-- name: upload to Azure Keyvault
-  shell: "az keyvault certificate import --file {{ azure_rm_keyvault_certificate_file }} --name {{ azure_rm_keyvault_certificate_name }} --vault-name {{ azure_rm_keyvault }}"
-  when:
-    - upload_keystore == "azure_keyvault"
