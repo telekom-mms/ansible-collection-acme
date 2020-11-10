@@ -103,8 +103,7 @@ wildcard-certificates use base name again as otherwise DNS txt record creation c
 | fullchain_path                           | yes      | $letsencrypt_conf_dir/certs          | path for full chain file (certificate + intermediate)
 | private_key_path                         | yes      | $letsencrypt_conf_dir/certs          | path for private key
 | remaining_days                           | yes      | 30                                   | min days remaining before certificate will be renewed
-| convert_certificate | yes      | false   | convert to other format
-| convert_to          | no       |         | to whoch format should the certificateconverted: pfx
+| convert_cert_to                          | no       |                                      | format to convert the certificate to: `pfx`
 
 ### Usage
 

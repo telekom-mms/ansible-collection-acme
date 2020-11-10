@@ -1,4 +1,4 @@
 ---
 - name: convert certificate to pfx format
   shell: "openssl pkcs12 -inkey {{ private_key_path }} -in {{ fullchain_path }} -export -out {{ pfx_cert_path }}"
-  when: convert_to == "pfx"
+  when: convert_cert_to == "pfx"

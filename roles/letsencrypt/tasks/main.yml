@@ -21,5 +21,4 @@
 - name: convert certificate
   include_tasks: convert_certificate.yml
   when:
-    - convert_certificate | bool
-    - convert_to is defined
+    - convert_cert_to is defined

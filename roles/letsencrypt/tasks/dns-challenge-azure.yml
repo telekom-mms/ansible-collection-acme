@@ -1,3 +1,4 @@
+---
 - name: create TXT record in a new record set
   azure_rm_dnsrecordset:
     resource_group: "{{ azure_resource_group }}"
