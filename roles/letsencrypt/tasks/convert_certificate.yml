@@ -1,4 +1,9 @@
 ---
 - name: convert certificate to pfx format
-  shell: "openssl pkcs12 -inkey {{ private_key_path }} -in {{ fullchain_path }} -export -out {{ pfx_cert_path }}"
+  openssl_pkcs12:
+    action: export
+    path: "{{ pfx_cert_path }}"
+    name: "{{ domain.certificate_name }}"
+    privatekey_path: "{{ private_key_path }}"
+    certificate_path: "{{ fullchain_path }}"
   when: convert_cert_to == "pfx"
