@@ -5,7 +5,8 @@
     - not letsencrypt_use_acme_live_directory
 
 - name: set fact for acme_directory
-  set_fact: acme_directory="{{ acme_live_directory }}"
+  set_fact:
+    acme_directory: "{{ acme_live_directory }}"
   when:
     - letsencrypt_use_acme_live_directory | bool
 
