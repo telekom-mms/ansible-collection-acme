@@ -1,4 +1,3 @@
-# AutoDNS
 - name: create the certificate for *.example.com
   hosts: localhost
   roles:
@@ -15,7 +14,6 @@
     letsencrypt_do_http_challenge: false
     letsencrypt_do_dns_challenge: true
     letsencrypt_use_acme_live_directory: false
-    letsencrypt_dns_provider: autodns
     account_email: "ssl-admin@example.com"
     private_key_content: !vault |
           $ANSIBLE_VAULT;1.1;AES256
