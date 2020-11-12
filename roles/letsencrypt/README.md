@@ -47,7 +47,7 @@ rewrite (\.well-known/acme-challenge.*) https://letsencrypt-challenge-bucket.s3.
 ```
 
 ## dns-challenge
-Currently the role only supports the InternetX autodns API. Feel free to contribute with other DNS APIs.
+Currently the role supports the InternetX autodns API and the Azure DNS API. Feel free to contribute with other DNS APIs.
 
 ## Variables for DNS & HTTP challenge
 
@@ -57,13 +57,17 @@ Currently the role only supports the InternetX autodns API. Feel free to contrib
 | certificate_name                    | yes      |         | name of the resulting certificate. Most useful for wildcard certificates to not have files named '*.example.com' on the filesystem
 | common_name                         | yes      |         | domain for which the certificate will be created, non wildcards are also possible
 | zone                                | yes      |         | zone in which the dns records should be created
-| subject_alt_name                    | yes      |         | if you want to use wildcard-certificates use base name again as otherwise DNS txt record creation could fail
+| subject_alt_name                    | yes      |         | if you want to use
+wildcard-certificates use base name again as otherwise DNS txt record creation could fail
+| subject_alt_name: top_level:        | no       |         | list of top-level domains
+| subject_alt_name: second_level:     | no       |         | list of second_level domains
 | email_address                       | yes      |         | mail address which is used for the certificate (reminder mails are sent here)
 | **configuration options**           |          |         |
 | private_key_content                 | no       |         | content of the created private key for the certificate (allows reuse of keys)
 | letsencrypt_do_http_challenge       | yes      | false   | use http challenge
 | letsencrypt_do_dns_challenge        | yes      | false   | use dns challenge
 | letsencrypt_use_acme_live_directory | no       | false   | choose if production certificates should be created, the staging directory of LE will be used by default
+| azure_resource_group                | no       |         | Azure Resource Group for zone_name
 
 ## Variables for HTTP challenge
 
@@ -76,10 +80,11 @@ Currently the role only supports the InternetX autodns API. Feel free to contrib
 
 ## Variables for dns-challenge
 
-| Variable     | Required | Default   | Description
-|--------------|----------|-----------|------------
-| dns_user     | yes      |           | username to access the DNS api
-| dns_password | yes      |           | password to access the DNS api
+| Variable                 | Required | Default   | Description
+|--------------------------|----------|-----------|------------
+| dns_user                 | yes      |           | username to access the DNS api
+| dns_password             | yes      |           | password to access the DNS api
+| letsencrypt_dns_provider | no       |         | which DNS provider should be used: autodns, azure
 
 ## global role variables
 
@@ -89,7 +94,8 @@ Currently the role only supports the InternetX autodns API. Feel free to contrib
 | letsencrypt_conf_dir_user                | yes      | $USER                                | you can overwrite letsencrypt_conf_dir_user with a user who should be used when a group readable directory is used
 | letsencrypt_conf_dir_group               | yes      | $GROUP                               | you can overwrite letsencrypt_conf_dir_group with a group which consists of multiple users if ansible role is used in subteams
 | letsencrypt_prerequisites_packagemanager | yes      | yum                                  | set the packagemanager which is used of the ansible_host. Possible values are all supported package managers from ansible package module
-| acme_directory                           | yes      | acme-staging-v02.api.letsencrypt.org | acme directory which will be used for certificate challenge
+| acme_staging_directory                   | no       | acme-staging-v02.api.letsencrypt.org | acme directory which will be used for certificate challenge
+| acme_live_directory                      | no       | acme-v02.api.letsencrypt.org         | acme directory which will be used for certificate challenge
 | account_key_path                         | yes      | $letsencrypt_conf_dir                | path for account key of letsencrypt
 | csr_path                                 | yes      | $letsencrypt_conf_dir/certs          | path for csr which is created for challenge
 | cert_path                                | yes      | $letsencrypt_conf_dir/certs          | path for issued certificate
@@ -97,6 +103,7 @@ Currently the role only supports the InternetX autodns API. Feel free to contrib
 | fullchain_path                           | yes      | $letsencrypt_conf_dir/certs          | path for full chain file (certificate + intermediate)
 | private_key_path                         | yes      | $letsencrypt_conf_dir/certs          | path for private key
 | remaining_days                           | yes      | 30                                   | min days remaining before certificate will be renewed
+| convert_cert_to                          | no       |                                      | format to convert the certificate to: `pfx`
 
 ### Usage
 

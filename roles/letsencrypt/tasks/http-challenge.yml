@@ -6,8 +6,6 @@
       - python-boto3
     state: present
     use: "{{ letsencrypt_prerequisites_packagemanager }}"
-  become: true
-  become_user: "root"
 
 - name: Create CSR for certificate
   openssl_csr:
