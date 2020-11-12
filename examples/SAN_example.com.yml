@@ -1,4 +1,3 @@
-# AutoDNS
 - name: create the certificate for example.com
   hosts: localhost
   roles:
