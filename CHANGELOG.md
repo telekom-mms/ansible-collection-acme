@@ -4,6 +4,10 @@
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.3...0.0.4)
 
+**Implemented enhancements:**
+
+- add description of force\_renewal variable [\#12](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/12) ([avalor1](https://github.com/avalor1))
+
 **Merged pull requests:**
 
 - update checkout version for release workflow [\#11](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/11) ([avalor1](https://github.com/avalor1))
