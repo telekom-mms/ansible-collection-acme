@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.0.4](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.4) (2020-11-12)
+
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.3...0.0.4)
+
+**Merged pull requests:**
+
+- update checkout version for release workflow [\#11](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/11) ([avalor1](https://github.com/avalor1))
+- update checkout version in galaxy push workflow [\#10](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/10) ([avalor1](https://github.com/avalor1))
+
 ## [0.0.3](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.3) (2020-11-12)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.2...0.0.3)
