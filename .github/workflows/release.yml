@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     name: create release draft
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2.3.4
 
       - name: 'Get Previous tag'
         id: previoustag
