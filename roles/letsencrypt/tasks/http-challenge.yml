@@ -13,7 +13,7 @@
     privatekey_path: "{{ private_key_path }}"
     email_address: "{{ domain.email_address }}"
     common_name: "{{ domain.common_name }}"
-    subject_alt_name: "DNS:{{ domain.subject_alt_name | join(',DNS:') }}"
+    subject_alt_name: "DNS:{{ (domain.subject_alt_name | default(domain.common_name) ) | join(',DNS:') }}"
 
 - name: Create a challenge for {{ domain.common_name }} using a account key file.
   acme_certificate:

@@ -1,12 +1,33 @@
 # Changelog
 
-## [0.0.2](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.2) (2020-11-06)
+## [0.0.4](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.4) (2020-11-12)
 
-[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.1...0.0.2)
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.3...0.0.4)
+
+**Implemented enhancements:**
+
+- add description of force\_renewal variable [\#12](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/12) ([avalor1](https://github.com/avalor1))
+
+**Merged pull requests:**
+
+- update checkout version for release workflow [\#11](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/11) ([avalor1](https://github.com/avalor1))
+- update checkout version in galaxy push workflow [\#10](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/10) ([avalor1](https://github.com/avalor1))
+
+## [0.0.3](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.3) (2020-11-12)
+
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.2...0.0.3)
 
 **Closed issues:**
 
 - Remove unwanted files from release-tarball  [\#4](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/issues/4)
+
+**Merged pull requests:**
+
+- Add Azure dns provider challenge [\#8](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/8) ([michaelamattes](https://github.com/michaelamattes))
+
+## [0.0.2](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.2) (2020-11-06)
+
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.1...0.0.2)
 
 **Merged pull requests:**
 

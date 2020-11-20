@@ -68,6 +68,7 @@ wildcard-certificates use base name again as otherwise DNS txt record creation c
 | letsencrypt_do_dns_challenge        | yes      | false   | use dns challenge
 | letsencrypt_use_acme_live_directory | no       | false   | choose if production certificates should be created, the staging directory of LE will be used by default
 | azure_resource_group                | no       |         | Azure Resource Group for zone_name
+| force_renewal                       | no       |         | Force renewal of certificate
 
 ## Variables for HTTP challenge
 
