@@ -20,3 +20,8 @@
   loop:
     - "{{ letsencrypt_conf_dir }}"
     - "{{ letsencrypt_cert_dir }}"
+
+- name: set fact for letsencrypt_conf_dir_group
+  set_fact:
+    letsencrypt_conf_dir_group: "{{ letsencrypt_conf_dir_user }}"
+  when: letsencrypt_conf_dir_group | length == 0
