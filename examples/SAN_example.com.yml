@@ -12,7 +12,6 @@
         - example.com
         - domain1.example.com
         - domain2.example.com
-    letsencrypt_create_private_keys: true
     letsencrypt_do_http_challenge: true
     letsencrypt_do_dns_challenge: false
     letsencrypt_use_acme_live_directory: false
