@@ -1,15 +1,4 @@
 ---
-- name: create TXT record in a new record set
-  azure_rm_dnsrecordset:
-    resource_group: "{{ azure_resource_group }}"
-    relative_name: "_acme-challenge"
-    zone_name: "{{ domain.zone }}"
-    record_mode: append
-    state: present
-    record_type: TXT
-    records:
-      - entry: "{{ challenge['challenge_data'][domain.common_name]['dns-01']['resource_value'] }}"
-
 # split top_level for zone_name and if subdomain is defined add subdomain to relative_name
 - name: add a new TXT record to the SAN top-level domains
   azure_rm_dnsrecordset:
@@ -53,16 +42,6 @@
     terms_agreed: true
     remaining_days: "{{ remaining_days }}"
     data: "{{ challenge }}"
-
-- name: remove created TXT record to keep DNS zone clean
-  azure_rm_dnsrecordset:
-    resource_group: "{{ azure_resource_group }}"
-    relative_name: "_acme-challenge"
-    zone_name: "{{ domain.zone }}"
-    state: absent
-    record_type: TXT
-    records:
-      - entry: "{{ challenge['challenge_data'][domain.common_name]['dns-01']['resource_value'] }}"
 
 - name: remove created SAN top-level TXT records to keep DNS zone clean
   azure_rm_dnsrecordset:

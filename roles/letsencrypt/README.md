@@ -55,7 +55,6 @@ Currently the role supports the InternetX autodns API and the Azure DNS API. Fee
 |-------------------------------------|----------|---------|------------
 | **domain configuration**
 | certificate_name                    | yes      |         | name of the resulting certificate. Most useful for wildcard certificates to not have files named '*.example.com' on the filesystem
-| common_name                         | yes      |         | domain for which the certificate will be created, non wildcards are also possible
 | zone                                | yes      |         | zone in which the dns records should be created
 | subject_alt_name                    | yes      |         | if you want to use
 wildcard-certificates use base name again as otherwise DNS txt record creation could fail
@@ -163,7 +162,6 @@ ansible-playbook playbooks/letsencrypt.yml --ask-vault
   vars:
     domain:
       certificate_name: "domain1.example.com"
-      common_name: "domain1.example.com"
       zone: "example.com"
       email_address: "ssl-admin@example.com"
       subject_alt_name:
@@ -194,7 +192,6 @@ ansible-playbook playbooks/letsencrypt.yml --ask-vault
   vars:
     domain:
       certificate_name: "wildcard.example.com"
-      common_name: "*.example.com"
       zone: "example.com"
       email_address: "ssl-admin@example.com"
       subject_alt_name:

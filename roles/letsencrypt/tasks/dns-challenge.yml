@@ -4,21 +4,20 @@
     path: "{{ csr_path }}"
     privatekey_path: "{{ private_key_path }}"
     email_address: "{{ domain.email_address }}"
-    common_name: "{{ domain.common_name }}"
     subject_alt_name: "DNS:{{ domain.subject_alt_name | join(',DNS:') }}"
   when:
     - domain.subject_alt_name.top_level is undefined and domain.subject_alt_name.second_level is undefined
+
 - name: Create CSR for certificate
   openssl_csr:
     path: "{{ csr_path }}"
     privatekey_path: "{{ private_key_path }}"
     email_address: "{{ domain.email_address }}"
-    common_name: "{{ domain.common_name }}"
     subject_alt_name: "DNS:{{ (domain.subject_alt_name.top_level | default([])) | union(domain.subject_alt_name.second_level | default([])) | join(',DNS:') }}"
   when:
     - domain.subject_alt_name.top_level is defined or domain.subject_alt_name.second_level is defined
 
-- name: Create a challenge for {{ domain.common_name }} using a account key file.
+- name: Create a challenge for {{ domain.certificate_name }} using a account key file.
   acme_certificate:
     account_key_src: "{{ account_key_path }}"
     account_email: "{{ account_email }}"
