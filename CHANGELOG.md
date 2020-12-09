@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.0.5](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.5) (2020-12-01)
+## [0.0.5](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.5) (2020-12-09)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.4...0.0.5)
 
@@ -9,8 +9,13 @@
 - Push to Galaxy Fails [\#13](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/issues/13)
 - add second checkout to solve race condition \(version gets updated but… [\#15](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/15) ([avalor1](https://github.com/avalor1))
 
+**Closed issues:**
+
+- subject\_alt\_name not optional [\#9](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/issues/9)
+
 **Merged pull requests:**
 
+- remove common\_name variable [\#18](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/18) ([avalor1](https://github.com/avalor1))
 - remove letsencrypt\_create\_private\_keys variable from examples [\#17](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/17) ([avalor1](https://github.com/avalor1))
 
 ## [0.0.4](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.4) (2020-11-12)
