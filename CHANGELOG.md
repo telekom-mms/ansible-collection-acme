@@ -15,6 +15,7 @@
 
 **Merged pull requests:**
 
+- fix ansible error if group is empty [\#19](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/19) ([avalor1](https://github.com/avalor1))
 - remove common\_name variable [\#18](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/18) ([avalor1](https://github.com/avalor1))
 - remove letsencrypt\_create\_private\_keys variable from examples [\#17](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/17) ([avalor1](https://github.com/avalor1))
 
