@@ -6,7 +6,6 @@
   vars:
     domain:
       certificate_name: "wildcard.example.com"
-      common_name: "*.example.com"
       zone: "example.com"
       email_address: "ssl-admin@example.com"
       subject_alt_name:
@@ -41,7 +40,6 @@
     domain:
       email_address: "ssl-admin@example.com"
       certificate_name: "wildcard.example.com"
-      common_name: "*.example.com"
       zone: "example.com"
       subject_alt_name:
         top_level:

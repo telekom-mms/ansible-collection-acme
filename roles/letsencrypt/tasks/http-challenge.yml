@@ -12,10 +12,9 @@
     path: "{{ csr_path }}"
     privatekey_path: "{{ private_key_path }}"
     email_address: "{{ domain.email_address }}"
-    common_name: "{{ domain.common_name }}"
     subject_alt_name: "DNS:{{ domain.subject_alt_name | join(',DNS:') }}"
 
-- name: Create a challenge for {{ domain.common_name }} using a account key file.
+- name: Create a challenge for {{ domain.certificate_name }} using a account key file.
   acme_certificate:
     account_key_src: "{{ account_key_path }}"
     account_email: "{{ account_email }}"
@@ -32,17 +31,6 @@
 - name: validate challenge only if it is created or changed
   when: challenge is changed
   block:
-    - name: create challenge file with common domain for s3 upload
-      copy:
-        dest: "acme-challenge.{{ domain.common_name }}"
-        content: "{{ challenge['challenge_data'][domain.common_name]['http-01']['resource_value'] }}"
-        owner: "{{ letsencrypt_conf_dir_user }}"
-        group: "{{ letsencrypt_conf_dir_group }}"
-      register: challenge_file
-      when:
-        # only runs if the challenge is run the first time, because then there is challenge_data
-        - challenge['challenge_data'][domain.common_name] is defined
-
     - name: create challenge file with SAN domain for s3 upload
       copy:
         dest: "acme-challenge.{{ item }}"
@@ -54,20 +42,6 @@
         - domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
         - challenge['challenge_data'][item] is defined
-
-    - name: upload challenge file for common domain to s3 bucket
-      aws_s3:
-        aws_access_key: "{{ letsencrypt_s3_access_key }}"
-        aws_secret_key: "{{ letsencrypt_s3_secret_key }}"
-        bucket: "{{ letsencrypt_s3_bucket_name }}"
-        object: "{{ challenge['challenge_data'][domain.common_name]['http-01']['resource'] }}"
-        src: "acme-challenge.{{ domain.common_name }}"
-        mode: "put"
-        region: "{{ letsencrypt_s3_config_region }}"
-        permission: "public-read"
-      when:
-        # only runs if the challenge is run the first time, because then there is challenge_data
-        - challenge['challenge_data'][domain.common_name] is defined
 
     - name: upload challenge file for SAN domain to s3 bucket
       aws_s3:
@@ -102,18 +76,6 @@
         remaining_days: "{{ remaining_days }}"
         data: "{{ challenge }}"
 
-    - name: remove challenge file for common domain from s3 bucket
-      aws_s3:
-        aws_access_key: "{{ letsencrypt_s3_access_key }}"
-        aws_secret_key: "{{ letsencrypt_s3_secret_key }}"
-        bucket: "{{ letsencrypt_s3_bucket_name }}"
-        object: "{{ challenge['challenge_data'][domain.common_name]['http-01']['resource'] }}"
-        mode: "delobj"
-        region: "{{ letsencrypt_s3_config_region }}"
-      when:
-        # only runs if the challenge is run the first time, because then there is challenge_data
-        - challenge['challenge_data'][domain.common_name] is defined
-
     - name: remove challenge file for SAN domain from s3 bucket
       aws_s3:
         aws_access_key: "{{ letsencrypt_s3_access_key }}"
@@ -127,14 +89,6 @@
         - domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
         - challenge['challenge_data'][item] is defined
-
-    - name: remove challenge file for common domain from fs
-      file:
-        dest: "acme-challenge.{{ domain.common_name }}"
-        state: absent
-      when:
-        # only runs if the challenge is run the first time, because then there is challenge_data
-        - challenge['challenge_data'][domain.common_name] is defined
 
     - name: remove challenge file for SAN domain from fs
       file:

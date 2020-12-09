@@ -5,7 +5,6 @@
   vars:
     domain:
       certificate_name: "example.com"
-      common_name: "www.example.com"
       zone: "example.com"
       email_address: "ssl-admin@example.com"
       subject_alt_name:
@@ -43,7 +42,6 @@
     convert_cert_to: pfx
     domain:
       certificate_name: "example.com"
-      common_name: "www.example.com"
       zone: "example.com"
       email_address: "ssl-admin@example.com"
       subject_alt_name:

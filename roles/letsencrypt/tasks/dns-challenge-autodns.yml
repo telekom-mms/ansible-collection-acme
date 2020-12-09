@@ -15,29 +15,6 @@
           }
       register: login
 
-    - name: add a new TXT record to the common domain
-      uri:
-        url: "https://api.autodns.com/v1/zone/{{ domain.zone }}/a.ns14.net"
-        method: PATCH
-        body_format: json
-        body:
-          {
-            "origin": "{{ domain.zone }}",
-            "resourceRecordsAdd": [
-              {
-                "name": "_acme-challenge",
-                "ttl": 60,
-                "type": "TXT",
-                "value": "{{ challenge['challenge_data'][domain.common_name]['dns-01']['resource_value'] }}"
-              }
-            ]
-          }
-        headers:
-          Cookie: "{{ login.set_cookie }}"
-      when:
-        # only runs if the challenge is run the first time, because then there is challenge_data
-        - challenge['challenge_data'][domain.common_name] is defined
-
     - name: add a new TXT record to the SAN domains
       uri:
         url: "https://api.autodns.com/v1/zone/{{ domain.zone }}/a.ns14.net"
@@ -78,29 +55,6 @@
         terms_agreed: true
         remaining_days: "{{ remaining_days }}"
         data: "{{ challenge }}"
-
-    - name: remove created TXT record to keep DNS zone clean
-      uri:
-        url: "https://api.autodns.com/v1/zone/{{ domain.zone }}/a.ns14.net"
-        method: PATCH
-        body_format: json
-        body:
-          {
-            "origin": "{{ domain.zone }}",
-            "resourceRecordsRem": [
-              {
-                "name": "_acme-challenge",
-                "ttl": 60,
-                "type": "TXT",
-                "value": "{{ challenge['challenge_data'][domain.common_name]['dns-01']['resource_value'] }}"
-              }
-            ]
-          }
-        headers:
-          Cookie: "{{ login.set_cookie }}"
-      when:
-        # only runs if the challenge is run the first time, because then there is challenge_data
-        - challenge['challenge_data'][domain.common_name] is defined
 
     - name: remove created SAN TXT records to keep DNS zone clean
       uri:
