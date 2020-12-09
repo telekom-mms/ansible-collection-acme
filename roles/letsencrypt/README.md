@@ -90,9 +90,7 @@ wildcard-certificates use base name again as otherwise DNS txt record creation c
 
 | Variable                                 | Required | Default                              | Description
 |------------------------------------------|----------|--------------------------------------|------------
-| letsencrypt_conf_dir                     | no       | $HOME                                | overwrite letsencrypt_conf_dir if you want to use a dir which is accessible from multiple users
-| letsencrypt_conf_dir_user                | yes      | $USER                                | you can overwrite letsencrypt_conf_dir_user with a user who should be used when a group readable directory is used
-| letsencrypt_conf_dir_group               | yes      | $GROUP                               | you can overwrite letsencrypt_conf_dir_group with a group which consists of multiple users if ansible role is used in subteams
+| letsencrypt_conf_dir                     | no       | $HOME                                | overwrite letsencrypt_conf_dir if you want to use another directory which is accessible for the user which runs the playbook
 | letsencrypt_prerequisites_packagemanager | yes      | yum                                  | set the packagemanager which is used of the ansible_host. Possible values are all supported package managers from ansible package module
 | acme_staging_directory                   | no       | acme-staging-v02.api.letsencrypt.org | acme directory which will be used for certificate challenge
 | acme_live_directory                      | no       | acme-v02.api.letsencrypt.org         | acme directory which will be used for certificate challenge
