@@ -7,11 +7,6 @@ letsencrypt_use_acme_live_directory: false
 # independend while using the same data
 letsencrypt_conf_dir: "{{ lookup('env','HOME') }}/letsencrypt"
 letsencrypt_cert_dir: "{{ letsencrypt_conf_dir }}/certs"
-## set user and group of conf dirs to values of running user of the playbook
-# overwrite in vars to allow usage of another user
-letsencrypt_conf_dir_user: "{{ lookup('env', 'USER') }}"
-# overwrite in vars to allow usage of another group which may consist of more members
-letsencrypt_conf_dir_group: "{{ lookup('env', 'GROUP') }}"
 # set packagemanager to use for localhost connections (yum, apt)
 letsencrypt_prerequisites_packagemanager: "yum"
 # region for s3 bucket when
