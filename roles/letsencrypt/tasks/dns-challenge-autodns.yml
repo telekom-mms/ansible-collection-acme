@@ -25,7 +25,7 @@
             "origin": "{{ item }}",
             "resourceRecordsAdd": [
               {
-                "name": "_acme-challenge.{{ item }}",
+                "name": "_acme-challenge.{{ item | replace ('*.','') }}",
                 "ttl": 60,
                 "type": "TXT",
                 "value": "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
@@ -66,7 +66,7 @@
             "origin": "{{ item }}",
             "resourceRecordsRem": [
               {
-                "name": "_acme-challenge.{{ item }}",
+                "name": "_acme-challenge.{{ item | replace ('*.','') }}",
                 "ttl": 60,
                 "type": "TXT",
                 "value": "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
