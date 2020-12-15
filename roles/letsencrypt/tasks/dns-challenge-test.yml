@@ -1,0 +1,40 @@
+---
+### include/role 3 - validate challenge
+- name: validate challenge only if it is created or changed
+  when: challenge is changed
+  block:
+    - name: add a new TXT record to the SAN domains
+      uri:
+        url: "http://localhost:8055/set-txt"
+        method: POST
+        body_format: json
+        # the dot after the hostname is required
+        # crtl-f "Note that a period character is required at the end of the host name here." here:
+        # https://github.com/letsencrypt/pebble/blob/master/cmd/pebble-challtestsrv/README.md
+        body:
+          {
+            "host": "_acme-challenge.{{ item }}.",
+            "value": "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
+          }
+      loop: "{{ domain.subject_alt_name }}"
+      when:
+        - domain.subject_alt_name is defined
+        # only runs if the challenge is run the first time, because then there is challenge_data
+        - challenge['challenge_data'][item] is defined
+
+    - name: Let the challenge be validated and retrieve the cert and intermediate certificate
+      acme_certificate:
+        account_key_src: "{{ account_key_path }}"
+        account_email: "{{ account_email }}"
+        csr: "{{ csr_path }}"
+        cert: "{{ cert_path }}"
+        fullchain: "{{ fullchain_path }}"
+        chain: "{{ intermediate_path }}"
+        challenge: dns-01
+        force: "{{ force_renewal | default(false) }}"
+        acme_directory: "{{ acme_directory }}"
+        acme_version: 2
+        terms_agreed: true
+        remaining_days: "{{ remaining_days }}"
+        data: "{{ challenge }}"
+        validate_certs: "{{ validate_certs | default(true) }}"

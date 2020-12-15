@@ -61,3 +61,45 @@ jobs:
         with:
           targets: ansible_collections/t_systems_mms/letsencrypt/roles/letsencrypt
           args: "-c ansible_collections/t_systems_mms/letsencrypt/.ansible-lint"
+
+  integration-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ansible_collections/t_systems_mms/letsencrypt
+    strategy:
+      fail-fast: false
+      matrix:
+        ansible:
+          - stable-2.9
+          - stable-2.10
+        python:
+          - 2.7
+          - 3.7
+          - 3.8
+    steps:
+      - name: Check out code to collections-folder, so ansible finds it
+        uses: actions/checkout@v2
+        with:
+          path: ansible_collections/t_systems_mms/letsencrypt
+
+      - name: Run Pebble and challtestsrv
+        run: cd .. && curl https://raw.githubusercontent.com/letsencrypt/pebble/master/docker-compose.yml >docker-compose.yml && docker-compose up -d
+
+      - name: Set up Pebble
+        run: curl --request POST --data '{"ip":"10.30.50.1"}' http://localhost:8055/set-default-ipv4
+
+      - name: Set up Python ${{ matrix.ansible }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install ansible-base (${{ matrix.ansible }})
+        run: python -m pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
+
+      - name: install community.crypto collection
+        run: ansible-galaxy collection install -p /home/runner/work/ansible-collection-letsencrypt/ansible-collection-letsencrypt community.crypto
+
+      - name: Run integration tests
+        run: ansible-test integration -v --color --retry-on-error --continue-on-error --diff --python ${{ matrix.python }} --requirements
+        working-directory: ./ansible_collections/t_systems_mms/letsencrypt

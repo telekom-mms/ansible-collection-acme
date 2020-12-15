@@ -29,6 +29,7 @@
     acme_version: 2
     terms_agreed: true
     remaining_days: "{{ remaining_days }}"
+    validate_certs: "{{ validate_certs | default(true) }}"
   register: challenge
 
 - name: do dns challenge autodns
@@ -48,3 +49,9 @@
   when:
     - letsencrypt_do_dns_challenge | bool
     - letsencrypt_dns_provider == "hetzner"
+
+- name: do dns challenge for testing
+  include_tasks: dns-challenge-test.yml
+  when:
+    - letsencrypt_do_dns_challenge | bool
+    - letsencrypt_dns_provider == "test"
