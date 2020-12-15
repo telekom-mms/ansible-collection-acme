@@ -12,7 +12,8 @@ license:
   - GPL-2.0-or-later
 license_file: ''
 tags: []
-dependencies: {}
+dependencies:
+  "community.crypto": ">=1.0.0"
 repository: 'https://github.com/T-Systems-MMS/ansible-collection-letsencrypt'
 documentation: 'https://github.com/T-Systems-MMS/ansible-collection-letsencrypt'
 homepage: 'https://github.com/T-Systems-MMS/ansible-collection-letsencrypt'
