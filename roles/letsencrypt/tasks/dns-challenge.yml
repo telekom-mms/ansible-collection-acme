@@ -50,8 +50,8 @@
     - letsencrypt_do_dns_challenge | bool
     - letsencrypt_dns_provider == "hetzner"
 
-- name: do dns challenge for testing
+- name: do dns challenge for testing with pebble
   include_tasks: dns-challenge-test.yml
   when:
     - letsencrypt_do_dns_challenge | bool
-    - letsencrypt_dns_provider == "test"
+    - letsencrypt_dns_provider == "pebble"
