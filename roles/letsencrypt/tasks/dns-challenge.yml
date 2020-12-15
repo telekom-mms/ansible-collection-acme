@@ -48,4 +48,3 @@
   when:
     - letsencrypt_do_dns_challenge | bool
     - letsencrypt_dns_provider == "hetzner"
-
