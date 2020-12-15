@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.7](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.7) (2020-12-15)
+
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.6...0.0.7)
+
+**Fixed bugs:**
+
+- fix broken AutoDNS wildcard creation \#20 [\#21](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/21) ([avalor1](https://github.com/avalor1))
+
+**Closed issues:**
+
+- creation of wildcard certificates with autodns challenge not working with release 0.0.5 [\#20](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/issues/20)
+
 ## [0.0.6](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.6) (2020-12-15)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.5...0.0.6)
