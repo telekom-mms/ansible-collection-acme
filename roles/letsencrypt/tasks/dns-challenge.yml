@@ -42,3 +42,9 @@
   when:
     - letsencrypt_do_dns_challenge | bool
     - letsencrypt_dns_provider == "azure"
+
+- name: do dns challenge hetzner
+  include_tasks: dns-challenge-hetzner.yml
+  when:
+    - letsencrypt_do_dns_challenge | bool
+    - letsencrypt_dns_provider == "hetzner"
