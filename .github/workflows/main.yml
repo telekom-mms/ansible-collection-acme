@@ -84,7 +84,7 @@ jobs:
           path: ansible_collections/t_systems_mms/letsencrypt
 
       - name: Run Pebble and challtestsrv
-        run: curl https://raw.githubusercontent.com/letsencrypt/pebble/master/docker-compose.yml | docker-compose -f - up
+        run: curl https://raw.githubusercontent.com/letsencrypt/pebble/master/docker-compose.yml >docker-compose.yml && docker-compose up -d
 
       - name: Set up Pebble
         run: curl --request POST --data '{"ip":"10.30.50.1"}' http://localhost:8055/set-default-ipv4
