@@ -103,6 +103,9 @@ jobs:
       - name: install the collection
         run: ansible-galaxy collection install *.tar.gz -p ~/.ansible/collections/
 
+      - name: install the collection
+        run: ansible-galaxy collection install community.crypto -p ~/.ansible/collections/
+
       - name: Run integration tests
         run: ansible-test integration -v --color --retry-on-error --continue-on-error --diff --python ${{ matrix.python }} --requirements
         working-directory: ./ansible_collections/t_systems_mms/letsencrypt
