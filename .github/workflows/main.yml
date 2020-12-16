@@ -84,7 +84,7 @@ jobs:
           path: ansible_collections/t_systems_mms/letsencrypt
 
       - name: Run Pebble and challtestsrv
-        run: curl https://raw.githubusercontent.com/letsencrypt/pebble/master/docker-compose.yml >docker-compose.yml && docker-compose up -d
+        run: curl https://raw.githubusercontent.com/letsencrypt/pebble/master/docker-compose.yml | docker-compose -f - up -d
 
       - name: Set up Pebble
         run: curl --request POST --data '{"ip":"10.30.50.1"}' http://localhost:8055/set-default-ipv4
@@ -101,7 +101,7 @@ jobs:
         run: ansible-galaxy collection build
 
       - name: install the collection
-        run: ansible-galaxy collection install -p /home/runner/work/ansible-collection-letsencrypt/ansible-collection-letsencrypt  *.tar.gz
+        run: ansible-galaxy collection install *.tar.gz
 
       - name: Run integration tests
         run: ansible-test integration -v --color --retry-on-error --continue-on-error --diff --python ${{ matrix.python }} --requirements
