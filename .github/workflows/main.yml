@@ -101,7 +101,7 @@ jobs:
         run: ansible-galaxy collection build
 
       - name: install the collection
-        run: ansible-galaxy collection install *.tar.gz
+        run: ansible-galaxy collection install *.tar.gz -p ~/.ansible/collections/
 
       - name: Run integration tests
         run: ansible-test integration -v --color --retry-on-error --continue-on-error --diff --python ${{ matrix.python }} --requirements
