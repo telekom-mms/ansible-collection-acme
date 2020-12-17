@@ -69,15 +69,18 @@
 
 - Remove unwanted files from release-tarball  [\#4](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/issues/4)
 
+**Merged pull requests:**
+
+- Add Azure dns provider challenge [\#8](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/8) ([michaelamattes](https://github.com/michaelamattes))
+- add build\_ignore to filter unwanted files from release-tarball [\#6](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/6) ([avalor1](https://github.com/avalor1))
+
 ## [0.0.2](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.2) (2020-11-06)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.1...0.0.2)
 
 **Merged pull requests:**
 
-- Add Azure dns provider challenge [\#8](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/8) ([michaelamattes](https://github.com/michaelamattes))
 - remove variable letsencrypt\_create\_private\_keys [\#7](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/7) ([avalor1](https://github.com/avalor1))
-- add build\_ignore to filter unwanted files from release-tarball [\#6](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/6) ([avalor1](https://github.com/avalor1))
 
 ## [0.0.1](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.1) (2020-11-04)
 
