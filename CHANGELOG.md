@@ -6,6 +6,7 @@
 
 **Merged pull requests:**
 
+- run tests on a schedule [\#24](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/24) ([rndmh3ro](https://github.com/rndmh3ro))
 - build integration tests [\#23](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/23) ([rndmh3ro](https://github.com/rndmh3ro))
 
 ## [0.0.7](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.7) (2020-12-15)
