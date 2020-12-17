@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.8](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.8) (2020-12-17)
+
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.7...0.0.8)
+
+**Merged pull requests:**
+
+- build integration tests [\#23](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/23) ([rndmh3ro](https://github.com/rndmh3ro))
+
 ## [0.0.7](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.7) (2020-12-15)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.6...0.0.7)
