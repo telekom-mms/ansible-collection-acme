@@ -11,7 +11,10 @@ description: >-
 license:
   - GPL-2.0-or-later
 license_file: ''
-tags: []
+tags:
+  - letsencrypt
+  - security
+  - certificates
 dependencies:
   "community.crypto": ">=1.0.0"
 repository: 'https://github.com/T-Systems-MMS/ansible-collection-letsencrypt'
