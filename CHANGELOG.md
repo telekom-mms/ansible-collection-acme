@@ -6,6 +6,8 @@
 
 **Merged pull requests:**
 
+- Create runtime.yml [\#26](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/26) ([rndmh3ro](https://github.com/rndmh3ro))
+- Create LICENSE [\#25](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/25) ([rndmh3ro](https://github.com/rndmh3ro))
 - run tests on a schedule [\#24](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/24) ([rndmh3ro](https://github.com/rndmh3ro))
 - build integration tests [\#23](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/23) ([rndmh3ro](https://github.com/rndmh3ro))
 
@@ -72,7 +74,6 @@
 **Merged pull requests:**
 
 - Add Azure dns provider challenge [\#8](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/8) ([michaelamattes](https://github.com/michaelamattes))
-- add build\_ignore to filter unwanted files from release-tarball [\#6](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/6) ([avalor1](https://github.com/avalor1))
 
 ## [0.0.2](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.2) (2020-11-06)
 
@@ -81,6 +82,7 @@
 **Merged pull requests:**
 
 - remove variable letsencrypt\_create\_private\_keys [\#7](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/7) ([avalor1](https://github.com/avalor1))
+- add build\_ignore to filter unwanted files from release-tarball [\#6](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/6) ([avalor1](https://github.com/avalor1))
 
 ## [0.0.1](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.1) (2020-11-04)
 
