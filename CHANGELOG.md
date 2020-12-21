@@ -1,11 +1,12 @@
 # Changelog
 
-## [0.0.8](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.8) (2020-12-17)
+## [0.0.8](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.8) (2020-12-21)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.7...0.0.8)
 
 **Merged pull requests:**
 
+- adjust variable naming in example files and readme [\#27](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/27) ([avalor1](https://github.com/avalor1))
 - Create runtime.yml [\#26](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/26) ([rndmh3ro](https://github.com/rndmh3ro))
 - Create LICENSE [\#25](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/25) ([rndmh3ro](https://github.com/rndmh3ro))
 - run tests on a schedule [\#24](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/24) ([rndmh3ro](https://github.com/rndmh3ro))
