@@ -172,10 +172,10 @@ ansible-playbook playbooks/letsencrypt.yml --ask-vault
           $ANSIBLE_VAULT;1.1;AES256
           ....
     letsencrypt_s3_bucket_name: "example-ssl-bucket"
-    letsencrypt_s3_config_access_key: !vault |
+    letsencrypt_s3_access_key: !vault |
               $ANSIBLE_VAULT;1.1;AES256
               ...
-    letsencrypt_s3_config_secret_key: !vault |
+    letsencrypt_s3_secret_key: !vault |
               $ANSIBLE_VAULT;1.1;AES256
               ...
 ```
