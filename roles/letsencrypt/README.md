@@ -14,7 +14,13 @@ ansible-galaxy collection install t_systems_mms.letsencrypt
 
 ## http-challenge
 
-It currently uses an AWS S3 bucket to safe the hashfiles. You have to set a redirect rule in your proxy or webserver to allow the acme challenge bot to read the file, during the http-01 challenge to work:
+The validation via http-challenge currently supports the usage of a local path at the webserver and also an AWS S3 bucket to safe the hashfiles
+
+### local path
+When using a local path at the webserver you have to ensure that this file is reachable by your configured vhost(s)
+
+### s3
+When using the s3 provider you have to set a redirect rule in your proxy or webserver to allow the acme challenge bot to read the file, during the http-01 challenge to work:
 
 **HaProxy(Version <=> 1.5):**
 
@@ -56,8 +62,7 @@ Currently the role supports the InternetX autodns API and the Azure DNS API. Fee
 | **domain configuration**
 | certificate_name                    | yes      |         | name of the resulting certificate. Most useful for wildcard certificates to not have files named '*.example.com' on the filesystem
 | zone                                | yes      |         | zone in which the dns records should be created
-| subject_alt_name                    | yes      |         | if you want to use
-wildcard-certificates use base name again as otherwise DNS txt record creation could fail
+| subject_alt_name                    | yes      |         | if you want to use wildcard-certificates use base name again as otherwise DNS txt record creation could fail
 | subject_alt_name: top_level:        | no       |         | list of top-level domains
 | subject_alt_name: second_level:     | no       |         | list of second_level domains
 | email_address                       | yes      |         | mail address which is used for the certificate (reminder mails are sent here)
@@ -71,12 +76,13 @@ wildcard-certificates use base name again as otherwise DNS txt record creation c
 
 ## Variables for HTTP challenge
 
-| Variable                            | Required | Default   | Description
-|-------------------------------------|----------|-----------|------------
-| letsencrypt_s3_bucket_name          | yes      |           | name of the s3 bucket which should be used
-| letsencrypt_s3_access_key           | yes      |           | aws access key for API user of s3 bucket
-| letsencrypt_s3_secret_key           | yes      |           | aws secret key for API user of s3 bucket
-| letsencrypt_s3_config_region        | no       | us-west-1 | aws s3 region in which bucket can be found
+| Variable                            | Required | Default         | Description
+|-------------------------------------|----------|-----------------|------------
+| letsencrypt_s3_bucket_name          | yes      |                 | name of the s3 bucket which should be used
+| letsencrypt_s3_access_key           | yes      |                 | aws access key for API user of s3 bucket
+| letsencrypt_s3_secret_key           | yes      |                 | aws secret key for API user of s3 bucket
+| letsencrypt_s3_config_region        | no       | us-west-1       | aws s3 region in which bucket can be found
+| letsencrypt_local_validation_path   | no       | "/var/www/html" | path on webserver in which challenge/hash files for validation will be created
 
 ## Variables for dns-challenge
 
@@ -90,7 +96,7 @@ wildcard-certificates use base name again as otherwise DNS txt record creation c
 
 | Variable                                 | Required | Default                              | Description
 |------------------------------------------|----------|--------------------------------------|------------
-| letsencrypt_conf_dir                     | no       | $HOME                                | overwrite letsencrypt_conf_dir if you want to use another directory which is accessible for the user which runs the playbook
+| letsencrypt_conf_dir                     | no       | $HOME/letsencrypt                    | overwrite letsencrypt_conf_dir if you want to use another directory which is accessible for the user which runs the playbook
 | letsencrypt_prerequisites_packagemanager | yes      | yum                                  | set the packagemanager which is used of the ansible_host. Possible values are all supported package managers from ansible package module
 | acme_staging_directory                   | no       | acme-staging-v02.api.letsencrypt.org | acme directory which will be used for certificate challenge
 | acme_live_directory                      | no       | acme-v02.api.letsencrypt.org         | acme directory which will be used for certificate challenge
@@ -165,6 +171,7 @@ ansible-playbook playbooks/letsencrypt.yml --ask-vault
       subject_alt_name:
         - domain2.example.com
     letsencrypt_do_http_challenge: true
+    letsencrypt_http_provider: "s3"
     letsencrypt_do_dns_challenge: false
     letsencrypt_use_acme_live_directory: false
     account_email: "ssl-admin@example.com"
