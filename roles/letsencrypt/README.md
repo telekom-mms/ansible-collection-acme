@@ -56,8 +56,7 @@ Currently the role supports the InternetX autodns API and the Azure DNS API. Fee
 | **domain configuration**
 | certificate_name                    | yes      |         | name of the resulting certificate. Most useful for wildcard certificates to not have files named '*.example.com' on the filesystem
 | zone                                | yes      |         | zone in which the dns records should be created
-| subject_alt_name                    | yes      |         | if you want to use
-wildcard-certificates use base name again as otherwise DNS txt record creation could fail
+| subject_alt_name                    | yes      |         | if you want to use wildcard-certificates use base name again as otherwise DNS txt record creation could fail
 | subject_alt_name: top_level:        | no       |         | list of top-level domains
 | subject_alt_name: second_level:     | no       |         | list of second_level domains
 | email_address                       | yes      |         | mail address which is used for the certificate (reminder mails are sent here)
@@ -90,7 +89,7 @@ wildcard-certificates use base name again as otherwise DNS txt record creation c
 
 | Variable                                 | Required | Default                              | Description
 |------------------------------------------|----------|--------------------------------------|------------
-| letsencrypt_conf_dir                     | no       | $HOME                                | overwrite letsencrypt_conf_dir if you want to use another directory which is accessible for the user which runs the playbook
+| letsencrypt_conf_dir                     | no       | $HOME/letsencrypt                    | overwrite letsencrypt_conf_dir if you want to use another directory which is accessible for the user which runs the playbook
 | letsencrypt_prerequisites_packagemanager | yes      | yum                                  | set the packagemanager which is used of the ansible_host. Possible values are all supported package managers from ansible package module
 | acme_staging_directory                   | no       | acme-staging-v02.api.letsencrypt.org | acme directory which will be used for certificate challenge
 | acme_live_directory                      | no       | acme-v02.api.letsencrypt.org         | acme directory which will be used for certificate challenge
