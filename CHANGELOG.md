@@ -1,11 +1,16 @@
 # Changelog
 
-## [0.0.8](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.8) (2020-12-21)
+## [0.0.8](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.8) (2021-01-11)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.7...0.0.8)
 
+**Closed issues:**
+
+- Integration Tests for role [\#3](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/issues/3)
+
 **Merged pull requests:**
 
+- fix galaxy-release action [\#29](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/29) ([rndmh3ro](https://github.com/rndmh3ro))
 - adjust variable naming in example files and readme [\#27](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/27) ([avalor1](https://github.com/avalor1))
 - Create runtime.yml [\#26](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/26) ([rndmh3ro](https://github.com/rndmh3ro))
 - Create LICENSE [\#25](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/25) ([rndmh3ro](https://github.com/rndmh3ro))
