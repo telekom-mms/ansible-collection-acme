@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.9](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.9) (2021-01-12)
+
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.8...0.0.9)
+
+**Merged pull requests:**
+
+- update documentation [\#28](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/28) ([avalor1](https://github.com/avalor1))
+
 ## [0.0.8](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.8) (2021-01-11)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.7...0.0.8)
@@ -29,6 +37,10 @@
 
 - creation of wildcard certificates with autodns challenge not working with release 0.0.5 [\#20](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/issues/20)
 
+**Merged pull requests:**
+
+- remove letsencrypt\_create\_private\_keys variable from examples [\#17](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/17) ([avalor1](https://github.com/avalor1))
+
 ## [0.0.6](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.6) (2020-12-15)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.5...0.0.6)
@@ -54,7 +66,6 @@
 
 - fix ansible error if group is empty [\#19](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/19) ([avalor1](https://github.com/avalor1))
 - remove common\_name variable [\#18](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/18) ([avalor1](https://github.com/avalor1))
-- remove letsencrypt\_create\_private\_keys variable from examples [\#17](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/17) ([avalor1](https://github.com/avalor1))
 
 ## [0.0.4](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.4) (2020-11-12)
 
