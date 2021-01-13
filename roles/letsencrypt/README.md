@@ -17,7 +17,7 @@ ansible-galaxy collection install t_systems_mms.letsencrypt
 The validation via http-challenge currently supports the usage of a local path at the webserver and also an AWS S3 bucket to safe the hashfiles.
 
 ### local path
-When using a local path at the webserver you have to ensure that this file is reachable by your configured vhost(s)
+When using a local path at the webserver you have to ensure that this file is reachable by your configured vhost(s).
 
 ### s3
 When using the s3 provider you have to set a redirect rule in your proxy or webserver to allow the acme challenge bot to read the file, during the http-01 challenge to work:
