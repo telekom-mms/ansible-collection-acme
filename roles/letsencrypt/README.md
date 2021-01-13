@@ -14,7 +14,7 @@ ansible-galaxy collection install t_systems_mms.letsencrypt
 
 ## http-challenge
 
-The validation via http-challenge currently supports the usage of a local path at the webserver and also an AWS S3 bucket to safe the hashfiles
+The validation via http-challenge currently supports the usage of a local path at the webserver and also an AWS S3 bucket to safe the hashfiles.
 
 ### local path
 When using a local path at the webserver you have to ensure that this file is reachable by your configured vhost(s)
