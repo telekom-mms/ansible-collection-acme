@@ -1,4 +1,4 @@
-## dns-challenge
+# dns-challenge
 
 ## Variables for dns-challenge
 
@@ -9,6 +9,7 @@
 | letsencrypt_dns_provider | yes      |           | which DNS provider should be used: autodns, azure, hetzner(, pebble)
 
 ## Example playbooks
+
 ### Wildcard certificate
 
 ```yaml

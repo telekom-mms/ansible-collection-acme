@@ -1,8 +1,11 @@
-## http-challenge
-### local path
+# http-challenge
+
+## local path
+
 When using a local path at the webserver you have to ensure that this file is reachable by your configured vhost(s).
 
-### s3
+## s3
+
 When using the s3 provider you have to set a redirect rule in your proxy or webserver to allow the acme challenge bot to read the file, during the http-01 challenge to work:
 
 **HaProxy(Version <=> 1.5):**
@@ -35,7 +38,6 @@ RewriteRule (\.well-known/acme-challenge.*) https://letsencrypt-challenge-bucket
 rewrite (\.well-known/acme-challenge.*) https://letsencrypt-challenge-bucket.s3.amazonaws.com/$1
 ```
 
-
 ## Variables for HTTP challenge
 
 | Variable                            | Required | Default   | Description
@@ -45,8 +47,8 @@ rewrite (\.well-known/acme-challenge.*) https://letsencrypt-challenge-bucket.s3.
 | letsencrypt_s3_secret_key           | yes      |           | aws secret key for API user of s3 bucket
 | letsencrypt_s3_config_region        | no       | us-west-1 | aws s3 region in which bucket can be found
 
-
 ## Example playbook
+
 ### SAN certificate
 
 ```yaml

@@ -13,11 +13,13 @@ ansible-galaxy collection install t_systems_mms.letsencrypt
 ```
 
 ## http-challenge
+
 The validation via http-challenge currently supports the usage of a local path at the webserver and also an AWS S3 bucket to safe the hashfiles.
 
 Please see [the corresponding README](roles/letsencrypt/README-http-challenge.md) for usage hints and variables of the HTTP-01 challenge
 
 ## dns-challenge
+
 Currently the role supports the InternetX autodns API and the Azure DNS API. Feel free to contribute with other DNS APIs.
 
 Please see [the corresponding README](roles/letsencrypt/README-dns-challenge.md) for variables of the DNS-01 challenge
@@ -58,13 +60,14 @@ Please see [the corresponding README](roles/letsencrypt/README-dns-challenge.md)
 | remaining_days                           | yes      | 30                                   | min days remaining before certificate will be renewed
 | convert_cert_to                          | no       |                                      | format to convert the certificate to: `pfx`
 
-### Usage
+## Usage
 
 ```bash
 ansible-playbook playbooks/letsencrypt.yml --ask-vault
 ```
 
 ### gitlab-pipeline
+
 * create a job which runs the certificate playbook
 
   ```yaml
