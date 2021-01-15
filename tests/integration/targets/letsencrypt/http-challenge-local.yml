@@ -20,15 +20,6 @@
     acme_staging_directory: "https://localhost:14000/dir"
     validate_certs: false
 
-  pre_tasks:
-    - name: install apache2
-      apt:
-        name: apache2
-        state: present
-
-    - name: start apache2
-      command: apache2ctl -D BACKGROUND
-
   post_tasks:
     - name: validate certs
       community.crypto.x509_certificate_info:
