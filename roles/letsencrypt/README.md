@@ -16,13 +16,13 @@ ansible-galaxy collection install t_systems_mms.letsencrypt
 
 The validation via http-challenge currently supports the usage of a local path at the webserver and also an AWS S3 bucket to safe the hashfiles.
 
-Please see [the corresponding README](roles/letsencrypt/README-http-challenge.md) for usage hints and variables of the HTTP-01 challenge
+Please see [the corresponding README](README-http-challenge.md) for usage hints and variables of the HTTP-01 challenge
 
 ## dns-challenge
 
-Currently the role supports the InternetX autodns API and the Azure DNS API. Feel free to contribute with other DNS APIs.
+Currently the role supports the InternetX autodns, Azure DNS, and Hetzner API. Feel free to contribute with other DNS APIs.
 
-Please see [the corresponding README](roles/letsencrypt/README-dns-challenge.md) for variables of the DNS-01 challenge
+Please see [the corresponding README](README-dns-challenge.md) for variables of the DNS-01 challenge
 
 ## Shared variables for DNS & HTTP challenge
 
