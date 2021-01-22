@@ -17,6 +17,7 @@ tags:
   - certificates
 dependencies:
   community.crypto: '>=1.0.0'
+  openstack.cloud: '>=1.2.1'
 repository: 'https://github.com/T-Systems-MMS/ansible-collection-letsencrypt'
 documentation: 'https://github.com/T-Systems-MMS/ansible-collection-letsencrypt'
 homepage: 'https://github.com/T-Systems-MMS/ansible-collection-letsencrypt'
