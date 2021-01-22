@@ -55,3 +55,9 @@
   when:
     - letsencrypt_do_dns_challenge | bool
     - letsencrypt_dns_provider == "pebble"
+
+- name: do dns challenge openstack
+  include_tasks: dns-challenge-os.yml
+  when:
+    - letsencrypt_do_dns_challenge | bool
+    - letsencrypt_dns_provider == "os"
