@@ -2,11 +2,11 @@
 - name: add new TXT record to DNS zone
   openstack.cloud.recordset:
     auth:
-      auth_url: "{{ dns_os_auth_url }}"
+      auth_url: "{{ dns_openstack_auth_url }}"
       username: "{{ dns_user }}"
       password: "{{ dns_password }}"
-      project_name: "{{ dns_os_project_name }}"
-      user_domain_name: "{{ dns_os_user_domain }}"
+      project_name: "{{ dns_openstack_project_name }}"
+      user_domain_name: "{{ dns_openstack_user_domain }}"
     state: present
     recordset_type: "txt"
     records:
@@ -38,11 +38,11 @@
 - name: remove TXT records from DNS zone
   openstack.cloud.recordset:
     auth:
-      auth_url: "{{ dns_os_auth_url }}"
+      auth_url: "{{ dns_openstack_auth_url }}"
       username: "{{ dns_user }}"
       password: "{{ dns_password }}"
-      project_name: "{{ dns_os_project_name }}"
-      user_domain_name: "{{ dns_os_user_domain }}"
+      project_name: "{{ dns_openstack_project_name }}"
+      user_domain_name: "{{ dns_openstack_user_domain }}"
     state: absent
     name: "{{ item.name }}"
     zone: "{{ item.zone_name }}"

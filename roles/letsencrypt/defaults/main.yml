@@ -23,5 +23,5 @@ fullchain_path: "{{ letsencrypt_cert_dir }}/{{ domain.certificate_name }}_fullch
 private_key_path: "{{ letsencrypt_cert_dir }}/{{ domain.certificate_name }}.key"
 remaining_days: "30"
 
-### dns os (openstack/otc)
-dns_os_project_name: "eu-de"
+### dns openstack
+dns_openstack_project_name: "eu-de"

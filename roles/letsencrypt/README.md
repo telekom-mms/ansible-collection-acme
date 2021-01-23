@@ -83,11 +83,11 @@ Currently the role supports the InternetX autodns API and the Azure DNS API. Fee
 |-------------------------------------|----------|--------------------------------------------|------------
 | dns_user                            | yes      |       | username to access the DNS api
 | dns_password                        | yes      |       | password to access the DNS api
-| letsencrypt_dns_provider            | no       |       | which DNS provider should be used: autodns, azure, hetzner, pebble, os
+| letsencrypt_dns_provider            | no       |       | which DNS provider should be used: autodns, azure, hetzner, pebble, openstack
 | **openstack configuration options** |          |       |
-| dns_os_user_domain                  | yes      |       | user domain name like OTC-EU-DE-00000000001000000000
-| dns_os_auth_url                     | yes      |       | authentification api-url
-| dns_os_project_name                 | yes      | eu-de | project name
+| dns_openstack_user_domain           | yes      |       | user domain name like OTC-EU-DE-00000000001000000000
+| dns_openstack_auth_url              | yes      |       | authentification api-url
+| dns_openstack_project_name          | yes      | eu-de | project name
 
 ## global role variables
 
