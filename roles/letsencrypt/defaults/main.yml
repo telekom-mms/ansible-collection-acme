@@ -24,5 +24,4 @@ private_key_path: "{{ letsencrypt_cert_dir }}/{{ domain.certificate_name }}.key"
 remaining_days: "30"
 
 ### dns os (openstack/otc)
-dns_os_auth_url: "https://iam.eu-de.otc.t-systems.com:443/v3"
 dns_os_project_name: "eu-de"
