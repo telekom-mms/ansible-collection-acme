@@ -18,6 +18,7 @@
     letsencrypt_use_acme_live_directory: false
     account_email: "ssl-admin@example.de"
     acme_staging_directory: "https://localhost:14000/dir"
+    acme_directory_validate_certs: false
     validate_certs: false
 
   post_tasks:

@@ -27,6 +27,7 @@
     acme_version: 2
     terms_agreed: true
     remaining_days: "{{ remaining_days }}"
+    validate_certs: "{{ acme_directory_validate_certs }}"
   register: challenge
 
 - name: do http challenge s3

@@ -25,3 +25,4 @@ intermediate_path: "{{ letsencrypt_cert_dir }}/{{ domain.certificate_name }}_int
 fullchain_path: "{{ letsencrypt_cert_dir }}/{{ domain.certificate_name }}_fullchain.pem"
 private_key_path: "{{ letsencrypt_cert_dir }}/{{ domain.certificate_name }}.key"
 remaining_days: "30"
+acme_directory_validate_certs: true
