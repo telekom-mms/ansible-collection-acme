@@ -88,7 +88,8 @@ jobs:
         image: nginx
         ports:
           - 80:80
-        volumes: /var/tmp:/usr/share/nginx/html
+        volumes:
+          - /var/tmp:/usr/share/nginx/html
 
     steps:
       - name: Check out code to collections-folder, so ansible finds it
