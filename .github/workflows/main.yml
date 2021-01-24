@@ -87,7 +87,7 @@ jobs:
       nginx:
         image: nginx
         ports:
-          - 80:80
+          - 5002:80
         volumes:
           - /var/tmp:/usr/share/nginx/html
 
