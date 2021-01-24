@@ -82,6 +82,14 @@ jobs:
           - 2.7
           - 3.7
           - 3.8
+    # start nginx as service to test validation via http-challenge local path
+    services:
+      nginx:
+        image: nginx
+        ports:
+          - 80:80
+        volumes: /var/tmp:/usr/share/nginx/html
+
     steps:
       - name: Check out code to collections-folder, so ansible finds it
         uses: actions/checkout@v2
@@ -93,15 +101,6 @@ jobs:
 
       - name: Set up Pebble
         run: curl --request POST --data '{"ip":"10.30.50.1"}' http://localhost:8055/set-default-ipv4
-
-      - name: update apt package list
-        run: apt update
-
-      - name: install apache2
-        run: apt install apache2
-
-      - name: start apache2
-        run: apache2ctl -D BACKGROUND
 
       - name: Set up Python ${{ matrix.ansible }}
         uses: actions/setup-python@v2
