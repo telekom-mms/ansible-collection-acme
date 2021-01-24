@@ -1,4 +1,4 @@
-- name: create the certificate for example.com
+- name: create the certificate for example.com with http-challenge provider "local"
   hosts: localhost
   collections:
     - t_systems_mms.letsencrypt
