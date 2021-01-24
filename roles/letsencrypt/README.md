@@ -14,24 +14,49 @@ ansible-galaxy collection install t_systems_mms.letsencrypt
 
 ## http-challenge
 
-The validation via http-challenge currently supports the usage of a local path at the webserver and also an AWS S3 bucket to safe the hashfiles.
+It currently uses an AWS S3 bucket to safe the hashfiles. You have to set a redirect rule in your proxy or webserver to allow the acme challenge bot to read the file, during the http-01 challenge to work:
 
-Please see [the corresponding README](README-http-challenge.md) for usage hints and variables of the HTTP-01 challenge
+**HaProxy(Version <=> 1.5):**
+
+```bash
+  # lets encrypt redirect
+  http-request del-header X-REWRITE
+  http-request add-header X-REWRITE %[url] if { path_beg /.well-known/acme-challenge }
+  http-request replace-header X-REWRITE ^(.well-known/acme-challenge/.*)?$ /\1 if { hdr_cnt(X-REWRITE) gt 0 }
+  http-request redirect code 301 location https://letsencrypt-challenge-bucket.s3.amazonaws.com%[hdr(X-REWRITE)] if { hdr_cnt(X-REWRITE) gt 0 }
+```
+
+**HaProxy(Version >= 1.6):**
+
+```bash
+http-request redirect code 301 location https://letsencrypt-challenge-bucket.s3.amazonaws.com%[url,regsub(^/.well-known/acme-challenge,/.well-known/acme-challenge,)] if { path_beg /.well-known/acme-challenge }
+```
+
+(can be set in frontend oder backend definition)
+
+**Apache:**
+
+```bash
+RewriteRule (\.well-known/acme-challenge.*) https://letsencrypt-challenge-bucket.s3.amazonaws.com/$1
+```
+
+**Nginx:**
+
+```bash
+rewrite (\.well-known/acme-challenge.*) https://letsencrypt-challenge-bucket.s3.amazonaws.com/$1
+```
 
 ## dns-challenge
+Currently the role supports the InternetX autodns API and the Azure DNS API. Feel free to contribute with other DNS APIs.
 
-Currently the role supports the InternetX autodns, Azure DNS, and Hetzner API. Feel free to contribute with other DNS APIs.
-
-Please see [the corresponding README](README-dns-challenge.md) for variables of the DNS-01 challenge
-
-## Shared variables for DNS & HTTP challenge
+## Variables for DNS & HTTP challenge
 
 | Variable                            | Required | Default | Description
 |-------------------------------------|----------|---------|------------
 | **domain configuration**
 | certificate_name                    | yes      |         | name of the resulting certificate. Most useful for wildcard certificates to not have files named '*.example.com' on the filesystem
 | zone                                | yes      |         | zone in which the dns records should be created
-| subject_alt_name                    | yes      |         | list of names which should be validated, this includes the deprecated common_name (see [here](https://tools.ietf.org/html/rfc2818#section-3.1))
+| subject_alt_name                    | yes      |         | if you want to use wildcard-certificates use base name again as otherwise DNS txt record creation could fail
 | subject_alt_name: top_level:        | no       |         | list of top-level domains
 | subject_alt_name: second_level:     | no       |         | list of second_level domains
 | email_address                       | yes      |         | mail address which is used for the certificate (reminder mails are sent here)
@@ -42,6 +67,23 @@ Please see [the corresponding README](README-dns-challenge.md) for variables of 
 | letsencrypt_use_acme_live_directory | no       | false   | choose if production certificates should be created, the staging directory of LE will be used by default
 | azure_resource_group                | no       |         | Azure Resource Group for zone_name
 | force_renewal                       | no       |         | Force renewal of certificate
+
+## Variables for HTTP challenge
+
+| Variable                            | Required | Default   | Description
+|-------------------------------------|----------|-----------|------------
+| letsencrypt_s3_bucket_name          | yes      |           | name of the s3 bucket which should be used
+| letsencrypt_s3_access_key           | yes      |           | aws access key for API user of s3 bucket
+| letsencrypt_s3_secret_key           | yes      |           | aws secret key for API user of s3 bucket
+| letsencrypt_s3_config_region        | no       | us-west-1 | aws s3 region in which bucket can be found
+
+## Variables for dns-challenge
+
+| Variable                 | Required | Default   | Description
+|--------------------------|----------|-----------|------------
+| dns_user                 | yes      |           | username to access the DNS api
+| dns_password             | yes      |           | password to access the DNS api
+| letsencrypt_dns_provider | no       |         | which DNS provider should be used: autodns, azure
 
 ## global role variables
 
@@ -60,14 +102,13 @@ Please see [the corresponding README](README-dns-challenge.md) for variables of 
 | remaining_days                           | yes      | 30                                   | min days remaining before certificate will be renewed
 | convert_cert_to                          | no       |                                      | format to convert the certificate to: `pfx`
 
-## Usage
+### Usage
 
 ```bash
 ansible-playbook playbooks/letsencrypt.yml --ask-vault
 ```
 
 ### gitlab-pipeline
-
 * create a job which runs the certificate playbook
 
   ```yaml
@@ -106,3 +147,61 @@ ansible-playbook playbooks/letsencrypt.yml --ask-vault
         - ansible-playbook playbooks/letsencrypt/all-certificates.yml --vault-password-file . vault_password.txt --diff
         - rm -f .vault_password.txt
     ```
+
+## Example playbooks
+### SAN certificate
+
+```yaml
+- name: create the certificate for domain1
+  hosts: localhost
+  roles:
+    - letsencrypt
+  vars:
+    domain:
+      certificate_name: "domain1.example.com"
+      zone: "example.com"
+      email_address: "ssl-admin@example.com"
+      subject_alt_name:
+        - domain2.example.com
+    letsencrypt_do_http_challenge: true
+    letsencrypt_do_dns_challenge: false
+    letsencrypt_use_acme_live_directory: false
+    account_email: "ssl-admin@example.com"
+    private_key_content: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          ....
+    letsencrypt_s3_bucket_name: "example-ssl-bucket"
+    letsencrypt_s3_access_key: !vault |
+              $ANSIBLE_VAULT;1.1;AES256
+              ...
+    letsencrypt_s3_secret_key: !vault |
+              $ANSIBLE_VAULT;1.1;AES256
+              ...
+```
+
+### Wildcard certificate
+
+```yaml
+- name: create the certificate for domain1
+  hosts: localhost
+  roles:
+    - letsencrypt
+  vars:
+    domain:
+      certificate_name: "wildcard.example.com"
+      zone: "example.com"
+      email_address: "ssl-admin@example.com"
+      subject_alt_name:
+        - "example.com"
+    letsencrypt_do_http_challenge: false
+    letsencrypt_do_dns_challenge: true
+    letsencrypt_use_acme_live_directory: false
+    account_email: "ssl-admin@example.com"
+    private_key_content: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          ....
+    dns_user: "example_dns"
+    dns_password: !vault |
+              $ANSIBLE_VAULT;1.1;AES256
+              ...
+```
