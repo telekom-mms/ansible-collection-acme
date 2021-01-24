@@ -6,6 +6,7 @@
       - python-boto3
     state: present
     use: "{{ letsencrypt_prerequisites_packagemanager }}"
+  when: letsencrypt_http_provider == "s3"
 
 - name: Create CSR for certificate
   openssl_csr:
