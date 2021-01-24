@@ -1,4 +1,9 @@
 ---
+- name: create directory for challenge/hash files
+  file:
+    path: "{{ letsencrypt_local_validation_path }}/.well-known/acme-challenge"
+    state: directory
+
 - name: validate challenge only if it is created or changed
   when: challenge is changed
   block:
