@@ -6,11 +6,11 @@
     - letsencrypt
   vars:
     domain:
-      certificate_name: "wildcard.example.com"
+      certificate_name: "dns-pebble.example.com"
       zone: "example.com"
       email_address: "ssl-admin@example.com"
       subject_alt_name:
-        - "*.example.com"
+        - "example.com"
     letsencrypt_do_http_challenge: false
     letsencrypt_do_dns_challenge: true
     letsencrypt_dns_provider: "pebble"
