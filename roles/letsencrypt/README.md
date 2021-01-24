@@ -101,7 +101,7 @@ Currently the role supports the InternetX autodns API and the Azure DNS API. Fee
 | private_key_path                         | yes      | $letsencrypt_conf_dir/certs          | path for private key
 | remaining_days                           | yes      | 30                                   | min days remaining before certificate will be renewed
 | convert_cert_to                          | no       |                                      | format to convert the certificate to: `pfx`
-
+| acme_directory_validate_certs            | no       | true                                 | Only exists to enable integration tests of http challenges with pebble server
 ### Usage
 
 ```bash
