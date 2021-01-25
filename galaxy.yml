@@ -1,6 +1,6 @@
 namespace: t_systems_mms
 name: letsencrypt
-version: 0.0.8
+version: 0.1.0
 readme: README.md
 authors:
   - Sebastian Gumprich <sebastian.gumprich@t-systems.com>
