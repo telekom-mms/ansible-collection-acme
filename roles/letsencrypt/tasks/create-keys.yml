@@ -6,6 +6,15 @@
     type: RSA
   no_log: true
 
+- name: create account key file from account_key_content-variable
+  copy:
+    dest: "{{ account_key_path }}"
+    content: "{{ account_key_content }}"
+    mode: 0400
+  when:
+    - account_key_content is defined
+  no_log: true
+
 - name: Create RSA key to be used for certificate
   openssl_privatekey:
     path: "{{ private_key_path }}"
