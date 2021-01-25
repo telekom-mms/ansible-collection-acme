@@ -1,8 +1,12 @@
 # Changelog
 
-## [0.0.9](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.9) (2021-01-12)
+## [0.1.0](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.1.0) (2021-01-25)
 
-[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.8...0.0.9)
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.8...0.1.0)
+
+**Implemented enhancements:**
+
+- Feature / dns challenge otc openstack [\#31](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/31) ([Nemental](https://github.com/Nemental))
 
 **Merged pull requests:**
 
@@ -11,6 +15,10 @@
 ## [0.0.8](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.8) (2021-01-11)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.7...0.0.8)
+
+**Implemented enhancements:**
+
+- add second checkout to solve race condition \(version gets updated but… [\#15](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/15) ([avalor1](https://github.com/avalor1))
 
 **Closed issues:**
 
@@ -37,10 +45,6 @@
 
 - creation of wildcard certificates with autodns challenge not working with release 0.0.5 [\#20](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/issues/20)
 
-**Merged pull requests:**
-
-- remove letsencrypt\_create\_private\_keys variable from examples [\#17](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/17) ([avalor1](https://github.com/avalor1))
-
 ## [0.0.6](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.6) (2020-12-15)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.5...0.0.6)
@@ -56,7 +60,6 @@
 **Implemented enhancements:**
 
 - Push to Galaxy Fails [\#13](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/issues/13)
-- add second checkout to solve race condition \(version gets updated but… [\#15](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/15) ([avalor1](https://github.com/avalor1))
 
 **Closed issues:**
 
@@ -66,6 +69,7 @@
 
 - fix ansible error if group is empty [\#19](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/19) ([avalor1](https://github.com/avalor1))
 - remove common\_name variable [\#18](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/18) ([avalor1](https://github.com/avalor1))
+- remove letsencrypt\_create\_private\_keys variable from examples [\#17](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/17) ([avalor1](https://github.com/avalor1))
 
 ## [0.0.4](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.4) (2020-11-12)
 
