@@ -44,9 +44,9 @@
       project_name: "{{ dns_openstack_project_name }}"
       user_domain_name: "{{ dns_openstack_user_domain }}"
     state: absent
-    name: "{{ item.name }}"
-    zone: "{{ item.zone_name }}"
-  loop: "{{ records | json_query('results[*].recordset') }}"
+    name: "_acme-challenge.{{ item | replace('*.', '') }}."
+    zone: "{{ domain.zone }}."
+  loop: "{{ domain.subject_alt_name }}"
   when:
     - domain.subject_alt_name is defined
-    - challenge['challenge_data'][item.zone_name|regex_replace('^(.*)\\.$','\\1')] is defined
+    - challenge['challenge_data'][item] is defined
