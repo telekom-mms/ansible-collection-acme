@@ -1,5 +1,4 @@
 ---
-
 ### global
 letsencrypt_use_acme_live_directory: false
 # overwrite letsencrypt_conf_dir if you want to use a directory
