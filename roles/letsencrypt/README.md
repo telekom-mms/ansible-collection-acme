@@ -61,6 +61,7 @@ Currently the role supports the InternetX autodns API and the Azure DNS API. Fee
 | subject_alt_name: second_level:     | no       |         | list of second_level domains
 | email_address                       | yes      |         | mail address which is used for the certificate (reminder mails are sent here)
 | **configuration options**           |          |         |
+| account_key_content                 | no       |         | content of the created letsencrypt account key
 | private_key_content                 | no       |         | content of the created private key for the certificate (allows reuse of keys)
 | letsencrypt_do_http_challenge       | yes      | false   | use http challenge
 | letsencrypt_do_dns_challenge        | yes      | false   | use dns challenge
