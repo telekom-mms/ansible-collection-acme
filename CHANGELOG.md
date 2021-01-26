@@ -1,8 +1,12 @@
 # Changelog
 
-## [0.1.1](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.1.1) (2021-01-26)
+## [0.2.0](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.2.0) (2021-01-26)
 
-[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.1.0...0.1.1)
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.1.0...0.2.0)
+
+**Implemented enhancements:**
+
+- Account key content as variable [\#33](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/33) ([Nemental](https://github.com/Nemental))
 
 **Merged pull requests:**
 
@@ -53,6 +57,10 @@
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.5...0.0.6)
 
+**Implemented enhancements:**
+
+- Add Hetzner DNS as letsencrypt\_dns\_provider [\#22](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/22) ([xobtoor](https://github.com/xobtoor))
+
 ## [0.0.5](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.5) (2020-12-09)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.4...0.0.5)
@@ -60,7 +68,6 @@
 **Implemented enhancements:**
 
 - Push to Galaxy Fails [\#13](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/issues/13)
-- Add Hetzner DNS as letsencrypt\_dns\_provider [\#22](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/22) ([xobtoor](https://github.com/xobtoor))
 - add second checkout to solve race condition \(version gets updated but… [\#15](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/15) ([avalor1](https://github.com/avalor1))
 
 **Closed issues:**
