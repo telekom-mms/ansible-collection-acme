@@ -22,3 +22,6 @@ intermediate_path: "{{ letsencrypt_cert_dir }}/{{ domain.certificate_name }}_int
 fullchain_path: "{{ letsencrypt_cert_dir }}/{{ domain.certificate_name }}_fullchain.pem"
 private_key_path: "{{ letsencrypt_cert_dir }}/{{ domain.certificate_name }}.key"
 remaining_days: "30"
+
+letsencrypt_do_http_challenge: false
+letsencrypt_do_dns_challenge: false

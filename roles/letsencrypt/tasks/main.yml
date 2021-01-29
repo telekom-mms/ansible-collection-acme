@@ -1,6 +1,6 @@
 ---
 - name: preconditions
-  include_tasks: letsencrypt_preconditions.yml
+  include_tasks: preconditions.yml
 
 - name: run certificate generation
   include_tasks: create-keys.yml

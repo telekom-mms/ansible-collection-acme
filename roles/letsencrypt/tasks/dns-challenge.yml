@@ -32,32 +32,8 @@
     validate_certs: "{{ validate_certs | default(true) }}"
   register: challenge
 
-- name: do dns challenge autodns
-  include_tasks: dns-challenge-autodns.yml
-  when:
-    - letsencrypt_do_dns_challenge | bool
-    - letsencrypt_dns_provider == "autodns"
-
-- name: do dns challenge azure
-  include_tasks: dns-challenge-azure.yml
-  when:
-    - letsencrypt_do_dns_challenge | bool
-    - letsencrypt_dns_provider == "azure"
-
-- name: do dns challenge hetzner
-  include_tasks: dns-challenge-hetzner.yml
-  when:
-    - letsencrypt_do_dns_challenge | bool
-    - letsencrypt_dns_provider == "hetzner"
-
-- name: do dns challenge for testing with pebble
-  include_tasks: dns-challenge-pebble.yml
-  when:
-    - letsencrypt_do_dns_challenge | bool
-    - letsencrypt_dns_provider == "pebble"
-
-- name: do dns challenge openstack
-  include_tasks: dns-challenge-openstack.yml
-  when:
-    - letsencrypt_do_dns_challenge | bool
-    - letsencrypt_dns_provider == "openstack"
+- name: "do DNS challenge with provider {{ letsencrypt_dns_provider }}"
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - "dns-challenge/{{ letsencrypt_dns_provider }}.yml"
+    - challenge-unknown.yml
