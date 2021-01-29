@@ -5,19 +5,16 @@
 - name: run certificate generation
   include_tasks: create-keys.yml
 
-# http challenge
 - name: do http challenge
   include_tasks: http-challenge.yml
   when:
     - letsencrypt_do_http_challenge | bool
 
-# dns challenge
 - name: do dns challenge
   include_tasks: dns-challenge.yml
   when:
     - letsencrypt_do_dns_challenge | bool
 
-# convert to other format
 - name: convert certificate
   include_tasks: convert_certificate.yml
   when:
