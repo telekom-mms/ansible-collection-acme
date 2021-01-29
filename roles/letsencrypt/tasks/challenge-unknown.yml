@@ -1,0 +1,4 @@
+---
+- name: fail because of unknown challenge provider
+  fail:
+    msg: unknown challenge provider

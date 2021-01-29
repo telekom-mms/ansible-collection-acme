@@ -32,10 +32,8 @@
     validate_certs: "{{ validate_certs | default(true) }}"
   register: challenge
 
-- name: "do dns challenge with provider {{ letsencrypt_dns_provider | default('unspecified') }}"
+- name: "do dns challenge with provider {{ letsencrypt_dns_provider }}"
   include_tasks: "{{ item }}"
   with_first_found:
-    - "dns-challenge/{{ letsencrypt_dns_provider | default('') }}.yml"
-    - dns-challenge-unknown.yml
-  when:
-    - letsencrypt_do_dns_challenge | bool
+    - "dns-challenge/{{ letsencrypt_dns_provider }}.yml"
+    - challenge-unknown.yml

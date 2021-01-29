@@ -1,4 +1,0 @@
----
-- name: fail because of unknown DNS challenge provider
-  fail:
-    msg: unknown DNS challenge provider
