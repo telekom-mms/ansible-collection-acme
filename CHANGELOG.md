@@ -1,11 +1,12 @@
 # Changelog
 
-## [0.2.0](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.2.0) (2021-01-26)
+## [0.2.0](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.2.0) (2021-01-29)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.1.0...0.2.0)
 
 **Implemented enhancements:**
 
+- unify challenge provider logic [\#35](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/35) ([schurzi](https://github.com/schurzi))
 - Account key content as variable [\#33](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/33) ([Nemental](https://github.com/Nemental))
 
 **Merged pull requests:**
