@@ -21,17 +21,9 @@
   when:
     - letsencrypt_do_http_challenge | bool
 
-- name: set fact for acme_directory
+- name: set fact for acme_directory depending on what is set in letsencrypt_use_acme_live_directory
   set_fact:
-    acme_directory: "{{ acme_staging_directory }}"
-  when:
-    - not letsencrypt_use_acme_live_directory
-
-- name: set fact for acme_directory
-  set_fact:
-    acme_directory: "{{ acme_live_directory }}"
-  when:
-    - letsencrypt_use_acme_live_directory | bool
+    acme_directory: "{{ letsencrypt_use_acme_live_directory | ternary(acme_live_directory, acme_staging_directory) }}"
 
 - name: create directories for letsencrypt
   delegate_to: localhost
