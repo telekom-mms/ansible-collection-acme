@@ -32,7 +32,7 @@
     validate_certs: "{{ validate_certs | default(true) }}"
   register: challenge
 
-- name: "do dns challenge with provider {{ letsencrypt_dns_provider }}"
+- name: "do DNS challenge with provider {{ letsencrypt_dns_provider }}"
   include_tasks: "{{ item }}"
   with_first_found:
     - "dns-challenge/{{ letsencrypt_dns_provider }}.yml"

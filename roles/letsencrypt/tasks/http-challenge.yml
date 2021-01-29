@@ -20,7 +20,7 @@
     remaining_days: "{{ remaining_days }}"
   register: challenge
 
-- name: "do dns challenge with provider {{ letsencrypt_http_provider }}"
+- name: "do HTTP challenge with provider {{ letsencrypt_http_provider }}"
   include_tasks: "{{ item }}"
   with_first_found:
     - "http-challenge/{{ letsencrypt_http_provider }}.yml"
