@@ -1,6 +1,6 @@
 namespace: t_systems_mms
 name: letsencrypt
-version: 0.0.1
+version: 0.1.0
 readme: README.md
 authors:
   - Sebastian Gumprich <sebastian.gumprich@t-systems.com>
@@ -16,7 +16,8 @@ tags:
   - security
   - certificates
 dependencies:
-  "community.crypto": ">=1.0.0"
+  community.crypto: '>=1.0.0'
+  openstack.cloud: '>=1.2.1'
 repository: 'https://github.com/T-Systems-MMS/ansible-collection-letsencrypt'
 documentation: 'https://github.com/T-Systems-MMS/ansible-collection-letsencrypt'
 homepage: 'https://github.com/T-Systems-MMS/ansible-collection-letsencrypt'

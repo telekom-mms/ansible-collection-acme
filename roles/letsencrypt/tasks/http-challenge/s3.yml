@@ -1,4 +1,12 @@
 ---
+- name: install prerequisites on localhost
+  delegate_to: localhost
+  package:
+    name:
+      - python-boto3
+    state: present
+    use: "{{ letsencrypt_prerequisites_packagemanager }}"
+
 - name: validate challenge only if it is created or changed
   when: challenge is changed
   block:

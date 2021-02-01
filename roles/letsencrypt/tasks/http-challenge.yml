@@ -1,13 +1,4 @@
 ---
-- name: install prerequisites on localhost
-  delegate_to: localhost
-  package:
-    name:
-      - python-boto3
-    state: present
-    use: "{{ letsencrypt_prerequisites_packagemanager }}"
-  when: letsencrypt_http_provider == "s3"
-
 - name: Create CSR for certificate
   openssl_csr:
     path: "{{ csr_path }}"
@@ -30,14 +21,8 @@
     validate_certs: "{{ validate_certs | default(true) }}"
   register: challenge
 
-- name: do http challenge s3
-  include_tasks: http-challenge-s3.yml
-  when:
-    - letsencrypt_do_http_challenge | bool
-    - letsencrypt_http_provider == "s3"
-
-- name: do http challenge local
-  include_tasks: http-challenge-local.yml
-  when:
-    - letsencrypt_do_http_challenge | bool
-    - letsencrypt_http_provider == "local"
+- name: "do HTTP challenge with provider {{ letsencrypt_http_provider }}"
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - "http-challenge/{{ letsencrypt_http_provider }}.yml"
+    - challenge-unknown.yml

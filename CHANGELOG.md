@@ -1,11 +1,46 @@
 # Changelog
 
-## [0.0.8](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.8) (2020-12-21)
+## [0.2.0](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.2.0) (2021-01-29)
 
-[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.7...0.0.8)
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.1.0...0.2.0)
+
+**Implemented enhancements:**
+
+- unify challenge provider logic [\#35](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/35) ([schurzi](https://github.com/schurzi))
+- Account key content as variable [\#33](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/33) ([Nemental](https://github.com/Nemental))
 
 **Merged pull requests:**
 
+- use ternary to simplify tasks for directory usage, remove comments [\#36](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/36) ([rndmh3ro](https://github.com/rndmh3ro))
+- use version for github action, short sha is no longer supported [\#34](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/34) ([schurzi](https://github.com/schurzi))
+
+## [0.1.0](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.1.0) (2021-01-25)
+
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.8...0.1.0)
+
+**Implemented enhancements:**
+
+- Feature / dns challenge otc openstack [\#31](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/31) ([Nemental](https://github.com/Nemental))
+
+**Merged pull requests:**
+
+- update documentation [\#28](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/28) ([avalor1](https://github.com/avalor1))
+
+## [0.0.8](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.8) (2021-01-11)
+
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.7...0.0.8)
+
+**Implemented enhancements:**
+
+- Add Hetzner DNS as letsencrypt\_dns\_provider [\#22](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/22) ([xobtoor](https://github.com/xobtoor))
+
+**Closed issues:**
+
+- Integration Tests for role [\#3](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/issues/3)
+
+**Merged pull requests:**
+
+- fix galaxy-release action [\#29](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/29) ([rndmh3ro](https://github.com/rndmh3ro))
 - adjust variable naming in example files and readme [\#27](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/27) ([avalor1](https://github.com/avalor1))
 - Create runtime.yml [\#26](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/26) ([rndmh3ro](https://github.com/rndmh3ro))
 - Create LICENSE [\#25](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/25) ([rndmh3ro](https://github.com/rndmh3ro))
@@ -27,10 +62,6 @@
 ## [0.0.6](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.6) (2020-12-15)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.5...0.0.6)
-
-**Implemented enhancements:**
-
-- Add Hetzner DNS as letsencrypt\_dns\_provider [\#22](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/22) ([xobtoor](https://github.com/xobtoor))
 
 ## [0.0.5](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.5) (2020-12-09)
 

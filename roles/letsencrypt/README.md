@@ -62,6 +62,7 @@ Currently the role supports the InternetX autodns API and the Azure DNS API. Fee
 | subject_alt_name: second_level:     | no       |         | list of second_level domains
 | email_address                       | yes      |         | mail address which is used for the certificate (reminder mails are sent here)
 | **configuration options**           |          |         |
+| account_key_content                 | no       |         | content of the created letsencrypt account key
 | private_key_content                 | no       |         | content of the created private key for the certificate (allows reuse of keys)
 | letsencrypt_do_http_challenge       | yes      | false   | use http challenge
 | letsencrypt_do_dns_challenge        | yes      | false   | use dns challenge
@@ -80,11 +81,15 @@ Currently the role supports the InternetX autodns API and the Azure DNS API. Fee
 
 ## Variables for dns-challenge
 
-| Variable                 | Required | Default   | Description
-|--------------------------|----------|-----------|------------
-| dns_user                 | yes      |           | username to access the DNS api
-| dns_password             | yes      |           | password to access the DNS api
-| letsencrypt_dns_provider | no       |         | which DNS provider should be used: autodns, azure
+| Variable                            | Required | Default | Description
+|-------------------------------------|----------|---------|------------
+| dns_user                            | yes      |         | username to access the DNS api
+| dns_password                        | yes      |         | password to access the DNS api
+| letsencrypt_dns_provider            | no       |         | which DNS provider should be used: autodns, azure, hetzner, pebble, openstack
+| **openstack configuration options** |          |         |
+| dns_openstack_user_domain           | yes      |         | user domain name like OTC-EU-DE-00000000001000000000
+| dns_openstack_auth_url              | yes      |         | authentification api-url
+| dns_openstack_project_name          | yes      |         | project name
 
 ## global role variables
 
