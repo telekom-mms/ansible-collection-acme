@@ -13,7 +13,7 @@
         - example.de
     letsencrypt_do_http_challenge: true
     letsencrypt_http_provider: "local"
-    letsencrypt_local_validation_path: "/var/tmp"
+    letsencrypt_local_validation_path: "/tmp"
     letsencrypt_do_dns_challenge: false
     letsencrypt_use_acme_live_directory: false
     account_email: "ssl-admin@example.de"
