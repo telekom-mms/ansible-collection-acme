@@ -18,6 +18,7 @@
     acme_version: 2
     terms_agreed: true
     remaining_days: "{{ remaining_days }}"
+    validate_certs: "{{ validate_certs | default(true) }}"
   register: challenge
 
 - name: "do HTTP challenge with provider {{ letsencrypt_http_provider }}"

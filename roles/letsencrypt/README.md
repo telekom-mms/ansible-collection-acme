@@ -47,6 +47,7 @@ rewrite (\.well-known/acme-challenge.*) https://letsencrypt-challenge-bucket.s3.
 ```
 
 ## dns-challenge
+
 Currently the role supports the InternetX autodns API and the Azure DNS API. Feel free to contribute with other DNS APIs.
 
 ## Variables for DNS & HTTP challenge
@@ -106,6 +107,7 @@ Currently the role supports the InternetX autodns API and the Azure DNS API. Fee
 | private_key_path                         | yes      | $letsencrypt_conf_dir/certs          | path for private key
 | remaining_days                           | yes      | 30                                   | min days remaining before certificate will be renewed
 | convert_cert_to                          | no       |                                      | format to convert the certificate to: `pfx`
+| validate_certs                           | no       |                                      | Only exists to enable integration tests with pebble server
 
 ### Usage
 
@@ -114,6 +116,7 @@ ansible-playbook playbooks/letsencrypt.yml --ask-vault
 ```
 
 ### gitlab-pipeline
+
 * create a job which runs the certificate playbook
 
   ```yaml
@@ -154,6 +157,7 @@ ansible-playbook playbooks/letsencrypt.yml --ask-vault
     ```
 
 ## Example playbooks
+
 ### SAN certificate
 
 ```yaml

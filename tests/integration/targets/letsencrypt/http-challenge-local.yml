@@ -1,0 +1,35 @@
+- name: create the certificate for example.de with http-challenge provider "local"
+  hosts: localhost
+  collections:
+    - t_systems_mms.letsencrypt
+  roles:
+    - letsencrypt
+  vars:
+    domain:
+      certificate_name: "http-local.example.de"
+      zone: "example.de"
+      email_address: "ssl-admin@example.de"
+      subject_alt_name:
+        - example.de
+    letsencrypt_do_http_challenge: true
+    letsencrypt_http_provider: "local"
+    letsencrypt_local_validation_path: "/tmp"
+    letsencrypt_do_dns_challenge: false
+    letsencrypt_use_acme_live_directory: false
+    account_email: "ssl-admin@example.de"
+    acme_staging_directory: "https://localhost:14000/dir"
+    validate_certs: false
+  post_tasks:
+    - name: validate certs
+      community.crypto.x509_certificate_info:
+        path: "{{ cert_path }}"
+      register: result
+
+    - debug:
+        msg: "{{ result }}"
+
+    - assert:
+        that:
+          - result.subject.commonName == "example.de"
+          - "'DNS:example.de' in result.subject_alt_name"
+          - "'Pebble Intermediate CA' in result.issuer.commonName"

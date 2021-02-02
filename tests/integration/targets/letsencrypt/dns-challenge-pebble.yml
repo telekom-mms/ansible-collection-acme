@@ -1,4 +1,4 @@
-- name: create the certificate for example.com
+- name: create the certificate for example.com with dns-challenge provider "pebble"
   hosts: localhost
   collections:
     - t_systems_mms.letsencrypt
@@ -6,11 +6,11 @@
     - letsencrypt
   vars:
     domain:
-      certificate_name: "example.com"
+      certificate_name: "dns-pebble.example.com"
       zone: "example.com"
       email_address: "ssl-admin@example.com"
       subject_alt_name:
-        - example.com
+        - "example.com"
     letsencrypt_do_http_challenge: false
     letsencrypt_do_dns_challenge: true
     letsencrypt_dns_provider: "pebble"

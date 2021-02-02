@@ -10,6 +10,8 @@ letsencrypt_cert_dir: "{{ letsencrypt_conf_dir }}/certs"
 letsencrypt_prerequisites_packagemanager: "yum"
 # region for s3 bucket when
 letsencrypt_s3_config_region: "eu-west-1"
+# path for validation via local path at webserver via http challenge
+letsencrypt_local_validation_path: "/var/www/html"
 
 ### http challenge / dns challenge
 acme_staging_directory: "https://acme-staging-v02.api.letsencrypt.org/directory"
