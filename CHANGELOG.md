@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.2.0](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.2.0) (2021-01-29)
+## [0.2.0](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.2.0) (2021-02-02)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.1.0...0.2.0)
 
@@ -32,7 +32,7 @@
 
 **Implemented enhancements:**
 
-- Add Hetzner DNS as letsencrypt\_dns\_provider [\#22](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/22) ([xobtoor](https://github.com/xobtoor))
+- Add "local" provider for http-challenge [\#30](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/30) ([avalor1](https://github.com/avalor1))
 
 **Closed issues:**
 
@@ -62,6 +62,10 @@
 ## [0.0.6](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.6) (2020-12-15)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.5...0.0.6)
+
+**Implemented enhancements:**
+
+- Add Hetzner DNS as letsencrypt\_dns\_provider [\#22](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/22) ([xobtoor](https://github.com/xobtoor))
 
 ## [0.0.5](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.5) (2020-12-09)
 
