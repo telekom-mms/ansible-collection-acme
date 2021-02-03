@@ -2,7 +2,6 @@
 
 This role issues Let's Encrypt certificates via DNS-01 or HTTP-01 challenge.
 
-**Please note that you have to use a dns-challenge if you want to issue wildcard certificates.**
 
 For distribution of certificates please implement your own playbooks/roles/tasks
 
