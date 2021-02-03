@@ -2,11 +2,11 @@
 
 | Variable                            | Required | Default | Description
 |-------------------------------------|----------|---------|------------
-| azure_resource_group                | no       |         | Azure Resource Group for zone_name
+| azure_resource_group                | yes      |         | Azure Resource Group for zone_name
 | subject_alt_name: top_level:        | no       |         | list of top-level domains
 | subject_alt_name: second_level:     | no       |         | list of second_level domains
 
-## Examples
+## Usage
 
 ### wildcard certificate
 

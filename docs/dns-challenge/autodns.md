@@ -2,7 +2,7 @@
 
 None
 
-## Examples
+## Usage
 
 ### wildcard certificate
 

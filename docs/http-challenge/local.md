@@ -8,7 +8,7 @@
 
 Make sure that the validation-/ hashfile(s) is/are reachable by your configured vhost(s).
 
-## Example
+## Usage
 
 ```yaml
 - name: create the certificate for example.com

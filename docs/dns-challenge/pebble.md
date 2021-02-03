@@ -7,7 +7,7 @@ The certificates are not trusted**.
 We start a Pebble and challtestsrv to validate a certificate for testing the role.
 This is also done for the provider of the local http-challenge.
 
-## Example
+## Usage
 
 ```yaml
 - name: create the certificate for example.com with dns-challenge provider "pebble"

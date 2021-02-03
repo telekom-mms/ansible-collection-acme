@@ -6,7 +6,7 @@
 | dns_openstack_auth_url              | yes      |         | authentification api-url
 | dns_openstack_project_name          | yes      |         | project name
 
-## Examples
+## Usage
 
 ### wildcard certificate
 

@@ -2,7 +2,6 @@
 
 This role issues Let's Encrypt certificates via DNS-01 or HTTP-01 challenge.
 
-
 This collection does not distribute certificates - it only creates them. You have to implement the distribution in your own playbooks roles.
 
 ## Installation
@@ -18,75 +17,62 @@ Please see the corresponding readme files for specific variables and examples.
 
 Feel free to contribute more DNS or HTTP APIs :)
 
-### http-challenge
-
-Following providers for a http-challenge are currently supported.
-
-| Provider                         | Description
-|----------------------------------|-------------
-| [s3](http-challenge/s3.md)       | uses a aws s3 bucket for validation/hash files
-| [local](http-challenge/local.md) | uses a local path at your server/machine for validation/hash files
-
-### dns-challenge
-
-Following providers for a dns-challenge are currently supported.
-
-| Provider                                | Description
-|-----------------------------------------|-------------
-| [AutoDNS](dns-challenge/autodns.md)     |
-| [Azure](dns-challenge/azure.md)         |
-| [hetzner](dns-challenge/hetzner.md)     |
-| [openstack](dns-challenge/openstack.md) |
-| [pebble](dns-challenge/pebble.md)       | used for integration tests in github workflow
+* [AutoDNS](dns-challenge/autodns.md)
+* [Azure](dns-challenge/azure.md)
+* [hetzner](dns-challenge/hetzner.md)
+* [local](http-challenge/local.md)
+* [openstack](dns-challenge/openstack.md)
+* [pebble](dns-challenge/pebble.md)
+* [s3](http-challenge/s3.md)
 
 ## General variables
 
 | Variable                            | Required | Default | Description
 |-------------------------------------|----------|---------|------------
 | **domain configuration**
-| certificate_name                    | yes      |         | name of the resulting certificate. Most useful for wildcard certificates to not have files named '*.example.com' on the filesystem
-| zone                                | yes      |         | zone in which the dns records should be created
-| subject_alt_name                    | yes      |         | if you want to use wildcard-certificates use base name again as otherwise DNS txt record creation could fail
-| email_address                       | yes      |         | mail address which is used for the certificate (reminder mails are sent here)
+| certificate_name                    | yes      |         | Name of the resulting certificate. Most useful for wildcard certificates to not have files named '*.example.com' on the filesystem
+| zone                                | yes      |         | Zone in which the dns records should be created
+| subject_alt_name                    | yes      |         | Domain(s) for which the certificate(s) should be validated. If you are issueing a wildcard certificate you should also add the main domain for which you are issueing the certificate
+| email_address                       | yes      |         | Mail address which is used for the certificate (reminder mails are sent here)
 | **configuration options**           |          |         |
-| account_key_content                 | no       |         | content of the created letsencrypt account key
-| private_key_content                 | no       |         | content of the created private key for the certificate (allows reuse of keys)
-| letsencrypt_do_http_challenge       | yes      | false   | use http challenge
-| letsencrypt_do_dns_challenge        | yes      | false   | use dns challenge
-| letsencrypt_use_acme_live_directory | no       | false   | choose if production certificates should be created, the staging directory of LE will be used by default
+| account_key_content                 | no       |         | Content of the created letsencrypt account key
+| private_key_content                 | no       |         | Content of the created private key for the certificate (allows reuse of keys)
+| letsencrypt_do_http_challenge       | yes      | false   | Use http challenge
+| letsencrypt_do_dns_challenge        | yes      | false   | Use dns challenge
+| letsencrypt_use_acme_live_directory | no       | false   | Choose if production certificates should be created, the staging directory of LE will be used by default
 | force_renewal                       | no       |         | Force renewal of certificate before `remaining_days` is reached
 
 ## Variables for http-challenge
 
 | Variable                            | Required | Default | Description
 |-------------------------------------|----------|---------|------------
-| letsencrypt_http_provider           | yes      |         | which http provider should be used: s3, local
+| letsencrypt_http_provider           | yes      |         | Which http provider should be used. See Usage of provider for the correct keyword
 
 ## Variables for dns-challenge
 
 | Variable                            | Required | Default | Description
 |-------------------------------------|----------|---------|------------
-| dns_user                            | yes      |         | username to access the DNS api
-| dns_password                        | yes      |         | password to access the DNS api
-| letsencrypt_dns_provider            | yes      |         | which DNS provider should be used: autodns, azure, hetzner, pebble, openstack
+| dns_user                            | yes      |         | Username to access the DNS api
+| dns_password                        | yes      |         | Password to access the DNS api
+| letsencrypt_dns_provider            | yes      |         | Which DNS provider should be used. See "Usage" of provider for the correct keyword
 
 ## Global role variables
 
 | Variable                                 | Required | Default                              | Description
 |------------------------------------------|----------|--------------------------------------|------------
-| letsencrypt_conf_dir                     | no       | $HOME/letsencrypt                    | overwrite letsencrypt_conf_dir if you want to use another directory which is accessible to the user which runs the playbook
-| letsencrypt_prerequisites_packagemanager | no       | yum                                  | set the packagemanager which is used of the ansible_host. Possible values are all supported package managers from ansible package module
-| acme_staging_directory                   | no       | acme-staging-v02.api.letsencrypt.org | acme directory which will be used for certificate challenge
-| acme_live_directory                      | no       | acme-v02.api.letsencrypt.org         | acme directory which will be used for certificate challenge
-| account_key_path                         | no       | $letsencrypt_conf_dir                | path for account key of letsencrypt
-| csr_path                                 | no       | $letsencrypt_conf_dir/certs          | path for csr which is created for challenge
-| cert_path                                | no       | $letsencrypt_conf_dir/certs          | path for issued certificate
-| intermediate_path                        | no       | $letsencrypt_conf_dir/certs          | path for intermediate chain
-| fullchain_path                           | no       | $letsencrypt_conf_dir/certs          | path for full chain file (certificate + intermediate)
-| private_key_path                         | no       | $letsencrypt_conf_dir/certs          | path for private key
-| remaining_days                           | no       | 30                                   | min days remaining before certificate will be renewed
-| convert_cert_to                          | no       |                                      | format to convert the certificate to: `pfx`
-| validate_certs (bool)                    | no       |                                      | Only used in integration tests with pebble server
+| letsencrypt_conf_dir                     | no       | $HOME/letsencrypt                    | Overwrite letsencrypt_conf_dir if you want to use another directory which is accessible to the user which runs the playbook
+| letsencrypt_prerequisites_packagemanager | no       | yum                                  | Set the packagemanager which is used of the ansible_host. Possible values are all supported package managers from ansible package module
+| acme_staging_directory                   | no       | acme-staging-v02.api.letsencrypt.org | Acme directory which will be used for certificate challenge
+| acme_live_directory                      | no       | acme-v02.api.letsencrypt.org         | Acme directory which will be used for certificate challenge
+| account_key_path                         | no       | $letsencrypt_conf_dir                | Path for account key of letsencrypt
+| csr_path                                 | no       | $letsencrypt_conf_dir/certs          | Path for csr which is created for challenge
+| cert_path                                | no       | $letsencrypt_conf_dir/certs          | Path for issued certificate
+| intermediate_path                        | no       | $letsencrypt_conf_dir/certs          | Path for intermediate chain
+| fullchain_path                           | no       | $letsencrypt_conf_dir/certs          | Path for full chain file (certificate + intermediate)
+| private_key_path                         | no       | $letsencrypt_conf_dir/certs          | Path for private key
+| remaining_days                           | no       | 30                                   | Min days remaining before certificate will be renewed
+| convert_cert_to                          | no       |                                      | Format to convert the certificate to: `pfx`
+| validate_certs                           | no       |                                      | Only used in integration tests with pebble server
 
 ### Usage
 
