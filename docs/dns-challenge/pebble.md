@@ -1,6 +1,6 @@
 # Variables for pebble dns-challenge
 
-This provider gets used in our integration tests for the dns challenge.
+This provider gets used in our integration tests for the DNS challenge.
 **This provider should not be used in other environments than for testing!
 The certificates are not trusted**.
 
