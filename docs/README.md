@@ -1,4 +1,4 @@
-# letsencrypt
+# Let's Encrypt Collection for Ansible
 
 This role issues Let's Encrypt certificates via DNS-01 or HTTP-01 challenge.
 
