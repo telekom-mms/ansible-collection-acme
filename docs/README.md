@@ -3,7 +3,7 @@
 This role issues Let's Encrypt certificates via DNS-01 or HTTP-01 challenge.
 
 
-For distribution of certificates please implement your own playbooks/roles/tasks
+This collection does not distribute certificates - it only creates them. You have to implement the distribution in your own playbooks roles.
 
 ## Installation
 
