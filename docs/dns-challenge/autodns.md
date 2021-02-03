@@ -1,5 +1,7 @@
 # Variables for AutoDNS dns-challenge
 
+None
+
 ## Examples
 
 ### wildcard certificate
