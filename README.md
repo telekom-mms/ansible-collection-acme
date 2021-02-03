@@ -1,6 +1,6 @@
 # Let's Encrypt Collection for Ansible
 
-This role issues Let's Encrypt certificates. Currently DNS-01 and HTTP-01 challenges are supported
+This role issues Let's Encrypt certificates. Currently DNS-01 and HTTP-01 challenges are supported.
 
 Required Ansible version: 2.9
 
