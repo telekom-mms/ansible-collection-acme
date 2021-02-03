@@ -16,7 +16,7 @@ ansible-galaxy collection install t_systems_mms.letsencrypt
 The role supports multiple providers for http- and dns-challenges.
 Please see the corresponding readme files for specific variables and examples.
 
-Feel free to contribute with more DNS APIs or more HTTP variants :)
+Feel free to contribute more DNS or HTTP APIs :)
 
 ### http-challenge
 
