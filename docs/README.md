@@ -86,7 +86,7 @@ Following providers for a dns-challenge are currently supported.
 | private_key_path                         | no       | $letsencrypt_conf_dir/certs          | path for private key
 | remaining_days                           | no       | 30                                   | min days remaining before certificate will be renewed
 | convert_cert_to                          | no       |                                      | format to convert the certificate to: `pfx`
-| validate_certs (bool)                    | no       |                                      | Gets used during integration tests with pebble server
+| validate_certs (bool)                    | no       |                                      | Only used in integration tests with pebble server
 
 ### Usage
 
