@@ -21,7 +21,7 @@ collections:
 - t_systems_mms.letsencrypt
 ```
 
-## Examples
+## Usage
 
 Please see [README](docs/README.md) for variables, usage and further information for the different providers.
 
