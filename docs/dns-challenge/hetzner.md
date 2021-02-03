@@ -1,10 +1,10 @@
 # Variables for hetzner dns-challenge
 
-| Variable       | Required | Default | Description
-|----------------|----------|---------|------------
-| dns_auth_token | yes      |         | Access token for hetzner DNS API
+| Variable               | Required | Default | Description
+|------------------------|----------|---------|------------
+| dns_hetzner_auth_token | yes      |         | Access token for hetzner DNS API
 
-## Example
+## Usage
 
 ```yaml
 - name: create the certificate for *.example.com
@@ -17,7 +17,7 @@
     letsencrypt_dns_provider: hetzner
     letsencrypt_use_acme_live_directory: true
     account_email: "ssl-admin@example.com"
-    dns_auth_token: !vault |
+    dns_hetzner_auth_token: !vault |
               $ANSIBLE_VAULT;1.1;AES256
               ...
     domain:
