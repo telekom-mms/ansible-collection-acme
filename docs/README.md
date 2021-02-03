@@ -74,7 +74,7 @@ Following providers for a dns-challenge are currently supported.
 
 | Variable                                 | Required | Default                              | Description
 |------------------------------------------|----------|--------------------------------------|------------
-| letsencrypt_conf_dir                     | no       | $HOME/letsencrypt                    | overwrite letsencrypt_conf_dir if you want to use another directory which is accessible for the user which runs the playbook
+| letsencrypt_conf_dir                     | no       | $HOME/letsencrypt                    | overwrite letsencrypt_conf_dir if you want to use another directory which is accessible to the user which runs the playbook
 | letsencrypt_prerequisites_packagemanager | no       | yum                                  | set the packagemanager which is used of the ansible_host. Possible values are all supported package managers from ansible package module
 | acme_staging_directory                   | no       | acme-staging-v02.api.letsencrypt.org | acme directory which will be used for certificate challenge
 | acme_live_directory                      | no       | acme-v02.api.letsencrypt.org         | acme directory which will be used for certificate challenge
