@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.2.0](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.2.0) (2021-02-02)
+## [0.2.0](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.2.0) (2021-02-04)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.1.0...0.2.0)
 
@@ -8,9 +8,15 @@
 
 - unify challenge provider logic [\#35](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/35) ([schurzi](https://github.com/schurzi))
 - Account key content as variable [\#33](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/33) ([Nemental](https://github.com/Nemental))
+- Add "local" provider for http-challenge [\#30](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/30) ([avalor1](https://github.com/avalor1))
+
+**Closed issues:**
+
+- Documentation restructuring [\#32](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/issues/32)
 
 **Merged pull requests:**
 
+- Documentation restructuring [\#37](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/37) ([avalor1](https://github.com/avalor1))
 - use ternary to simplify tasks for directory usage, remove comments [\#36](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/36) ([rndmh3ro](https://github.com/rndmh3ro))
 - use version for github action, short sha is no longer supported [\#34](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/34) ([schurzi](https://github.com/schurzi))
 
@@ -29,10 +35,6 @@
 ## [0.0.8](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.0.8) (2021-01-11)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.0.7...0.0.8)
-
-**Implemented enhancements:**
-
-- Add "local" provider for http-challenge [\#30](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/30) ([avalor1](https://github.com/avalor1))
 
 **Closed issues:**
 
