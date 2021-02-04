@@ -1,12 +1,10 @@
 # Let's Encrypt Collection for Ansible
-**NOT STABLE - DO NOT USE IN PRODUCTION ENVIRONMENTS**
 
-This role issues Let's Encrypt certificates. Currently DNS-01 and HTTP-01 challenges are supported
+This collection manages Let's Encrypt certificates.
 
 Required Ansible version: 2.9
 
-Installation
-------------
+## Installation
 
 These modules are distributed as [collections](https://docs.ansible.com/ansible/latest/user_guide/collections_using.html).
 To install them, run:
@@ -23,18 +21,16 @@ collections:
 - t_systems_mms.letsencrypt
 ```
 
-Examples
---------
+## Usage
 
-Please see [README](roles/letsencrypt/README.md) of the role.
+Role `letsencrypt` for issuing certificates.
+Please see [documentation](docs/role-letsencrypt.md) for variables, usage and further information for all the different providers.
 
-License
--------
+## License
 
 GPLv3
 
-Author Information
-------------------
+## Author Information
 
 * Sebastian Gumprich
 * Andreas Hering
