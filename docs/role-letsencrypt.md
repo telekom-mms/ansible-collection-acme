@@ -1,14 +1,8 @@
-# Let's Encrypt Collection for Ansible
+# Let's Encrypt role
 
 This role issues Let's Encrypt certificates via DNS-01 or HTTP-01 challenge.
 
-This collection does not distribute certificates - it only creates them. You have to implement the distribution in your own playbooks roles.
-
-## Installation
-
-```bash
-ansible-galaxy collection install t_systems_mms.letsencrypt
-```
+This role does not distribute certificates - it only creates them. You have to implement the distribution in your own playbooks roles.
 
 ## Providers
 
@@ -17,13 +11,15 @@ Please see the corresponding readme files for specific variables and examples.
 
 Feel free to contribute more DNS or HTTP APIs :)
 
-* [AutoDNS](dns-challenge/autodns.md)
-* [Azure](dns-challenge/azure.md)
-* [hetzner](dns-challenge/hetzner.md)
-* [local](http-challenge/local.md)
-* [openstack](dns-challenge/openstack.md)
-* [pebble](dns-challenge/pebble.md)
-* [s3](http-challenge/s3.md)
+* DNS
+  * [AutoDNS](dns-challenge/autodns.md)
+  * [Azure](dns-challenge/azure.md)
+  * [hetzner](dns-challenge/hetzner.md)
+  * [openstack](dns-challenge/openstack.md)
+  * [pebble](dns-challenge/pebble.md)
+* HTTP
+  * [local](http-challenge/local.md)
+  * [s3](http-challenge/s3.md)
 
 ## General variables
 
@@ -32,7 +28,7 @@ Feel free to contribute more DNS or HTTP APIs :)
 | **domain configuration**
 | certificate_name                    | yes      |         | Name of the resulting certificate. Most useful for wildcard certificates to not have files named '*.example.com' on the filesystem
 | zone                                | yes      |         | Zone in which the dns records should be created
-| subject_alt_name                    | yes      |         | Domain(s) for which the certificate(s) should be validated. If you are issueing a wildcard certificate you should also add the main domain for which you are issueing the certificate
+| subject_alt_name                    | yes      |         | Domain(s) for which the certificate(s) should be validated. If you are issuing a wildcard certificate you should also add the main domain for which you are issuing the certificate
 | email_address                       | yes      |         | Mail address which is used for the certificate (reminder mails are sent here)
 | **configuration options**           |          |         |
 | account_key_content                 | no       |         | Content of the created letsencrypt account key
