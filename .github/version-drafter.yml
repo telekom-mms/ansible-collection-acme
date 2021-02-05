@@ -1,0 +1,3 @@
+major-labels: ['semver:major','major','breaking','backwards-incompatible']
+minor-labels: ['semver:minor','minor','enhancement']
+patch-labels: ['semver:patch','patch','bug']
