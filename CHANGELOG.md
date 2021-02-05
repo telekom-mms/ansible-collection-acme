@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.1](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/1.0.1) (2021-02-05)
+
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/1.0.0...1.0.1)
+
+**Merged pull requests:**
+
+- Add README.md link in role [\#41](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/41) ([avalor1](https://github.com/avalor1))
+
 ## [1.0.0](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/1.0.0) (2021-02-05)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.1.0...1.0.0)
