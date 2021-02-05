@@ -6,6 +6,7 @@
 
 **Implemented enhancements:**
 
+- unify challenge provider logic [\#35](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/35) ([schurzi](https://github.com/schurzi))
 - Account key content as variable [\#33](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/33) ([Nemental](https://github.com/Nemental))
 - Add "local" provider for http-challenge [\#30](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/30) ([avalor1](https://github.com/avalor1))
 
@@ -26,7 +27,6 @@
 
 **Implemented enhancements:**
 
-- unify challenge provider logic [\#35](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/35) ([schurzi](https://github.com/schurzi))
 - Feature / dns challenge otc openstack [\#31](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/31) ([Nemental](https://github.com/Nemental))
 
 **Merged pull requests:**
