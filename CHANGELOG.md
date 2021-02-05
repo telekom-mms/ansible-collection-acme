@@ -1,8 +1,8 @@
 # Changelog
 
-## [0.2.0](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/0.2.0) (2021-02-05)
+## [1.0.0](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/1.0.0) (2021-02-05)
 
-[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.1.0...0.2.0)
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/0.1.0...1.0.0)
 
 **Implemented enhancements:**
 
@@ -16,6 +16,7 @@
 
 **Merged pull requests:**
 
+- Release 1.0 [\#40](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/40) ([avalor1](https://github.com/avalor1))
 - use more labels for version-generation [\#39](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/39) ([rndmh3ro](https://github.com/rndmh3ro))
 - Documentation restructuring [\#37](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/37) ([avalor1](https://github.com/avalor1))
 - use ternary to simplify tasks for directory usage, remove comments [\#36](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/36) ([rndmh3ro](https://github.com/rndmh3ro))
