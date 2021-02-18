@@ -2,7 +2,7 @@
 - name: check if a challenge provider is used
   assert:
     that:
-      - letsencrypt_dns_provider or letsencrypt_http_provider
+      - letsencrypt_dns_provider is defined or letsencrypt_http_provider is defined
     fail_msg: "You need to set a 'letsencrypt_dns_provider' or 'letsencrypt_http_provider'."
 
 - name: set fact for acme_directory depending on what is set in letsencrypt_use_acme_live_directory
