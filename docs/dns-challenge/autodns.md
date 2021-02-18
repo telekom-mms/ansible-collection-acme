@@ -18,8 +18,6 @@ None
       email_address: "ssl-admin@example.com"
       subject_alt_name:
         - "*.example.com"
-    letsencrypt_do_http_challenge: false
-    letsencrypt_do_dns_challenge: true
     letsencrypt_dns_provider: autodns
     letsencrypt_use_acme_live_directory: false
     account_email: "ssl-admin@example.com"
@@ -32,7 +30,7 @@ None
 ### SAN certificate
 
 ```yaml
-- name: create the certificate for *.example.com
+- name: create the certificate for example.com
   hosts: localhost
   roles:
     - letsencrypt
@@ -45,8 +43,6 @@ None
         - "example.com"
         - "domain1.example.com"
         - "domain2.example.com"
-    letsencrypt_do_http_challenge: false
-    letsencrypt_do_dns_challenge: true
     letsencrypt_dns_provider: autodns
     letsencrypt_use_acme_live_directory: false
     account_email: "ssl-admin@example.com"

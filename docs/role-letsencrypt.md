@@ -33,8 +33,6 @@ Feel free to contribute more DNS or HTTP APIs :)
 | **configuration options**           |          |         |
 | account_key_content                 | no       |         | Content of the created letsencrypt account key
 | private_key_content                 | no       |         | Content of the created private key for the certificate (allows reuse of keys)
-| letsencrypt_do_http_challenge       | yes      | false   | Use http challenge
-| letsencrypt_do_dns_challenge        | yes      | false   | Use dns challenge
 | letsencrypt_use_acme_live_directory | no       | false   | Choose if production certificates should be created, the staging directory of LE will be used by default
 | force_renewal                       | no       |         | Force renewal of certificate before `remaining_days` is reached
 

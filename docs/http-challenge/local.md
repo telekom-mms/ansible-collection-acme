@@ -24,9 +24,7 @@ Make sure that the validation-/ hashfile(s) is/are reachable by your configured 
         - example.com
         - domain1.example.com
         - domain2.example.com
-    letsencrypt_do_http_challenge: true
     letsencrypt_http_provider: "local"
-    letsencrypt_do_dns_challenge: false
     letsencrypt_use_acme_live_directory: false
     account_email: "ssl-admin@example.com"
 ```

@@ -12,8 +12,6 @@
   roles:
     - letsencrypt
   vars:
-    letsencrypt_do_http_challenge: false
-    letsencrypt_do_dns_challenge: true
     letsencrypt_dns_provider: hetzner
     letsencrypt_use_acme_live_directory: true
     account_email: "ssl-admin@example.com"

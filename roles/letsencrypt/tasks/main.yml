@@ -8,12 +8,12 @@
 - name: do http challenge
   include_tasks: http-challenge.yml
   when:
-    - letsencrypt_do_http_challenge | bool
+    - letsencrypt_http_provider
 
 - name: do dns challenge
   include_tasks: dns-challenge.yml
   when:
-    - letsencrypt_do_dns_challenge | bool
+    - letsencrypt_dns_provider
 
 - name: convert certificate
   include_tasks: convert_certificate.yml

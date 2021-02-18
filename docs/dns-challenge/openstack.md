@@ -16,8 +16,6 @@
   roles:
     - letsencrypt
   vars:
-    letsencrypt_do_http_challenge: false
-    letsencrypt_do_dns_challenge: true
     letsencrypt_dns_provider: openstack
     letsencrypt_use_acme_live_directory: false
     dns_openstack_user_domain: "OTC-EU-DE-00000000001000000000"
