@@ -64,7 +64,7 @@ jobs:
       - name: Run Linting
         uses: ansible/ansible-lint-action@master
         with:
-          targets: ansible_collections/t_systems_mms/acme/roles/letsencrypt
+          targets: ansible_collections/t_systems_mms/acme/roles/acme_letsencrypt
           args: "-c ansible_collections/t_systems_mms/acme/.ansible-lint"
 
   integration-tests:

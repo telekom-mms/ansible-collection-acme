@@ -3,7 +3,7 @@
   collections:
     - t_systems_mms.acme
   roles:
-  - letsencrypt
+    - acme_letsencrypt
   vars:
     acme_letsencrypt_domain:
       certificate_name: "http-local.example.de"
