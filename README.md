@@ -10,7 +10,7 @@ These modules are distributed as [collections](https://docs.ansible.com/ansible/
 To install them, run:
 
 ```bash
-ansible-galaxy collection install t_systems_mms.letsencrypt
+ansible-galaxy collection install t_systems_mms.acme
 ```
 
 Alternatively put the collection into a `requirements.yml`-file:
@@ -18,13 +18,13 @@ Alternatively put the collection into a `requirements.yml`-file:
 ```yaml
 ---
 collections:
-- t_systems_mms.letsencrypt
+- t_systems_mms.acme
 ```
 
 ## Usage
 
-Role `letsencrypt` for issuing certificates.
-Please see [documentation](docs/role-letsencrypt.md) for variables, usage and further information for all the different providers.
+Role `acme_letsencrypt` for issuing certificates.
+Please see [documentation](docs/role-acme_letsencrypt.md) for variables, usage and further information for all the different providers.
 
 ## License
 
