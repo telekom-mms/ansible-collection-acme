@@ -13,8 +13,10 @@
 ```yaml
 - name: create the certificate for *.example.com
   hosts: localhost
+  collections:
+    - t_systems_mms.acme
   roles:
-  - letsencrypt
+    - letsencrypt
   vars:
     acme_challenge_provider: azure
     acme_use_live_directory: true
@@ -35,8 +37,10 @@
 ```yaml
 - name: create the certificate for example.com
   hosts: localhost
+  collections:
+    - t_systems_mms.acme
   roles:
-  - letsencrypt
+    - letsencrypt
   vars:
     acme_challenge_provider: azure
     acme_use_live_directory: true

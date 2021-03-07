@@ -15,7 +15,7 @@ This is also done for the provider of the local http-challenge.
   collections:
     - t_systems_mms.acme
   roles:
-  - letsencrypt
+    - letsencrypt
   vars:
     domain:
       acme_certificate_name: "dns-pebble.example.com"

@@ -13,8 +13,10 @@ Make sure that the validation-/ hashfile(s) is/are reachable by your configured 
 ```yaml
 - name: create the certificate for example.com
   hosts: localhost
+  collections:
+    - t_systems_mms.acme
   roles:
-  - letsencrypt
+    - letsencrypt
   vars:
     domain:
       acme_certificate_name: "example.com"
