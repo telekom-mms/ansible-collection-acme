@@ -1,25 +1,10 @@
 ---
-- name: check if a challenge provider is used
-  assert:
-    that:
-      - acme_do_dns_challenge | bool or acme_do_http_challenge | bool
-    fail_msg: "You need to set acme_do_dns_challenge'' or 'acme_do_http_challenge'."
-
-- name: check if a DNS challenge provider is used
+- name: check if a challenge provider is set
   assert:
     that:
       - acme_challenge_provider is defined
-    fail_msg: "You need to set a DNS challenge provider ('acme_challenge_provider') if you use the DNS challenge."
-  when:
-    - acme_do_dns_challenge | bool
-
-- name: check if a HTTP challenge provider is used
-  assert:
-    that:
-      - acme_challenge_provider is defined
-    fail_msg: "You need to set a HTTP challenge provider ('acme_challenge_provider') if you use the HTTP challenge."
-  when:
-    - acme_do_http_challenge | bool
+      - acme_challenge_provider != ""
+    fail_msg: "You need to set acme_challenge_provider with a provider. See documentation for a list of possible providers."
 
 - name: set fact for acme_directory depending on what is set in acme_use_live_directory
   set_fact:
