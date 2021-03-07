@@ -2,9 +2,9 @@
 
 | Variable                            | Required | Default | Description
 |-------------------------------------|----------|---------|------------
-| azure_resource_group                | yes      |         | Azure Resource Group for acme_dns_zone_name
-| acme_subject_alt_name: top_level:        | no       |         | list of top-level domains
-| acme_subject_alt_name: second_level:     | no       |         | list of second_level domains
+| acme_letsencrypt_azure_resource_group                | yes      |         | Azure Resource Group for zone_name
+| subject_alt_name: top_level:        | no       |         | list of top-level domains
+| subject_alt_name: second_level:     | no       |         | list of second_level domains
 
 ## Usage
 
@@ -16,18 +16,18 @@
   collections:
     - t_systems_mms.acme
   roles:
-    - letsencrypt
+    - acme_letsencrypt
   vars:
-    acme_challenge_provider: azure
-    acme_use_live_directory: true
-    account_email: "ssl-admin@example.com"
-    azure_resource_group: "azure_resource_group"
-    acme_convert_cert_to: pfx
-    domain:
-      acme_email_address: "ssl-admin@example.com"
-      acme_certificate_name: "wildcard.example.com"
-      acme_dns_zone: "example.com"
-      acme_subject_alt_name:
+    acme_letsencrypt_challenge_provider: azure
+    acme_letsencrypt_use_live_directory: true
+    acme_letsencrypt_account_email: "ssl-admin@example.com"
+    acme_letsencrypt_azure_resource_group: "azure_resource_group"
+    acme_letsencrypt_convert_cert_to: pfx
+    acme_letsencrypt_domain:
+      email_address: "ssl-admin@example.com"
+      certificate_name: "wildcard.example.com"
+      zone: "example.com"
+      subject_alt_name:
         top_level:
           - "*.example.com"
 ```
@@ -40,18 +40,18 @@
   collections:
     - t_systems_mms.acme
   roles:
-    - letsencrypt
+    - acme_letsencrypt
   vars:
-    acme_challenge_provider: azure
-    acme_use_live_directory: true
-    account_email: "ssl-admin@example.com"
-    azure_resource_group: "azure_resource_group"
-    acme_convert_cert_to: pfx
-    domain:
-      acme_certificate_name: "example.com"
-      acme_dns_zone: "example.com"
-      acme_email_address: "ssl-admin@example.com"
-      acme_subject_alt_name:
+    acme_letsencrypt_challenge_provider: azure
+    acme_letsencrypt_use_live_directory: true
+    acme_letsencrypt_account_email: "ssl-admin@example.com"
+    acme_letsencrypt_azure_resource_group: "azure_resource_group"
+    acme_letsencrypt_convert_cert_to: pfx
+    acme_letsencrypt_domain:
+      certificate_name: "example.com"
+      zone: "example.com"
+      email_address: "ssl-admin@example.com"
+      subject_alt_name:
         top_level:
           - example.com
           - domain1.example.com

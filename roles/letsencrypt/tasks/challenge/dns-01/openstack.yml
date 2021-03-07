@@ -1,52 +1,52 @@
 ---
-- name: add new TXT record to DNS acme_dns_zone
+- name: add new TXT record to DNS zone
   openstack.cloud.recordset:
     auth:
-      auth_url: "{{ dns_openstack_auth_url }}"
-      username: "{{ acme_dns_user }}"
-      password: "{{ acme_dns_password }}"
-      project_name: "{{ dns_openstack_project_name }}"
-      user_domain_name: "{{ dns_openstack_user_domain }}"
+      auth_url: "{{ acme_letsencrypt_openstack_auth_url }}"
+      username: "{{ acme_letsencrypt_dns_user }}"
+      password: "{{ acme_letsencrypt_dns_password }}"
+      project_name: "{{ acme_letsencrypt_openstack_project_name }}"
+      user_domain_name: "{{ acme_letsencrypt_openstack_user_domain }}"
     state: present
     recordset_type: "txt"
     records:
       - "\"{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}\""
     name: "_acme-challenge.{{ item | replace('*.', '') }}."
-    acme_dns_zone: "{{ domain.acme_dns_zone }}."
-  loop: "{{ domain.acme_subject_alt_name }}"
+    zone: "{{ acme_letsencrypt_domain.zone }}."
+  loop: "{{ acme_letsencrypt_domain.subject_alt_name }}"
   register: records
   when:
-    - domain.acme_subject_alt_name is defined
+    - acme_letsencrypt_domain.subject_alt_name is defined
     - challenge['challenge_data'][item] is defined
 
 - name: Let the challenge be validated and retrieve the cert and intermediate certificate
   acme_certificate:
-    account_key_src: "{{ acme_account_key_path }}"
-    account_email: "{{ account_email }}"
-    csr: "{{ acme_csr_path }}"
-    cert: "{{ acme_cert_path }}"
-    fullchain: "{{ acme_fullchain_path }}"
-    chain: "{{ acme_intermediate_path }}"
+    account_key_src: "{{ acme_letsencrypt_account_key_path }}"
+    account_email: "{{ acme_letsencrypt_account_email }}"
+    csr: "{{ acme_letsencrypt_csr_path }}"
+    cert: "{{ acme_letsencrypt_cert_path }}"
+    fullchain: "{{ acme_letsencrypt_fullchain_path }}"
+    chain: "{{ acme_letsencrypt_intermediate_path }}"
     challenge: dns-01
-    force: "{{ acme_force_renewal | default(false) }}"
-    acme_directory: "{{ acme_directory }}"
+    force: "{{ acme_letsencrypt_force_renewal | default(false) }}"
+    acme_directory: "{{ acme_letsencrypt_directory }}"
     acme_version: 2
     terms_agreed: true
-    acme_remaining_days: "{{ acme_remaining_days }}"
+    remaining_days: "{{ acme_letsencrypt_remaining_days }}"
     data: "{{ challenge }}"
 
-- name: remove TXT records from DNS acme_dns_zone
+- name: remove TXT records from DNS zone
   openstack.cloud.recordset:
     auth:
-      auth_url: "{{ dns_openstack_auth_url }}"
-      username: "{{ acme_dns_user }}"
-      password: "{{ acme_dns_password }}"
-      project_name: "{{ dns_openstack_project_name }}"
-      user_domain_name: "{{ dns_openstack_user_domain }}"
+      auth_url: "{{ acme_letsencrypt_openstack_auth_url }}"
+      username: "{{ acme_letsencrypt_dns_user }}"
+      password: "{{ acme_letsencrypt_dns_password }}"
+      project_name: "{{ acme_letsencrypt_openstack_project_name }}"
+      user_domain_name: "{{ acme_letsencrypt_openstack_user_domain }}"
     state: absent
     name: "_acme-challenge.{{ item | replace('*.', '') }}."
-    acme_dns_zone: "{{ domain.acme_dns_zone }}."
-  loop: "{{ domain.acme_subject_alt_name }}"
+    zone: "{{ acme_letsencrypt_domain.zone }}."
+  loop: "{{ acme_letsencrypt_domain.subject_alt_name }}"
   when:
-    - domain.acme_subject_alt_name is defined
+    - acme_letsencrypt_domain.subject_alt_name is defined
     - challenge['challenge_data'][item] is defined

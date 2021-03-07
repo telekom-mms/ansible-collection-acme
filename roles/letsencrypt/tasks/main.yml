@@ -5,12 +5,12 @@
 - name: run key generation
   include_tasks: create-keys.yml
 
-- name: "select provider {{ acme_challenge_provider }}"
+- name: "select provider {{ acme_letsencrypt_challenge_provider }}"
   set_fact:
-    acme_provider_path: "{{ item }}"
+    acme_letsencrypt_provider_path: "{{ item }}"
   with_first_found:
-    - "challenge/dns-01/{{ acme_challenge_provider }}.yml"
-    - "challenge/http-01/{{ acme_challenge_provider }}.yml"
+    - "challenge/dns-01/{{ acme_letsencrypt_challenge_provider }}.yml"
+    - "challenge/http-01/{{ acme_letsencrypt_challenge_provider }}.yml"
     - challenge-unknown.yml
 
 - name: create csr
@@ -19,10 +19,10 @@
 - name: create challenge
   include_tasks: create-challenge.yml
 
-- name: do challenge with provider {{ acme_challenge_provider }}
-  include_tasks: "{{ acme_provider_path }}"
+- name: do challenge with provider {{ acme_letsencrypt_challenge_provider }}
+  include_tasks: "{{ acme_letsencrypt_provider_path }}"
 
 - name: convert certificate
   include_tasks: convert_certificate.yml
   when:
-    - acme_convert_cert_to is defined
+    - acme_letsencrypt_convert_cert_to is defined

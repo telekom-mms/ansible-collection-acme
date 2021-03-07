@@ -15,23 +15,23 @@ This is also done for the provider of the local http-challenge.
   collections:
     - t_systems_mms.acme
   roles:
-    - letsencrypt
+    - acme_letsencrypt
   vars:
-    domain:
-      acme_certificate_name: "dns-pebble.example.com"
-      acme_dns_zone: "example.com"
-      acme_email_address: "ssl-admin@example.com"
-      acme_subject_alt_name:
+    acme_letsencrypt_domain:
+      certificate_name: "dns-pebble.example.com"
+      zone: "example.com"
+      email_address: "ssl-admin@example.com"
+      subject_alt_name:
         - "example.com"
-    acme_challenge_provider: "pebble"
-    acme_use_live_directory: false
-    account_email: "ssl-admin@example.com"
-    acme_staging_directory: "https://localhost:14000/dir"
-    acme_validate_certs: false
+    acme_letsencrypt_challenge_provider: "pebble"
+    acme_letsencrypt_use_live_directory: false
+    acme_letsencrypt_account_email: "ssl-admin@example.com"
+    acme_letsencrypt_staging_directory: "https://localhost:14000/dir"
+    acme_letsencrypt_validate_certs: false
   post_tasks:
     - name: validate certs
       community.crypto.x509_certificate_info:
-        path: "{{ acme_cert_path }}"
+        path: "{{ acme_letsencrypt_cert_path }}"
       register: result
 
     - debug:
@@ -40,6 +40,6 @@ This is also done for the provider of the local http-challenge.
     - assert:
         that:
           - result.subject.commonName == "example.com"
-          - "'DNS:example.com' in result.acme_subject_alt_name"
+          - "'DNS:example.com' in result.subject_alt_name"
           - "'Pebble Intermediate CA' in result.issuer.commonName"
 ```

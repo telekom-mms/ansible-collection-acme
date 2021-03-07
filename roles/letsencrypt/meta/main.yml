@@ -2,6 +2,7 @@
 collections:
   - t_systems_mms.acme
 galaxy_info:
+  role_name: acme_letsencrypt
   author: t_systems_mms
   description: Issue certificates from Let's Encrypt via dns- or http-challenge.
   license: GPLv3

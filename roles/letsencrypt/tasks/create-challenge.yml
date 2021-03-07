@@ -1,16 +1,16 @@
 ---
-- name: Create a challenge for {{ domain.acme_certificate_name }} using a account key file.
+- name: Create a challenge for {{ acme_letsencrypt_domain.acme_letsencrypt_certificate_name }} using a account key file.
   acme_certificate:
-    account_key_src: "{{ acme_account_key_path }}"
-    account_email: "{{ account_email }}"
-    csr: "{{ acme_csr_path }}"
-    cert: "{{ acme_cert_path }}"
-    # e.g. acme_provider_path is "challenge/http-01/s3.yml" > dirname is "challenge/http-01" > basename is "http-01"
-    challenge: "{{ acme_provider_path | dirname | basename }}"
-    force: "{{ acme_force_renewal | default(false) }}"
-    acme_directory: "{{ acme_directory }}"
+    account_key_src: "{{ acme_letsencrypt_account_key_path }}"
+    account_email: "{{ acme_letsencrypt_account_email }}"
+    csr: "{{ acme_letsencrypt_csr_path }}"
+    cert: "{{ acme_letsencrypt_cert_path }}"
+    # e.g. acme_letsencrypt_provider_path is "challenge/http-01/s3.yml" > dirname is "challenge/http-01" > basename is "http-01"
+    challenge: "{{ acme_letsencrypt_provider_path | dirname | basename }}"
+    force: "{{ acme_letsencrypt_force_renewal | default(false) }}"
+    acme_directory: "{{ acme_letsencrypt_directory }}"
     acme_version: 2
     terms_agreed: true
-    acme_remaining_days: "{{ acme_remaining_days }}"
-    acme_validate_certs: "{{ acme_validate_certs | default(true) }}"
+    remaining_days: "{{ acme_letsencrypt_remaining_days }}"
+    validate_certs: "{{ acme_letsencrypt_validate_certs | default(true) }}"
   register: challenge

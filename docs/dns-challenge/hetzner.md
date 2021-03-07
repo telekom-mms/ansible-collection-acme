@@ -2,7 +2,7 @@
 
 | Variable               | Required | Default | Description
 |------------------------|----------|---------|------------
-| dns_hetzner_auth_token | yes      |         | Access token for hetzner DNS API
+| acme_letsencrypt_hetzner_auth_token | yes      |         | Access token for hetzner DNS API
 
 ## Usage
 
@@ -12,18 +12,18 @@
   collections:
     - t_systems_mms.acme
   roles:
-    - letsencrypt
+    - acme_letsencrypt
   vars:
-    acme_challenge_provider: hetzner
-    acme_use_live_directory: true
-    account_email: "ssl-admin@example.com"
-    dns_hetzner_auth_token: !vault |
+    acme_letsencrypt_challenge_provider: hetzner
+    acme_letsencrypt_use_live_directory: true
+    acme_letsencrypt_account_email: "ssl-admin@example.com"
+    acme_letsencrypt_hetzner_auth_token: !vault |
               $ANSIBLE_VAULT;1.1;AES256
               ...
-    domain:
-      acme_email_address: "ssl-admin@example.com"
-      acme_certificate_name: "wildcard.example.com"
-      acme_dns_zone: "example.com"
-      acme_subject_alt_name:
+    acme_letsencrypt_domain:
+      email_address: "ssl-admin@example.com"
+      certificate_name: "wildcard.example.com"
+      zone: "example.com"
+      subject_alt_name:
         - "*.example.com"
 ```
