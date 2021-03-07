@@ -1,10 +1,10 @@
 # Variables for azure dns-challenge
 
-| Variable                            | Required | Default | Description
-|-------------------------------------|----------|---------|------------
-| acme_letsencrypt_azure_resource_group                | yes      |         | Azure Resource Group for zone_name
-| subject_alt_name: top_level:        | no       |         | list of top-level domains
-| subject_alt_name: second_level:     | no       |         | list of second_level domains
+| Variable                              | Required | Default | Description
+|---------------------------------------|----------|---------|------------
+| acme_letsencrypt_azure_resource_group | yes      |         | Azure Resource Group for zone_name
+| subject_alt_name: top_level:          | no       |         | list of top-level domains
+| subject_alt_name: second_level:       | no       |         | list of second_level domains
 
 ## Usage
 

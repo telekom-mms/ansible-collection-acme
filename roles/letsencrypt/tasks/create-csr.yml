@@ -3,8 +3,8 @@
   openssl_csr:
     path: "{{ acme_letsencrypt_csr_path }}"
     privatekey_path: "{{ acme_letsencrypt_private_key_path }}"
-    email_address: "{{ acme_letsencrypt_domain.acme_letsencrypt_email_address }}"
-    subject_alt_name: "DNS:{{ acme_letsencrypt_acme_letsencrypt_domain.subject_alt_name | join(',DNS:') }}"
+    email_address: "{{ acme_letsencrypt_domain.email_address }}"
+    subject_alt_name: "DNS:{{ acme_letsencrypt_domain.subject_alt_name | join(',DNS:') }}"
   when:
     - acme_letsencrypt_domain.subject_alt_name.top_level is undefined and acme_letsencrypt_domain.subject_alt_name.second_level is undefined
     - '"dns-01" in acme_letsencrypt_provider_path'
@@ -13,7 +13,7 @@
   openssl_csr:
     path: "{{ acme_letsencrypt_csr_path }}"
     privatekey_path: "{{ acme_letsencrypt_private_key_path }}"
-    email_address: "{{ acme_letsencrypt_domain.acme_letsencrypt_email_address }}"
+    email_address: "{{ acme_letsencrypt_domain.email_address }}"
     subject_alt_name: "DNS:{{ (acme_letsencrypt_domain.subject_alt_name.top_level | default([])) | union(acme_letsencrypt_domain.subject_alt_name.second_level | default([])) | join(',DNS:') }}"
   when:
     - acme_letsencrypt_domain.subject_alt_name.top_level is defined or acme_letsencrypt_domain.subject_alt_name.second_level is defined
@@ -23,7 +23,7 @@
   openssl_csr:
     path: "{{ acme_letsencrypt_csr_path }}"
     privatekey_path: "{{ acme_letsencrypt_private_key_path }}"
-    email_address: "{{ acme_letsencrypt_domain.acme_letsencrypt_email_address }}"
-    subject_alt_name: "DNS:{{ acme_letsencrypt_acme_letsencrypt_domain.subject_alt_name | join(',DNS:') }}"
+    email_address: "{{ acme_letsencrypt_domain.email_address }}"
+    subject_alt_name: "DNS:{{ acme_letsencrypt_domain.subject_alt_name | join(',DNS:') }}"
   when:
     - '"http-01" in acme_letsencrypt_provider_path'

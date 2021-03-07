@@ -9,12 +9,12 @@ acme_letsencrypt_staging_directory: "https://acme-staging-v02.api.letsencrypt.or
 acme_letsencrypt_live_directory: "https://acme-v02.api.letsencrypt.org/directory"
 acme_letsencrypt_use_live_directory: false
 acme_letsencrypt_account_key_path: "{{ acme_letsencrypt_conf_dir }}/letsencrypt_account.pem"
-acme_letsencrypt_csr_path: "{{ acme_letsencrypt_cert_dir }}/{{ acme_letsencrypt_domain.acme_letsencrypt_certificate_name }}.csr"
-acme_letsencrypt_cert_path: "{{ acme_letsencrypt_cert_dir }}/{{ acme_letsencrypt_domain.acme_letsencrypt_certificate_name }}.pem"
-acme_letsencrypt_pfx_cert_path: "{{ acme_letsencrypt_cert_dir }}/{{ acme_letsencrypt_domain.acme_letsencrypt_certificate_name }}.pfx"
-acme_letsencrypt_intermediate_path: "{{ acme_letsencrypt_cert_dir }}/{{ acme_letsencrypt_domain.acme_letsencrypt_certificate_name }}_intermediate.pem"
-acme_letsencrypt_fullchain_path: "{{ acme_letsencrypt_cert_dir }}/{{ acme_letsencrypt_domain.acme_letsencrypt_certificate_name }}_fullchain.pem"
-acme_letsencrypt_private_key_path: "{{ acme_letsencrypt_cert_dir }}/{{ acme_letsencrypt_domain.acme_letsencrypt_certificate_name }}.key"
+acme_letsencrypt_csr_path: "{{ acme_letsencrypt_cert_dir }}/{{ acme_letsencrypt_domain.certificate_name }}.csr"
+acme_letsencrypt_cert_path: "{{ acme_letsencrypt_cert_dir }}/{{ acme_letsencrypt_domain.certificate_name }}.pem"
+acme_letsencrypt_pfx_cert_path: "{{ acme_letsencrypt_cert_dir }}/{{ acme_letsencrypt_domain.certificate_name }}.pfx"
+acme_letsencrypt_intermediate_path: "{{ acme_letsencrypt_cert_dir }}/{{ acme_letsencrypt_domain.certificate_name }}_intermediate.pem"
+acme_letsencrypt_fullchain_path: "{{ acme_letsencrypt_cert_dir }}/{{ acme_letsencrypt_domain.certificate_name }}_fullchain.pem"
+acme_letsencrypt_private_key_path: "{{ acme_letsencrypt_cert_dir }}/{{ acme_letsencrypt_domain.certificate_name }}.key"
 acme_letsencrypt_remaining_days: "30"
 
 ### provider specific config

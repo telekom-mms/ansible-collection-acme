@@ -1,8 +1,8 @@
 # Variables for local http-challenge
 
-| Variable                            | Required | Default       | Description
-|-------------------------------------|----------|---------------|------------
-| acme_letsencrypt_local_validation_path   | no       | /var/www/html | Path where the validation-/ hashfiles get created
+| Variable                               | Required | Default       | Description
+|----------------------------------------|----------|---------------|------------
+| acme_letsencrypt_local_validation_path | no       | /var/www/html | Path where the validation-/ hashfiles get created
 
 ## Validation
 

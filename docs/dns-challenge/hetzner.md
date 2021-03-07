@@ -1,7 +1,7 @@
 # Variables for hetzner dns-challenge
 
-| Variable               | Required | Default | Description
-|------------------------|----------|---------|------------
+| Variable                            | Required | Default | Description
+|-------------------------------------|----------|---------|------------
 | acme_letsencrypt_hetzner_auth_token | yes      |         | Access token for hetzner DNS API
 
 ## Usage

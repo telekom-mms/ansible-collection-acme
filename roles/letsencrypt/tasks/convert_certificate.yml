@@ -3,7 +3,7 @@
   openssl_pkcs12:
     action: export
     path: "{{ acme_letsencrypt_pfx_cert_path }}"
-    name: "{{ acme_letsencrypt_domain.acme_letsencrypt_certificate_name }}"
+    name: "{{ acme_letsencrypt_domain.certificate_name }}"
     privatekey_path: "{{ acme_letsencrypt_private_key_path }}"
     certificate_path: "{{ acme_letsencrypt_fullchain_path }}"
   when: acme_letsencrypt_convert_cert_to == "pfx"
