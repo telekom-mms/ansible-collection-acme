@@ -6,4 +6,4 @@
     name: "{{ domain.acme_certificate_name }}"
     privatekey_path: "{{ acme_private_key_path }}"
     certificate_path: "{{ acme_fullchain_path }}"
-  when: convert_cert_to == "pfx"
+  when: acme_convert_cert_to == "pfx"

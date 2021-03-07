@@ -8,16 +8,16 @@
 - name: check if a DNS challenge provider is used
   assert:
     that:
-      - acme_dns_provider is defined
-    fail_msg: "You need to set a DNS challenge provider ('acme_dns_provider') if you use the DNS challenge."
+      - acme_challenge_provider is defined
+    fail_msg: "You need to set a DNS challenge provider ('acme_challenge_provider') if you use the DNS challenge."
   when:
     - acme_do_dns_challenge | bool
 
 - name: check if a HTTP challenge provider is used
   assert:
     that:
-      - acme_http_provider is defined
-    fail_msg: "You need to set a HTTP challenge provider ('acme_http_provider') if you use the HTTP challenge."
+      - acme_challenge_provider is defined
+    fail_msg: "You need to set a HTTP challenge provider ('acme_challenge_provider') if you use the HTTP challenge."
   when:
     - acme_do_http_challenge | bool
 

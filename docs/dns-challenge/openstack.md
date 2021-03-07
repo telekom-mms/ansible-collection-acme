@@ -16,9 +16,7 @@
   roles:
   - acme
   vars:
-    acme_do_http_challenge: false
-    acme_do_dns_challenge: true
-    acme_dns_provider: openstack
+    acme_challenge_provider: openstack
     acme_use_live_directory: false
     dns_openstack_user_domain: "OTC-EU-DE-00000000001000000000"
     dns_openstack_auth_url: "https://iam.eu-de.otc.t-systems.com:443/v3"

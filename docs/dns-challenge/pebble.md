@@ -23,13 +23,11 @@ This is also done for the provider of the local http-challenge.
       acme_email_address: "ssl-admin@example.com"
       acme_subject_alt_name:
         - "example.com"
-    acme_do_http_challenge: false
-    acme_do_dns_challenge: true
-    acme_dns_provider: "pebble"
+    acme_challenge_provider: "pebble"
     acme_use_live_directory: false
     account_email: "ssl-admin@example.com"
     acme_staging_directory: "https://localhost:14000/dir"
-    validate_certs: false
+    acme_validate_certs: false
   post_tasks:
     - name: validate certs
       community.crypto.x509_certificate_info:

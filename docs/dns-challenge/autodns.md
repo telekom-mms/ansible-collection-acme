@@ -18,9 +18,7 @@ None
       acme_email_address: "ssl-admin@example.com"
       acme_subject_alt_name:
         - "*.example.com"
-    acme_do_http_challenge: false
-    acme_do_dns_challenge: true
-    acme_dns_provider: autodns
+    acme_challenge_provider: autodns
     acme_use_live_directory: false
     account_email: "ssl-admin@example.com"
     acme_dns_user: "example_dns"
@@ -32,7 +30,7 @@ None
 ### SAN certificate
 
 ```yaml
-- name: create the certificate for *.example.com
+- name: create the certificate for example.com
   hosts: localhost
   roles:
   - acme
@@ -45,9 +43,7 @@ None
         - "example.com"
         - "domain1.example.com"
         - "domain2.example.com"
-    acme_do_http_challenge: false
-    acme_do_dns_challenge: true
-    acme_dns_provider: autodns
+    acme_challenge_provider: autodns
     acme_use_live_directory: false
     account_email: "ssl-admin@example.com"
     acme_dns_user: "example_dns"

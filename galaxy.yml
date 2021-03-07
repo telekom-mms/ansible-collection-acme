@@ -13,9 +13,10 @@ license:
 license_file: ''
 tags:
   - acme
+  - certificates
   - letsencrypt
   - security
-  - certificates
+  - ssl
 dependencies:
   community.crypto: '>=1.0.0'
   openstack.cloud: '>=1.2.1'

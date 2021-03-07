@@ -2,20 +2,27 @@
 - name: preconditions
   include_tasks: preconditions.yml
 
-- name: run certificate generation
+- name: run key generation
   include_tasks: create-keys.yml
 
-- name: do http challenge
-  include_tasks: http-challenge.yml
-  when:
-    - acme_do_http_challenge | bool
+- name: "select provider {{ acme_challenge_provider }}"
+  set_fact:
+    acme_provider_path: "{{ item }}"
+  with_first_found:
+    - "challenge/dns-01/{{ acme_challenge_provider }}.yml"
+    - "challenge/http-01/{{ acme_challenge_provider }}.yml"
+    - challenge-unknown.yml
 
-- name: do dns challenge
-  include_tasks: dns-challenge.yml
-  when:
-    - acme_do_dns_challenge | bool
+- name: create csr
+  include_tasks: create-csr.yml
+
+- name: create challenge
+  include_tasks: create-challenge.yml
+
+- name: do challenge with provider {{ acme_challenge_provider }}
+  include_tasks: "{{ acme_provider_path }}"
 
 - name: convert certificate
   include_tasks: convert_certificate.yml
   when:
-    - convert_cert_to is defined
+    - acme_convert_cert_to is defined

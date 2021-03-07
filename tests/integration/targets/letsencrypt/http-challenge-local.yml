@@ -11,14 +11,12 @@
       acme_email_address: "ssl-admin@example.de"
       acme_subject_alt_name:
         - example.de
-    acme_do_http_challenge: true
-    acme_http_provider: "local"
+    acme_challenge_provider: "local"
     acme_local_validation_path: "/tmp"
-    acme_do_dns_challenge: false
     acme_use_live_directory: false
     account_email: "ssl-admin@example.de"
     acme_staging_directory: "https://localhost:14000/dir"
-    validate_certs: false
+    acme_validate_certs: false
   post_tasks:
     - name: validate certs
       community.crypto.x509_certificate_info:

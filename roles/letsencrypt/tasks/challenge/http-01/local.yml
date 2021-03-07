@@ -34,7 +34,7 @@
         terms_agreed: true
         acme_remaining_days: "{{ acme_remaining_days }}"
         data: "{{ challenge }}"
-        validate_certs: "{{ validate_certs | default(true) }}"
+        acme_validate_certs: "{{ acme_validate_certs | default(true) }}"
 
     - name: remove challenge/hash files for SAN domains from fs
       file:

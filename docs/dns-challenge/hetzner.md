@@ -12,9 +12,7 @@
   roles:
   - acme
   vars:
-    acme_do_http_challenge: false
-    acme_do_dns_challenge: true
-    acme_dns_provider: hetzner
+    acme_challenge_provider: hetzner
     acme_use_live_directory: true
     account_email: "ssl-admin@example.com"
     dns_hetzner_auth_token: !vault |

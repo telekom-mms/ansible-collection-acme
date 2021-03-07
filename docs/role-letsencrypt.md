@@ -33,8 +33,6 @@ Feel free to contribute more DNS or HTTP APIs :)
 | **configuration options**           |          |         |
 | acme_account_key_content                 | no       |         | Content of the created letsencrypt account key
 | acme_private_key_content                 | no       |         | Content of the created private key for the certificate (allows reuse of keys)
-| acme_do_http_challenge       | yes      | false   | Use http challenge
-| acme_do_dns_challenge        | yes      | false   | Use dns challenge
 | acme_use_live_directory | no       | false   | Choose if production certificates should be created, the staging directory of LE will be used by default
 | acme_force_renewal                       | no       |         | Force renewal of certificate before `acme_remaining_days` is reached
 
@@ -42,7 +40,7 @@ Feel free to contribute more DNS or HTTP APIs :)
 
 | Variable                            | Required | Default | Description
 |-------------------------------------|----------|---------|------------
-| acme_http_provider           | yes      |         | Which http provider should be used. See Usage of provider for the correct keyword
+| acme_challenge_provider           | yes      |         | Which http provider should be used. See Usage of provider for the correct keyword
 
 ## Variables for dns-challenge
 
@@ -50,7 +48,7 @@ Feel free to contribute more DNS or HTTP APIs :)
 |-------------------------------------|----------|---------|------------
 | acme_dns_user                            | yes      |         | Username to access the DNS api
 | acme_dns_password                        | yes      |         | Password to access the DNS api
-| acme_dns_provider            | yes      |         | Which DNS provider should be used. See "Usage" of provider for the correct keyword
+| acme_challenge_provider            | yes      |         | Which DNS provider should be used. See "Usage" of provider for the correct keyword
 
 ## Global role variables
 
@@ -67,8 +65,8 @@ Feel free to contribute more DNS or HTTP APIs :)
 | acme_fullchain_path                           | no       | $acme_conf_dir/certs          | Path for full chain file (certificate + intermediate)
 | acme_private_key_path                         | no       | $acme_conf_dir/certs          | Path for private key
 | acme_remaining_days                           | no       | 30                                   | Min days remaining before certificate will be renewed
-| convert_cert_to                          | no       |                                      | Format to convert the certificate to: `pfx`
-| validate_certs                           | no       |                                      | Only used in integration tests with pebble server
+| acme_convert_cert_to                          | no       |                                      | Format to convert the certificate to: `pfx`
+| acme_validate_certs                           | no       |                                      | Only used in integration tests with pebble server
 
 ### Usage
 

@@ -24,9 +24,7 @@ Make sure that the validation-/ hashfile(s) is/are reachable by your configured 
         - example.com
         - domain1.example.com
         - domain2.example.com
-    acme_do_http_challenge: true
-    acme_http_provider: "local"
-    acme_do_dns_challenge: false
+    acme_challenge_provider: "local"
     acme_use_live_directory: false
     account_email: "ssl-admin@example.com"
 ```

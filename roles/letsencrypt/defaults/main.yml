@@ -16,8 +16,6 @@ acme_intermediate_path: "{{ acme_cert_dir }}/{{ domain.acme_certificate_name }}_
 acme_fullchain_path: "{{ acme_cert_dir }}/{{ domain.acme_certificate_name }}_fullchain.pem"
 acme_private_key_path: "{{ acme_cert_dir }}/{{ domain.acme_certificate_name }}.key"
 acme_remaining_days: "30"
-acme_do_http_challenge: false
-acme_do_dns_challenge: false
 
 ### provider specific config
 acme_s3_config_region: "eu-west-1"
