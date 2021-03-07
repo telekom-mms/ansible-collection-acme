@@ -3,6 +3,7 @@
   file:
     path: "{{ acme_letsencrypt_local_validation_path }}/.well-known/acme-challenge"
     state: directory
+    mode: 0755
 
 - name: validate challenge only if it is created or changed
   when: challenge is changed
