@@ -10,7 +10,7 @@
 - name: create the certificate for *.example.com
   hosts: localhost
   roles:
-  - acme
+  - letsencrypt
   vars:
     acme_challenge_provider: hetzner
     acme_use_live_directory: true

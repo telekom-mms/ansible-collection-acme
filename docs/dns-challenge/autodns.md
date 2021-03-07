@@ -10,7 +10,7 @@ None
 - name: create the certificate for *.example.com
   hosts: localhost
   roles:
-  - acme
+  - letsencrypt
   vars:
     domain:
       acme_certificate_name: "wildcard.example.com"
@@ -33,7 +33,7 @@ None
 - name: create the certificate for example.com
   hosts: localhost
   roles:
-  - acme
+  - letsencrypt
   vars:
     domain:
       acme_certificate_name: "wildcard.example.com"

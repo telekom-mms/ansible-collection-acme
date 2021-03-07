@@ -14,7 +14,7 @@ Make sure that the validation-/ hashfile(s) is/are reachable by your configured 
 - name: create the certificate for example.com
   hosts: localhost
   roles:
-  - acme
+  - letsencrypt
   vars:
     domain:
       acme_certificate_name: "example.com"

@@ -14,7 +14,7 @@
 - name: create the certificate for *.example.com
   hosts: localhost
   roles:
-  - acme
+  - letsencrypt
   vars:
     acme_challenge_provider: azure
     acme_use_live_directory: true
@@ -36,7 +36,7 @@
 - name: create the certificate for example.com
   hosts: localhost
   roles:
-  - acme
+  - letsencrypt
   vars:
     acme_challenge_provider: azure
     acme_use_live_directory: true
