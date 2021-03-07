@@ -1,5 +1,5 @@
 namespace: t_systems_mms
-name: letsencrypt
+name: acme
 version: 1.0.1
 readme: README.md
 authors:
@@ -12,16 +12,17 @@ license:
   - GPL-2.0-or-later
 license_file: ''
 tags:
+  - acme
   - letsencrypt
   - security
   - certificates
 dependencies:
   community.crypto: '>=1.0.0'
   openstack.cloud: '>=1.2.1'
-repository: 'https://github.com/T-Systems-MMS/ansible-collection-letsencrypt'
-documentation: 'https://github.com/T-Systems-MMS/ansible-collection-letsencrypt'
-homepage: 'https://github.com/T-Systems-MMS/ansible-collection-letsencrypt'
-issues: 'https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/issues'
+repository: 'https://github.com/T-Systems-MMS/ansible-collection-acme'
+documentation: 'https://github.com/T-Systems-MMS/ansible-collection-acme'
+homepage: 'https://github.com/T-Systems-MMS/ansible-collection-acme'
+issues: 'https://github.com/T-Systems-MMS/ansible-collection-acme/issues'
 build_ignore:
   - .ansible-lint
   - .gitattributes

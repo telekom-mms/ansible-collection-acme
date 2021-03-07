@@ -1,10 +1,13 @@
 ---
 collections:
-  - t_systems_mms.letsencrypt
+  - t_systems_mms.acme
 galaxy_info:
   author: t_systems_mms
+  role_name: acme_letsencrypt
   description: Issue certificates from Let's Encrypt via dns- or http-challenge.
   license: GPLv3
   min_ansible_version: 2.9
   galaxy_tags:
+    - acme
     - letsencrypt
+    - ssl

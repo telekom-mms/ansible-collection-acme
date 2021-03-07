@@ -2,28 +2,28 @@
 - name: check if a challenge provider is used
   assert:
     that:
-      - letsencrypt_do_dns_challenge | bool or letsencrypt_do_http_challenge | bool
-    fail_msg: "You need to set letsencrypt_do_dns_challenge'' or 'letsencrypt_do_http_challenge'."
+      - acme_do_dns_challenge | bool or acme_do_http_challenge | bool
+    fail_msg: "You need to set acme_do_dns_challenge'' or 'acme_do_http_challenge'."
 
 - name: check if a DNS challenge provider is used
   assert:
     that:
-      - letsencrypt_dns_provider is defined
-    fail_msg: "You need to set a DNS challenge provider ('letsencrypt_dns_provider') if you use the DNS challenge."
+      - acme_dns_provider is defined
+    fail_msg: "You need to set a DNS challenge provider ('acme_dns_provider') if you use the DNS challenge."
   when:
-    - letsencrypt_do_dns_challenge | bool
+    - acme_do_dns_challenge | bool
 
 - name: check if a HTTP challenge provider is used
   assert:
     that:
-      - letsencrypt_http_provider is defined
-    fail_msg: "You need to set a HTTP challenge provider ('letsencrypt_http_provider') if you use the HTTP challenge."
+      - acme_http_provider is defined
+    fail_msg: "You need to set a HTTP challenge provider ('acme_http_provider') if you use the HTTP challenge."
   when:
-    - letsencrypt_do_http_challenge | bool
+    - acme_do_http_challenge | bool
 
-- name: set fact for acme_directory depending on what is set in letsencrypt_use_acme_live_directory
+- name: set fact for acme_directory depending on what is set in acme_use_live_directory
   set_fact:
-    acme_directory: "{{ letsencrypt_use_acme_live_directory | ternary(acme_live_directory, acme_staging_directory) }}"
+    acme_directory: "{{ acme_use_live_directory | ternary(acme_live_directory, acme_staging_directory) }}"
 
 - name: create directories for letsencrypt
   delegate_to: localhost
@@ -32,5 +32,5 @@
     state: directory
     mode: 0750
   loop:
-    - "{{ letsencrypt_conf_dir }}"
-    - "{{ letsencrypt_cert_dir }}"
+    - "{{ acme_conf_dir }}"
+    - "{{ acme_cert_dir }}"

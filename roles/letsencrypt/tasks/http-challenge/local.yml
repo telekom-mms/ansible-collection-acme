@@ -1,7 +1,7 @@
 ---
 - name: create directory for challenge/hash files
   file:
-    path: "{{ letsencrypt_local_validation_path }}/.well-known/acme-challenge"
+    path: "{{ acme_local_validation_path }}/.well-known/acme-challenge"
     state: directory
 
 - name: validate challenge only if it is created or changed
@@ -9,39 +9,39 @@
   block:
     - name: create challenge/hash files with SAN domains
       copy:
-        dest: "{{ letsencrypt_local_validation_path }}/{{ challenge['challenge_data'][item]['http-01']['resource'] }}"
+        dest: "{{ acme_local_validation_path }}/{{ challenge['challenge_data'][item]['http-01']['resource'] }}"
         content: "{{ challenge['challenge_data'][item]['http-01']['resource_value'] }}"
         mode: 0640
-      loop: "{{ domain.subject_alt_name }}"
+      loop: "{{ domain.acme_subject_alt_name }}"
       when:
-        - domain.subject_alt_name is defined
+        - domain.acme_subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
         - challenge['challenge_data'][item] is defined
 
      # validate certficate
     - name: Let the challenge be validated and retrieve the cert and intermediate certificate
       acme_certificate:
-        account_key_src: "{{ account_key_path }}"
+        account_key_src: "{{ acme_account_key_path }}"
         account_email: "{{ account_email }}"
-        csr: "{{ csr_path }}"
-        cert: "{{ cert_path }}"
-        fullchain: "{{ fullchain_path }}"
-        chain: "{{ intermediate_path }}"
+        csr: "{{ acme_csr_path }}"
+        cert: "{{ acme_cert_path }}"
+        fullchain: "{{ acme_fullchain_path }}"
+        chain: "{{ acme_intermediate_path }}"
         challenge: http-01
-        force: "{{ force_renewal | default(false) }}"
+        force: "{{ acme_force_renewal | default(false) }}"
         acme_directory: "{{ acme_directory }}"
         acme_version: 2
         terms_agreed: true
-        remaining_days: "{{ remaining_days }}"
+        acme_remaining_days: "{{ acme_remaining_days }}"
         data: "{{ challenge }}"
         validate_certs: "{{ validate_certs | default(true) }}"
 
     - name: remove challenge/hash files for SAN domains from fs
       file:
-        dest: "{{ letsencrypt_local_validation_path }}/{{ challenge['challenge_data'][item]['http-01']['resource'] }}"
+        dest: "{{ acme_local_validation_path }}/{{ challenge['challenge_data'][item]['http-01']['resource'] }}"
         state: absent
-      loop: "{{ domain.subject_alt_name }}"
+      loop: "{{ domain.acme_subject_alt_name }}"
       when:
-        - domain.subject_alt_name is defined
+        - domain.acme_subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
         - challenge['challenge_data'][item] is defined

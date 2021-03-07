@@ -10,21 +10,21 @@ None
 - name: create the certificate for *.example.com
   hosts: localhost
   roles:
-    - letsencrypt
+  - acme
   vars:
     domain:
-      certificate_name: "wildcard.example.com"
-      zone: "example.com"
-      email_address: "ssl-admin@example.com"
-      subject_alt_name:
+      acme_certificate_name: "wildcard.example.com"
+      acme_dns_zone: "example.com"
+      acme_email_address: "ssl-admin@example.com"
+      acme_subject_alt_name:
         - "*.example.com"
-    letsencrypt_do_http_challenge: false
-    letsencrypt_do_dns_challenge: true
-    letsencrypt_dns_provider: autodns
-    letsencrypt_use_acme_live_directory: false
+    acme_do_http_challenge: false
+    acme_do_dns_challenge: true
+    acme_dns_provider: autodns
+    acme_use_live_directory: false
     account_email: "ssl-admin@example.com"
-    dns_user: "example_dns"
-    dns_password: !vault |
+    acme_dns_user: "example_dns"
+    acme_dns_password: !vault |
               $ANSIBLE_VAULT;1.1;AES256
               ...
 ```
@@ -35,23 +35,23 @@ None
 - name: create the certificate for *.example.com
   hosts: localhost
   roles:
-    - letsencrypt
+  - acme
   vars:
     domain:
-      certificate_name: "wildcard.example.com"
-      zone: "example.com"
-      email_address: "ssl-admin@example.com"
-      subject_alt_name:
+      acme_certificate_name: "wildcard.example.com"
+      acme_dns_zone: "example.com"
+      acme_email_address: "ssl-admin@example.com"
+      acme_subject_alt_name:
         - "example.com"
         - "domain1.example.com"
         - "domain2.example.com"
-    letsencrypt_do_http_challenge: false
-    letsencrypt_do_dns_challenge: true
-    letsencrypt_dns_provider: autodns
-    letsencrypt_use_acme_live_directory: false
+    acme_do_http_challenge: false
+    acme_do_dns_challenge: true
+    acme_dns_provider: autodns
+    acme_use_live_directory: false
     account_email: "ssl-admin@example.com"
-    dns_user: "example_dns"
-    dns_password: !vault |
+    acme_dns_user: "example_dns"
+    acme_dns_password: !vault |
               $ANSIBLE_VAULT;1.1;AES256
               ...
 ```

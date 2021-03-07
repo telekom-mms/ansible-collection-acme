@@ -14,14 +14,14 @@
             "ttl": 60,
             "type": "TXT",
             "value": "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}",
-            "zone_id": "{{ domain.zone }}",
+            "acme_dns_zone_id": "{{ domain.acme_dns_zone }}",
           }
         headers:
           Auth-API-Token: "{{ dns_hetzner_auth_token }}"
-      loop: "{{ domain.subject_alt_name }}"
+      loop: "{{ domain.acme_subject_alt_name }}"
       register: records
       when:
-        - domain.subject_alt_name is defined
+        - domain.acme_subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
         - challenge['challenge_data'][item] is defined
 
@@ -31,21 +31,21 @@
 
     - name: Let the challenge be validated and retrieve the cert and intermediate certificate
       acme_certificate:
-        account_key_src: "{{ account_key_path }}"
+        account_key_src: "{{ acme_account_key_path }}"
         account_email: "{{ account_email }}"
-        csr: "{{ csr_path }}"
-        cert: "{{ cert_path }}"
-        fullchain: "{{ fullchain_path }}"
-        chain: "{{ intermediate_path }}"
+        csr: "{{ acme_csr_path }}"
+        cert: "{{ acme_cert_path }}"
+        fullchain: "{{ acme_fullchain_path }}"
+        chain: "{{ acme_intermediate_path }}"
         challenge: dns-01
-        force: "{{ force_renewal | default(false) }}"
+        force: "{{ acme_force_renewal | default(false) }}"
         acme_directory: "{{ acme_directory }}"
         acme_version: 2
         terms_agreed: true
-        remaining_days: "{{ remaining_days }}"
+        acme_remaining_days: "{{ acme_remaining_days }}"
         data: "{{ challenge }}"
 
-    - name: remove created SAN TXT records to keep DNS zone clean
+    - name: remove created SAN TXT records to keep DNS acme_dns_zone clean
       uri:
         url: "https://dns.hetzner.com/api/v1/records/{{ item }}"
         method: DELETE
@@ -53,6 +53,6 @@
           Auth-API-Token: "{{ dns_hetzner_auth_token }}"
       loop: "{{ records | json_query('results[*].json.record.id') }}"
       when:
-        - domain.subject_alt_name is defined
+        - domain.acme_subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
         - item is defined
