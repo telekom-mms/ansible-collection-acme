@@ -16,25 +16,25 @@
             "host": "_acme-challenge.{{ item }}.",
             "value": "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
           }
-      loop: "{{ acme_letsencrypt_domain.subject_alt_name }}"
+      loop: "{{ acme_domain.subject_alt_name }}"
       when:
-        - acme_letsencrypt_domain.subject_alt_name is defined
+        - acme_domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
         - challenge['challenge_data'][item] is defined
 
     - name: Let the challenge be validated and retrieve the cert and intermediate certificate
       acme_certificate:
-        account_key_src: "{{ acme_letsencrypt_account_key_path }}"
-        account_email: "{{ acme_letsencrypt_account_email }}"
-        csr: "{{ acme_letsencrypt_csr_path }}"
-        cert: "{{ acme_letsencrypt_cert_path }}"
-        fullchain: "{{ acme_letsencrypt_fullchain_path }}"
-        chain: "{{ acme_letsencrypt_intermediate_path }}"
+        account_key_src: "{{ acme_account_key_path }}"
+        account_email: "{{ acme_account_email }}"
+        csr: "{{ acme_csr_path }}"
+        cert: "{{ acme_cert_path }}"
+        fullchain: "{{ acme_fullchain_path }}"
+        chain: "{{ acme_intermediate_path }}"
         challenge: dns-01
-        force: "{{ acme_letsencrypt_force_renewal | default(false) }}"
-        acme_directory: "{{ acme_letsencrypt_directory }}"
+        force: "{{ acme_force_renewal | default(false) }}"
+        acme_directory: "{{ acme_directory }}"
         acme_version: 2
         terms_agreed: true
-        remaining_days: "{{ acme_letsencrypt_remaining_days }}"
+        remaining_days: "{{ acme_remaining_days }}"
         data: "{{ challenge }}"
-        validate_certs: "{{ acme_letsencrypt_validate_certs | default(true) }}"
+        validate_certs: "{{ acme_validate_certs | default(true) }}"

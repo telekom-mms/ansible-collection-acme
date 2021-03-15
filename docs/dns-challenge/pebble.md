@@ -15,23 +15,23 @@ This is also done for the provider of the local http-challenge.
   collections:
     - t_systems_mms.acme
   roles:
-    - acme_letsencrypt
+    - acme
   vars:
-    acme_letsencrypt_domain:
+    acme_domain:
       certificate_name: "dns-pebble.example.com"
       zone: "example.com"
       email_address: "ssl-admin@example.com"
       subject_alt_name:
         - "example.com"
-    acme_letsencrypt_challenge_provider: "pebble"
-    acme_letsencrypt_use_live_directory: false
-    acme_letsencrypt_account_email: "ssl-admin@example.com"
-    acme_letsencrypt_staging_directory: "https://localhost:14000/dir"
-    acme_letsencrypt_validate_certs: false
+    acme_challenge_provider: "pebble"
+    acme_use_live_directory: false
+    acme_account_email: "ssl-admin@example.com"
+    acme_staging_directory: "https://localhost:14000/dir"
+    acme_validate_certs: false
   post_tasks:
     - name: validate certs
       community.crypto.x509_certificate_info:
-        path: "{{ acme_letsencrypt_cert_path }}"
+        path: "{{ acme_cert_path }}"
       register: result
 
     - debug:

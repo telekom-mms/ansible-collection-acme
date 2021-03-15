@@ -10,14 +10,14 @@
         body_format: json
         body:
           { "context": "4",
-            "user": "{{ acme_letsencrypt_dns_user }}",
-            "password": "{{ acme_letsencrypt_dns_password }}"
+            "user": "{{ acme_dns_user }}",
+            "password": "{{ acme_dns_password }}"
           }
       register: login
 
     - name: add a new TXT record to the SAN domains
       uri:
-        url: "https://api.autodns.com/v1/zone/{{ acme_letsencrypt_domain.zone }}/a.ns14.net"
+        url: "https://api.autodns.com/v1/zone/{{ acme_domain.zone }}/a.ns14.net"
         method: PATCH
         body_format: json
         body:
@@ -38,31 +38,31 @@
           }
         headers:
           Cookie: "{{ login.set_cookie }}"
-      loop: "{{ acme_letsencrypt_domain.subject_alt_name }}"
+      loop: "{{ acme_domain.subject_alt_name }}"
       when:
-        - acme_letsencrypt_domain.subject_alt_name is defined
+        - acme_domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
         - challenge['challenge_data'][item] is defined
 
     - name: Let the challenge be validated and retrieve the cert and intermediate certificate
       acme_certificate:
-        account_key_src: "{{ acme_letsencrypt_account_key_path }}"
-        account_email: "{{ acme_letsencrypt_account_email }}"
-        csr: "{{ acme_letsencrypt_csr_path }}"
-        cert: "{{ acme_letsencrypt_cert_path }}"
-        fullchain: "{{ acme_letsencrypt_fullchain_path }}"
-        chain: "{{ acme_letsencrypt_intermediate_path }}"
+        account_key_src: "{{ acme_account_key_path }}"
+        account_email: "{{ acme_account_email }}"
+        csr: "{{ acme_csr_path }}"
+        cert: "{{ acme_cert_path }}"
+        fullchain: "{{ acme_fullchain_path }}"
+        chain: "{{ acme_intermediate_path }}"
         challenge: dns-01
-        force: "{{ acme_letsencrypt_force_renewal | default(false) }}"
-        acme_directory: "{{ acme_letsencrypt_directory }}"
+        force: "{{ acme_force_renewal | default(false) }}"
+        acme_directory: "{{ acme_directory }}"
         acme_version: 2
         terms_agreed: true
-        remaining_days: "{{ acme_letsencrypt_remaining_days }}"
+        remaining_days: "{{ acme_remaining_days }}"
         data: "{{ challenge }}"
 
     - name: remove created SAN TXT records to keep DNS zone clean
       uri:
-        url: "https://api.autodns.com/v1/zone/{{ acme_letsencrypt_domain.zone }}/a.ns14.net"
+        url: "https://api.autodns.com/v1/zone/{{ acme_domain.zone }}/a.ns14.net"
         method: PATCH
         body_format: json
         body:
@@ -79,8 +79,8 @@
           }
         headers:
           Cookie: "{{ login.set_cookie }}"
-      loop: "{{ acme_letsencrypt_domain.subject_alt_name }}"
+      loop: "{{ acme_domain.subject_alt_name }}"
       when:
-        - acme_letsencrypt_domain.subject_alt_name is defined
+        - acme_domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
         - challenge['challenge_data'][item] is defined

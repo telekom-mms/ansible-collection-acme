@@ -1,8 +1,8 @@
 # Variables for local http-challenge
 
-| Variable                               | Required | Default       | Description
-|----------------------------------------|----------|---------------|------------
-| acme_letsencrypt_local_validation_path | no       | /var/www/html | Path where the validation-/ hashfiles get created
+| Variable                   | Required | Default       | Description
+|----------------------------|----------|---------------|------------
+| acme_local_validation_path | no       | /var/www/html | Path where the validation-/ hashfiles get created
 
 ## Validation
 
@@ -16,9 +16,9 @@ Make sure that the validation-/ hashfile(s) is/are reachable by your configured 
   collections:
     - t_systems_mms.acme
   roles:
-    - acme_letsencrypt
+    - acme
   vars:
-    acme_letsencrypt_domain:
+    acme_domain:
       certificate_name: "example.com"
       zone: "example.com"
       email_address: "ssl-admin@example.com"
@@ -26,7 +26,7 @@ Make sure that the validation-/ hashfile(s) is/are reachable by your configured 
         - example.com
         - domain1.example.com
         - domain2.example.com
-    acme_letsencrypt_challenge_provider: "local"
-    acme_letsencrypt_use_live_directory: false
-    acme_letsencrypt_account_email: "ssl-admin@example.com"
+    acme_challenge_provider: "local"
+    acme_use_live_directory: false
+    acme_account_email: "ssl-admin@example.com"
 ```

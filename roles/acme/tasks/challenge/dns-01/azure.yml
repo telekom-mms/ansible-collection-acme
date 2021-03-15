@@ -2,7 +2,7 @@
 # split top_level for zone_name and if subdomain is defined add subdomain to relative_name
 - name: add a new TXT record to the SAN top-level domains
   azure_rm_dnsrecordset:
-    resource_group: "{{ acme_letsencrypt_azure_resource_group }}"
+    resource_group: "{{ acme_azure_resource_group }}"
     relative_name: "{{ '_acme-challenge' }}{{ '' if item | replace('*.','') == (item.split('.')[-2:] | join('.')) else '.' }}{{ (item | replace('*.','')).split('.')[:-2] | join('.') }}"
     zone_name: "{{ item.split('.')[-2:] | join('.') }}"
     record_mode: append
@@ -10,13 +10,13 @@
     record_type: TXT
     records:
     - entry: "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
-  loop: "{{ acme_letsencrypt_domain.subject_alt_name.top_level }}"
-  when: acme_letsencrypt_domain.subject_alt_name.top_level is defined
+  loop: "{{ acme_domain.subject_alt_name.top_level }}"
+  when: acme_domain.subject_alt_name.top_level is defined
 
 # split second_level for zone_name and if subdomain is defined add subdomain to relative_name
 - name: add a new TXT record to the SAN second-level domains
   azure_rm_dnsrecordset:
-    resource_group: "{{ acme_letsencrypt_azure_resource_group }}"
+    resource_group: "{{ acme_azure_resource_group }}"
     relative_name: "{{ '_acme-challenge' }}{{ '' if item | replace('*.','') == (item.split('.')[-3:] | join('.')) else '.' }}{{ (item | replace('*.','')).split('.')[:-3] | join('.') }}"
     zone_name: "{{ item.split('.')[-3:] | join('.') }}"
     record_mode: append
@@ -24,45 +24,45 @@
     record_type: TXT
     records:
     - entry: "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
-  loop: "{{ acme_letsencrypt_domain.subject_alt_name.second_level }}"
-  when: acme_letsencrypt_domain.subject_alt_name.second_level is defined
+  loop: "{{ acme_domain.subject_alt_name.second_level }}"
+  when: acme_domain.subject_alt_name.second_level is defined
 
 - name: Let the challenge be validated and retrieve the cert and intermediate certificate
   acme_certificate:
-    account_key_src: "{{ acme_letsencrypt_account_key_path }}"
-    account_email: "{{ acme_letsencrypt_account_email }}"
-    csr: "{{ acme_letsencrypt_csr_path }}"
-    cert: "{{ acme_letsencrypt_cert_path }}"
-    fullchain: "{{ acme_letsencrypt_fullchain_path }}"
-    chain: "{{ acme_letsencrypt_intermediate_path }}"
+    account_key_src: "{{ acme_account_key_path }}"
+    account_email: "{{ acme_account_email }}"
+    csr: "{{ acme_csr_path }}"
+    cert: "{{ acme_cert_path }}"
+    fullchain: "{{ acme_fullchain_path }}"
+    chain: "{{ acme_intermediate_path }}"
     challenge: dns-01
-    force: "{{ acme_letsencrypt_force_renewal | default(false) }}"
-    acme_directory: "{{ acme_letsencrypt_directory }}"
+    force: "{{ acme_force_renewal | default(false) }}"
+    acme_directory: "{{ acme_directory }}"
     acme_version: 2
     terms_agreed: true
-    remaining_days: "{{ acme_letsencrypt_remaining_days }}"
+    remaining_days: "{{ acme_remaining_days }}"
     data: "{{ challenge }}"
 
 - name: remove created SAN top-level TXT records to keep DNS zone clean
   azure_rm_dnsrecordset:
-    resource_group: "{{ acme_letsencrypt_azure_resource_group }}"
+    resource_group: "{{ acme_azure_resource_group }}"
     relative_name: "{{ '_acme-challenge' }}{{ '' if item | replace('*.','') == (item.split('.')[-2:] | join('.')) else '.' }}{{ (item | replace('*.','')).split('.')[:-2] | join('.') }}"
     zone_name: "{{ item.split('.')[-2:] | join('.') }}"
     state: absent
     record_type: TXT
     records:
       - entry: "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
-  loop: "{{ acme_letsencrypt_domain.subject_alt_name.top_level }}"
-  when: acme_letsencrypt_domain.subject_alt_name.top_level is defined
+  loop: "{{ acme_domain.subject_alt_name.top_level }}"
+  when: acme_domain.subject_alt_name.top_level is defined
 
 - name: remove created SAN second-level TXT records to keep DNS zone clean
   azure_rm_dnsrecordset:
-    resource_group: "{{ acme_letsencrypt_azure_resource_group }}"
+    resource_group: "{{ acme_azure_resource_group }}"
     relative_name: "{{ '_acme-challenge' }}{{ '' if item | replace('*.','') == (item.split('.')[-3:] | join('.')) else '.' }}{{ (item | replace('*.','')).split('.')[:-3] | join('.') }}"
     zone_name: "{{ item.split('.')[-3:] | join('.') }}"
     state: absent
     record_type: TXT
     records:
       - entry: "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
-  loop: "{{ acme_letsencrypt_domain.subject_alt_name.second_level }}"
-  when: acme_letsencrypt_domain.subject_alt_name.second_level is defined
+  loop: "{{ acme_domain.subject_alt_name.second_level }}"
+  when: acme_domain.subject_alt_name.second_level is defined

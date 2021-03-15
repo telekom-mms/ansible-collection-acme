@@ -1,0 +1,48 @@
+---
+- name: create directory for challenge/hash files
+  file:
+    path: "{{ acme_local_validation_path }}/.well-known/acme-challenge"
+    state: directory
+    mode: 0755
+
+- name: validate challenge only if it is created or changed
+  when: challenge is changed
+  block:
+    - name: create challenge/hash files with SAN domains
+      copy:
+        dest: "{{ acme_local_validation_path }}/{{ challenge['challenge_data'][item]['http-01']['resource'] }}"
+        content: "{{ challenge['challenge_data'][item]['http-01']['resource_value'] }}"
+        mode: 0640
+      loop: "{{ acme_domain.subject_alt_name }}"
+      when:
+        - acme_domain.subject_alt_name is defined
+        # only runs if the challenge is run the first time, because then there is challenge_data
+        - challenge['challenge_data'][item] is defined
+
+     # validate certficate
+    - name: Let the challenge be validated and retrieve the cert and intermediate certificate
+      acme_certificate:
+        account_key_src: "{{ acme_account_key_path }}"
+        account_email: "{{ acme_account_email }}"
+        csr: "{{ acme_csr_path }}"
+        cert: "{{ acme_cert_path }}"
+        fullchain: "{{ acme_fullchain_path }}"
+        chain: "{{ acme_intermediate_path }}"
+        challenge: http-01
+        force: "{{ acme_force_renewal | default(false) }}"
+        acme_directory: "{{ acme_directory }}"
+        acme_version: 2
+        terms_agreed: true
+        remaining_days: "{{ acme_remaining_days }}"
+        data: "{{ challenge }}"
+        validate_certs: "{{ acme_validate_certs | default(true) }}"
+
+    - name: remove challenge/hash files for SAN domains from fs
+      file:
+        dest: "{{ acme_local_validation_path }}/{{ challenge['challenge_data'][item]['http-01']['resource'] }}"
+        state: absent
+      loop: "{{ acme_domain.subject_alt_name }}"
+      when:
+        - acme_domain.subject_alt_name is defined
+        # only runs if the challenge is run the first time, because then there is challenge_data
+        - challenge['challenge_data'][item] is defined

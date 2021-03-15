@@ -12,19 +12,19 @@ None
   collections:
     - t_systems_mms.acme
   roles:
-    - acme_letsencrypt
+    - acme
   vars:
-    acme_letsencrypt_domain:
+    acme_domain:
       certificate_name: "wildcard.example.com"
       zone: "example.com"
       email_address: "ssl-admin@example.com"
       subject_alt_name:
         - "*.example.com"
-    acme_letsencrypt_challenge_provider: autodns
-    acme_letsencrypt_use_live_directory: false
-    acme_letsencrypt_account_email: "ssl-admin@example.com"
-    acme_letsencrypt_dns_user: "example_dns"
-    acme_letsencrypt_dns_password: !vault |
+    acme_challenge_provider: autodns
+    acme_use_live_directory: false
+    acme_account_email: "ssl-admin@example.com"
+    acme_dns_user: "example_dns"
+    acme_dns_password: !vault |
               $ANSIBLE_VAULT;1.1;AES256
               ...
 ```
@@ -37,9 +37,9 @@ None
   collections:
     - t_systems_mms.acme
   roles:
-    - acme_letsencrypt
+    - acme
   vars:
-    acme_letsencrypt_domain:
+    acme_domain:
       certificate_name: "wildcard.example.com"
       zone: "example.com"
       email_address: "ssl-admin@example.com"
@@ -47,11 +47,11 @@ None
         - "example.com"
         - "domain1.example.com"
         - "domain2.example.com"
-    acme_letsencrypt_challenge_provider: autodns
-    acme_letsencrypt_use_live_directory: false
-    acme_letsencrypt_account_email: "ssl-admin@example.com"
-    acme_letsencrypt_dns_user: "example_dns"
-    acme_letsencrypt_dns_password: !vault |
+    acme_challenge_provider: autodns
+    acme_use_live_directory: false
+    acme_account_email: "ssl-admin@example.com"
+    acme_dns_user: "example_dns"
+    acme_dns_password: !vault |
               $ANSIBLE_VAULT;1.1;AES256
               ...
 ```

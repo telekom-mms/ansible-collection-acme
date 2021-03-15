@@ -1,10 +1,10 @@
 # Variables for azure dns-challenge
 
-| Variable                              | Required | Default | Description
-|---------------------------------------|----------|---------|------------
-| acme_letsencrypt_azure_resource_group | yes      |         | Azure Resource Group for zone_name
-| subject_alt_name: top_level:          | no       |         | list of top-level domains
-| subject_alt_name: second_level:       | no       |         | list of second_level domains
+| Variable                        | Required | Default | Description
+|---------------------------------|----------|---------|------------
+| acme_azure_resource_group       | yes      |         | Azure Resource Group for zone_name
+| subject_alt_name: top_level:    | no       |         | list of top-level domains
+| subject_alt_name: second_level: | no       |         | list of second_level domains
 
 ## Usage
 
@@ -16,14 +16,14 @@
   collections:
     - t_systems_mms.acme
   roles:
-    - acme_letsencrypt
+    - acme
   vars:
-    acme_letsencrypt_challenge_provider: azure
-    acme_letsencrypt_use_live_directory: true
-    acme_letsencrypt_account_email: "ssl-admin@example.com"
-    acme_letsencrypt_azure_resource_group: "azure_resource_group"
-    acme_letsencrypt_convert_cert_to: pfx
-    acme_letsencrypt_domain:
+    acme_challenge_provider: azure
+    acme_use_live_directory: true
+    acme_account_email: "ssl-admin@example.com"
+    acme_azure_resource_group: "azure_resource_group"
+    acme_convert_cert_to: pfx
+    acme_domain:
       email_address: "ssl-admin@example.com"
       certificate_name: "wildcard.example.com"
       zone: "example.com"
@@ -40,14 +40,14 @@
   collections:
     - t_systems_mms.acme
   roles:
-    - acme_letsencrypt
+    - acme
   vars:
-    acme_letsencrypt_challenge_provider: azure
-    acme_letsencrypt_use_live_directory: true
-    acme_letsencrypt_account_email: "ssl-admin@example.com"
-    acme_letsencrypt_azure_resource_group: "azure_resource_group"
-    acme_letsencrypt_convert_cert_to: pfx
-    acme_letsencrypt_domain:
+    acme_challenge_provider: azure
+    acme_use_live_directory: true
+    acme_account_email: "ssl-admin@example.com"
+    acme_azure_resource_group: "azure_resource_group"
+    acme_convert_cert_to: pfx
+    acme_domain:
       certificate_name: "example.com"
       zone: "example.com"
       email_address: "ssl-admin@example.com"

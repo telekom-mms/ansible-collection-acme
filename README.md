@@ -1,6 +1,6 @@
-# Let's Encrypt Collection for Ansible
+# ACME Collection for Ansible
 
-This collection manages Let's Encrypt certificates.
+This collection manages ACME certificates.
 
 Required Ansible version: 2.9
 
@@ -23,8 +23,8 @@ collections:
 
 ## Usage
 
-Role `acme_letsencrypt` for issuing certificates.
-Please see [documentation](docs/role-acme_letsencrypt.md) for variables, usage and further information for all the different providers.
+Role `acme` for issuing certificates from a certificate authority which implements the ACME protocol.
+Please see [documentation](docs/role-acme.md) for variables, usage and further information for all the different providers.
 
 ## License
 
