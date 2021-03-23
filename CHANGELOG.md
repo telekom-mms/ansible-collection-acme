@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.2](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/1.0.2) (2021-03-17)
+
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/1.0.1...1.0.2)
+
+**Fixed bugs:**
+
+- Improve Release Action [\#47](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/47) ([schurzi](https://github.com/schurzi))
+
 ## [1.0.1](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/tree/1.0.1) (2021-02-05)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/compare/1.0.0...1.0.1)
@@ -14,7 +22,6 @@
 
 **Implemented enhancements:**
 
-- unify challenge provider logic [\#35](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/35) ([schurzi](https://github.com/schurzi))
 - Account key content as variable [\#33](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/33) ([Nemental](https://github.com/Nemental))
 - Add "local" provider for http-challenge [\#30](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/30) ([avalor1](https://github.com/avalor1))
 
@@ -36,6 +43,7 @@
 
 **Implemented enhancements:**
 
+- unify challenge provider logic [\#35](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/35) ([schurzi](https://github.com/schurzi))
 - Feature / dns challenge otc openstack [\#31](https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/pull/31) ([Nemental](https://github.com/Nemental))
 
 **Merged pull requests:**
