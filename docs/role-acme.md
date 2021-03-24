@@ -2,7 +2,7 @@
 
 This role issues certificates via the ACME protocol. By default the API of Let's Encrypt is used.
 
-This role does not distribute certificates - it only creates them. You have to implement the distribution in your own playbooks roles.
+This role does not distribute certificates - it only creates them. You have to implement the distribution in your own playbooks or roles.
 
 ## Providers
 
