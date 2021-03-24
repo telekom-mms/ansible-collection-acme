@@ -34,7 +34,7 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
         with:
-          path: ansible_collections/t_systems_mms/letsencrypt
+          path: ansible_collections/t_systems_mms/acme
 
       - name: Set up Python ${{ matrix.ansible }}
         uses: actions/setup-python@v2
@@ -50,7 +50,7 @@ jobs:
       # Explicity specify the version of Python we want to test
       - name: Run sanity tests
         run: ansible-test sanity --docker -v --color --python ${{ matrix.python }}
-        working-directory: ./ansible_collections/t_systems_mms/letsencrypt
+        working-directory: ./ansible_collections/t_systems_mms/acme
 
   linting:
     name: Ansible Lint
@@ -59,19 +59,19 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
         with:
-          path: ansible_collections/t_systems_mms/letsencrypt
+          path: ansible_collections/t_systems_mms/acme
 
       - name: Run Linting
         uses: ansible/ansible-lint-action@master
         with:
-          targets: ansible_collections/t_systems_mms/letsencrypt/roles/letsencrypt
-          args: "-c ansible_collections/t_systems_mms/letsencrypt/.ansible-lint"
+          targets: ansible_collections/t_systems_mms/acme/roles/acme
+          args: "-c ansible_collections/t_systems_mms/acme/.ansible-lint"
 
   integration-tests:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ansible_collections/t_systems_mms/letsencrypt
+        working-directory: ansible_collections/t_systems_mms/acme
     strategy:
       fail-fast: false
       matrix:
@@ -95,7 +95,7 @@ jobs:
       - name: Check out code to collections-folder, so ansible finds it
         uses: actions/checkout@v2
         with:
-          path: ansible_collections/t_systems_mms/letsencrypt
+          path: ansible_collections/t_systems_mms/acme
 
       - name: Run Pebble and challtestsrv
         run: curl https://raw.githubusercontent.com/letsencrypt/pebble/master/docker-compose.yml | docker-compose -f - up -d
@@ -123,11 +123,11 @@ jobs:
         run: ansible-galaxy collection build
 
       - name: install the collection
-        run: ansible-galaxy collection install -p /home/runner/work/ansible-collection-letsencrypt/ansible-collection-letsencrypt *.tar.gz
+        run: ansible-galaxy collection install -p /home/runner/work/ansible-collection-acme/ansible-collection-acme *.tar.gz
 
       - name: install community.crypto collection
-        run: ansible-galaxy collection install -p /home/runner/work/ansible-collection-letsencrypt/ansible-collection-letsencrypt community.crypto
+        run: ansible-galaxy collection install -p /home/runner/work/ansible-collection-acme/ansible-collection-acme community.crypto
 
       - name: Run integration tests
         run: ansible-test integration -v --color --retry-on-error --continue-on-error --diff --python ${{ matrix.python }} --requirements
-        working-directory: ./ansible_collections/t_systems_mms/letsencrypt
+        working-directory: ./ansible_collections/t_systems_mms/acme

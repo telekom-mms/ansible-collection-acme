@@ -1,0 +1,29 @@
+---
+- name: check if a challenge provider is set
+  assert:
+    that:
+      - acme_challenge_provider is defined
+      - acme_challenge_provider != ""
+    fail_msg: "You need to set acme_challenge_provider with a provider. See documentation for a list of possible providers."
+
+- name: set fact for acme_directory depending on what is set in acme_use_live_directory
+  set_fact:
+    acme_directory: "{{ acme_use_live_directory | ternary(acme_live_directory, acme_staging_directory) }}"
+
+- name: create directories for acme certificates
+  delegate_to: localhost
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0750
+  loop:
+    - "{{ acme_conf_dir }}"
+    - "{{ acme_cert_dir }}"
+
+- name: "select provider {{ acme_challenge_provider }}"
+  set_fact:
+    acme_provider_path: "{{ item }}"
+  with_first_found:
+    - "challenge/dns-01/{{ acme_challenge_provider }}.yml"
+    - "challenge/http-01/{{ acme_challenge_provider }}.yml"
+    - challenge-unknown.yml

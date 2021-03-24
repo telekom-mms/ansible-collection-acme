@@ -1,0 +1,20 @@
+---
+- name: preconditions
+  include_tasks: preconditions.yml
+
+- name: run key generation
+  include_tasks: create-keys.yml
+
+- name: create csr
+  include_tasks: create-csr.yml
+
+- name: create challenge
+  include_tasks: create-challenge.yml
+
+- name: do challenge with provider {{ acme_challenge_provider }}
+  include_tasks: "{{ acme_provider_path }}"
+
+- name: convert certificate
+  include_tasks: convert_certificate.yml
+  when:
+    - acme_convert_cert_to is defined

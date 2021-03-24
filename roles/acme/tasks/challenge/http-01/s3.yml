@@ -5,7 +5,7 @@
     name:
       - python-boto3
     state: present
-    use: "{{ letsencrypt_prerequisites_packagemanager }}"
+    use: "{{ acme_prerequisites_packagemanager }}"
 
 - name: validate challenge only if it is created or changed
   when: challenge is changed
@@ -15,56 +15,56 @@
         dest: "acme-challenge.{{ item }}"
         content: "{{ challenge['challenge_data'][item]['http-01']['resource_value'] }}"
         mode: 0640
-      loop: "{{ domain.subject_alt_name }}"
+      loop: "{{ acme_domain.subject_alt_name }}"
       when:
-        - domain.subject_alt_name is defined
+        - acme_domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
         - challenge['challenge_data'][item] is defined
 
     - name: upload challenge file for SAN domain to s3 bucket
       aws_s3:
-        aws_access_key: "{{ letsencrypt_s3_access_key }}"
-        aws_secret_key: "{{ letsencrypt_s3_secret_key }}"
-        bucket: "{{ letsencrypt_s3_bucket_name }}"
+        aws_access_key: "{{ acme_s3_access_key }}"
+        aws_secret_key: "{{ acme_s3_secret_key }}"
+        bucket: "{{ acme_s3_bucket_name }}"
         object: "{{ challenge['challenge_data'][item]['http-01']['resource'] }}"
         src: "acme-challenge.{{ item }}"
         mode: "put"
-        region: "{{ letsencrypt_s3_config_region }}"
+        region: "{{ acme_s3_config_region }}"
         permission: "public-read"
-      loop: "{{ domain.subject_alt_name }}"
+      loop: "{{ acme_domain.subject_alt_name }}"
       when:
-        - domain.subject_alt_name is defined
+        - acme_domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
         - challenge['challenge_data'][item] is defined
 
     # validate certficate
     - name: Let the challenge be validated and retrieve the cert and intermediate certificate
       acme_certificate:
-        account_key_src: "{{ account_key_path }}"
-        account_email: "{{ account_email }}"
-        csr: "{{ csr_path }}"
-        cert: "{{ cert_path }}"
-        fullchain: "{{ fullchain_path }}"
-        chain: "{{ intermediate_path }}"
+        account_key_src: "{{ acme_account_key_path }}"
+        account_email: "{{ acme_account_email }}"
+        csr: "{{ acme_csr_path }}"
+        cert: "{{ acme_cert_path }}"
+        fullchain: "{{ acme_fullchain_path }}"
+        chain: "{{ acme_intermediate_path }}"
         challenge: http-01
-        force: "{{ force_renewal | default(false) }}"
+        force: "{{ acme_force_renewal | default(false) }}"
         acme_directory: "{{ acme_directory }}"
         acme_version: 2
         terms_agreed: true
-        remaining_days: "{{ remaining_days }}"
+        remaining_days: "{{ acme_remaining_days }}"
         data: "{{ challenge }}"
 
     - name: remove challenge file for SAN domain from s3 bucket
       aws_s3:
-        aws_access_key: "{{ letsencrypt_s3_access_key }}"
-        aws_secret_key: "{{ letsencrypt_s3_secret_key }}"
-        bucket: "{{ letsencrypt_s3_bucket_name }}"
+        aws_access_key: "{{ acme_s3_access_key }}"
+        aws_secret_key: "{{ acme_s3_secret_key }}"
+        bucket: "{{ acme_s3_bucket_name }}"
         object: "{{ challenge['challenge_data'][item]['http-01']['resource'] }}"
         mode: "delobj"
-        region: "{{ letsencrypt_s3_config_region }}"
-      loop: "{{ domain.subject_alt_name }}"
+        region: "{{ acme_s3_config_region }}"
+      loop: "{{ acme_domain.subject_alt_name }}"
       when:
-        - domain.subject_alt_name is defined
+        - acme_domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
         - challenge['challenge_data'][item] is defined
 
@@ -72,8 +72,8 @@
       file:
         dest: "acme-challenge.{{ item }}"
         state: absent
-      loop: "{{ domain.subject_alt_name }}"
+      loop: "{{ acme_domain.subject_alt_name }}"
       when:
-        - domain.subject_alt_name is defined
+        - acme_domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
         - challenge['challenge_data'][item] is defined

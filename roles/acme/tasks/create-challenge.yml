@@ -1,0 +1,16 @@
+---
+- name: Create a challenge for {{ acme_domain.certificate_name }} using a account key file.
+  acme_certificate:
+    account_key_src: "{{ acme_account_key_path }}"
+    account_email: "{{ acme_account_email }}"
+    csr: "{{ acme_csr_path }}"
+    cert: "{{ acme_cert_path }}"
+    # e.g. acme_provider_path is "challenge/http-01/s3.yml" > dirname is "challenge/http-01" > basename is "http-01"
+    challenge: "{{ acme_provider_path | dirname | basename }}"
+    force: "{{ acme_force_renewal | default(false) }}"
+    acme_directory: "{{ acme_directory }}"
+    acme_version: 2
+    terms_agreed: true
+    remaining_days: "{{ acme_remaining_days }}"
+    validate_certs: "{{ acme_validate_certs | default(true) }}"
+  register: challenge

@@ -1,0 +1,34 @@
+---
+- name: Create RSA key to be used for acme account
+  openssl_privatekey:
+    path: "{{ acme_account_key_path }}"
+    size: 4096
+    type: RSA
+  when:
+    - acme_account_key_content is not defined
+  no_log: true
+
+- name: create account key file from acme_account_key_content-variable
+  copy:
+    dest: "{{ acme_account_key_path }}"
+    content: "{{ acme_account_key_content }}"
+    mode: 0400
+  when:
+    - acme_account_key_content is defined
+  no_log: true
+
+- name: Create RSA key to be used for certificate
+  openssl_privatekey:
+    path: "{{ acme_private_key_path }}"
+  when:
+    - acme_private_key_content is not defined
+  no_log: true
+
+- name: create private key file from acme_private_key_content-variable
+  copy:
+    dest: "{{ acme_private_key_path }}"
+    content: "{{ acme_private_key_content }}"
+    mode: 0400
+  when:
+    - acme_private_key_content is defined
+  no_log: true
