@@ -1,5 +1,5 @@
 namespace: t_systems_mms
-name: letsencrypt
+name: acme
 version: 1.0.2
 readme: README.md
 authors:
