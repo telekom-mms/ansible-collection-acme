@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.0.0](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.0.0) (2021-03-24)
+## [2.0.0](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.0.0) (2021-03-25)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/1.0.2...2.0.0)
 
@@ -13,6 +13,10 @@
 
 - Rename collection to avoid LE trademark [\#43](https://github.com/T-Systems-MMS/ansible-collection-acme/issues/43)
 - Simplify challenge provider selection [\#42](https://github.com/T-Systems-MMS/ansible-collection-acme/issues/42)
+
+**Merged pull requests:**
+
+- Adjust collection name for galaxy [\#49](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/49) ([avalor1](https://github.com/avalor1))
 
 ## [1.0.2](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/1.0.2) (2021-03-17)
 
