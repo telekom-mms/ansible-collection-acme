@@ -4,7 +4,7 @@
 |---------------------------------------|----------|---------------|------------
 | acme_local_validation_path            | no       | /var/www/html | Path where the validation-/ hashfiles get created
 | amce_local_validation_path_file_owner | no       | runner        | User who owns the validation-/ hash- files and path
-| amce_local_validation_path_file_group | no       | root          | User Group which own the validation-/ hash- files and path 
+| amce_local_validation_path_file_group | no       | docker        | Group who owns the validation-/ hash- files and path 
 
 ## Validation
 
