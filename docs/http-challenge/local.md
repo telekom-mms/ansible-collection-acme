@@ -3,8 +3,8 @@
 | Variable                              | Required | Default       | Description
 |---------------------------------------|----------|---------------|------------
 | acme_local_validation_path            | no       | /var/www/html | Path where the validation-/ hashfiles get created
-| amce_local_validation_path_file_owner | no       | root          | User which own the validation-/ hash- files and path
-| amce_local_validation_path_file_group | no       | root          | User Group which own the validation-/ hash- files and path 
+| amce_local_validation_path_file_owner | no       |               | User which own the validation-/ hash- files and path
+| amce_local_validation_path_file_group | no       |               | User Group which own the validation-/ hash- files and path 
 
 ## Validation
 

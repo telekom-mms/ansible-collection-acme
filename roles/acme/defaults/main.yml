@@ -20,5 +20,3 @@ acme_remaining_days: "30"
 ### provider specific config
 acme_s3_config_region: "eu-west-1"
 acme_local_validation_path: "/var/www/html"
-amce_local_validation_path_file_owner: "runner"
-amce_local_validation_path_file_group: "docker"
