@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.0.0](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.0.0) (2021-03-25)
+## [2.0.0](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.0.0) (2021-03-26)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/1.0.2...2.0.0)
 
@@ -17,6 +17,7 @@
 **Merged pull requests:**
 
 - Adjust collection name for galaxy [\#49](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/49) ([avalor1](https://github.com/avalor1))
+- add possibility to define owner/group for local validation path and local challenge files [\#48](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/48) ([beechesII](https://github.com/beechesII))
 
 ## [1.0.2](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/1.0.2) (2021-03-17)
 
