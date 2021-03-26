@@ -1,8 +1,10 @@
 # Variables for local http-challenge
 
-| Variable                   | Required | Default       | Description
-|----------------------------|----------|---------------|------------
-| acme_local_validation_path | no       | /var/www/html | Path where the validation-/ hashfiles get created
+| Variable                              | Required | Default       | Description
+|---------------------------------------|----------|---------------|------------
+| acme_local_validation_path            | no       | /var/www/html | Path where the validation-/ hashfiles get created
+| acme_local_validation_path_file_owner | no       |               | User who owns the validation-/ hash- files and path
+| acme_local_validation_path_file_group | no       |               | Group who owns the validation-/ hash- files and path 
 
 ## Validation
 
