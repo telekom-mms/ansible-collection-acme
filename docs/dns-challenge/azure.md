@@ -3,8 +3,9 @@
 | Variable                        | Required | Default | Description
 |---------------------------------|----------|---------|------------
 | acme_azure_resource_group       | yes      |         | Azure Resource Group for zone_name
-| subject_alt_name: top_level:    | no       |         | list of top-level domains
-| subject_alt_name: second_level: | no       |         | list of second_level domains
+| subject_alt_name: top_level:    | no       |         | List of top-level domains
+| subject_alt_name: second_level: | no       |         | List of second_level domains
+| acme_azure_purge_state          | yes      | absent  | Define if the acme_challenge record should be `present` or `absent`. Useful if record deletion is impossible due to azure mgmt delete locks
 
 ## Usage
 
@@ -23,6 +24,7 @@
     acme_account_email: "ssl-admin@example.com"
     acme_azure_resource_group: "azure_resource_group"
     acme_convert_cert_to: pfx
+    acme_azure_purge_state: present
     acme_domain:
       email_address: "ssl-admin@example.com"
       certificate_name: "wildcard.example.com"
