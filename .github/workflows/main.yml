@@ -131,3 +131,5 @@ jobs:
       - name: Run integration tests
         run: ansible-test integration -v --color --retry-on-error --continue-on-error --diff --python ${{ matrix.python }} --requirements
         working-directory: ./ansible_collections/t_systems_mms/acme
+        env:
+          HETZNER_AUTH_TOKEN: ${{ secrets.HETZNER_AUTH_TOKEN }}

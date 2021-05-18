@@ -1,0 +1,32 @@
+- name: create a test certificate for acme-test.ansible-training.de
+  hosts: localhost
+  collections:
+    - t_systems_mms.acme
+  roles:
+    - acme
+  vars:
+    acme_challenge_provider: hetzner
+    acme_use_live_directory: false
+    acme_account_email: "ssl-admin@example.de"
+    acme_force_renewal: true
+    acme_hetzner_auth_token: "{{ lookup('env','HETZNER_AUTH_TOKEN') }}"
+    acme_domain:
+      email_address: "ssl-admin@example.de"
+      certificate_name: "acme-test.ansible-training.de"
+      zone: "ansible-training.de"
+      subject_alt_name:
+        - "acme-test.ansible-training.de"
+  post_tasks:
+    - name: validate certs
+      community.crypto.x509_certificate_info:
+        path: "{{ acme_cert_path }}"
+      register: result
+
+    - debug:
+        msg: "{{ result }}"
+
+    - assert:
+        that:
+          - result.subject.commonName == "acme-test.ansible-training.de"
+          - "'DNS:acme-test.ansible-training.de' in result.subject_alt_name"
+          - "'(STAGING) Artificial Apricot R3' in result.issuer.commonName"
