@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.1](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.0.1) (2021-05-18)
+
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.0.0...2.0.1)
+
+**Merged pull requests:**
+
+- Lookup ZoneID and fix challenge record format. [\#53](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/53) ([smapjb](https://github.com/smapjb))
+
 ## [2.0.0](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.0.0) (2021-03-26)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/1.0.2...2.0.0)
@@ -7,7 +15,6 @@
 **Breaking changes:**
 
 - Unify variables [\#44](https://github.com/T-Systems-MMS/ansible-collection-acme/issues/44)
-- Rename collection | simplify provider selection | unify variables  [\#46](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/46) ([avalor1](https://github.com/avalor1))
 
 **Closed issues:**
 
@@ -30,6 +37,10 @@
 ## [1.0.1](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/1.0.1) (2021-02-05)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/1.0.0...1.0.1)
+
+**Breaking changes:**
+
+- Rename collection | simplify provider selection | unify variables  [\#46](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/46) ([avalor1](https://github.com/avalor1))
 
 **Merged pull requests:**
 
