@@ -3,6 +3,13 @@
 - name: validate challenge only if it is created or changed
   when: challenge is changed
   block:
+    - name: Lookup the zone_id using the acme_domain.zone
+      uri:
+        url: "https://dns.hetzner.com/api/v1/zones?name={{ acme_domain.zone }}"
+        headers:
+          Auth-API-Token: "{{ acme_hetzner_auth_token }}"
+      register: lookup_zone_id
+
     - name: add a new TXT record to the SAN domains
       uri:
         url: "https://dns.hetzner.com/api/v1/records"
@@ -10,11 +17,11 @@
         body_format: json
         body:
           {
-            "name": "_acme-challenge",
+            "name": "{{ '_acme-challenge' }}{{ '' if item | replace('*.','') == (item.split('.')[-2:] | join('.')) else '.' }}{{ (item | replace('*.','')).split('.')[:-2] | join('.') }}",
             "ttl": 60,
             "type": "TXT",
             "value": "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}",
-            "zone_id": "{{ acme_domain.zone }}",
+            "zone_id": "{{ lookup_zone_id.json.zones[0].id }}",
           }
         headers:
           Auth-API-Token: "{{ acme_hetzner_auth_token }}"
