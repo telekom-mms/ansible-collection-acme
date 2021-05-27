@@ -1,0 +1,31 @@
+- name: create a test certificate for hetzner
+  hosts: localhost
+  collections:
+    - t_systems_mms.acme
+  roles:
+    - acme
+  vars:
+    acme_challenge_provider: hetzner
+    acme_use_live_directory: false
+    acme_account_email: "ssl-admin@example.de"
+    acme_force_renewal: true
+    acme_domain:
+      email_address: "ssl-admin@example.de"
+      certificate_name: "{{ hetzner_domain_name }}.{{ hetzner_zone }}"
+      zone: "{{ hetzner_zone }}"
+      subject_alt_name:
+        - "{{ hetzner_domain_name }}.{{ hetzner_zone }}"
+  post_tasks:
+    - name: validate certs
+      community.crypto.x509_certificate_info:
+        path: "{{ acme_cert_path }}"
+      register: result
+
+    - debug:
+        msg: "{{ result }}"
+
+    - assert:
+        that:
+          - result.subject.commonName == "{{ acme_domain.certificate_name }}"
+          - "'DNS:{{ acme_domain.certificate_name }}' in result.subject_alt_name"
+          - "'(STAGING) Artificial Apricot R3' in result.issuer.commonName"
