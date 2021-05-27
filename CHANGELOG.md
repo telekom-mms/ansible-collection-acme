@@ -4,9 +4,14 @@
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.0.1...2.0.2)
 
+**Closed issues:**
+
+- add possibility azure dns challenge purge entry [\#51](https://github.com/T-Systems-MMS/ansible-collection-acme/issues/51)
+
 **Merged pull requests:**
 
 - add hetzner dns tests [\#54](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/54) ([rndmh3ro](https://github.com/rndmh3ro))
+- add possibility to keep and purge challenge record in Azure [\#52](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/52) ([michaelamattes](https://github.com/michaelamattes))
 
 ## [2.0.1](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.0.1) (2021-05-18)
 
