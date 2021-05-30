@@ -1,23 +1,27 @@
 # Changelog
 
-## [2.0.2](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.0.2) (2021-05-27)
+## [2.1.0](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.1.0) (2021-05-30)
 
-[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.0.1...2.0.2)
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.0.1...2.1.0)
+
+**Breaking changes:**
+
+- Rename collection | simplify provider selection | unify variables  [\#46](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/46) ([avalor1](https://github.com/avalor1))
+
+**Implemented enhancements:**
+
+- add hetzner dns tests [\#54](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/54) ([rndmh3ro](https://github.com/rndmh3ro))
+- add possibility to keep and purge challenge record in Azure [\#52](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/52) ([michaelamattes](https://github.com/michaelamattes))
 
 **Closed issues:**
 
 - add possibility azure dns challenge purge entry [\#51](https://github.com/T-Systems-MMS/ansible-collection-acme/issues/51)
 
-**Merged pull requests:**
-
-- add hetzner dns tests [\#54](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/54) ([rndmh3ro](https://github.com/rndmh3ro))
-- add possibility to keep and purge challenge record in Azure [\#52](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/52) ([michaelamattes](https://github.com/michaelamattes))
-
 ## [2.0.1](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.0.1) (2021-05-18)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.0.0...2.0.1)
 
-**Merged pull requests:**
+**Fixed bugs:**
 
 - Lookup ZoneID and fix challenge record format. [\#53](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/53) ([smapjb](https://github.com/smapjb))
 
@@ -28,7 +32,6 @@
 **Breaking changes:**
 
 - Unify variables [\#44](https://github.com/T-Systems-MMS/ansible-collection-acme/issues/44)
-- Rename collection | simplify provider selection | unify variables  [\#46](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/46) ([avalor1](https://github.com/avalor1))
 
 **Closed issues:**
 
@@ -119,6 +122,10 @@
 
 - creation of wildcard certificates with autodns challenge not working with release 0.0.5 [\#20](https://github.com/T-Systems-MMS/ansible-collection-acme/issues/20)
 
+**Merged pull requests:**
+
+- remove common\_name variable [\#18](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/18) ([avalor1](https://github.com/avalor1))
+
 ## [0.0.6](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/0.0.6) (2020-12-15)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/0.0.5...0.0.6)
@@ -143,8 +150,8 @@
 **Merged pull requests:**
 
 - fix ansible error if group is empty [\#19](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/19) ([avalor1](https://github.com/avalor1))
-- remove common\_name variable [\#18](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/18) ([avalor1](https://github.com/avalor1))
 - remove letsencrypt\_create\_private\_keys variable from examples [\#17](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/17) ([avalor1](https://github.com/avalor1))
+- remove variable letsencrypt\_create\_private\_keys [\#7](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/7) ([avalor1](https://github.com/avalor1))
 
 ## [0.0.4](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/0.0.4) (2020-11-12)
 
@@ -177,7 +184,6 @@
 
 **Merged pull requests:**
 
-- remove variable letsencrypt\_create\_private\_keys [\#7](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/7) ([avalor1](https://github.com/avalor1))
 - add build\_ignore to filter unwanted files from release-tarball [\#6](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/6) ([avalor1](https://github.com/avalor1))
 
 ## [0.0.1](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/0.0.1) (2020-11-04)
