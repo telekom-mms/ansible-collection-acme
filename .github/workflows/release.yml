@@ -36,13 +36,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Generate new version in changelog.yaml
-        run: antsibull-changelog release -v --version "{{ steps.previoustag.outputs.tag }}"
+        run: antsibull-changelog release -v --version "${{ steps.previoustag.outputs.tag }}"
 
       - name: Generate changelog.yaml
         run: antsi_change_pr_getter.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SINCE_VERSION: "{{ steps.previoustag.outputs.tag }}"
+          SINCE_VERSION: "${{ steps.previoustag.outputs.tag }}"
           GITHUB_REPOSITORY: "T-Systems-MMS/ansible-collection-acme"
 
       - name: Update Changelog.rst
