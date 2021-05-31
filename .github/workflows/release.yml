@@ -39,7 +39,7 @@ jobs:
         run: antsibull-changelog release -v --version "${{ steps.previoustag.outputs.tag }}"
 
       - name: Generate changelog.yaml
-        run: antsi_change_pr_getter.py
+        run: python antsi_change_pr_getter.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SINCE_VERSION: "${{ steps.previoustag.outputs.tag }}"
