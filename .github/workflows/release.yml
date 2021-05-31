@@ -19,9 +19,11 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
 
-      # Install the head of the given branch (devel, stable-2.10)
       - name: Install antsibull-changelog
         run: python -m pip install antsibull-changelog --disable-pip-version-check
+
+      - name: Install the reqs of antsi-change-pr-getter
+        run: python -m pip install -r requirements-antsi.txt
 
       - name: 'Get Previous tag'
         id: previoustag
