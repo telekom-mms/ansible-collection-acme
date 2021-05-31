@@ -36,7 +36,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Generate new version in changelog.yaml
-        run: antsibull-changelog release --version "{{ steps.previoustag.outputs.tag }}"
+        run: antsibull-changelog release -v --version "{{ steps.previoustag.outputs.tag }}"
 
       - name: Generate changelog.yaml
         run: antsi_change_pr_getter.py
