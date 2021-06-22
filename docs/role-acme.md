@@ -30,11 +30,11 @@ Feel free to contribute more DNS or HTTP APIs :)
 | zone                              | yes      |         | zone in which the dns records should be created
 | subject_alt_name                  | yes      |         | Domain(s) for which the certificate(s) should be validated. If you are issuing a wildcard certificate you should also add the main domain for which you are issuing the certificate
 | email_address                     | yes      |         | Mail address which is used for the certificate (reminder mails are sent here) and the field `email_address` as specified in section [4.1.2.6. Subject](https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.6 "Link to the IETF RFC 5280") of the RFC 5280
-| acme_subject_country:             | no       |         | containing a digraph for the country as in ISO 3166
-| acme_subject_state_or_province:   | no       |         | a string representing the state or province to be put into the subject field of the certificate
-| acme_subject_locality:            | no       |         | a string representing a locality to be put into the subject field of the certificate
-| acme_subject_organization:        | no       |         | a string representing the organization to be put into the subject field of the certificate
-| acme_subject_organizational_unit: | no       |         | a string representing the organizational unit to be put into the subject field of the certificate
+| acme_subject_country              | no       |         | containing a digraph for the country as in ISO 3166
+| acme_subject_state_or_province    | no       |         | a string representing the state or province to be put into the subject field of the certificate
+| acme_subject_locality             | no       |         | a string representing a locality to be put into the subject field of the certificate
+| acme_subject_organization         | no       |         | a string representing the organization to be put into the subject field of the certificate
+| acme_subject_organizational_unit  | no       |         | a string representing the organizational unit to be put into the subject field of the certificate
 | acme_subject_common_name          | yes*no   |         | MUST be set, if any of the other `acme_subject_…` fields does contain any value
 | **configuration options**
 | acme_account_key_content          | no       |         | Content of the created account key
