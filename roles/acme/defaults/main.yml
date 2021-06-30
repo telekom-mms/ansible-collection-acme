@@ -17,14 +17,6 @@ acme_fullchain_path: "{{ acme_cert_dir }}/{{ acme_domain.certificate_name }}_ful
 acme_private_key_path: "{{ acme_cert_dir }}/{{ acme_domain.certificate_name }}.key"
 acme_remaining_days: "30"
 
-### subject fields for the resulting cert
-acme_subject_country: "{{ acme_domain.country | default(omit) }}"
-acme_subject_state_or_province: "{{ acme_domain.state_or_province | default(omit) }}"
-acme_subject_locality: "{{ acme_domain.locality | default(omit) }}"
-acme_subject_organization: "{{ acme_domain.organization | default(omit) }}"
-acme_subject_organizational_unit: "{{ acme_domain.organizational_unit | default(omit) }}"
-acme_subject_common_name: "{{ acme_domain.common_name | default(omit) }}"
-
 ### provider specific config
 acme_s3_config_region: "eu-west-1"
 acme_local_validation_path: "/var/www/html"
