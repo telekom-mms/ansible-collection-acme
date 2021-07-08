@@ -22,6 +22,23 @@
     acme_staging_directory: "https://localhost:14000/dir"
     acme_validate_certs: false
   post_tasks:
+    - name: validate certificate signing request
+      community.crypto.openssl_csr_info:
+        path: "{{ acme_csr_path }}"
+      register: result_csr
+    
+    - debug:
+        msg: "{{ result_csr }}"
+    
+    - assert:
+        that:
+          - result_csr.subject.commonName == "example.de"
+          - result_csr.subject.countryName == "GB"
+          - result_csr.subject.localityName == "Main Street"
+          - result_csr.subject.organization == "ACME Inc."
+          - "'DNS:example.de' in result_csr.subject_alt_name"
+          - result_cst.subject.emailAddress == "ssl-admin@example.de"
+    
     - name: validate certs
       community.crypto.x509_certificate_info:
         path: "{{ acme_cert_path }}"
