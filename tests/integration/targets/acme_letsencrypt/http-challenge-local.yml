@@ -9,6 +9,10 @@
       certificate_name: "http-local.example.de"
       zone: "example.de"
       email_address: "ssl-admin@example.de"
+      country: GB
+      state_or_province: Anytown
+      locality_name: Main Street
+      organization: ACME Inc.
       subject_alt_name:
         - example.de
     acme_challenge_provider: "local"
@@ -29,5 +33,8 @@
     - assert:
         that:
           - result.subject.commonName == "example.de"
+          - result.subject.countryName == "GB"
+          - result.subject.localityName == "Main Street"
+          - result.subject.organization == "ACME Inc."
           - "'DNS:example.de' in result.subject_alt_name"
           - "'Pebble Intermediate CA' in result.issuer.commonName"
