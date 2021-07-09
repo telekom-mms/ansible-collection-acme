@@ -29,7 +29,13 @@ Feel free to contribute more DNS or HTTP APIs :)
 | certificate_name                  | yes      |         | Name of the resulting certificate. Most useful for wildcard certificates to not have files named '*.example.com' on the filesystem
 | zone                              | yes      |         | zone in which the dns records should be created
 | subject_alt_name                  | yes      |         | Domain(s) for which the certificate(s) should be validated. If you are issuing a wildcard certificate you should also add the main domain for which you are issuing the certificate
-| email_address                     | yes      |         | Mail address which is used for the certificate (reminder mails are sent here)
+| email_address                     | yes      |         | Mail address which is used for the certificate (reminder mails are sent here) and the field `email_address` as specified in section [4.1.2.6. Subject](https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.6 "Link to the IETF RFC 5280") of the RFC 5280
+| country                           | no       |         | containing a digraph for the country as in ISO 3166
+| state_or_province                 | no       |         | a string representing the state or province to be put into the subject field of the certificate
+| locality                          | no       |         | a string representing a locality to be put into the subject field of the certificate
+| organization                      | no       |         | a string representing the organization to be put into the subject field of the certificate
+| organizational_unit               | no       |         | a string representing the organizational unit to be put into the subject field of the certificate
+| common_name                       | yes*no   |         | MUST be set, if any of the other fields `country`, `state_or_province`, `locality`, `organization` or `organizational_unit` does contain any value. MUST be a domain name as you would give it for a Subject Alternative Name
 | **configuration options**
 | acme_account_key_content          | no       |         | Content of the created account key
 | acme_private_key_content          | no       |         | Content of the created private key for the certificate (allows reuse of keys)
