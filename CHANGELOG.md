@@ -1,12 +1,20 @@
 # Changelog
 
+## [2.2.0](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.2.0) (2021-07-09)
+
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.1.0...2.2.0)
+
+**Implemented enhancements:**
+
+- enhancement: new variables for letting the user set subject fields [\#57](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/57) ([Zephyr82](https://github.com/Zephyr82))
+
+**Closed issues:**
+
+- Test collection with other acme providers [\#55](https://github.com/T-Systems-MMS/ansible-collection-acme/issues/55)
+
 ## [2.1.0](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.1.0) (2021-05-30)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.0.1...2.1.0)
-
-**Breaking changes:**
-
-- Rename collection | simplify provider selection | unify variables  [\#46](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/46) ([avalor1](https://github.com/avalor1))
 
 **Implemented enhancements:**
 
@@ -32,6 +40,11 @@
 **Breaking changes:**
 
 - Unify variables [\#44](https://github.com/T-Systems-MMS/ansible-collection-acme/issues/44)
+- Rename collection | simplify provider selection | unify variables  [\#46](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/46) ([avalor1](https://github.com/avalor1))
+
+**Implemented enhancements:**
+
+- add possibility to define owner/group for local validation path and local challenge files [\#48](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/48) ([beechesII](https://github.com/beechesII))
 
 **Closed issues:**
 
@@ -41,7 +54,6 @@
 **Merged pull requests:**
 
 - Adjust collection name for galaxy [\#49](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/49) ([avalor1](https://github.com/avalor1))
-- add possibility to define owner/group for local validation path and local challenge files [\#48](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/48) ([beechesII](https://github.com/beechesII))
 
 ## [1.0.2](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/1.0.2) (2021-03-17)
 
@@ -122,10 +134,6 @@
 
 - creation of wildcard certificates with autodns challenge not working with release 0.0.5 [\#20](https://github.com/T-Systems-MMS/ansible-collection-acme/issues/20)
 
-**Merged pull requests:**
-
-- remove common\_name variable [\#18](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/18) ([avalor1](https://github.com/avalor1))
-
 ## [0.0.6](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/0.0.6) (2020-12-15)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/0.0.5...0.0.6)
@@ -151,7 +159,6 @@
 
 - fix ansible error if group is empty [\#19](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/19) ([avalor1](https://github.com/avalor1))
 - remove letsencrypt\_create\_private\_keys variable from examples [\#17](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/17) ([avalor1](https://github.com/avalor1))
-- remove variable letsencrypt\_create\_private\_keys [\#7](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/7) ([avalor1](https://github.com/avalor1))
 
 ## [0.0.4](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/0.0.4) (2020-11-12)
 
@@ -163,6 +170,7 @@
 
 **Merged pull requests:**
 
+- remove common\_name variable [\#18](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/18) ([avalor1](https://github.com/avalor1))
 - update checkout version for release workflow [\#11](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/11) ([avalor1](https://github.com/avalor1))
 - update checkout version in galaxy push workflow [\#10](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/10) ([avalor1](https://github.com/avalor1))
 
@@ -184,6 +192,7 @@
 
 **Merged pull requests:**
 
+- remove variable letsencrypt\_create\_private\_keys [\#7](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/7) ([avalor1](https://github.com/avalor1))
 - add build\_ignore to filter unwanted files from release-tarball [\#6](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/6) ([avalor1](https://github.com/avalor1))
 
 ## [0.0.1](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/0.0.1) (2020-11-04)
