@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.3.0](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.0) (2021-08-02)
+
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.2.0...2.3.0)
+
+**Implemented enhancements:**
+
+- all chains should be included after convert [\#60](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/60) ([michaelamattes](https://github.com/michaelamattes))
+
 ## [2.2.0](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.2.0) (2021-07-09)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.1.0...2.2.0)
@@ -158,6 +166,7 @@
 **Merged pull requests:**
 
 - fix ansible error if group is empty [\#19](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/19) ([avalor1](https://github.com/avalor1))
+- remove common\_name variable [\#18](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/18) ([avalor1](https://github.com/avalor1))
 - remove letsencrypt\_create\_private\_keys variable from examples [\#17](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/17) ([avalor1](https://github.com/avalor1))
 
 ## [0.0.4](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/0.0.4) (2020-11-12)
@@ -170,7 +179,6 @@
 
 **Merged pull requests:**
 
-- remove common\_name variable [\#18](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/18) ([avalor1](https://github.com/avalor1))
 - update checkout version for release workflow [\#11](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/11) ([avalor1](https://github.com/avalor1))
 - update checkout version in galaxy push workflow [\#10](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/10) ([avalor1](https://github.com/avalor1))
 
