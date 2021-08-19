@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.3.1](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.1) (2021-08-19)
+
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.3.0...2.3.1)
+
+**Implemented enhancements:**
+
+- pfx convert has no full chain [\#59](https://github.com/T-Systems-MMS/ansible-collection-acme/issues/59)
+
+**Fixed bugs:**
+
+- Remove delegate\_to when creating directories for certificate [\#63](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/63) ([avalor1](https://github.com/avalor1))
+
+**Closed issues:**
+
+- Use temp-dir for creation of certificates? [\#5](https://github.com/T-Systems-MMS/ansible-collection-acme/issues/5)
+
 ## [2.3.0](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.0) (2021-08-02)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.2.0...2.3.0)
