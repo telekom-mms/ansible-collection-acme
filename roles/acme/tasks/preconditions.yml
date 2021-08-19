@@ -11,7 +11,7 @@
     acme_directory: "{{ acme_use_live_directory | ternary(acme_live_directory, acme_staging_directory) }}"
 
 - name: create directories for acme certificates
-  delegate_to: localhost
+  delegate_to: "{{ inventory_hostname }}"
   file:
     path: "{{ item }}"
     state: directory
