@@ -1,10 +1,11 @@
 # Variables for azure dns-challenge
 
-| Variable                            | Required | Default | Description
-|-------------------------------------|----------|---------|------------
-| azure_resource_group                | yes      |         | Azure Resource Group for zone_name
-| subject_alt_name: top_level:        | no       |         | list of top-level domains
-| subject_alt_name: second_level:     | no       |         | list of second_level domains
+| Variable                        | Required | Default | Description
+|---------------------------------|----------|---------|------------
+| acme_azure_resource_group       | yes      |         | Azure Resource Group for zone_name
+| subject_alt_name: top_level:    | no       |         | List of top-level domains
+| subject_alt_name: second_level: | no       |         | List of second_level domains
+| acme_azure_purge_state          | yes      | absent  | Define if the acme_challenge record should be `present` or `absent`. Useful if record deletion is impossible due to azure mgmt delete locks
 
 ## Usage
 
@@ -13,17 +14,18 @@
 ```yaml
 - name: create the certificate for *.example.com
   hosts: localhost
+  collections:
+    - t_systems_mms.acme
   roles:
-    - letsencrypt
+    - acme
   vars:
-    letsencrypt_do_http_challenge: false
-    letsencrypt_do_dns_challenge: true
-    letsencrypt_dns_provider: azure
-    letsencrypt_use_acme_live_directory: true
-    account_email: "ssl-admin@example.com"
-    azure_resource_group: "azure_resource_group"
-    convert_cert_to: pfx
-    domain:
+    acme_challenge_provider: azure
+    acme_use_live_directory: true
+    acme_account_email: "ssl-admin@example.com"
+    acme_azure_resource_group: "azure_resource_group"
+    acme_convert_cert_to: pfx
+    acme_azure_purge_state: present
+    acme_domain:
       email_address: "ssl-admin@example.com"
       certificate_name: "wildcard.example.com"
       zone: "example.com"
@@ -37,17 +39,17 @@
 ```yaml
 - name: create the certificate for example.com
   hosts: localhost
+  collections:
+    - t_systems_mms.acme
   roles:
-    - letsencrypt
+    - acme
   vars:
-    letsencrypt_do_http_challenge: false
-    letsencrypt_do_dns_challenge: true
-    letsencrypt_dns_provider: azure
-    letsencrypt_use_acme_live_directory: true
-    account_email: "ssl-admin@example.com"
-    azure_resource_group: "azure_resource_group"
-    convert_cert_to: pfx
-    domain:
+    acme_challenge_provider: azure
+    acme_use_live_directory: true
+    acme_account_email: "ssl-admin@example.com"
+    acme_azure_resource_group: "azure_resource_group"
+    acme_convert_cert_to: pfx
+    acme_domain:
       certificate_name: "example.com"
       zone: "example.com"
       email_address: "ssl-admin@example.com"

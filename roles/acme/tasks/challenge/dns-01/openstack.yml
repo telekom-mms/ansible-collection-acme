@@ -1,0 +1,52 @@
+---
+- name: add new TXT record to DNS zone
+  openstack.cloud.recordset:
+    auth:
+      auth_url: "{{ acme_openstack_auth_url }}"
+      username: "{{ acme_dns_user }}"
+      password: "{{ acme_dns_password }}"
+      project_name: "{{ acme_openstack_project_name }}"
+      user_domain_name: "{{ acme_openstack_user_domain }}"
+    state: present
+    recordset_type: "txt"
+    records:
+      - "\"{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}\""
+    name: "_acme-challenge.{{ item | replace('*.', '') }}."
+    zone: "{{ acme_domain.zone }}."
+  loop: "{{ acme_domain.subject_alt_name }}"
+  register: records
+  when:
+    - acme_domain.subject_alt_name is defined
+    - challenge['challenge_data'][item] is defined
+
+- name: Let the challenge be validated and retrieve the cert and intermediate certificate
+  acme_certificate:
+    account_key_src: "{{ acme_account_key_path }}"
+    account_email: "{{ acme_account_email }}"
+    csr: "{{ acme_csr_path }}"
+    cert: "{{ acme_cert_path }}"
+    fullchain: "{{ acme_fullchain_path }}"
+    chain: "{{ acme_intermediate_path }}"
+    challenge: dns-01
+    force: "{{ acme_force_renewal | default(false) }}"
+    acme_directory: "{{ acme_directory }}"
+    acme_version: 2
+    terms_agreed: true
+    remaining_days: "{{ acme_remaining_days }}"
+    data: "{{ challenge }}"
+
+- name: remove TXT records from DNS zone
+  openstack.cloud.recordset:
+    auth:
+      auth_url: "{{ acme_openstack_auth_url }}"
+      username: "{{ acme_dns_user }}"
+      password: "{{ acme_dns_password }}"
+      project_name: "{{ acme_openstack_project_name }}"
+      user_domain_name: "{{ acme_openstack_user_domain }}"
+    state: absent
+    name: "_acme-challenge.{{ item | replace('*.', '') }}."
+    zone: "{{ acme_domain.zone }}."
+  loop: "{{ acme_domain.subject_alt_name }}"
+  when:
+    - acme_domain.subject_alt_name is defined
+    - challenge['challenge_data'][item] is defined

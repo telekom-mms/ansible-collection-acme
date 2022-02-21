@@ -1,27 +1,31 @@
 namespace: t_systems_mms
-name: letsencrypt
-version: 1.0.2
+name: acme
+version: 2.3.1
 readme: README.md
 authors:
   - Sebastian Gumprich <sebastian.gumprich@t-systems.com>
   - Andreas Hering <andreas.hering@t-systems.com>
 description: >-
-  This collection contains a role for issuing ssl certificates from Let's
-  Encrypt via dns- or http-challenge
+  This collection contains a role for issuing ssl certificates via the ACME
+  protocol. By default Let's Encrypt certificates are issued but it is also
+  possible to use other certificate authorities which implement the ACME
+  protocol.
 license:
   - GPL-2.0-or-later
 license_file: ''
 tags:
+  - acme
+  - certificates
   - letsencrypt
   - security
-  - certificates
+  - ssl
 dependencies:
   community.crypto: '>=1.0.0'
   openstack.cloud: '>=1.2.1'
-repository: 'https://github.com/T-Systems-MMS/ansible-collection-letsencrypt'
-documentation: 'https://github.com/T-Systems-MMS/ansible-collection-letsencrypt'
-homepage: 'https://github.com/T-Systems-MMS/ansible-collection-letsencrypt'
-issues: 'https://github.com/T-Systems-MMS/ansible-collection-letsencrypt/issues'
+repository: 'https://github.com/T-Systems-MMS/ansible-collection-acme'
+documentation: 'https://github.com/T-Systems-MMS/ansible-collection-acme'
+homepage: 'https://github.com/T-Systems-MMS/ansible-collection-acme'
+issues: 'https://github.com/T-Systems-MMS/ansible-collection-acme/issues'
 build_ignore:
   - .ansible-lint
   - .gitattributes
