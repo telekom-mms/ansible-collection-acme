@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.3.2](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.2) (2022-02-21)
+
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.3.1...2.3.2)
+
+**Closed issues:**
+
+- Test against recent ansible versions  [\#64](https://github.com/T-Systems-MMS/ansible-collection-acme/issues/64)
+
+**Merged pull requests:**
+
+- Test against recent ansible versions [\#65](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/65) ([avalor1](https://github.com/avalor1))
+
 ## [2.3.1](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.1) (2021-08-19)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.3.0...2.3.1)
@@ -43,7 +55,6 @@
 **Implemented enhancements:**
 
 - add hetzner dns tests [\#54](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/54) ([rndmh3ro](https://github.com/rndmh3ro))
-- add possibility to keep and purge challenge record in Azure [\#52](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/52) ([michaelamattes](https://github.com/michaelamattes))
 
 **Closed issues:**
 
@@ -101,6 +112,7 @@
 
 **Implemented enhancements:**
 
+- add possibility to keep and purge challenge record in Azure [\#52](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/52) ([michaelamattes](https://github.com/michaelamattes))
 - unify challenge provider logic [\#35](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/35) ([schurzi](https://github.com/schurzi))
 - Account key content as variable [\#33](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/33) ([Nemental](https://github.com/Nemental))
 - Add "local" provider for http-challenge [\#30](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/30) ([avalor1](https://github.com/avalor1))
