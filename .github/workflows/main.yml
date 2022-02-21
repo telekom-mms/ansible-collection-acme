@@ -75,10 +75,12 @@ jobs:
           path: ansible_collections/t_systems_mms/acme
 
       - name: Run Linting
-        uses: ansible/ansible-lint-action@v5.4.0
+        uses: ansible/ansible-lint-action@master
         with:
           targets: ansible_collections/t_systems_mms/acme/roles/acme
           args: "-c ansible_collections/t_systems_mms/acme/.ansible-lint"
+          override-deps: |
+            ansible-lint>=5.4
 
   integration-tests:
     runs-on: ubuntu-latest
