@@ -71,8 +71,6 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v2
-        with:
-          path: ansible_collections/t_systems_mms/acme
 
       - name: Run Linting
         uses: ansible/ansible-lint-action@main
