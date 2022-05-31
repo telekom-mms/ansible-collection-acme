@@ -76,7 +76,6 @@ jobs:
 
       - name: Run Linting
         uses: ansible/ansible-lint-action@main
-        working-directory: ./ansible_collections/t_systems_mms/acme
 
   integration-tests:
     runs-on: ubuntu-latest
