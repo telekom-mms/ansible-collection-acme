@@ -78,7 +78,7 @@ jobs:
         uses: ansible/ansible-lint-action@main
         with:
           targets: ansible_collections/t_systems_mms/acme/roles/acme
-          args: "-c ansible_collections/t_systems_mms/acme/.ansible-lint"
+          args: "-c ansible_collections/t_systems_mms/acme/.config/ansible-lint.yml"
           override-deps: |
             ansible-lint>=5.4
 
