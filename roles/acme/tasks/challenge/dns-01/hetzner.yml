@@ -4,14 +4,14 @@
   when: challenge is changed
   block:
     - name: Lookup the zone_id using the acme_domain.zone
-      uri:
+      ansible.builtin.uri:
         url: "https://dns.hetzner.com/api/v1/zones?name={{ acme_domain.zone }}"
         headers:
           Auth-API-Token: "{{ acme_hetzner_auth_token }}"
       register: lookup_zone_id
 
     - name: add a new TXT record to the SAN domains
-      uri:
+      ansible.builtin.uri:
         url: "https://dns.hetzner.com/api/v1/records"
         method: POST
         body_format: json
@@ -33,7 +33,7 @@
         - challenge['challenge_data'][item] is defined
 
     - name: Wait 20 seconds
-      pause:
+      ansible.builtin.pause:
         seconds: 20
 
     - name: Let the challenge be validated and retrieve the cert and intermediate certificate
@@ -53,7 +53,7 @@
         data: "{{ challenge }}"
 
     - name: remove created SAN TXT records to keep DNS zone clean
-      uri:
+      ansible.builtin.uri:
         url: "https://dns.hetzner.com/api/v1/records/{{ item }}"
         method: DELETE
         headers:

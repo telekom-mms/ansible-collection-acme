@@ -1,0 +1,6 @@
+---
+warn_list:  # or 'skip_list' to silence them completely
+  - experimental  # all rules tagged as experimental
+  - meta-no-info  # meta/main.yml should contain relevant info.
+  - no-handler  # Tasks that run when changed should likely be handlers.
+  - yaml  # Violations reported by yamllint.

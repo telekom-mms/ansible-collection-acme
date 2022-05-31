@@ -4,7 +4,7 @@
   when: challenge is changed
   block:
     - name: add a new TXT record to the SAN domains
-      uri:
+      ansible.builtin.uri:
         url: "http://localhost:8055/set-txt"
         method: POST
         body_format: json

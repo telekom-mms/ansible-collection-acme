@@ -3,8 +3,8 @@
 - name: validate challenge only if it is created or changed
   when: challenge is changed
   block:
-    - name: Login to autodns
-      uri:
+    - name: Login to autodns  # noqa no-handler
+      ansible.builtin.uri:
         url: "https://api.autodns.com/v1/login"
         method: POST
         body_format: json
@@ -16,7 +16,7 @@
       register: login
 
     - name: add a new TXT record to the SAN domains
-      uri:
+      ansible.builtin.uri:
         url: "https://api.autodns.com/v1/zone/{{ acme_domain.zone }}/a.ns14.net"
         method: PATCH
         body_format: json
@@ -61,7 +61,7 @@
         data: "{{ challenge }}"
 
     - name: remove created SAN TXT records to keep DNS zone clean
-      uri:
+      ansible.builtin.uri:
         url: "https://api.autodns.com/v1/zone/{{ acme_domain.zone }}/a.ns14.net"
         method: PATCH
         body_format: json

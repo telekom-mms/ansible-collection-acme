@@ -1,7 +1,7 @@
 ---
 - name: install prerequisites on localhost
   delegate_to: localhost
-  package:
+  ansible.builtin.package:
     name:
       - python-boto3
     state: present
@@ -11,7 +11,7 @@
   when: challenge is changed
   block:
     - name: create challenge file with SAN domain for s3 upload
-      copy:
+      ansible.builtin.copy:
         dest: "acme-challenge.{{ item }}"
         content: "{{ challenge['challenge_data'][item]['http-01']['resource_value'] }}"
         mode: 0640
@@ -69,7 +69,7 @@
         - challenge['challenge_data'][item] is defined
 
     - name: remove challenge file for SAN domain from fs
-      file:
+      ansible.builtin.file:
         dest: "acme-challenge.{{ item }}"
         state: absent
       loop: "{{ acme_domain.subject_alt_name }}"
