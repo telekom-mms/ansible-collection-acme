@@ -71,16 +71,9 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v2
-        with:
-          path: ansible_collections/t_systems_mms/acme
 
       - name: Run Linting
         uses: ansible/ansible-lint-action@main
-        with:
-          targets: ansible_collections/t_systems_mms/acme/roles/acme
-          args: "-c ansible_collections/t_systems_mms/acme/.ansible-lint"
-          override-deps: |
-            ansible-lint>=5.4
 
   integration-tests:
     runs-on: ubuntu-latest

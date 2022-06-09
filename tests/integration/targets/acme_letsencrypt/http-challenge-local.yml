@@ -27,11 +27,11 @@
       community.crypto.openssl_csr_info:
         path: "{{ acme_csr_path }}"
       register: result_csr
-    
+
     - debug:
         msg: "{{ result_csr }}"
 
-    # When defining subject fields like countryName, no commonName will be in the subject field of the CSR or final cert, 
+    # When defining subject fields like countryName, no commonName will be in the subject field of the CSR or final cert,
     # so we do not need to test for a commonName.
     - assert:
         that:
@@ -42,8 +42,8 @@
           - result_csr.subject.localityName == "Main Street"
           - result_csr.subject.organizationName == "ACME Inc."
           - result_csr.subject.organizationalUnitName == "ACME Security"
-      when: 
-    
+      when:
+
     - name: validate certs
       community.crypto.x509_certificate_info:
         path: "{{ acme_cert_path }}"

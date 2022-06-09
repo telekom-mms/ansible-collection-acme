@@ -6,7 +6,7 @@ galaxy_info:
   author: t_systems_mms
   description: Issue certificates via the ACME protocol via dns- or http-challenge. By default the API of Let's Encrypts gets used.
   license: GPLv3
-  min_ansible_version: 2.9
+  min_ansible_version: "2.9"
   galaxy_tags:
     - acme
     - certificates

@@ -9,7 +9,7 @@
     state: present
     record_type: TXT
     records:
-    - entry: "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
+      - entry: "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
   loop: "{{ acme_domain.subject_alt_name.top_level }}"
   when: acme_domain.subject_alt_name.top_level is defined
 
@@ -23,7 +23,7 @@
     state: present
     record_type: TXT
     records:
-    - entry: "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
+      - entry: "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
   loop: "{{ acme_domain.subject_alt_name.second_level }}"
   when: acme_domain.subject_alt_name.second_level is defined
 
