@@ -1,8 +1,12 @@
 # Changelog
 
-## [2.3.2](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.2) (2022-03-30)
+## [2.3.2](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.2) (2022-06-09)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.3.1...2.3.2)
+
+**Fixed bugs:**
+
+- fix ansible-lint errors [\#67](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/67) ([rndmh3ro](https://github.com/rndmh3ro))
 
 **Closed issues:**
 
@@ -10,6 +14,10 @@
 
 **Merged pull requests:**
 
+- Update github-actions-x/commit action to v2.9 [\#71](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/71) ([renovate[bot]](https://github.com/apps/renovate))
+- Update charmixer/auto-changelog-action action to v1.4 [\#69](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/69) ([renovate[bot]](https://github.com/apps/renovate))
+- Update actions/checkout action to v2.4.2 [\#68](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/68) ([renovate[bot]](https://github.com/apps/renovate))
+- Configure Renovate [\#66](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/66) ([renovate[bot]](https://github.com/apps/renovate))
 - Test against recent ansible versions [\#65](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/65) ([avalor1](https://github.com/avalor1))
 
 ## [2.3.1](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.1) (2021-08-19)
@@ -176,7 +184,7 @@
 
 **Implemented enhancements:**
 
-- Add Hetzner DNS as letsencrypt\_dns\_provider [\#22](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/22) ([xobtoor](https://github.com/xobtoor))
+- Add Hetzner DNS as letsencrypt\_dns\_provider [\#22](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/22) ([stndrf](https://github.com/stndrf))
 
 ## [0.0.5](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/0.0.5) (2020-12-09)
 
