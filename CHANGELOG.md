@@ -14,6 +14,7 @@
 
 **Merged pull requests:**
 
+- Update actions/setup-python action to v4 [\#73](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/73) ([renovate[bot]](https://github.com/apps/renovate))
 - Update actions/checkout action to v3 [\#72](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/72) ([renovate[bot]](https://github.com/apps/renovate))
 - Update github-actions-x/commit action to v2.9 [\#71](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/71) ([renovate[bot]](https://github.com/apps/renovate))
 - Update charmixer/auto-changelog-action action to v1.4 [\#69](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/69) ([renovate[bot]](https://github.com/apps/renovate))
