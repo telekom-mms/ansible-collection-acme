@@ -50,7 +50,7 @@ jobs:
           path: ansible_collections/t_systems_mms/acme
 
       - name: Set up Python ${{ matrix.ansible }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python }}
 
@@ -136,7 +136,7 @@ jobs:
         run: docker restart ${{ job.services.nginx.id }}
 
       - name: Set up Python ${{ matrix.ansible }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python }}
 
