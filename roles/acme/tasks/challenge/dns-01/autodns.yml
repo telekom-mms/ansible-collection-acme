@@ -60,7 +60,6 @@
         remaining_days: "{{ acme_remaining_days }}"
         data: "{{ challenge }}"
 
-
   always:
     - name: remove created SAN TXT records to keep DNS zone clean
       ansible.builtin.uri:
