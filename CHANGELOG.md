@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.3.3](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.3) (2022-07-04)
+
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.3.2...2.3.3)
+
+**Fixed bugs:**
+
+- autodns: remove TXT RRs when validation fails [\#74](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/74) ([z-bsod](https://github.com/z-bsod))
+
+**Merged pull requests:**
+
+- Update actions/setup-python action to v4 [\#73](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/73) ([renovate[bot]](https://github.com/apps/renovate))
+- Update actions/checkout action to v3 [\#72](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/72) ([renovate[bot]](https://github.com/apps/renovate))
+
 ## [2.3.2](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.2) (2022-06-09)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.3.1...2.3.2)
@@ -14,8 +27,6 @@
 
 **Merged pull requests:**
 
-- Update actions/setup-python action to v4 [\#73](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/73) ([renovate[bot]](https://github.com/apps/renovate))
-- Update actions/checkout action to v3 [\#72](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/72) ([renovate[bot]](https://github.com/apps/renovate))
 - Update github-actions-x/commit action to v2.9 [\#71](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/71) ([renovate[bot]](https://github.com/apps/renovate))
 - Update charmixer/auto-changelog-action action to v1.4 [\#69](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/69) ([renovate[bot]](https://github.com/apps/renovate))
 - Update actions/checkout action to v2.4.2 [\#68](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/68) ([renovate[bot]](https://github.com/apps/renovate))
