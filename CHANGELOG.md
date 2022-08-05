@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.3.4](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.4) (2022-08-05)
+
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.3.3...2.3.4)
+
+**Closed issues:**
+
+- Requirements missing [\#50](https://github.com/T-Systems-MMS/ansible-collection-acme/issues/50)
+
+**Merged pull requests:**
+
+- update used versions in tests [\#75](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/75) ([rndmh3ro](https://github.com/rndmh3ro))
+
 ## [2.3.3](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.3) (2022-07-04)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.3.2...2.3.3)
