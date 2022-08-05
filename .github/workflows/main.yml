@@ -19,26 +19,12 @@ jobs:
         ansible:
           # It's important that Sanity is tested against all stable-X.Y branches
           # Testing against `devel` may fail as new tests are added.
-          - stable-2.9
-          - stable-2.10
           - stable-2.11
           - stable-2.12
+          - stable-2.13
           - devel
         python:
-          - 3.7
-          - 3.8
           - 3.9
-        exclude:
-          # Because ansible-test doesn't support python3.9 for Ansible 2.9
-          - ansible: stable-2.9
-            python: 3.9
-          # Because ansible-test doesn't support < python3.8 for Ansible 2.12
-          - ansible: stable-2.12
-            python: 3.7
-          - ansible: devel
-            python: 2.7
-          - ansible: devel
-            python: 3.7
     runs-on: ubuntu-latest
     steps:
       # ansible-test requires the collection to be in a directory in the form
@@ -84,28 +70,12 @@ jobs:
       fail-fast: false
       matrix:
         ansible:
-          - stable-2.9
-          - stable-2.10
           - stable-2.11
           - stable-2.12
+          - stable-2.13
           - devel
         python:
-          - 2.7
-          - 3.7
-          - 3.8
-        exclude:
-          # Because ansible-test doesn't support python3.9 for Ansible 2.9
-          - ansible: stable-2.9
-            python: 3.9
-          # Because ansible-test doesn't support < python3.8 for Ansible 2.12 oder devel
-          - ansible: stable-2.12
-            python: 2.7
-          - ansible: stable-2.12
-            python: 3.7
-          - ansible: devel
-            python: 2.7
-          - ansible: devel
-            python: 3.7
+          - 3.9
     # start nginx as service to test validation via http-challenge local path
     services:
       nginx:
