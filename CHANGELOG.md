@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.3.4](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.4) (2022-08-05)
+## [2.3.4](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.4) (2022-09-06)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.3.3...2.3.4)
 
@@ -10,6 +10,7 @@
 
 **Merged pull requests:**
 
+- fix linting - uppercase first letter of task-names [\#76](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/76) ([rndmh3ro](https://github.com/rndmh3ro))
 - update used versions in tests [\#75](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/75) ([rndmh3ro](https://github.com/rndmh3ro))
 
 ## [2.3.3](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.3) (2022-07-04)
