@@ -1,5 +1,5 @@
 ---
-- name: create directory for challenge/hash files
+- name: Create directory for challenge/hash files
   ansible.builtin.file:
     path: "{{ acme_local_validation_path }}/.well-known/acme-challenge"
     state: directory
@@ -7,10 +7,10 @@
     owner: "{{ acme_local_validation_path_file_owner | default(omit) }}"
     group: "{{ acme_local_validation_path_file_group | default(omit) }}"
 
-- name: validate challenge only if it is created or changed
+- name: Validate challenge only if it is created or changed
   when: challenge is changed
   block:
-    - name: create challenge/hash files with SAN domains
+    - name: Create challenge/hash files with SAN domains
       ansible.builtin.copy:
         dest: "{{ acme_local_validation_path }}/{{ challenge['challenge_data'][item]['http-01']['resource'] }}"
         content: "{{ challenge['challenge_data'][item]['http-01']['resource_value'] }}"
@@ -41,7 +41,7 @@
         data: "{{ challenge }}"
         validate_certs: "{{ acme_validate_certs | default(true) }}"
 
-    - name: remove challenge/hash files for SAN domains from fs
+    - name: Remove challenge/hash files for SAN domains from fs
       ansible.builtin.file:
         dest: "{{ acme_local_validation_path }}/{{ challenge['challenge_data'][item]['http-01']['resource'] }}"
         state: absent
