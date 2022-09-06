@@ -1,9 +1,9 @@
 ---
 # split top_level for zone_name and if subdomain is defined add subdomain to relative_name
-- name: add a new TXT record to the SAN top-level domains
+- name: Add a new TXT record to the SAN top-level domains
   azure_rm_dnsrecordset:
     resource_group: "{{ acme_azure_resource_group }}"
-    relative_name: "{{ '_acme-challenge' }}{{ '' if item | replace('*.','') == (item.split('.')[-2:] | join('.')) else '.' }}{{ (item | replace('*.','')).split('.')[:-2] | join('.') }}"
+    relative_name: "{{ '_acme-challenge' }}{{ '' if item | replace('*.', '') == (item.split('.')[-2:] | join('.')) else '.' }}{{ (item | replace('*.', '')).split('.')[:-2] | join('.') }}"
     zone_name: "{{ item.split('.')[-2:] | join('.') }}"
     record_mode: append
     state: present
@@ -14,10 +14,10 @@
   when: acme_domain.subject_alt_name.top_level is defined
 
 # split second_level for zone_name and if subdomain is defined add subdomain to relative_name
-- name: add a new TXT record to the SAN second-level domains
+- name: Add a new TXT record to the SAN second-level domains
   azure_rm_dnsrecordset:
     resource_group: "{{ acme_azure_resource_group }}"
-    relative_name: "{{ '_acme-challenge' }}{{ '' if item | replace('*.','') == (item.split('.')[-3:] | join('.')) else '.' }}{{ (item | replace('*.','')).split('.')[:-3] | join('.') }}"
+    relative_name: "{{ '_acme-challenge' }}{{ '' if item | replace('*.', '') == (item.split('.')[-3:] | join('.')) else '.' }}{{ (item | replace('*.', '')).split('.')[:-3] | join('.') }}"
     zone_name: "{{ item.split('.')[-3:] | join('.') }}"
     record_mode: append
     state: present
@@ -43,10 +43,10 @@
     remaining_days: "{{ acme_remaining_days }}"
     data: "{{ challenge }}"
 
-- name: remove created SAN top-level TXT records to keep DNS zone clean
+- name: Remove created SAN top-level TXT records to keep DNS zone clean
   azure_rm_dnsrecordset:
     resource_group: "{{ acme_azure_resource_group }}"
-    relative_name: "{{ '_acme-challenge' }}{{ '' if item | replace('*.','') == (item.split('.')[-2:] | join('.')) else '.' }}{{ (item | replace('*.','')).split('.')[:-2] | join('.') }}"
+    relative_name: "{{ '_acme-challenge' }}{{ '' if item | replace('*.', '') == (item.split('.')[-2:] | join('.')) else '.' }}{{ (item | replace('*.', '')).split('.')[:-2] | join('.') }}"
     zone_name: "{{ item.split('.')[-2:] | join('.') }}"
     record_mode: purge
     state: "{{ acme_azure_purge_state }}"
@@ -56,10 +56,10 @@
   loop: "{{ acme_domain.subject_alt_name.top_level }}"
   when: acme_domain.subject_alt_name.top_level is defined
 
-- name: remove created SAN second-level TXT records to keep DNS zone clean
+- name: Remove created SAN second-level TXT records to keep DNS zone clean
   azure_rm_dnsrecordset:
     resource_group: "{{ acme_azure_resource_group }}"
-    relative_name: "{{ '_acme-challenge' }}{{ '' if item | replace('*.','') == (item.split('.')[-3:] | join('.')) else '.' }}{{ (item | replace('*.','')).split('.')[:-3] | join('.') }}"
+    relative_name: "{{ '_acme-challenge' }}{{ '' if item | replace('*.', '') == (item.split('.')[-3:] | join('.')) else '.' }}{{ (item | replace('*.', '')).split('.')[:-3] | join('.') }}"
     zone_name: "{{ item.split('.')[-3:] | join('.') }}"
     record_mode: purge
     state: "{{ acme_azure_purge_state }}"

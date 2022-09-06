@@ -1,3 +1,4 @@
+---
 - name: create the certificate for example.de with http-challenge provider "local"
   hosts: localhost
   collections:

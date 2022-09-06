@@ -1,5 +1,5 @@
 ---
-- name: add new TXT record to DNS zone
+- name: Add new TXT record to DNS zone
   openstack.cloud.recordset:
     auth:
       auth_url: "{{ acme_openstack_auth_url }}"
@@ -35,7 +35,7 @@
     remaining_days: "{{ acme_remaining_days }}"
     data: "{{ challenge }}"
 
-- name: remove TXT records from DNS zone
+- name: Remove TXT records from DNS zone
   openstack.cloud.recordset:
     auth:
       auth_url: "{{ acme_openstack_auth_url }}"

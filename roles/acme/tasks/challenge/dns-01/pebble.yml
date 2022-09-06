@@ -1,9 +1,9 @@
 ---
 ### include/role 3 - validate challenge
-- name: validate challenge only if it is created or changed
+- name: Validate challenge only if it is created or changed
   when: challenge is changed
   block:
-    - name: add a new TXT record to the SAN domains
+    - name: Add a new TXT record to the SAN domains
       ansible.builtin.uri:
         url: "http://localhost:8055/set-txt"
         method: POST
