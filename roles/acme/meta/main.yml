@@ -13,3 +13,7 @@ galaxy_info:
     - letsencrypt
     - security
     - ssl
+  platforms:
+    - name: any
+      versions:
+        - any

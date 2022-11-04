@@ -1,6 +1,6 @@
 ---
 ### include/role 3 - validate challenge
-- name: Validate challenge only if it is created or changed
+- name: Validate challenge only if it is created or changed  # noqa no-handler
   when: challenge is changed
   block:
     - name: Lookup the zone_id using the acme_domain.zone
@@ -22,7 +22,7 @@
             "type": "TXT",
             "value": "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}",
             "zone_id": "{{ lookup_zone_id.json.zones[0].id }}",
-          }
+          }  # noqa yaml[line-length]
         headers:
           Auth-API-Token: "{{ acme_hetzner_auth_token }}"
       loop: "{{ acme_domain.subject_alt_name }}"
@@ -37,7 +37,7 @@
         seconds: 20
 
     - name: Let the challenge be validated and retrieve the cert and intermediate certificate
-      acme_certificate:
+      community.crypto.acme_certificate:
         account_key_src: "{{ acme_account_key_path }}"
         account_email: "{{ acme_account_email }}"
         csr: "{{ acme_csr_path }}"

@@ -1,6 +1,6 @@
 ---
 - name: Create RSA key to be used for acme account
-  openssl_privatekey:
+  community.crypto.openssl_privatekey:
     path: "{{ acme_account_key_path }}"
     size: 4096
     type: RSA
@@ -8,7 +8,7 @@
     - acme_account_key_content is not defined
   no_log: true
 
-- name: Create account key file from acme_account_key_content-variable
+- name: Create account key file from acme_account_key_content-variable  # noqa template-instead-of-copy
   ansible.builtin.copy:
     dest: "{{ acme_account_key_path }}"
     content: "{{ acme_account_key_content }}"
@@ -18,13 +18,13 @@
   no_log: true
 
 - name: Create RSA key to be used for certificate
-  openssl_privatekey:
+  community.crypto.openssl_privatekey:
     path: "{{ acme_private_key_path }}"
   when:
     - acme_private_key_content is not defined
   no_log: true
 
-- name: Create private key file from acme_private_key_content-variable
+- name: Create private key file from acme_private_key_content-variable  # noqa template-instead-of-copy
   ansible.builtin.copy:
     dest: "{{ acme_private_key_path }}"
     content: "{{ acme_private_key_content }}"
