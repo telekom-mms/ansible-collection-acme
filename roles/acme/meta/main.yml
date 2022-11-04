@@ -14,6 +14,6 @@ galaxy_info:
     - security
     - ssl
   platforms:
-    - name: any
+    - name: GenericLinux
       versions:
-        - any
+        - all
