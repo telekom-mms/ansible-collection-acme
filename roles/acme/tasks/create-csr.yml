@@ -1,6 +1,6 @@
 ---
 - name: Create CSR for certificate
-  openssl_csr:
+  community.crypto.openssl_csr:
     path: "{{ acme_csr_path }}"
     privatekey_path: "{{ acme_private_key_path }}"
     email_address: "{{ acme_domain.email_address }}"
@@ -16,7 +16,7 @@
     - '"dns-01" in acme_provider_path'
 
 - name: Create CSR for certificate
-  openssl_csr:
+  community.crypto.openssl_csr:
     path: "{{ acme_csr_path }}"
     privatekey_path: "{{ acme_private_key_path }}"
     email_address: "{{ acme_domain.email_address }}"
@@ -26,13 +26,13 @@
     organization_name: "{{ acme_domain.organization | default(omit) }}"
     organizational_unit_name: "{{ acme_domain.organizational_unit | default(omit) }}"
     common_name: "{{ acme_domain.common_name | default(omit) }}"
-    subject_alt_name: "DNS:{{ (acme_domain.subject_alt_name.top_level | default([])) | union(acme_domain.subject_alt_name.second_level | default([])) | join(',DNS:') }}"
+    subject_alt_name: "DNS:{{ (acme_domain.subject_alt_name.top_level | default([])) | union(acme_domain.subject_alt_name.second_level | default([])) | join(',DNS:') }}"  # noqa yaml[line-length]
   when:
     - acme_domain.subject_alt_name.top_level is defined or acme_domain.subject_alt_name.second_level is defined
     - '"dns-01" in acme_provider_path'
 
 - name: Create CSR for certificate
-  openssl_csr:
+  community.crypto.openssl_csr:
     path: "{{ acme_csr_path }}"
     privatekey_path: "{{ acme_private_key_path }}"
     email_address: "{{ acme_domain.email_address }}"
