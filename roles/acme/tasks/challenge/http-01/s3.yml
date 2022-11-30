@@ -55,7 +55,7 @@
         data: "{{ challenge }}"
 
     - name: Remove challenge file for SAN domain from s3 bucket
-      amazon.aws.aws_s3_object:
+      amazon.aws.s3_object:
         aws_access_key: "{{ acme_s3_access_key }}"
         aws_secret_key: "{{ acme_s3_secret_key }}"
         bucket: "{{ acme_s3_bucket_name }}"
