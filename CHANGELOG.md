@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.3.5](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.5) (2022-12-09)
+
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.3.4...2.3.5)
+
+**Merged pull requests:**
+
+- chore\(deps\): update actions/checkout action to v3.1.0 [\#78](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/78) ([renovate[bot]](https://github.com/apps/renovate))
+- when pushing, run action only on master [\#77](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/77) ([rndmh3ro](https://github.com/rndmh3ro))
+
 ## [2.3.4](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.4) (2022-11-30)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.3.3...2.3.4)
