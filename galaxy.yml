@@ -1,6 +1,6 @@
 namespace: t_systems_mms
 name: acme
-version: 2.3.3
+version: 2.3.4
 readme: README.md
 authors:
   - Sebastian Gumprich <sebastian.gumprich@t-systems.com>
@@ -22,6 +22,7 @@ tags:
 dependencies:
   community.crypto: '>=1.0.0'
   openstack.cloud: '>=1.2.1'
+  amazon.aws: '>=5.0.0'
 repository: 'https://github.com/T-Systems-MMS/ansible-collection-acme'
 documentation: 'https://github.com/T-Systems-MMS/ansible-collection-acme'
 homepage: 'https://github.com/T-Systems-MMS/ansible-collection-acme'

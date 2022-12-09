@@ -1,6 +1,6 @@
 ---
 - name: Convert certificate to pfx format
-  openssl_pkcs12:
+  community.crypto.openssl_pkcs12:
     action: export
     path: "{{ acme_pfx_cert_path }}"
     name: "{{ acme_domain.certificate_name }}"

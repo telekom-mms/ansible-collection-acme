@@ -1,8 +1,12 @@
 # Changelog
 
-## [2.3.4](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.4) (2022-09-06)
+## [2.3.4](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.4) (2022-11-30)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.3.3...2.3.4)
+
+**Fixed bugs:**
+
+- Fix wrong module name in roles/acme/tasks/challenge/http-01/s3.yml [\#81](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/81) ([beechesII](https://github.com/beechesII))
 
 **Closed issues:**
 
@@ -10,6 +14,7 @@
 
 **Merged pull requests:**
 
+- fix linting [\#79](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/79) ([rndmh3ro](https://github.com/rndmh3ro))
 - fix linting - uppercase first letter of task-names [\#76](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/76) ([rndmh3ro](https://github.com/rndmh3ro))
 - update used versions in tests [\#75](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/75) ([rndmh3ro](https://github.com/rndmh3ro))
 

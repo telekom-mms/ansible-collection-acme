@@ -1,9 +1,9 @@
 ---
 # split top_level for zone_name and if subdomain is defined add subdomain to relative_name
 - name: Add a new TXT record to the SAN top-level domains
-  azure_rm_dnsrecordset:
+  azure.azcollection.azure_rm_dnsrecordset:
     resource_group: "{{ acme_azure_resource_group }}"
-    relative_name: "{{ '_acme-challenge' }}{{ '' if item | replace('*.', '') == (item.split('.')[-2:] | join('.')) else '.' }}{{ (item | replace('*.', '')).split('.')[:-2] | join('.') }}"
+    relative_name: "{{ '_acme-challenge' }}{{ '' if item | replace('*.', '') == (item.split('.')[-2:] | join('.')) else '.' }}{{ (item | replace('*.', '')).split('.')[:-2] | join('.') }}"  # noqa yaml[line-length]
     zone_name: "{{ item.split('.')[-2:] | join('.') }}"
     record_mode: append
     state: present
@@ -15,9 +15,9 @@
 
 # split second_level for zone_name and if subdomain is defined add subdomain to relative_name
 - name: Add a new TXT record to the SAN second-level domains
-  azure_rm_dnsrecordset:
+  azure.azcollection.azure_rm_dnsrecordset:
     resource_group: "{{ acme_azure_resource_group }}"
-    relative_name: "{{ '_acme-challenge' }}{{ '' if item | replace('*.', '') == (item.split('.')[-3:] | join('.')) else '.' }}{{ (item | replace('*.', '')).split('.')[:-3] | join('.') }}"
+    relative_name: "{{ '_acme-challenge' }}{{ '' if item | replace('*.', '') == (item.split('.')[-3:] | join('.')) else '.' }}{{ (item | replace('*.', '')).split('.')[:-3] | join('.') }}"  # noqa yaml[line-length]
     zone_name: "{{ item.split('.')[-3:] | join('.') }}"
     record_mode: append
     state: present
@@ -28,7 +28,7 @@
   when: acme_domain.subject_alt_name.second_level is defined
 
 - name: Let the challenge be validated and retrieve the cert and intermediate certificate
-  acme_certificate:
+  community.crypto.acme_certificate:
     account_key_src: "{{ acme_account_key_path }}"
     account_email: "{{ acme_account_email }}"
     csr: "{{ acme_csr_path }}"
@@ -44,9 +44,9 @@
     data: "{{ challenge }}"
 
 - name: Remove created SAN top-level TXT records to keep DNS zone clean
-  azure_rm_dnsrecordset:
+  azure.azcollection.azure_rm_dnsrecordset:
     resource_group: "{{ acme_azure_resource_group }}"
-    relative_name: "{{ '_acme-challenge' }}{{ '' if item | replace('*.', '') == (item.split('.')[-2:] | join('.')) else '.' }}{{ (item | replace('*.', '')).split('.')[:-2] | join('.') }}"
+    relative_name: "{{ '_acme-challenge' }}{{ '' if item | replace('*.', '') == (item.split('.')[-2:] | join('.')) else '.' }}{{ (item | replace('*.', '')).split('.')[:-2] | join('.') }}"  # noqa yaml[line-length]
     zone_name: "{{ item.split('.')[-2:] | join('.') }}"
     record_mode: purge
     state: "{{ acme_azure_purge_state }}"
@@ -57,9 +57,9 @@
   when: acme_domain.subject_alt_name.top_level is defined
 
 - name: Remove created SAN second-level TXT records to keep DNS zone clean
-  azure_rm_dnsrecordset:
+  azure.azcollection.azure_rm_dnsrecordset:
     resource_group: "{{ acme_azure_resource_group }}"
-    relative_name: "{{ '_acme-challenge' }}{{ '' if item | replace('*.', '') == (item.split('.')[-3:] | join('.')) else '.' }}{{ (item | replace('*.', '')).split('.')[:-3] | join('.') }}"
+    relative_name: "{{ '_acme-challenge' }}{{ '' if item | replace('*.', '') == (item.split('.')[-3:] | join('.')) else '.' }}{{ (item | replace('*.', '')).split('.')[:-3] | join('.') }}"  # noqa yaml[line-length]
     zone_name: "{{ item.split('.')[-3:] | join('.') }}"
     record_mode: purge
     state: "{{ acme_azure_purge_state }}"

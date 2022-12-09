@@ -7,10 +7,10 @@
     owner: "{{ acme_local_validation_path_file_owner | default(omit) }}"
     group: "{{ acme_local_validation_path_file_group | default(omit) }}"
 
-- name: Validate challenge only if it is created or changed
+- name: Validate challenge only if it is created or changed  # noqa no-handler
   when: challenge is changed
   block:
-    - name: Create challenge/hash files with SAN domains
+    - name: Create challenge/hash files with SAN domains  # noqa template-instead-of-copy
       ansible.builtin.copy:
         dest: "{{ acme_local_validation_path }}/{{ challenge['challenge_data'][item]['http-01']['resource'] }}"
         content: "{{ challenge['challenge_data'][item]['http-01']['resource_value'] }}"
@@ -25,7 +25,7 @@
 
      # validate certficate
     - name: Let the challenge be validated and retrieve the cert and intermediate certificate
-      acme_certificate:
+      community.crypto.acme_certificate:
         account_key_src: "{{ acme_account_key_path }}"
         account_email: "{{ acme_account_email }}"
         csr: "{{ acme_csr_path }}"
