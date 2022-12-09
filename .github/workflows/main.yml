@@ -19,25 +19,24 @@ jobs:
         ansible:
           # It's important that Sanity is tested against all stable-X.Y branches
           # Testing against `devel` may fail as new tests are added.
-          - stable-2.9
-          - stable-2.10
+          - stable-2.11
+          - stable-2.12
+          - stable-2.13
+          - devel
         python:
-          - 3.7
-          - 3.8
-        exclude:
-          - python: 3.8  # blocked by ansible/ansible#70155
+          - 3.9
     runs-on: ubuntu-latest
     steps:
       # ansible-test requires the collection to be in a directory in the form
       # .../ansible_collections/NAMESPACE/COLLECTION_NAME/
 
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
-          path: ansible_collections/t_systems_mms/letsencrypt
+          path: ansible_collections/t_systems_mms/acme
 
       - name: Set up Python ${{ matrix.ansible }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python }}
 
@@ -50,38 +49,33 @@ jobs:
       # Explicity specify the version of Python we want to test
       - name: Run sanity tests
         run: ansible-test sanity --docker -v --color --python ${{ matrix.python }}
-        working-directory: ./ansible_collections/t_systems_mms/letsencrypt
+        working-directory: ./ansible_collections/t_systems_mms/acme
 
   linting:
     name: Ansible Lint
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
-        with:
-          path: ansible_collections/t_systems_mms/letsencrypt
+        uses: actions/checkout@v3
 
       - name: Run Linting
-        uses: ansible/ansible-lint-action@master
-        with:
-          targets: ansible_collections/t_systems_mms/letsencrypt/roles/letsencrypt
-          args: "-c ansible_collections/t_systems_mms/letsencrypt/.ansible-lint"
+        uses: ansible/ansible-lint-action@main
 
   integration-tests:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ansible_collections/t_systems_mms/letsencrypt
+        working-directory: ansible_collections/t_systems_mms/acme
     strategy:
       fail-fast: false
       matrix:
         ansible:
-          - stable-2.9
-          - stable-2.10
+          - stable-2.11
+          - stable-2.12
+          - stable-2.13
+          - devel
         python:
-          - 2.7
-          - 3.7
-          - 3.8
+          - 3.9
     # start nginx as service to test validation via http-challenge local path
     services:
       nginx:
@@ -93,9 +87,9 @@ jobs:
 
     steps:
       - name: Check out code to collections-folder, so ansible finds it
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
-          path: ansible_collections/t_systems_mms/letsencrypt
+          path: ansible_collections/t_systems_mms/acme
 
       - name: Run Pebble and challtestsrv
         run: curl https://raw.githubusercontent.com/letsencrypt/pebble/master/docker-compose.yml | docker-compose -f - up -d
@@ -112,7 +106,7 @@ jobs:
         run: docker restart ${{ job.services.nginx.id }}
 
       - name: Set up Python ${{ matrix.ansible }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python }}
 
@@ -123,11 +117,11 @@ jobs:
         run: ansible-galaxy collection build
 
       - name: install the collection
-        run: ansible-galaxy collection install -p /home/runner/work/ansible-collection-letsencrypt/ansible-collection-letsencrypt *.tar.gz
+        run: ansible-galaxy collection install -p /home/runner/work/ansible-collection-acme/ansible-collection-acme *.tar.gz
 
       - name: install community.crypto collection
-        run: ansible-galaxy collection install -p /home/runner/work/ansible-collection-letsencrypt/ansible-collection-letsencrypt community.crypto
+        run: ansible-galaxy collection install -p /home/runner/work/ansible-collection-acme/ansible-collection-acme community.crypto
 
       - name: Run integration tests
         run: ansible-test integration -v --color --retry-on-error --continue-on-error --diff --python ${{ matrix.python }} --requirements
-        working-directory: ./ansible_collections/t_systems_mms/letsencrypt
+        working-directory: ./ansible_collections/t_systems_mms/acme

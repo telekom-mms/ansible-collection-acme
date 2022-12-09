@@ -1,0 +1,20 @@
+---
+- name: Preconditions
+  ansible.builtin.include_tasks: preconditions.yml
+
+- name: Run key generation
+  ansible.builtin.include_tasks: create-keys.yml
+
+- name: Create csr
+  ansible.builtin.include_tasks: create-csr.yml
+
+- name: Create challenge
+  ansible.builtin.include_tasks: create-challenge.yml
+
+- name: Do challenge with provider {{ acme_challenge_provider }}
+  ansible.builtin.include_tasks: "{{ acme_provider_path }}"
+
+- name: Convert certificate
+  ansible.builtin.include_tasks: convert_certificate.yml
+  when:
+    - acme_convert_cert_to is defined

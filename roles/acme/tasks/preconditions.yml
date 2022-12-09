@@ -1,0 +1,29 @@
+---
+- name: Check if a challenge provider is set
+  ansible.builtin.assert:
+    that:
+      - acme_challenge_provider is defined
+      - acme_challenge_provider != ""
+    fail_msg: "You need to set acme_challenge_provider with a provider. See documentation for a list of possible providers."
+
+- name: Set fact for acme_directory depending on what is set in acme_use_live_directory
+  ansible.builtin.set_fact:
+    acme_directory: "{{ acme_use_live_directory | ternary(acme_live_directory, acme_staging_directory) }}"
+
+- name: Create directories for acme certificates
+  delegate_to: "{{ inventory_hostname }}"
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0750
+  loop:
+    - "{{ acme_conf_dir }}"
+    - "{{ acme_cert_dir }}"
+
+- name: Select provider {{ acme_challenge_provider }}
+  ansible.builtin.set_fact:
+    acme_provider_path: "{{ item }}"
+  with_first_found:
+    - "challenge/dns-01/{{ acme_challenge_provider }}.yml"
+    - "challenge/http-01/{{ acme_challenge_provider }}.yml"
+    - challenge-unknown.yml

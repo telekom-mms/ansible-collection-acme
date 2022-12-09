@@ -1,0 +1,4 @@
+---
+- name: Fail because of unknown challenge provider
+  ansible.builtin.fail:
+    msg: unknown challenge provider

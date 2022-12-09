@@ -1,0 +1,62 @@
+---
+- name: create the certificate for example.de with http-challenge provider "local"
+  hosts: localhost
+  collections:
+    - t_systems_mms.acme
+  roles:
+    - acme
+  vars:
+    acme_domain:
+      certificate_name: "http-local.example.de"
+      zone: "example.de"
+      email_address: "ssl-admin@example.de"
+      country: GB
+      state_or_province: Anytown
+      locality: Main Street
+      organization: ACME Inc.
+      organizational_unit: ACME Security
+      subject_alt_name:
+        - example.de
+    acme_challenge_provider: "local"
+    acme_local_validation_path: "/tmp"
+    acme_use_live_directory: false
+    acme_account_email: "ssl-admin@example.de"
+    acme_staging_directory: "https://localhost:14000/dir"
+    acme_validate_certs: false
+  post_tasks:
+    - name: validate certificate signing request
+      community.crypto.openssl_csr_info:
+        path: "{{ acme_csr_path }}"
+      register: result_csr
+
+    - debug:
+        msg: "{{ result_csr }}"
+
+    # When defining subject fields like countryName, no commonName will be in the subject field of the CSR or final cert,
+    # so we do not need to test for a commonName.
+    - assert:
+        that:
+          - "'DNS:example.de' in result_csr.subject_alt_name"
+          - result_csr.subject.emailAddress == "ssl-admin@example.de"
+          - result_csr.subject.countryName == "GB"
+          - result_csr.subject.stateOrProvinceName == "Anytown"
+          - result_csr.subject.localityName == "Main Street"
+          - result_csr.subject.organizationName == "ACME Inc."
+          - result_csr.subject.organizationalUnitName == "ACME Security"
+      when:
+
+    - name: validate certs
+      community.crypto.x509_certificate_info:
+        path: "{{ acme_cert_path }}"
+      register: result
+
+    - debug:
+        msg: "{{ result }}"
+
+    # Pebble (the CA software for these tests) does throw away the subject fields, so it is not reasonable to test for them in the final cert.
+    # Nontheless, other CA software processes the subject fields for the final cert, which is why the CSR is tested above for these fields.
+    - assert:
+        that:
+          - result.subject.commonName == "example.de"
+          - "'DNS:example.de' in result.subject_alt_name"
+          - "'Pebble Intermediate CA' in result.issuer.commonName"
