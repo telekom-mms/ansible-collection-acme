@@ -12,14 +12,14 @@ Please see the corresponding readme files for specific variables and examples.
 Feel free to contribute more DNS or HTTP APIs :)
 
 * DNS-01
-  * [AutoDNS](dns-challenge/autodns.md)
-  * [Azure](dns-challenge/azure.md)
-  * [hetzner](dns-challenge/hetzner.md)
-  * [openstack](dns-challenge/openstack.md)
-  * [pebble](dns-challenge/pebble.md)
+  * [AutoDNS](/docs/dns-challenge/autodns.md)
+  * [Azure](/docs/dns-challenge/azure.md)
+  * [hetzner](/docs/dns-challenge/hetzner.md)
+  * [openstack](/docs/dns-challenge/openstack.md)
+  * [pebble](/docs/dns-challenge/pebble.md)
 * HTTP-01
-  * [local](http-challenge/local.md)
-  * [s3](http-challenge/s3.md)
+  * [local](/docs/http-challenge/local.md)
+  * [s3](/docs/http-challenge/s3.md)
 
 ## General variables
 
