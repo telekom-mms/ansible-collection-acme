@@ -2,7 +2,9 @@
 
 This collection manages ACME certificates.
 
-Required Ansible version: 2.9
+## Requirements
+* Ansible >= 2.9
+* Python >= 3 (if you want to use http-challenge via S3)
 
 ## Installation
 

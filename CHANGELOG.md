@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.3.5](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.5) (2023-02-22)
+
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.3.4...2.3.5)
+
+**Merged pull requests:**
+
+- update README.md [\#88](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/88) ([beechesII](https://github.com/beechesII))
+- update links to providers [\#86](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/86) ([rndmh3ro](https://github.com/rndmh3ro))
+- chore\(deps\): update actions/checkout action to v3.3.0 [\#84](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/84) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update actions/checkout action to v3.2.0 [\#82](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/82) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update actions/checkout action to v3.1.0 [\#78](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/78) ([renovate[bot]](https://github.com/apps/renovate))
+- when pushing, run action only on master [\#77](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/77) ([rndmh3ro](https://github.com/rndmh3ro))
+
 ## [2.3.4](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.4) (2022-11-30)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.3.3...2.3.4)
