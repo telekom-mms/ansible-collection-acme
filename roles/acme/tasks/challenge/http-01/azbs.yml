@@ -22,7 +22,7 @@
         - challenge['challenge_data'][item] is defined
 
     - name: Create storage container and upload challenge file to it
-      azure_rm_storageblob:
+      azure.azcollection.azure_rm_storageblob:
         resource_group: "{{ acme_azbs_resource_group }}"
         storage_account_name: "{{ acme_azbs_storage_account_name }}"
         public_access: "blob"
@@ -53,7 +53,7 @@
         data: "{{ challenge }}"
 
     - name: Remove challenge file for SAN domain from azure blob storage container
-      azure_rm_storageblob:
+      azure.azcollection.azure_rm_storageblob:
         resource_group: "{{ acme_azbs_resource_group }}"
         storage_account_name: "{{ acme_azbs_storage_account_name }}"
         container: "{{ acme_azbs_container_name }}"
