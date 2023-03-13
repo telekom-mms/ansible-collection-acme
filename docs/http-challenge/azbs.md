@@ -14,29 +14,11 @@
 
 You have to create a service principal/application in the Azure Active Directory.
 This can be done via Frontend, Azure CLI or terraform.
+See https://learn.microsoft.com/en-us/azure/active-directory/develop/app-objects-and-service-principals
 
-### Frontend
+You also have to set a redirect rule in your proxy or webserver to allow the acme challenge bot to read the file, during the http-01 challenge to work.
 
-`Azure Login > Active directory >  App registrations`
-
-### Azure CLI
-
-```bash
-az login # open link and insert code from console to "login"
-az ad sp create-for-rbac --name https://somedomain.onmicrosoft.com/my-app-name --scopes /subscriptions/my-subscription-id/resourceGroups/my-resource-group-name
-
-# Example:
-az login
-To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code xxxx to authenticate.
-
-az ad sp create-for-rbac --name https://example.onmicrosoft.com/my-app-name --scopes /subscriptions/00000-111111-22222-333333-44444-/resourceGroups/my-resource-group-name
-```
-
-> Note that you have to set a verified domain name of your organization or its subdomains when service principal is created via CLI.
-
-You have to set a redirect rule in your proxy or webserver to allow the acme challenge bot to read the file, during the http-01 challenge to work.
-
-*Please note that the URL for the bucket needs to be adjusted to the name of your used bucket.*
+*Please note that the URL for the storage account and container needs to be adjusted to the name of your used account and container.*
 
 **HaProxy:**
 *works with version >= 1.6*
