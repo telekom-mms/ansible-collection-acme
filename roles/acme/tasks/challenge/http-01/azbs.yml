@@ -1,12 +1,4 @@
 ---
-- name: Install prerequisites on localhost
-  delegate_to: localhost
-  ansible.builtin.package:
-    name:
-      - python-boto3
-    state: present
-    use: "{{ acme_prerequisites_packagemanager }}"
-
 - name: Validate challenge only if it is created or changed  # noqa no-handler
   when: challenge is changed
   block:
