@@ -23,6 +23,7 @@ dependencies:
   community.crypto: '>=1.0.0'
   openstack.cloud: '>=1.2.1'
   amazon.aws: '>=5.0.0'
+  azure.azcollection: '>=1.14.0'
 repository: 'https://github.com/T-Systems-MMS/ansible-collection-acme'
 documentation: 'https://github.com/T-Systems-MMS/ansible-collection-acme'
 homepage: 'https://github.com/T-Systems-MMS/ansible-collection-acme'
