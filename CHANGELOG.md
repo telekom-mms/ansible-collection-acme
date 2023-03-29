@@ -1,8 +1,12 @@
 # Changelog
 
-## [2.3.6](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.6) (2023-03-24)
+## [2.3.6](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.6) (2023-03-29)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.3.5...2.3.6)
+
+**Fixed bugs:**
+
+- Fix azure dns challenge bug [\#91](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/91) ([avalor1](https://github.com/avalor1))
 
 **Merged pull requests:**
 
