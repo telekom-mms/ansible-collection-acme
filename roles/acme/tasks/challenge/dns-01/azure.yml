@@ -11,7 +11,10 @@
     records:
       - entry: "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
   loop: "{{ acme_domain.subject_alt_name.top_level }}"
-  when: acme_domain.subject_alt_name.top_level is defined
+  when:
+    - acme_domain.subject_alt_name.top_level is defined
+    # only runs if the challenge is run the first time, because then there is challenge_data
+    - challenge['challenge_data'][item] is defined
 
 # split second_level for zone_name and if subdomain is defined add subdomain to relative_name
 - name: Add a new TXT record to the SAN second-level domains
@@ -25,7 +28,10 @@
     records:
       - entry: "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
   loop: "{{ acme_domain.subject_alt_name.second_level }}"
-  when: acme_domain.subject_alt_name.second_level is defined
+  when:
+    - acme_domain.subject_alt_name.second_level is defined
+    # only runs if the challenge is run the first time, because then there is challenge_data
+    - challenge['challenge_data'][item] is defined
 
 - name: Let the challenge be validated and retrieve the cert and intermediate certificate
   community.crypto.acme_certificate:
@@ -54,7 +60,10 @@
     records:
       - entry: "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
   loop: "{{ acme_domain.subject_alt_name.top_level }}"
-  when: acme_domain.subject_alt_name.top_level is defined
+  when:
+    - acme_domain.subject_alt_name.top_level is defined
+    # only runs if the challenge is run the first time, because then there is challenge_data
+    - challenge['challenge_data'][item] is defined
 
 - name: Remove created SAN second-level TXT records to keep DNS zone clean
   azure.azcollection.azure_rm_dnsrecordset:
@@ -67,4 +76,7 @@
     records:
       - entry: "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
   loop: "{{ acme_domain.subject_alt_name.second_level }}"
-  when: acme_domain.subject_alt_name.second_level is defined
+  when:
+    - acme_domain.subject_alt_name.second_level is defined
+    # only runs if the challenge is run the first time, because then there is challenge_data
+    - challenge['challenge_data'][item] is defined
