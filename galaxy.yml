@@ -1,6 +1,6 @@
 namespace: t_systems_mms
 name: acme
-version: 2.3.5
+version: 2.3.6
 readme: README.md
 authors:
   - Sebastian Gumprich <sebastian.gumprich@t-systems.com>
