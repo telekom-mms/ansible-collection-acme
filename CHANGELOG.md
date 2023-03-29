@@ -1,11 +1,20 @@
 # Changelog
 
-## [2.3.5](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.5) (2023-02-22)
+## [2.3.6](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.6) (2023-03-24)
+
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.3.5...2.3.6)
+
+**Merged pull requests:**
+
+- chore\(deps\): update actions/checkout action to v3.5.0 [\#90](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/90) ([renovate[bot]](https://github.com/apps/renovate))
+
+## [2.3.5](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.5) (2023-03-23)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.3.4...2.3.5)
 
 **Merged pull requests:**
 
+- Add Azure blob storage provider [\#89](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/89) ([avalor1](https://github.com/avalor1))
 - update README.md [\#88](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/88) ([beechesII](https://github.com/beechesII))
 - update links to providers [\#86](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/86) ([rndmh3ro](https://github.com/rndmh3ro))
 - chore\(deps\): update actions/checkout action to v3.3.0 [\#84](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/84) ([renovate[bot]](https://github.com/apps/renovate))
