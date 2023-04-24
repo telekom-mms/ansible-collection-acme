@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.3.7](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.7) (2023-04-24)
+
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.3.6...2.3.7)
+
+**Merged pull requests:**
+
+- use reusable workflow [\#80](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/80) ([rndmh3ro](https://github.com/rndmh3ro))
+
 ## [2.3.6](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.6) (2023-03-29)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.3.5...2.3.6)
