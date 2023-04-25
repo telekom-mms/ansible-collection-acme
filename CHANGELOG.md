@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.3.7](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.7) (2023-04-24)
+## [2.3.7](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.7) (2023-04-25)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.3.6...2.3.7)
 
