@@ -6,6 +6,7 @@
 
 **Merged pull requests:**
 
+- chore\(deps\): update actions/checkout action to v3.5.2 [\#92](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/92) ([renovate[bot]](https://github.com/apps/renovate))
 - use reusable workflow [\#80](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/80) ([rndmh3ro](https://github.com/rndmh3ro))
 
 ## [2.3.6](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.6) (2023-03-29)
