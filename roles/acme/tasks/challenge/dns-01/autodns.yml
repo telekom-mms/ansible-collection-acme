@@ -5,37 +5,24 @@
   block:
     - name: Login to autodns # noqa no-handler
       ansible.builtin.uri:
-        url: "https://api.autodns.com/v1/login"
+        url: https://api.autodns.com/v1/login
         method: POST
         body_format: json
-        body:
-          { "context": "4",
-            "user": "{{ acme_dns_user }}",
-            "password": "{{ acme_dns_password }}"
-          }
+        body: { context: "4", user: "{{ acme_dns_user }}", password: "{{ acme_dns_password }}" }
       register: login
 
     - name: Add a new TXT record to the SAN domains
       ansible.builtin.uri:
-        url: "https://api.autodns.com/v1/zone/{{ acme_domain.zone }}/a.ns14.net"
+        url: https://api.autodns.com/v1/zone/{{ acme_domain.zone }}/a.ns14.net
         method: PATCH
         body_format: json
         body:
-          {
-            "origin": "{{ item }}",
-            "resourceRecordsAdd": [
-              {
-                # "remove" '*.' from entry when it occurs. without it it would try to create a
-                # record like _acme-challenge.*.example.com which is not allowed by AutoDNS
-                # see: https://jinja.palletsprojects.com/en/master/templates/#replace
-                # and: https://jbmoelker.github.io/jinja-compat-tests/filters/replace/#pattern
-                "name": "_acme-challenge.{{ item | replace('*.', '') }}",
-                "ttl": 60,
-                "type": "TXT",
-                "value": "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
-              }
-            ]
-          }
+          origin: "{{ item }}"
+          resourceRecordsAdd:
+            - name: _acme-challenge.{{ item | replace('*.', '') }}
+              ttl: 60
+              type: TXT
+              value: "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
         headers:
           Cookie: "{{ login.set_cookie }}"
       loop: "{{ acme_domain.subject_alt_name }}"
@@ -63,21 +50,16 @@
   always:
     - name: Remove created SAN TXT records to keep DNS zone clean
       ansible.builtin.uri:
-        url: "https://api.autodns.com/v1/zone/{{ acme_domain.zone }}/a.ns14.net"
+        url: https://api.autodns.com/v1/zone/{{ acme_domain.zone }}/a.ns14.net
         method: PATCH
         body_format: json
         body:
-          {
-            "origin": "{{ item }}",
-            "resourceRecordsRem": [
-              {
-                "name": "_acme-challenge.{{ item | replace('*.', '') }}",
-                "ttl": 60,
-                "type": "TXT",
-                "value": "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
-              }
-            ]
-          }
+          origin: "{{ item }}"
+          resourceRecordsRem:
+            - name: _acme-challenge.{{ item | replace('*.', '') }}
+              ttl: 60
+              type: TXT
+              value: "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
         headers:
           Cookie: "{{ login.set_cookie }}"
       loop: "{{ acme_domain.subject_alt_name }}"

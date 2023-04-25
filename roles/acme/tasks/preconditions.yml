@@ -4,7 +4,7 @@
     that:
       - acme_challenge_provider is defined
       - acme_challenge_provider != ""
-    fail_msg: "You need to set acme_challenge_provider with a provider. See documentation for a list of possible providers."
+    fail_msg: You need to set acme_challenge_provider with a provider. See documentation for a list of possible providers.
 
 - name: Set fact for acme_directory depending on what is set in acme_use_live_directory
   ansible.builtin.set_fact:
@@ -15,7 +15,7 @@
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
-    mode: 0750
+    mode: "0750"
   loop:
     - "{{ acme_conf_dir }}"
     - "{{ acme_cert_dir }}"
@@ -24,6 +24,6 @@
   ansible.builtin.set_fact:
     acme_provider_path: "{{ item }}"
   with_first_found:
-    - "challenge/dns-01/{{ acme_challenge_provider }}.yml"
-    - "challenge/http-01/{{ acme_challenge_provider }}.yml"
+    - challenge/dns-01/{{ acme_challenge_provider }}.yml
+    - challenge/http-01/{{ acme_challenge_provider }}.yml
     - challenge-unknown.yml
