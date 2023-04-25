@@ -10,7 +10,7 @@
     organization_name: "{{ acme_domain.organization | default(omit) }}"
     organizational_unit_name: "{{ acme_domain.organizational_unit | default(omit) }}"
     common_name: "{{ acme_domain.common_name | default(omit) }}"
-    subject_alt_name: DNS:{{ acme_domain.subject_alt_name | join(',DNS:') }}
+    subject_alt_name: "DNS:{{ acme_domain.subject_alt_name | join(',DNS:') }}"
   when:
     - acme_domain.subject_alt_name.top_level is undefined and acme_domain.subject_alt_name.second_level is undefined
     - '"dns-01" in acme_provider_path'
@@ -26,7 +26,7 @@
     organization_name: "{{ acme_domain.organization | default(omit) }}"
     organizational_unit_name: "{{ acme_domain.organizational_unit | default(omit) }}"
     common_name: "{{ acme_domain.common_name | default(omit) }}"
-    subject_alt_name: DNS:{{ (acme_domain.subject_alt_name.top_level | default([])) | union(acme_domain.subject_alt_name.second_level | default([])) | join(',DNS:') }} # noqa yaml[line-length]
+    subject_alt_name: "DNS:{{ (acme_domain.subject_alt_name.top_level | default([])) | union(acme_domain.subject_alt_name.second_level | default([])) | join(',DNS:') }}"  # noqa yaml[line-length]
   when:
     - acme_domain.subject_alt_name.top_level is defined or acme_domain.subject_alt_name.second_level is defined
     - '"dns-01" in acme_provider_path'
@@ -42,6 +42,6 @@
     organization_name: "{{ acme_domain.organization | default(omit) }}"
     organizational_unit_name: "{{ acme_domain.organizational_unit | default(omit) }}"
     common_name: "{{ acme_domain.common_name | default(omit) }}"
-    subject_alt_name: DNS:{{ acme_domain.subject_alt_name | join(',DNS:') }}
+    subject_alt_name: "DNS:{{ acme_domain.subject_alt_name | join(',DNS:') }}"
   when:
     - '"http-01" in acme_provider_path'

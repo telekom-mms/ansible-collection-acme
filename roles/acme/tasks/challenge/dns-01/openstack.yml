@@ -8,10 +8,10 @@
       project_name: "{{ acme_openstack_project_name }}"
       user_domain_name: "{{ acme_openstack_user_domain }}"
     state: present
-    recordset_type: txt
+    recordset_type: "txt"
     records:
       - "\"{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}\""
-    name: _acme-challenge.{{ item | replace('*.', '') }}.
+    name: "_acme-challenge.{{ item | replace('*.', '') }}."
     zone: "{{ acme_domain.zone }}."
   loop: "{{ acme_domain.subject_alt_name }}"
   register: records
@@ -44,7 +44,7 @@
       project_name: "{{ acme_openstack_project_name }}"
       user_domain_name: "{{ acme_openstack_user_domain }}"
     state: absent
-    name: _acme-challenge.{{ item | replace('*.', '') }}.
+    name: "_acme-challenge.{{ item | replace('*.', '') }}."
     zone: "{{ acme_domain.zone }}."
   loop: "{{ acme_domain.subject_alt_name }}"
   when:

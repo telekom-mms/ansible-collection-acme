@@ -1,17 +1,21 @@
 ---
 ### include/role 3 - validate challenge
-- name: Validate challenge only if it is created or changed # noqa no-handler
+- name: Validate challenge only if it is created or changed  # noqa no-handler
   when: challenge is changed
   block:
     - name: Add a new TXT record to the SAN domains
       ansible.builtin.uri:
-        url: http://localhost:8055/set-txt
+        url: "http://localhost:8055/set-txt"
         method: POST
         body_format: json
         # the dot after the hostname is required
         # crtl-f "Note that a period character is required at the end of the host name here." here:
         # https://github.com/letsencrypt/pebble/blob/master/cmd/pebble-challtestsrv/README.md
-        body: { host: "_acme-challenge.{{ item }}.", value: "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}" }
+        body:
+          {
+            "host": "_acme-challenge.{{ item }}.",
+            "value": "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
+          }
       loop: "{{ acme_domain.subject_alt_name }}"
       when:
         - acme_domain.subject_alt_name is defined

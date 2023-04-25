@@ -8,11 +8,11 @@
     - acme_account_key_content is not defined
   no_log: true
 
-- name: Create account key file from acme_account_key_content-variable # noqa template-instead-of-copy
+- name: Create account key file from acme_account_key_content-variable  # noqa template-instead-of-copy
   ansible.builtin.copy:
     dest: "{{ acme_account_key_path }}"
     content: "{{ acme_account_key_content }}"
-    mode: "0400"
+    mode: 0400
   when:
     - acme_account_key_content is defined
   no_log: true
@@ -24,11 +24,11 @@
     - acme_private_key_content is not defined
   no_log: true
 
-- name: Create private key file from acme_private_key_content-variable # noqa template-instead-of-copy
+- name: Create private key file from acme_private_key_content-variable  # noqa template-instead-of-copy
   ansible.builtin.copy:
     dest: "{{ acme_private_key_path }}"
     content: "{{ acme_private_key_content }}"
-    mode: "0400"
+    mode: 0400
   when:
     - acme_private_key_content is defined
   no_log: true

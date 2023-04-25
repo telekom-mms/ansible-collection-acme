@@ -1,31 +1,31 @@
 ---
-- name: Create a test certificate for hetzner
+- name: create a test certificate for hetzner
   hosts: localhost
+  collections:
+    - t_systems_mms.acme
   roles:
-    - t_systems_mms.acme.acme
+    - acme
   vars:
     acme_challenge_provider: hetzner
     acme_use_live_directory: false
-    acme_account_email: ssl-admin@example.de
+    acme_account_email: "ssl-admin@example.de"
     acme_force_renewal: true
     acme_domain:
-      email_address: ssl-admin@example.de
+      email_address: "ssl-admin@example.de"
       certificate_name: "{{ hetzner_domain_name }}.{{ hetzner_zone }}"
       zone: "{{ hetzner_zone }}"
       subject_alt_name:
         - "{{ hetzner_domain_name }}.{{ hetzner_zone }}"
   post_tasks:
-    - name: Validate certs
+    - name: validate certs
       community.crypto.x509_certificate_info:
         path: "{{ acme_cert_path }}"
       register: result
 
-    - name: Print the certificate
-      ansible.builtin.debug:
+    - debug:
         msg: "{{ result }}"
 
-    - name: Check if the certificate has correct data
-      ansible.builtin.assert:
+    - assert:
         that:
           - result.subject.commonName == "{{ acme_domain.certificate_name }}"
           - "'DNS:{{ acme_domain.certificate_name }}' in result.subject_alt_name"
