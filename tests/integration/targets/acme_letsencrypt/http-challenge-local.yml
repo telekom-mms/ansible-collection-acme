@@ -54,7 +54,7 @@
         msg: "{{ result }}"
 
     # Pebble (the CA software for these tests) does throw away the subject fields, so it is not reasonable to test for them in the final cert.
-    # Nontheless, other CA software processes the subject fields for the final cert, which is why the CSR is tested above for these fields.
+    # Nonetheless, other CA software processes the subject fields for the final cert, which is why the CSR is tested above for these fields.
     - assert:
         that:
           - result.subject.commonName == "example.de"
