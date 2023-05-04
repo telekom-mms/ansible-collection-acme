@@ -1,11 +1,12 @@
 # Changelog
 
-## [2.3.7](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.7) (2023-04-25)
+## [2.3.7](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.7) (2023-05-04)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.3.6...2.3.7)
 
 **Merged pull requests:**
 
+- add spellchecking with codespell [\#94](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/94) ([schurzi](https://github.com/schurzi))
 - chore\(deps\): update actions/checkout action to v3.5.2 [\#92](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/92) ([renovate[bot]](https://github.com/apps/renovate))
 - use reusable workflow [\#80](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/80) ([rndmh3ro](https://github.com/rndmh3ro))
 
