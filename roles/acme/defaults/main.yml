@@ -2,11 +2,11 @@
 ### global
 acme_conf_dir: "{{ lookup('env', 'HOME') }}/letsencrypt"
 acme_cert_dir: "{{ acme_conf_dir }}/certs"
-acme_prerequisites_packagemanager: "yum"
+acme_prerequisites_packagemanager: yum
 
 ### http challenge / dns challenge
-acme_staging_directory: "https://acme-staging-v02.api.letsencrypt.org/directory"
-acme_live_directory: "https://acme-v02.api.letsencrypt.org/directory"
+acme_staging_directory: https://acme-staging-v02.api.letsencrypt.org/directory
+acme_live_directory: https://acme-v02.api.letsencrypt.org/directory
 acme_use_live_directory: false
 acme_account_key_path: "{{ acme_conf_dir }}/letsencrypt_account.pem"
 acme_csr_path: "{{ acme_cert_dir }}/{{ acme_domain.certificate_name }}.csr"
@@ -18,6 +18,6 @@ acme_private_key_path: "{{ acme_cert_dir }}/{{ acme_domain.certificate_name }}.k
 acme_remaining_days: "30"
 
 ### provider specific config
-acme_s3_config_region: "eu-west-1"
-acme_local_validation_path: "/var/www/html"
-acme_azure_purge_state: "absent"
+acme_s3_config_region: eu-west-1
+acme_local_validation_path: /var/www/html
+acme_azure_purge_state: absent

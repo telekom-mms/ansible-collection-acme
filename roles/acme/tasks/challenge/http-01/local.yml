@@ -3,18 +3,18 @@
   ansible.builtin.file:
     path: "{{ acme_local_validation_path }}/.well-known/acme-challenge"
     state: directory
-    mode: 0755
+    mode: "0755"
     owner: "{{ acme_local_validation_path_file_owner | default(omit) }}"
     group: "{{ acme_local_validation_path_file_group | default(omit) }}"
 
-- name: Validate challenge only if it is created or changed  # noqa no-handler
+- name: Validate challenge only if it is created or changed # noqa no-handler
   when: challenge is changed
   block:
-    - name: Create challenge/hash files with SAN domains  # noqa template-instead-of-copy
+    - name: Create challenge/hash files with SAN domains # noqa template-instead-of-copy
       ansible.builtin.copy:
         dest: "{{ acme_local_validation_path }}/{{ challenge['challenge_data'][item]['http-01']['resource'] }}"
         content: "{{ challenge['challenge_data'][item]['http-01']['resource_value'] }}"
-        mode: 0640
+        mode: "0640"
         owner: "{{ acme_local_validation_path_file_owner | default(omit) }}"
         group: "{{ acme_local_validation_path_file_group | default(omit) }}"
       loop: "{{ acme_domain.subject_alt_name }}"
@@ -23,7 +23,7 @@
         # only runs if the challenge is run the first time, because then there is challenge_data
         - challenge['challenge_data'][item] is defined
 
-     # validate certificate
+    # validate certificate
     - name: Let the challenge be validated and retrieve the cert and intermediate certificate
       community.crypto.acme_certificate:
         account_key_src: "{{ acme_account_key_path }}"

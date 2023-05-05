@@ -1,11 +1,11 @@
 ---
 ### include/role 3 - validate challenge
-- name: Validate challenge only if it is created or changed  # noqa no-handler
+- name: Validate challenge only if it is created or changed # noqa no-handler
   when: challenge is changed
   block:
     - name: Add a new TXT record to the SAN domains
       ansible.builtin.uri:
-        url: "http://localhost:8055/set-txt"
+        url: http://localhost:8055/set-txt
         method: POST
         body_format: json
         # the dot after the hostname is required
