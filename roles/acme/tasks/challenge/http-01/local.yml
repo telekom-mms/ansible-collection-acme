@@ -23,7 +23,7 @@
         # only runs if the challenge is run the first time, because then there is challenge_data
         - challenge['challenge_data'][item] is defined
 
-    # validate certficate
+    # validate certificate
     - name: Let the challenge be validated and retrieve the cert and intermediate certificate
       community.crypto.acme_certificate:
         account_key_src: "{{ acme_account_key_path }}"
