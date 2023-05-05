@@ -17,12 +17,21 @@
         method: PATCH
         body_format: json
         body:
-          origin: "{{ item }}"
-          resourceRecordsAdd:
-            - name: _acme-challenge.{{ item | replace('*.', '') }}
-              ttl: 60
-              type: TXT
-              value: "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
+          {
+            "origin": "{{ item }}",
+            "resourceRecordsAdd": [
+              {
+                # "remove" '*.' from entry when it occurs. without it it would try to create a
+                # record like _acme-challenge.*.example.com which is not allowed by AutoDNS
+                # see: https://jinja.palletsprojects.com/en/master/templates/#replace
+                # and: https://jbmoelker.github.io/jinja-compat-tests/filters/replace/#pattern
+                "name": "_acme-challenge.{{ item | replace('*.', '') }}",
+                "ttl": 60,
+                "type": "TXT",
+                "value": "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
+              }
+            ]
+          }
         headers:
           Cookie: "{{ login.set_cookie }}"
       loop: "{{ acme_domain.subject_alt_name }}"
@@ -54,12 +63,17 @@
         method: PATCH
         body_format: json
         body:
-          origin: "{{ item }}"
-          resourceRecordsRem:
-            - name: _acme-challenge.{{ item | replace('*.', '') }}
-              ttl: 60
-              type: TXT
-              value: "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
+          {
+            "origin": "{{ item }}",
+            "resourceRecordsRem": [
+              {
+                "name": "_acme-challenge.{{ item | replace('*.', '') }}",
+                "ttl": 60,
+                "type": "TXT",
+                "value": "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
+              }
+            ]
+          }
         headers:
           Cookie: "{{ login.set_cookie }}"
       loop: "{{ acme_domain.subject_alt_name }}"

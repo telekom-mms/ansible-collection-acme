@@ -15,12 +15,14 @@
         url: https://dns.hetzner.com/api/v1/records
         method: POST
         body_format: json
-        body: # noqa yaml[line-length]
-          name: "{{ '_acme-challenge' }}{{ '' if item | replace('*.', '') == (item.split('.')[-2:] | join('.')) else '.' }}{{ (item | replace('*.', '')).split('.')[:-2] | join('.') }}" # noqa yaml[line-length]
-          ttl: 60
-          type: TXT
-          value: "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
-          zone_id: "{{ lookup_zone_id.json.zones[0].id }}"
+        body:
+          {
+            "name": "{{ '_acme-challenge' }}{{ '' if item | replace('*.', '') == (item.split('.')[-2:] | join('.')) else '.' }}{{ (item | replace('*.', '')).split('.')[:-2] | join('.') }}",
+            "ttl": 60,
+            "type": "TXT",
+            "value": "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}",
+            "zone_id": "{{ lookup_zone_id.json.zones[0].id }}",
+          }
         headers:
           Auth-API-Token: "{{ acme_hetzner_auth_token }}"
       loop: "{{ acme_domain.subject_alt_name }}"
@@ -29,6 +31,9 @@
         - acme_domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
         - challenge['challenge_data'][item] is defined
+      tags:
+        - skip_ansible_lint
+
 
     - name: Wait 20 seconds
       ansible.builtin.pause:
