@@ -3,7 +3,7 @@
 | Variable                    | Required | Default | Description
 |-----------------------------|----------|---------|------------
 | acme_openstack_user_domain  | yes      |         | user domain name like OTC-EU-DE-00000000001000000000
-| acme_openstack_auth_url     | yes      |         | authentification api-url
+| acme_openstack_auth_url     | yes      |         | authentication api-url
 | acme_openstack_project_name | yes      |         | project name
 
 ## Usage
