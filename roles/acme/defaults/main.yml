@@ -9,12 +9,18 @@ acme_staging_directory: https://acme-staging-v02.api.letsencrypt.org/directory
 acme_live_directory: https://acme-v02.api.letsencrypt.org/directory
 acme_use_live_directory: false
 acme_account_key_path: "{{ acme_conf_dir }}/letsencrypt_account.pem"
+acme_account_key_size: "384"
+acme_account_key_type: "ECC"
+acme_account_key_curve: "secp384r1"
 acme_csr_path: "{{ acme_cert_dir }}/{{ acme_domain.certificate_name }}.csr"
 acme_cert_path: "{{ acme_cert_dir }}/{{ acme_domain.certificate_name }}.pem"
 acme_pfx_cert_path: "{{ acme_cert_dir }}/{{ acme_domain.certificate_name }}.pfx"
 acme_intermediate_path: "{{ acme_cert_dir }}/{{ acme_domain.certificate_name }}_intermediate.pem"
 acme_fullchain_path: "{{ acme_cert_dir }}/{{ acme_domain.certificate_name }}_fullchain.pem"
 acme_private_key_path: "{{ acme_cert_dir }}/{{ acme_domain.certificate_name }}.key"
+acme_private_key_size: "384"
+acme_private_key_type: "ECC"
+acme_private_key_curve: "secp384r1"
 acme_remaining_days: "30"
 
 ### provider specific config

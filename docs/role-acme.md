@@ -60,11 +60,15 @@ Feel free to contribute more DNS or HTTP APIs :)
 | acme_staging_directory            | no       | acme-staging-v02.api.letsencrypt.org | Acme directory which will be used for certificate challenge
 | acme_live_directory               | no       | acme-v02.api.letsencrypt.org         | Acme directory which will be used for certificate challenge
 | acme_account_key_path             | no       | $acme_conf_dir                       | Path for account key
+| acme_account_key_size             | no       | 384                                  | Account key size
+| acme_account_key_type             | no       | ECC                                  | Account key type
 | acme_csr_path                     | no       | $acme_conf_dir/certs                 | Path for csr which is created for challenge
 | acme_cert_path                    | no       | $acme_conf_dir/certs                 | Path for issued certificate
 | acme_intermediate_path            | no       | $acme_conf_dir/certs                 | Path for intermediate chain
 | acme_fullchain_path               | no       | $acme_conf_dir/certs                 | Path for full chain file (certificate + intermediate)
 | acme_private_key_path             | no       | $acme_conf_dir/certs                 | Path for private key
+| acme_private_key_size             | no       | 384                                  | Private key size
+| acme_private_key_type             | no       | ECC                                  | Private key type
 | acme_remaining_days               | no       | 30                                   | Min days remaining before certificate will be renewed
 | acme_convert_cert_to              | no       |                                      | Format to convert the certificate to: `pfx`
 | acme_validate_certs               | no       |                                      | Only used in integration tests with pebble server
