@@ -1,8 +1,23 @@
 # Changelog
 
-## [2.3.6](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.6) (2023-03-24)
+## [2.3.7](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.7) (2023-05-05)
+
+[Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.3.6...2.3.7)
+
+**Merged pull requests:**
+
+- add spellchecking with codespell [\#94](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/94) ([schurzi](https://github.com/schurzi))
+- linting with ansible-lint [\#93](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/93) ([rndmh3ro](https://github.com/rndmh3ro))
+- chore\(deps\): update actions/checkout action to v3.5.2 [\#92](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/92) ([renovate[bot]](https://github.com/apps/renovate))
+- use reusable workflow [\#80](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/80) ([rndmh3ro](https://github.com/rndmh3ro))
+
+## [2.3.6](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.6) (2023-03-29)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.3.5...2.3.6)
+
+**Fixed bugs:**
+
+- Fix azure dns challenge bug [\#91](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/91) ([avalor1](https://github.com/avalor1))
 
 **Merged pull requests:**
 

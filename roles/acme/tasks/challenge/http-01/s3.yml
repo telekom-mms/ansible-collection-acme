@@ -7,14 +7,14 @@
     state: present
     use: "{{ acme_prerequisites_packagemanager }}"
 
-- name: Validate challenge only if it is created or changed  # noqa no-handler
+- name: Validate challenge only if it is created or changed # noqa no-handler
   when: challenge is changed
   block:
-    - name: Create challenge file with SAN domain for s3 upload  # noqa template-instead-of-copy
+    - name: Create challenge file with SAN domain for s3 upload # noqa template-instead-of-copy
       ansible.builtin.copy:
-        dest: "acme-challenge.{{ item }}"
+        dest: acme-challenge.{{ item }}
         content: "{{ challenge['challenge_data'][item]['http-01']['resource_value'] }}"
-        mode: 0640
+        mode: "0640"
       loop: "{{ acme_domain.subject_alt_name }}"
       when:
         - acme_domain.subject_alt_name is defined
@@ -27,17 +27,17 @@
         aws_secret_key: "{{ acme_s3_secret_key }}"
         bucket: "{{ acme_s3_bucket_name }}"
         object: "{{ challenge['challenge_data'][item]['http-01']['resource'] }}"
-        src: "acme-challenge.{{ item }}"
-        mode: "put"
+        src: acme-challenge.{{ item }}
+        mode: put
         region: "{{ acme_s3_config_region }}"
-        permission: "public-read"
+        permission: public-read
       loop: "{{ acme_domain.subject_alt_name }}"
       when:
         - acme_domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
         - challenge['challenge_data'][item] is defined
 
-    # validate certficate
+    # validate certificate
     - name: Let the challenge be validated and retrieve the cert and intermediate certificate
       community.crypto.acme_certificate:
         account_key_src: "{{ acme_account_key_path }}"
@@ -60,7 +60,7 @@
         aws_secret_key: "{{ acme_s3_secret_key }}"
         bucket: "{{ acme_s3_bucket_name }}"
         object: "{{ challenge['challenge_data'][item]['http-01']['resource'] }}"
-        mode: "delobj"
+        mode: delobj
         region: "{{ acme_s3_config_region }}"
       loop: "{{ acme_domain.subject_alt_name }}"
       when:
@@ -70,7 +70,7 @@
 
     - name: Remove challenge file for SAN domain from fs
       ansible.builtin.file:
-        dest: "acme-challenge.{{ item }}"
+        dest: acme-challenge.{{ item }}
         state: absent
       loop: "{{ acme_domain.subject_alt_name }}"
       when:

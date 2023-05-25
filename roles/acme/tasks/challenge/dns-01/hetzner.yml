@@ -1,28 +1,29 @@
 ---
 ### include/role 3 - validate challenge
-- name: Validate challenge only if it is created or changed  # noqa no-handler
+- name: Validate challenge only if it is created or changed # noqa no-handler
   when: challenge is changed
   block:
     - name: Lookup the zone_id using the acme_domain.zone
       ansible.builtin.uri:
-        url: "https://dns.hetzner.com/api/v1/zones?name={{ acme_domain.zone }}"
+        url: https://dns.hetzner.com/api/v1/zones?name={{ acme_domain.zone }}
         headers:
           Auth-API-Token: "{{ acme_hetzner_auth_token }}"
       register: lookup_zone_id
 
     - name: Add a new TXT record to the SAN domains
       ansible.builtin.uri:
-        url: "https://dns.hetzner.com/api/v1/records"
+        url: https://dns.hetzner.com/api/v1/records
         method: POST
         body_format: json
         body:
           {
-            "name": "{{ '_acme-challenge' }}{{ '' if item | replace('*.', '') == (item.split('.')[-2:] | join('.')) else '.' }}{{ (item | replace('*.', '')).split('.')[:-2] | join('.') }}",
+            "name": "{{ '_acme-challenge' }}{{ '' if item | replace('*.', '') == (item.split('.')[-2:] | join('.')) else '.' }}\
+                     {{ (item | replace('*.', '')).split('.')[:-2] | join('.') }}",
             "ttl": 60,
             "type": "TXT",
             "value": "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}",
             "zone_id": "{{ lookup_zone_id.json.zones[0].id }}",
-          }  # noqa yaml[line-length]
+          }
         headers:
           Auth-API-Token: "{{ acme_hetzner_auth_token }}"
       loop: "{{ acme_domain.subject_alt_name }}"
@@ -54,7 +55,7 @@
 
     - name: Remove created SAN TXT records to keep DNS zone clean
       ansible.builtin.uri:
-        url: "https://dns.hetzner.com/api/v1/records/{{ item }}"
+        url: https://dns.hetzner.com/api/v1/records/{{ item }}
         method: DELETE
         headers:
           Auth-API-Token: "{{ acme_hetzner_auth_token }}"
