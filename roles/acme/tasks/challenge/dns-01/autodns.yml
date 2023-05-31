@@ -1,7 +1,7 @@
 ---
 ### include/role 3 - validate challenge
 - name: Validate challenge only if it is created or changed
-  when: challenge is changed
+  when: acme_challenge is changed
   block:
     - name: Login to autodns # noqa no-handler
       ansible.builtin.uri:
@@ -9,7 +9,7 @@
         method: POST
         body_format: json
         body: { context: "4", user: "{{ acme_dns_user }}", password: "{{ acme_dns_password }}" }
-      register: login
+      register: acme_login_result
 
     - name: Add a new TXT record to the SAN domains
       ansible.builtin.uri:
@@ -28,17 +28,17 @@
                 "name": "_acme-challenge.{{ item | replace('*.', '') }}",
                 "ttl": 60,
                 "type": "TXT",
-                "value": "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
+                "value": "{{ acme_challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
               }
             ]
           }
         headers:
-          Cookie: "{{ login.set_cookie }}"
+          Cookie: "{{ acme_login.set_cookie }}"
       loop: "{{ acme_domain.subject_alt_name }}"
       when:
         - acme_domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
-        - challenge['challenge_data'][item] is defined
+        - acme_challenge['challenge_data'][item] is defined
 
     - name: Let the challenge be validated and retrieve the cert and intermediate certificate
       community.crypto.acme_certificate:
@@ -54,7 +54,7 @@
         acme_version: 2
         terms_agreed: true
         remaining_days: "{{ acme_remaining_days }}"
-        data: "{{ challenge }}"
+        data: "{{ acme_challenge }}"
 
   always:
     - name: Remove created SAN TXT records to keep DNS zone clean
@@ -70,12 +70,12 @@
                 "name": "_acme-challenge.{{ item | replace('*.', '') }}",
                 "ttl": 60,
                 "type": "TXT",
-                "value": "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
+                "value": "{{ acme_challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
               }
             ]
           }
         headers:
-          Cookie: "{{ login.set_cookie }}"
+          Cookie: "{{ acme_login.set_cookie }}"
       loop: "{{ acme_domain.subject_alt_name }}"
       when:
         - acme_domain.subject_alt_name is defined

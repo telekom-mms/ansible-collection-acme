@@ -8,12 +8,12 @@
     group: "{{ acme_local_validation_path_file_group | default(omit) }}"
 
 - name: Validate challenge only if it is created or changed # noqa no-handler
-  when: challenge is changed
+  when: acme_challenge is changed
   block:
     - name: Create challenge/hash files with SAN domains # noqa template-instead-of-copy
       ansible.builtin.copy:
-        dest: "{{ acme_local_validation_path }}/{{ challenge['challenge_data'][item]['http-01']['resource'] }}"
-        content: "{{ challenge['challenge_data'][item]['http-01']['resource_value'] }}"
+        dest: "{{ acme_local_validation_path }}/{{ acme_challenge['challenge_data'][item]['http-01']['resource'] }}"
+        content: "{{ acme_challenge['challenge_data'][item]['http-01']['resource_value'] }}"
         mode: "0640"
         owner: "{{ acme_local_validation_path_file_owner | default(omit) }}"
         group: "{{ acme_local_validation_path_file_group | default(omit) }}"
@@ -21,7 +21,7 @@
       when:
         - acme_domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
-        - challenge['challenge_data'][item] is defined
+        - acme_challenge['challenge_data'][item] is defined
 
     # validate certificate
     - name: Let the challenge be validated and retrieve the cert and intermediate certificate
@@ -38,15 +38,15 @@
         acme_version: 2
         terms_agreed: true
         remaining_days: "{{ acme_remaining_days }}"
-        data: "{{ challenge }}"
+        data: "{{ acme_challenge }}"
         validate_certs: "{{ acme_validate_certs | default(true) }}"
 
     - name: Remove challenge/hash files for SAN domains from fs
       ansible.builtin.file:
-        dest: "{{ acme_local_validation_path }}/{{ challenge['challenge_data'][item]['http-01']['resource'] }}"
+        dest: "{{ acme_local_validation_path }}/{{ acme_challenge['challenge_data'][item]['http-01']['resource'] }}"
         state: absent
       loop: "{{ acme_domain.subject_alt_name }}"
       when:
         - acme_domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
-        - challenge['challenge_data'][item] is defined
+        - acme_challenge['challenge_data'][item] is defined
