@@ -62,6 +62,7 @@ Feel free to contribute more DNS or HTTP APIs :)
 | acme_account_key_path             | no       | $acme_conf_dir                       | Path for account key
 | acme_account_key_size             | no       | 384                                  | Account key size
 | acme_account_key_type             | no       | ECC                                  | Account key type
+| acme_account_key_curve            | no       | secp384r1                            | Account key curve used
 | acme_csr_path                     | no       | $acme_conf_dir/certs                 | Path for csr which is created for challenge
 | acme_cert_path                    | no       | $acme_conf_dir/certs                 | Path for issued certificate
 | acme_intermediate_path            | no       | $acme_conf_dir/certs                 | Path for intermediate chain
@@ -69,6 +70,7 @@ Feel free to contribute more DNS or HTTP APIs :)
 | acme_private_key_path             | no       | $acme_conf_dir/certs                 | Path for private key
 | acme_private_key_size             | no       | 384                                  | Private key size
 | acme_private_key_type             | no       | ECC                                  | Private key type
+| acme_private_key_curve            | no       | secp384r1                            | Private key curve used
 | acme_remaining_days               | no       | 30                                   | Min days remaining before certificate will be renewed
 | acme_convert_cert_to              | no       |                                      | Format to convert the certificate to: `pfx`
 | acme_validate_certs               | no       |                                      | Only used in integration tests with pebble server
