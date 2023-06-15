@@ -1,11 +1,12 @@
 # Changelog
 
-## [2.3.7](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.7) (2023-06-09)
+## [2.3.7](https://github.com/T-Systems-MMS/ansible-collection-acme/tree/2.3.7) (2023-06-15)
 
 [Full Changelog](https://github.com/T-Systems-MMS/ansible-collection-acme/compare/2.3.6...2.3.7)
 
 **Merged pull requests:**
 
+- run CI-tests only once peer week [\#97](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/97) ([rndmh3ro](https://github.com/rndmh3ro))
 - chore\(deps\): update actions/checkout action to v3.5.3 [\#96](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/96) ([renovate[bot]](https://github.com/apps/renovate))
 - add spellchecking with codespell [\#94](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/94) ([schurzi](https://github.com/schurzi))
 - linting with ansible-lint [\#93](https://github.com/T-Systems-MMS/ansible-collection-acme/pull/93) ([rndmh3ro](https://github.com/rndmh3ro))
