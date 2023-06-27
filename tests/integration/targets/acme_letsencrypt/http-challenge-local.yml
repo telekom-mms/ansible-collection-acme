@@ -2,7 +2,7 @@
 - name: Create the certificate for example.de with http-challenge provider "local"
   hosts: localhost
   roles:
-    - t_systems_mms.acme.acme
+    - telekom_mms.acme.acme
   vars:
     acme_domain:
       certificate_name: http-local.example.de

@@ -14,7 +14,7 @@
 - name: create the certificate for *.example.com
   hosts: localhost
   collections:
-    - t_systems_mms.acme
+    - telekom_mms.acme
   roles:
     - acme
   vars:

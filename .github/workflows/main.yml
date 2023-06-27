@@ -38,7 +38,7 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v3
         with:
-          path: ansible_collections/t_systems_mms/acme
+          path: ansible_collections/telekom_mms/acme
 
       - name: Set up Python ${{ matrix.ansible }}
         uses: actions/setup-python@v4
@@ -54,7 +54,7 @@ jobs:
       # Explicitly specify the version of Python we want to test
       - name: Run sanity tests
         run: ansible-test sanity --docker -v --color --python ${{ matrix.python }}
-        working-directory: ./ansible_collections/t_systems_mms/acme
+        working-directory: ./ansible_collections/telekom_mms/acme
 
   linting:
     name: Ansible Lint
@@ -70,7 +70,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ansible_collections/t_systems_mms/acme
+        working-directory: ansible_collections/telekom_mms/acme
     strategy:
       fail-fast: false
       matrix:
@@ -94,7 +94,7 @@ jobs:
       - name: Check out code to collections-folder, so ansible finds it
         uses: actions/checkout@v3
         with:
-          path: ansible_collections/t_systems_mms/acme
+          path: ansible_collections/telekom_mms/acme
 
       - name: Run Pebble and challtestsrv
         run: curl https://raw.githubusercontent.com/letsencrypt/pebble/master/docker-compose.yml | docker-compose -f - up -d
@@ -129,4 +129,4 @@ jobs:
 
       - name: Run integration tests
         run: ansible-test integration -v --color --retry-on-error --continue-on-error --diff --python ${{ matrix.python }} --requirements
-        working-directory: ./ansible_collections/t_systems_mms/acme
+        working-directory: ./ansible_collections/telekom_mms/acme
