@@ -6,7 +6,7 @@ For example, if you are working in the `~/dev` directory:
 
 ```
 cd ~/dev
-git clone https://github.com/T-Systems-MMS/ansible-collection-acme collections/ansible_collections/telekom_mms/acme
+git clone https://github.com/telekom-mms/ansible-collection-acme collections/ansible_collections/telekom_mms/acme
 export COLLECTIONS_PATH=$(pwd)/collections:$COLLECTIONS_PATH
 ```
 
