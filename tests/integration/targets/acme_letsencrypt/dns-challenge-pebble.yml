@@ -2,7 +2,7 @@
 - name: Create the certificate for example.com with dns-challenge provider "pebble"
   hosts: localhost
   roles:
-    - telekom-mms.acme.acme
+    - telekom-mms.acme
   vars:
     acme_domain:
       certificate_name: dns-pebble.example.com
