@@ -1,5 +1,5 @@
 ---
-namespace: telekom-mms
+namespace: telekom_mms
 name: acme
 version: 2.3.6
 readme: README.md

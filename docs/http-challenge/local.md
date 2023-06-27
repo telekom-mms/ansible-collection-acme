@@ -16,7 +16,7 @@ Make sure that the validation-/ hashfile(s) is/are reachable by your configured 
 - name: create the certificate for example.com
   hosts: localhost
   collections:
-    - telekom-mms.acme
+    - telekom_mms.acme
   roles:
     - acme
   vars:

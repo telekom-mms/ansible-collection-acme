@@ -1,9 +1,9 @@
 ---
 collections:
-  - telekom-mms.acme
+  - telekom_mms.acme
 galaxy_info:
   role_name: acme
-  author: telekom-mms
+  author: telekom_mms
   description: Issue certificates via the ACME protocol via dns- or http-challenge. By default the API of Let's Encrypts gets used.
   license: GPLv3
   min_ansible_version: "2.9"

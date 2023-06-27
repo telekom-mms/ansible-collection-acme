@@ -13,7 +13,7 @@ This is also done for the provider of the local http-challenge.
 - name: create the certificate for example.com with dns-challenge provider "pebble"
   hosts: localhost
   collections:
-    - telekom-mms.acme
+    - telekom_mms.acme
   roles:
     - acme
   vars:

@@ -12,7 +12,7 @@ These modules are distributed as [collections](https://docs.ansible.com/ansible/
 To install them, run:
 
 ```bash
-ansible-galaxy collection install telekom-mms.acme
+ansible-galaxy collection install telekom_mms.acme
 ```
 
 Alternatively put the collection into a `requirements.yml`-file:
@@ -20,7 +20,7 @@ Alternatively put the collection into a `requirements.yml`-file:
 ```yaml
 ---
 collections:
-- telekom-mms.acme
+- telekom_mms.acme
 ```
 
 ## Usage
