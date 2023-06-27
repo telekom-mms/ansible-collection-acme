@@ -2,7 +2,7 @@
 - name: Create a test certificate for hetzner
   hosts: localhost
   roles:
-    - telekom-mms.acme
+    - telekom-mms.acme.acme
   vars:
     acme_challenge_provider: hetzner
     acme_use_live_directory: false
