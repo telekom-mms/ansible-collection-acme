@@ -1,9 +1,10 @@
 ---
-- name: Create RSA key to be used for acme account
+- name: Create key to be used for acme account
   community.crypto.openssl_privatekey:
     path: "{{ acme_account_key_path }}"
-    size: 4096
-    type: RSA
+    size: "{{ acme_account_key_size }}"
+    type: "{{ acme_account_key_type }}"
+    curve: "{{ acme_account_key_curve }}"
   when:
     - acme_account_key_content is not defined
   no_log: true
@@ -17,9 +18,12 @@
     - acme_account_key_content is defined
   no_log: true
 
-- name: Create RSA key to be used for certificate
+- name: Create key to be used for certificate
   community.crypto.openssl_privatekey:
     path: "{{ acme_private_key_path }}"
+    size: "{{ acme_private_key_size }}"
+    type: "{{ acme_private_key_type }}"
+    curve: "{{ acme_private_key_curve }}"
   when:
     - acme_private_key_content is not defined
   no_log: true
