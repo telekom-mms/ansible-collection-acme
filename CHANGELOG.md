@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.0.1](https://github.com/telekom-mms/ansible-collection-acme/tree/3.0.1) (2023-07-04)
+
+[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/3.0.0...3.0.1)
+
+**Merged pull requests:**
+
+- rename challenge-var to include role\_prefix [\#99](https://github.com/telekom-mms/ansible-collection-acme/pull/99) ([rndmh3ro](https://github.com/rndmh3ro))
+
 ## [3.0.0](https://github.com/telekom-mms/ansible-collection-acme/tree/3.0.0) (2023-06-27)
 
 [Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/2.3.6...3.0.0)
