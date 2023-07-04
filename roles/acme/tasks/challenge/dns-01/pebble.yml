@@ -1,7 +1,7 @@
 ---
 ### include/role 3 - validate challenge
 - name: Validate challenge only if it is created or changed # noqa no-handler
-  when: challenge is changed
+  when: acme_challenge is changed
   block:
     - name: Add a new TXT record to the SAN domains
       ansible.builtin.uri:
@@ -14,13 +14,13 @@
         body:
           {
             "host": "_acme-challenge.{{ item }}.",
-            "value": "{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
+            "value": "{{ acme_challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
           }
       loop: "{{ acme_domain.subject_alt_name }}"
       when:
         - acme_domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
-        - challenge['challenge_data'][item] is defined
+        - acme_challenge['challenge_data'][item] is defined
 
     - name: Let the challenge be validated and retrieve the cert and intermediate certificate
       community.crypto.acme_certificate:
@@ -36,5 +36,5 @@
         acme_version: 2
         terms_agreed: true
         remaining_days: "{{ acme_remaining_days }}"
-        data: "{{ challenge }}"
+        data: "{{ acme_challenge }}"
         validate_certs: "{{ acme_validate_certs | default(true) }}"

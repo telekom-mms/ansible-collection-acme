@@ -10,14 +10,14 @@
     state: present
     recordset_type: txt
     records:
-      - "\"{{ challenge['challenge_data'][item]['dns-01']['resource_value'] }}\""
+      - "\"{{ acme_challenge['challenge_data'][item]['dns-01']['resource_value'] }}\""
     name: _acme-challenge.{{ item | replace('*.', '') }}.
     zone: "{{ acme_domain.zone }}."
   loop: "{{ acme_domain.subject_alt_name }}"
   register: records
   when:
     - acme_domain.subject_alt_name is defined
-    - challenge['challenge_data'][item] is defined
+    - acme_challenge['challenge_data'][item] is defined
 
 - name: Let the challenge be validated and retrieve the cert and intermediate certificate
   community.crypto.acme_certificate:
@@ -33,7 +33,7 @@
     acme_version: 2
     terms_agreed: true
     remaining_days: "{{ acme_remaining_days }}"
-    data: "{{ challenge }}"
+    data: "{{ acme_challenge }}"
 
 - name: Remove TXT records from DNS zone
   openstack.cloud.recordset:
@@ -49,4 +49,4 @@
   loop: "{{ acme_domain.subject_alt_name }}"
   when:
     - acme_domain.subject_alt_name is defined
-    - challenge['challenge_data'][item] is defined
+    - acme_challenge['challenge_data'][item] is defined
