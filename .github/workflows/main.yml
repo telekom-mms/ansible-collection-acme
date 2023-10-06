@@ -39,7 +39,7 @@ jobs:
       # .../ansible_collections/NAMESPACE/COLLECTION_NAME/
 
       - name: Check out code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: ansible_collections/telekom_mms/acme
 
@@ -64,7 +64,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Run Linting
         uses: ansible/ansible-lint-action@main
@@ -117,7 +117,7 @@ jobs:
 
     steps:
       - name: Check out code to collections-folder, so ansible finds it
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: ansible_collections/telekom_mms/acme
 
