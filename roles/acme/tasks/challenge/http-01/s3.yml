@@ -6,6 +6,8 @@
       - python-boto3
     state: present
     use: "{{ acme_prerequisites_packagemanager }}"
+  when:
+    - acme_s3_install_prerequisites | bool
 
 - name: Validate challenge only if it is created or changed # noqa no-handler
   when: acme_challenge is changed
