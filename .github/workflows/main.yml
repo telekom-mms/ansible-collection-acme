@@ -44,7 +44,7 @@ jobs:
           path: ansible_collections/telekom_mms/acme
 
       - name: Set up Python ${{ matrix.ansible }}
-        uses: actions/setup-python@65d7f2d534ac1bc67fcd62888c5f4f3d2cb2b236 # v4
+        uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c # v5
         with:
           python-version: ${{ matrix.python }}
 
@@ -136,7 +136,7 @@ jobs:
         run: docker restart ${{ job.services.nginx.id }}
 
       - name: Set up Python ${{ matrix.ansible }}
-        uses: actions/setup-python@65d7f2d534ac1bc67fcd62888c5f4f3d2cb2b236 # v4
+        uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c # v5
         with:
           python-version: ${{ matrix.python }}
 
