@@ -25,8 +25,8 @@
 
     - name: Upload challenge file for SAN domain to s3 bucket
       amazon.aws.s3_object:
-        aws_access_key: "{{ acme_s3_access_key }}"
-        aws_secret_key: "{{ acme_s3_secret_key }}"
+        access_key: "{{ acme_s3_access_key }}"
+        secret_key: "{{ acme_s3_secret_key }}"
         bucket: "{{ acme_s3_bucket_name }}"
         object: "{{ acme_challenge['challenge_data'][item]['http-01']['resource'] }}"
         src: acme-challenge.{{ item }}
@@ -58,8 +58,8 @@
 
     - name: Remove challenge file for SAN domain from s3 bucket
       amazon.aws.s3_object:
-        aws_access_key: "{{ acme_s3_access_key }}"
-        aws_secret_key: "{{ acme_s3_secret_key }}"
+        access_key: "{{ acme_s3_access_key }}"
+        secret_key: "{{ acme_s3_secret_key }}"
         bucket: "{{ acme_s3_bucket_name }}"
         object: "{{ acme_challenge['challenge_data'][item]['http-01']['resource'] }}"
         mode: delobj

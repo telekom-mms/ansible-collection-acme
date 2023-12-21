@@ -1,20 +1,32 @@
 ---
 - name: Preconditions
-  ansible.builtin.include_tasks: preconditions.yml
+  ansible.builtin.include_tasks:
+    file: preconditions.yml
+
+- name: Download Certificate from https
+  ansible.builtin.include_tasks:
+    file: download_cert.yml
+  when:
+    - acme_download_cert
 
 - name: Run key generation
-  ansible.builtin.include_tasks: create-keys.yml
+  ansible.builtin.include_tasks:
+    file: create-keys.yml
 
 - name: Create csr
-  ansible.builtin.include_tasks: create-csr.yml
+  ansible.builtin.include_tasks:
+    file: create-csr.yml
 
 - name: Create challenge
-  ansible.builtin.include_tasks: create-challenge.yml
+  ansible.builtin.include_tasks:
+    file: create-challenge.yml
 
 - name: Do challenge with provider {{ acme_challenge_provider }}
-  ansible.builtin.include_tasks: "{{ acme_provider_path }}"
+  ansible.builtin.include_tasks:
+    file: "{{ acme_provider_path }}"
 
 - name: Convert certificate
-  ansible.builtin.include_tasks: convert_certificate.yml
+  ansible.builtin.include_tasks:
+    file: convert_certificate.yml
   when:
     - acme_convert_cert_to is defined
