@@ -1,11 +1,23 @@
 # Changelog
 
-## [3.0.1](https://github.com/telekom-mms/ansible-collection-acme/tree/3.0.1) (2023-08-09)
+## [3.0.2](https://github.com/telekom-mms/ansible-collection-acme/tree/3.0.2) (2023-12-01)
+
+[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/3.0.1...3.0.2)
+
+## [3.0.1](https://github.com/telekom-mms/ansible-collection-acme/tree/3.0.1) (2023-12-01)
 
 [Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/3.0.0...3.0.1)
 
 **Merged pull requests:**
 
+- allow to skip installation of prerequisites [\#108](https://github.com/telekom-mms/ansible-collection-acme/pull/108) ([beechesII](https://github.com/beechesII))
+- chore\(deps\): update nginx docker digest to 10d1f5b [\#107](https://github.com/telekom-mms/ansible-collection-acme/pull/107) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update nginx docker digest to ad90e20 [\#106](https://github.com/telekom-mms/ansible-collection-acme/pull/106) ([renovate[bot]](https://github.com/apps/renovate))
+- use shared release workflow [\#105](https://github.com/telekom-mms/ansible-collection-acme/pull/105) ([rndmh3ro](https://github.com/rndmh3ro))
+- chore\(deps\): pin dependencies [\#104](https://github.com/telekom-mms/ansible-collection-acme/pull/104) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update actions/checkout action to v4.1.1 [\#103](https://github.com/telekom-mms/ansible-collection-acme/pull/103) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update actions/checkout action to v4 [\#102](https://github.com/telekom-mms/ansible-collection-acme/pull/102) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update actions/checkout action to v3.6.0 [\#101](https://github.com/telekom-mms/ansible-collection-acme/pull/101) ([renovate[bot]](https://github.com/apps/renovate))
 - update test matrix and do not ansible-lint .github [\#100](https://github.com/telekom-mms/ansible-collection-acme/pull/100) ([rndmh3ro](https://github.com/rndmh3ro))
 - rename challenge-var to include role\_prefix [\#99](https://github.com/telekom-mms/ansible-collection-acme/pull/99) ([rndmh3ro](https://github.com/rndmh3ro))
 
