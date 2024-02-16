@@ -109,7 +109,7 @@ jobs:
     # start nginx as service to test validation via http-challenge local path
     services:
       nginx:
-        image: nginx@sha256:84c52dfd55c467e12ef85cad6a252c0990564f03c4850799bf41dd738738691f
+        image: nginx@sha256:c26ae7472d624ba1fafd296e73cecc4f93f853088e6a9c13c0d52f6ca5865107
         volumes:
           - /tmp:/usr/share/nginx/html
         ports:
