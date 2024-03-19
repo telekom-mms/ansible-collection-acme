@@ -1,0 +1,32 @@
+---
+- name: Create a test certificate for domain-offensive
+  hosts: localhost
+  roles:
+    - ../../../../roles/acme
+  vars:
+    acme_challenge_provider: domain-offensive
+    acme_use_live_directory: false
+    acme_account_email: ssl-admin@example.de
+    acme_force_renewal: true
+    acme_domain:
+      email_address: ssl-admin@example.de
+      certificate_name: "{{ domain_offensive_zone }}"
+      zone: "{{ domain_offensive_zone }}"
+      subject_alt_name:
+        - "{{ domain_offensive_domain_name }}"
+  post_tasks:
+    - name: Validate certs
+      community.crypto.x509_certificate_info:
+        path: "{{ acme_cert_path }}"
+      register: result
+
+    - name: Print the certificate
+      ansible.builtin.debug:
+        msg: "{{ result }}"
+
+    - name: Check if the certificate has correct data
+      ansible.builtin.assert:
+        that:
+          - result.subject.commonName == "{{ acme_domain.certificate_name }}"
+          - "'DNS:{{ acme_domain.certificate_name }}' in result.subject_alt_name"
+          - "'(STAGING) Artificial Apricot R3' in result.issuer.commonName"
