@@ -2,7 +2,7 @@
 - name: Create a test certificate for domain-offensive
   hosts: localhost
   roles:
-    - ../../../../roles/acme
+    - telekom_mms.acme.acme
   vars:
     acme_challenge_provider: domain-offensive
     acme_use_live_directory: false
