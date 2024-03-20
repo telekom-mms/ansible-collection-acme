@@ -1,0 +1,53 @@
+---
+### include/role 3 - validate challenge
+- name: Validate challenge only if it is created or changed # noqa no-handler
+  when: acme_challenge is changed
+  block:
+    - name: Add a new TXT record to the SAN domains
+      ansible.builtin.uri:
+        url: "https://my.do.de/api/letsencrypt"
+        body_format: form-multipart
+        body:
+          token: "{{ acme_dns_password }}"
+          domain: "_acme-challenge.{{ item | replace('*.', '') }}"
+          value: "{{ acme_challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
+          ttl: "120"
+        method: POST
+      loop: "{{ acme_domain.subject_alt_name }}"
+      when:
+        - acme_domain.subject_alt_name is defined
+        # only runs if the challenge is run the first time, because then there is challenge_data
+        - acme_challenge['challenge_data'][item] is defined
+
+    - name: Let the challenge be validated and retrieve the cert and intermediate certificate
+      community.crypto.acme_certificate:
+        account_key_src: "{{ acme_account_key_path }}"
+        account_email: "{{ acme_account_email }}"
+        csr: "{{ acme_csr_path }}"
+        cert: "{{ acme_cert_path }}"
+        fullchain: "{{ acme_fullchain_path }}"
+        chain: "{{ acme_intermediate_path }}"
+        challenge: dns-01
+        force: "{{ acme_force_renewal | default(false) }}"
+        acme_directory: "{{ acme_directory }}"
+        acme_version: 2
+        terms_agreed: true
+        remaining_days: "{{ acme_remaining_days }}"
+        data: "{{ acme_challenge }}"
+
+  always:
+    - name: Remove created SAN TXT records to keep DNS zone clean
+      ansible.builtin.uri:
+        url: "https://my.do.de/api/letsencrypt"
+        body_format: form-multipart
+        body:
+          token: "{{ acme_dns_password }}"
+          domain: "_acme-challenge.{{ item | replace('*.', '') }}"
+          value: "{{ acme_challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
+          action: delete
+        method: POST
+      loop: "{{ acme_domain.subject_alt_name }}"
+      when:
+        - acme_domain.subject_alt_name is defined
+        # only runs if the challenge is run the first time, because then there is challenge_data
+        - acme_challenge['challenge_data'][item] is defined
