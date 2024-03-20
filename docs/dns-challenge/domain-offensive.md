@@ -2,7 +2,7 @@
 
 | Variable                | Required | Default | Description
 |-------------------------|----------|---------|------------
-| acme_dns_password       | yes      |         | Let`s Encrypt API-Token, you can get here: [do.de](https://my.do.de/settings/domains/general)
+| acme_dns_password       | yes      |         | Let's Encrypt API-Token, you can get here: [do.de](https://my.do.de/settings/domains/general)
 
 ## Usage
 
