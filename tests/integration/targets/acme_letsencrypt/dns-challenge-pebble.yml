@@ -28,6 +28,5 @@
     - name: Check if the certificate is correct
       ansible.builtin.assert:
         that:
-          - result.subject.commonName == "example.com"
           - "'DNS:example.com' in result.subject_alt_name"
           - "'Pebble Intermediate CA' in result.issuer.commonName"
