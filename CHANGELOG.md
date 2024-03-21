@@ -1,12 +1,33 @@
 # Changelog
 
-## [3.0.2](https://github.com/telekom-mms/ansible-collection-acme/tree/3.0.2) (2023-12-01)
+## [3.1.0](https://github.com/telekom-mms/ansible-collection-acme/tree/3.1.0) (2024-03-20)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/3.0.1...3.0.2)
+[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/3.0.1...3.1.0)
+
+**Merged pull requests:**
+
+- commonName is deprecated [\#123](https://github.com/telekom-mms/ansible-collection-acme/pull/123) ([rndmh3ro](https://github.com/rndmh3ro))
+- Add domain-offensive as dns-01 challenge [\#122](https://github.com/telekom-mms/ansible-collection-acme/pull/122) ([SvenLie](https://github.com/SvenLie))
+- chore\(deps\): update nginx docker digest to c26ae74 [\#120](https://github.com/telekom-mms/ansible-collection-acme/pull/120) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update nginx docker digest to 84c52df [\#119](https://github.com/telekom-mms/ansible-collection-acme/pull/119) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update nginx docker digest to 5f44022 [\#118](https://github.com/telekom-mms/ansible-collection-acme/pull/118) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update nginx docker digest to 6eb9534 [\#117](https://github.com/telekom-mms/ansible-collection-acme/pull/117) ([renovate[bot]](https://github.com/apps/renovate))
+- rename master branch to main [\#116](https://github.com/telekom-mms/ansible-collection-acme/pull/116) ([rndmh3ro](https://github.com/rndmh3ro))
+- chore\(deps\): update nginx docker digest to 4c0fdaa [\#115](https://github.com/telekom-mms/ansible-collection-acme/pull/115) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update nginx docker digest to 2bdc49f [\#114](https://github.com/telekom-mms/ansible-collection-acme/pull/114) ([renovate[bot]](https://github.com/apps/renovate))
+- release only on releases, not pre-releases [\#113](https://github.com/telekom-mms/ansible-collection-acme/pull/113) ([rndmh3ro](https://github.com/rndmh3ro))
+- Add Readme for Certificate Download [\#112](https://github.com/telekom-mms/ansible-collection-acme/pull/112) ([z-bsod](https://github.com/z-bsod))
+- feat: add certificate download for temporary environments [\#111](https://github.com/telekom-mms/ansible-collection-acme/pull/111) ([z-bsod](https://github.com/z-bsod))
+- chore\(deps\): update nginx docker digest to 5040a25 [\#110](https://github.com/telekom-mms/ansible-collection-acme/pull/110) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update actions/setup-python action to v5 [\#109](https://github.com/telekom-mms/ansible-collection-acme/pull/109) ([renovate[bot]](https://github.com/apps/renovate))
 
 ## [3.0.1](https://github.com/telekom-mms/ansible-collection-acme/tree/3.0.1) (2023-12-01)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/3.0.0...3.0.1)
+[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/3.0.2...3.0.1)
+
+## [3.0.2](https://github.com/telekom-mms/ansible-collection-acme/tree/3.0.2) (2023-12-01)
+
+[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/3.0.0...3.0.2)
 
 **Merged pull requests:**
 
