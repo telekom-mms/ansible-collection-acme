@@ -1,13 +1,15 @@
----
 name: Publish collection to Ansible Galaxy
 
 on:
   release:
     types:
+      # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#release
       - released
 
 jobs:
   deploy:
+    # docs: https://github.com/telekom-mms/.github#publish-collection-to-ansible-galaxy
     uses: telekom-mms/.github/.github/workflows/ansible-galaxy-publish.yml@main
     secrets:
       GALAXY_API_KEY: ${{ secrets.GALAXY_API_KEY }}
+      GH_APP_CREDENTIALS_TOKEN: ${{ secrets.GH_APP_CREDENTIALS_TOKEN }}
