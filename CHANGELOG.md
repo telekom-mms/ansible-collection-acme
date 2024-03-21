@@ -1,8 +1,17 @@
 # Changelog
 
+## [3.1.1](https://github.com/telekom-mms/ansible-collection-acme/tree/3.1.1) (2024-03-21)
+
+[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/3.1.0...3.1.1)
+
+**Merged pull requests:**
+
+- Update galaxy.yml [\#124](https://github.com/telekom-mms/ansible-collection-acme/pull/124) ([rndmh3ro](https://github.com/rndmh3ro))
+- chore\(deps\): update nginx docker digest to 6db391d [\#121](https://github.com/telekom-mms/ansible-collection-acme/pull/121) ([renovate[bot]](https://github.com/apps/renovate))
+
 ## [3.1.0](https://github.com/telekom-mms/ansible-collection-acme/tree/3.1.0) (2024-03-20)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/3.0.1...3.1.0)
+[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/3.0.2...3.1.0)
 
 **Merged pull requests:**
 
@@ -21,13 +30,13 @@
 - chore\(deps\): update nginx docker digest to 5040a25 [\#110](https://github.com/telekom-mms/ansible-collection-acme/pull/110) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update actions/setup-python action to v5 [\#109](https://github.com/telekom-mms/ansible-collection-acme/pull/109) ([renovate[bot]](https://github.com/apps/renovate))
 
-## [3.0.1](https://github.com/telekom-mms/ansible-collection-acme/tree/3.0.1) (2023-12-01)
-
-[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/3.0.2...3.0.1)
-
 ## [3.0.2](https://github.com/telekom-mms/ansible-collection-acme/tree/3.0.2) (2023-12-01)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/3.0.0...3.0.2)
+[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/3.0.1...3.0.2)
+
+## [3.0.1](https://github.com/telekom-mms/ansible-collection-acme/tree/3.0.1) (2023-12-01)
+
+[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/3.0.0...3.0.1)
 
 **Merged pull requests:**
 
