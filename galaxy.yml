@@ -7,7 +7,8 @@ authors:
   - Sebastian Gumprich <sebastian.gumprich@telekom.de>
   - Andreas Hering <andreas.hering@telekom.de>
 description: >-
-  This collection contains a role for issuing ssl certificates via the ACME protocol. By default Let's Encrypt certificates are issued but it is also possible to use other certificate authorities which implement the ACME protocol.
+  This collection contains a role for issuing ssl certificates via the ACME protocol.
+  By default Let's Encrypt certificates are issued but it is also possible to use other certificate authorities which implement the ACME protocol.
 license:
   - GPL-2.0-or-later
 license_file: ""
