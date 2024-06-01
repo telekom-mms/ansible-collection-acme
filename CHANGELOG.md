@@ -1,5 +1,22 @@
 # Changelog
 
+## [3.1.3](https://github.com/telekom-mms/ansible-collection-acme/tree/3.1.3) (2024-06-01)
+
+[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/3.1.2...3.1.3)
+
+**Merged pull requests:**
+
+- chore\(deps\): update nginx docker digest to 0f04e4f [\#134](https://github.com/telekom-mms/ansible-collection-acme/pull/134) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update actions/checkout digest to a5ac7e5 [\#133](https://github.com/telekom-mms/ansible-collection-acme/pull/133) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update nginx docker digest to a484819 [\#132](https://github.com/telekom-mms/ansible-collection-acme/pull/132) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update nginx docker digest to 32e76d4 [\#131](https://github.com/telekom-mms/ansible-collection-acme/pull/131) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update actions/checkout digest to 0ad4b8f [\#130](https://github.com/telekom-mms/ansible-collection-acme/pull/130) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update nginx docker digest to ed6d2c4 [\#129](https://github.com/telekom-mms/ansible-collection-acme/pull/129) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update actions/checkout digest to 1d96c77 [\#128](https://github.com/telekom-mms/ansible-collection-acme/pull/128) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update nginx docker digest to 0463a96 [\#127](https://github.com/telekom-mms/ansible-collection-acme/pull/127) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update nginx docker digest to 9ff236e [\#126](https://github.com/telekom-mms/ansible-collection-acme/pull/126) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update actions/setup-python digest to 82c7e63 [\#125](https://github.com/telekom-mms/ansible-collection-acme/pull/125) ([renovate[bot]](https://github.com/apps/renovate))
+
 ## [3.1.2](https://github.com/telekom-mms/ansible-collection-acme/tree/3.1.2) (2024-03-21)
 
 [Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/3.1.1...3.1.2)
