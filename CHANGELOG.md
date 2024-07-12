@@ -8,6 +8,7 @@
 
 - Update test matrix [\#140](https://github.com/telekom-mms/ansible-collection-acme/pull/140) ([avalor1](https://github.com/avalor1))
 - chore\(deps\): update actions/setup-python digest to 39cd149 [\#139](https://github.com/telekom-mms/ansible-collection-acme/pull/139) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update nginx docker digest to 67682bd [\#138](https://github.com/telekom-mms/ansible-collection-acme/pull/138) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update nginx docker digest to 9c36718 [\#137](https://github.com/telekom-mms/ansible-collection-acme/pull/137) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update nginx docker digest to 56b388b [\#136](https://github.com/telekom-mms/ansible-collection-acme/pull/136) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update actions/checkout digest to 692973e [\#135](https://github.com/telekom-mms/ansible-collection-acme/pull/135) ([renovate[bot]](https://github.com/apps/renovate))
