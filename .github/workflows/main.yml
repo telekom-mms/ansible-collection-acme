@@ -30,7 +30,6 @@ jobs:
           - devel
         python:
           - "3.11"
-          - "3.12"
     runs-on: >-
       ${{ contains(fromJson(
           '["stable-2.9", "stable-2.10", "stable-2.11"]'
@@ -82,7 +81,6 @@ jobs:
           - devel
         # - milestone
         python:
-          - '3.10'
           - '3.11'
           - '3.12'
         include:
