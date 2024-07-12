@@ -24,12 +24,12 @@ jobs:
         ansible:
           # It's important that Sanity is tested against all stable-X.Y branches
           # Testing against `devel` may fail as new tests are added.
-          - stable-2.13
-          - stable-2.14
           - stable-2.15
+          - stable-2.16
+          - stable-2.17
           - devel
         python:
-          - "3.10"
+          - "3.11"
     runs-on: >-
       ${{ contains(fromJson(
           '["stable-2.9", "stable-2.10", "stable-2.11"]'
@@ -81,24 +81,12 @@ jobs:
           - devel
         # - milestone
         python:
-          - '3.10'
           - '3.11'
+          - '3.12'
         include:
           # Add new versions announced in
           # https://github.com/ansible-collections/news-for-maintainers in a timely manner,
           # consider dropping testing against EOL versions and versions you don't support.
-          # ansible-core 2.13
-          - ansible: stable-2.13
-            python: '3.9'
-          - ansible: stable-2.13
-            python: '3.10'
-          # ansible-core 2.14
-          - ansible: stable-2.14
-            python: '3.9'
-          - ansible: stable-2.14
-            python: '3.10'
-          - ansible: stable-2.14
-            python: '3.11'
           # ansible-core 2.15
           - ansible: stable-2.15
             python: '3.9'
@@ -106,6 +94,20 @@ jobs:
             python: '3.10'
           - ansible: stable-2.15
             python: '3.11'
+          # ansible-core 2.16
+          - ansible: stable-2.16
+            python: '3.10'
+          - ansible: stable-2.16
+            python: '3.11'
+          - ansible: stable-2.16
+            python: '3.12'
+          # ansible-core 2.17
+          - ansible: stable-2.17
+            python: '3.10'
+          - ansible: stable-2.17
+            python: '3.11'
+          - ansible: stable-2.17
+            python: '3.12'
     # start nginx as service to test validation via http-challenge local path
     services:
       nginx:
