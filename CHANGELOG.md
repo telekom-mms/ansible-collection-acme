@@ -1,8 +1,16 @@
 # Changelog
 
-## [3.1.3](https://github.com/telekom-mms/ansible-collection-acme/tree/3.1.3) (2024-07-12)
+## [4.0.0](https://github.com/telekom-mms/ansible-collection-acme/tree/4.0.0) (2024-07-22)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/3.1.2...3.1.3)
+[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/3.1.2...4.0.0)
+
+**Breaking changes:**
+
+- Add ECC key creation support [\#95](https://github.com/telekom-mms/ansible-collection-acme/pull/95) ([avalor1](https://github.com/avalor1))
+
+**Implemented enhancements:**
+
+- \[Enhancement\] Support creating ECC Keys [\#87](https://github.com/telekom-mms/ansible-collection-acme/issues/87)
 
 **Merged pull requests:**
 
