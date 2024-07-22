@@ -1,6 +1,8 @@
-# Variables for AutoDNS dns-challenge
+# Variables for Domain Offensive dns-challenge
 
-None
+| Variable                | Required | Default | Description
+|-------------------------|----------|---------|------------
+| acme_dns_password       | yes      |         | Let's Encrypt API-Token, you can get here: [do.de](https://my.do.de/settings/domains/general)
 
 ## Usage
 
@@ -20,10 +22,9 @@ None
       email_address: "ssl-admin@example.com"
       subject_alt_name:
         - "*.example.com"
-    acme_challenge_provider: autodns
+    acme_challenge_provider: domain-offensive
     acme_use_live_directory: false
     acme_account_email: "ssl-admin@example.com"
-    acme_dns_user: "example_dns"
     acme_dns_password: !vault |
               $ANSIBLE_VAULT;1.1;AES256
               ...
@@ -47,10 +48,9 @@ None
         - "example.com"
         - "domain1.example.com"
         - "domain2.example.com"
-    acme_challenge_provider: autodns
+    acme_challenge_provider: domain-offensive
     acme_use_live_directory: false
     acme_account_email: "ssl-admin@example.com"
-    acme_dns_user: "example_dns"
     acme_dns_password: !vault |
               $ANSIBLE_VAULT;1.1;AES256
               ...

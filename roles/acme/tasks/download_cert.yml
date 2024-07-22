@@ -1,0 +1,13 @@
+---
+- name: Fetch current certificate from https server
+  community.crypto.get_certificate:
+    host: "{{ acme_cert_download_host | default(acme_domain.subject_alt_name[0]) }}"
+    port: "{{ acme_cert_download_port | default('443') }}"
+    server_name: "{{ acme_cert_san_name | default(acme_domain.subject_alt_name[0]) }}"
+  register: certificate
+
+- name: Write fetched certificate to file
+  ansible.builtin.copy:
+    content: "{{ certificate.cert }}"
+    dest: "{{ acme_cert_path }}"
+    mode: "0644"

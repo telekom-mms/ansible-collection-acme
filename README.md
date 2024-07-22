@@ -12,7 +12,7 @@ These modules are distributed as [collections](https://docs.ansible.com/ansible/
 To install them, run:
 
 ```bash
-ansible-galaxy collection install t_systems_mms.acme
+ansible-galaxy collection install telekom_mms.acme
 ```
 
 Alternatively put the collection into a `requirements.yml`-file:
@@ -20,7 +20,7 @@ Alternatively put the collection into a `requirements.yml`-file:
 ```yaml
 ---
 collections:
-- t_systems_mms.acme
+- telekom_mms.acme
 ```
 
 ## Usage
@@ -40,6 +40,12 @@ Here we list ways to manually test the dns-providers if you have access:
 
 ```
 ansible-playbook tests/integration/targets/acme_letsencrypt/dns-challenge-hetzner.yml -e acme_hetzner_auth_token=YOUR_AUTH_TOKEN -e hetzner_domain_name="example.com" -e hetzner_zone="example.com"
+```
+
+* Domain-Offensive
+
+```
+ansible-playbook tests/integration/targets/acme_letsencrypt/dns-challenge-domain-offensive.yml -e acme_dns_password=YOUR_DO_AUTH_TOKEN -e domain_offensive_zone="example.com" -e domain_offensive_domain_name="example.com"
 ```
 
 ## License

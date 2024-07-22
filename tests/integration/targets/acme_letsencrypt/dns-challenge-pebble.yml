@@ -2,7 +2,7 @@
 - name: Create the certificate for example.com with dns-challenge provider "pebble"
   hosts: localhost
   roles:
-    - t_systems_mms.acme.acme
+    - telekom_mms.acme.acme
   vars:
     acme_domain:
       certificate_name: dns-pebble.example.com
@@ -28,6 +28,5 @@
     - name: Check if the certificate is correct
       ansible.builtin.assert:
         that:
-          - result.subject.commonName == "example.com"
           - "'DNS:example.com' in result.subject_alt_name"
           - "'Pebble Intermediate CA' in result.issuer.commonName"

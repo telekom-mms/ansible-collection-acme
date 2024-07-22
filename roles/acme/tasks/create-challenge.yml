@@ -13,4 +13,4 @@
     terms_agreed: true
     remaining_days: "{{ acme_remaining_days }}"
     validate_certs: "{{ acme_validate_certs | default(true) }}"
-  register: acme_challenge_result
+  register: acme_challenge

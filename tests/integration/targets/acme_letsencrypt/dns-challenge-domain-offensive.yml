@@ -1,19 +1,19 @@
 ---
-- name: Create a test certificate for hetzner
+- name: Create a test certificate for domain-offensive
   hosts: localhost
   roles:
     - telekom_mms.acme.acme
   vars:
-    acme_challenge_provider: hetzner
+    acme_challenge_provider: domain-offensive
     acme_use_live_directory: false
     acme_account_email: ssl-admin@example.de
     acme_force_renewal: true
     acme_domain:
       email_address: ssl-admin@example.de
-      certificate_name: "{{ hetzner_domain_name }}.{{ hetzner_zone }}"
-      zone: "{{ hetzner_zone }}"
+      certificate_name: "{{ domain_offensive_zone }}"
+      zone: "{{ domain_offensive_zone }}"
       subject_alt_name:
-        - "{{ hetzner_domain_name }}.{{ hetzner_zone }}"
+        - "{{ domain_offensive_domain_name }}"
   post_tasks:
     - name: Validate certs
       community.crypto.x509_certificate_info:

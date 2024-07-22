@@ -1,7 +1,7 @@
 ---
 ### include/role 3 - validate challenge
 - name: Validate challenge only if it is created or changed # noqa no-handler
-  when: acme_challenge_result is changed
+  when: acme_challenge is changed
   block:
     - name: Lookup the zone_id using the acme_domain.zone
       ansible.builtin.uri:
@@ -21,8 +21,8 @@
                      {{ (item | replace('*.', '')).split('.')[:-2] | join('.') }}",
             "ttl": 60,
             "type": "TXT",
-            "value": "{{ acme_challenge_result['challenge_data'][item]['dns-01']['resource_value'] }}",
-            "zone_id": "{{ acme_lookup_zone_id.json.zones[0].id }}",
+            "value": "{{ acme_challenge['challenge_data'][item]['dns-01']['resource_value'] }}",
+            "zone_id": "{{ lookup_zone_id.json.zones[0].id }}",
           }
         headers:
           Auth-API-Token: "{{ acme_hetzner_auth_token }}"
@@ -31,7 +31,7 @@
       when:
         - acme_domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
-        - acme_challenge_result['challenge_data'][item] is defined
+        - acme_challenge['challenge_data'][item] is defined
 
     - name: Wait 20 seconds
       ansible.builtin.pause:
@@ -51,7 +51,7 @@
         acme_version: 2
         terms_agreed: true
         remaining_days: "{{ acme_remaining_days }}"
-        data: "{{ acme_challenge_result }}"
+        data: "{{ acme_challenge }}"
 
     - name: Remove created SAN TXT records to keep DNS zone clean
       ansible.builtin.uri:

@@ -14,6 +14,7 @@ Feel free to contribute more DNS or HTTP APIs :)
 * DNS-01
   * [AutoDNS](/docs/dns-challenge/autodns.md)
   * [Azure](/docs/dns-challenge/azure.md)
+  * [Domain Offensive](/docs/dns-challenge/domain-offensive.md)
   * [hetzner](/docs/dns-challenge/hetzner.md)
   * [openstack](/docs/dns-challenge/openstack.md)
   * [pebble](/docs/dns-challenge/pebble.md)
@@ -50,6 +51,16 @@ Feel free to contribute more DNS or HTTP APIs :)
 | acme_dns_user                     | yes      |         | Username to access the DNS api
 | acme_dns_password                 | yes      |         | Password to access the DNS api
 
+## Variables for Certificate Download
+
+If you are running this role in a temporary environment such as a CI runner and you use your certificates on a https server you can enable the download of the current certificate from the web server. This prevents unnecessary renewal of certificates which aren't due for renewal yet.
+
+| Variable                | Required | Default                           | Description                                  |
+| ----------------------- | -------- | --------------------------------- | -------------------------------------------- |
+| acme_download_cert      | no       | false                             | Enable Certificate Download                  |
+| acme_cert_download_host | no       | uses first SAN of the Certificate | Hostname/IP to Download the Certificate from |
+| acme_cert_download_port | no       | 443                               | Port to Download the Certificate from        |
+| acme_cert_san_name      | no       | uses first SAN of the Certificate | Hostname for SNI for Cert File Download      |
 
 ## Global role variables
 

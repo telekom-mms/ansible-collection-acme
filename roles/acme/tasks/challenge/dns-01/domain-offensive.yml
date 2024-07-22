@@ -1,29 +1,24 @@
 ---
-- name: Create directory for challenge/hash files
-  ansible.builtin.file:
-    path: "{{ acme_local_validation_path }}/.well-known/acme-challenge"
-    state: directory
-    mode: "0755"
-    owner: "{{ acme_local_validation_path_file_owner | default(omit) }}"
-    group: "{{ acme_local_validation_path_file_group | default(omit) }}"
-
+### include/role 3 - validate challenge
 - name: Validate challenge only if it is created or changed # noqa no-handler
   when: acme_challenge is changed
   block:
-    - name: Create challenge/hash files with SAN domains # noqa template-instead-of-copy
-      ansible.builtin.copy:
-        dest: "{{ acme_local_validation_path }}/{{ acme_challenge['challenge_data'][item]['http-01']['resource'] }}"
-        content: "{{ acme_challenge['challenge_data'][item]['http-01']['resource_value'] }}"
-        mode: "0640"
-        owner: "{{ acme_local_validation_path_file_owner | default(omit) }}"
-        group: "{{ acme_local_validation_path_file_group | default(omit) }}"
+    - name: Add a new TXT record to the SAN domains
+      ansible.builtin.uri:
+        url: "https://my.do.de/api/letsencrypt"
+        body_format: form-multipart
+        body:
+          token: "{{ acme_dns_password }}"
+          domain: "_acme-challenge.{{ item | replace('*.', '') }}"
+          value: "{{ acme_challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
+          ttl: "120"
+        method: POST
       loop: "{{ acme_domain.subject_alt_name }}"
       when:
         - acme_domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
         - acme_challenge['challenge_data'][item] is defined
 
-    # validate certificate
     - name: Let the challenge be validated and retrieve the cert and intermediate certificate
       community.crypto.acme_certificate:
         account_key_src: "{{ acme_account_key_path }}"
@@ -32,19 +27,25 @@
         cert: "{{ acme_cert_path }}"
         fullchain: "{{ acme_fullchain_path }}"
         chain: "{{ acme_intermediate_path }}"
-        challenge: http-01
+        challenge: dns-01
         force: "{{ acme_force_renewal | default(false) }}"
         acme_directory: "{{ acme_directory }}"
         acme_version: 2
         terms_agreed: true
         remaining_days: "{{ acme_remaining_days }}"
         data: "{{ acme_challenge }}"
-        validate_certs: "{{ acme_validate_certs | default(true) }}"
 
-    - name: Remove challenge/hash files for SAN domains from fs
-      ansible.builtin.file:
-        dest: "{{ acme_local_validation_path }}/{{ acme_challenge['challenge_data'][item]['http-01']['resource'] }}"
-        state: absent
+  always:
+    - name: Remove created SAN TXT records to keep DNS zone clean
+      ansible.builtin.uri:
+        url: "https://my.do.de/api/letsencrypt"
+        body_format: form-multipart
+        body:
+          token: "{{ acme_dns_password }}"
+          domain: "_acme-challenge.{{ item | replace('*.', '') }}"
+          value: "{{ acme_challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
+          action: delete
+        method: POST
       loop: "{{ acme_domain.subject_alt_name }}"
       when:
         - acme_domain.subject_alt_name is defined

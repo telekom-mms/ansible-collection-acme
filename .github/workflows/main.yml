@@ -4,14 +4,16 @@ name: ansible-test
 on:
   # Run CI against all pushes (direct commits, also merged PRs), Pull Requests
   push:
-    branches: [master]
+    branches: [main]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [master]
-  # Run CI once per day (at 06:00 UTC)
-  # This ensures that even if there haven't been commits that we are still testing against latest version of ansible-test for each ansible-base version
+    branches: [main]
+  # Run CI once per week (at 06:00 UTC)
+  # This ensures that even if there haven't been commits that we are still
+  # testing against latest version of ansible-test for each ansible-core
+  # version
   schedule:
-    - cron: '0 6 * * *'
+    - cron: '0 6 * * 1'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -22,24 +24,27 @@ jobs:
         ansible:
           # It's important that Sanity is tested against all stable-X.Y branches
           # Testing against `devel` may fail as new tests are added.
-          - stable-2.11
-          - stable-2.12
-          - stable-2.13
+          - stable-2.15
+          - stable-2.16
+          - stable-2.17
           - devel
         python:
-          - 3.9
-    runs-on: ubuntu-latest
+          - "3.11"
+    runs-on: >-
+      ${{ contains(fromJson(
+          '["stable-2.9", "stable-2.10", "stable-2.11"]'
+      ), matrix.ansible) && 'ubuntu-20.04' || 'ubuntu-latest' }}
     steps:
       # ansible-test requires the collection to be in a directory in the form
       # .../ansible_collections/NAMESPACE/COLLECTION_NAME/
 
       - name: Check out code
-        uses: actions/checkout@v3
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
-          path: ansible_collections/t_systems_mms/acme
+          path: ansible_collections/telekom_mms/acme
 
       - name: Set up Python ${{ matrix.ansible }}
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@39cd14951b08e74b54015e9e001cdefcf80e669f # v5
         with:
           python-version: ${{ matrix.python }}
 
@@ -52,14 +57,14 @@ jobs:
       # Explicitly specify the version of Python we want to test
       - name: Run sanity tests
         run: ansible-test sanity --docker -v --color --python ${{ matrix.python }}
-        working-directory: ./ansible_collections/t_systems_mms/acme
+        working-directory: ./ansible_collections/telekom_mms/acme
 
   linting:
     name: Ansible Lint
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@v3
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
 
       - name: Run Linting
         uses: ansible/ansible-lint-action@main
@@ -68,21 +73,45 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ansible_collections/t_systems_mms/acme
+        working-directory: ansible_collections/telekom_mms/acme
     strategy:
       fail-fast: false
       matrix:
         ansible:
-          - stable-2.11
-          - stable-2.12
-          - stable-2.13
           - devel
+        # - milestone
         python:
-          - 3.9
+          - '3.11'
+          - '3.12'
+        include:
+          # Add new versions announced in
+          # https://github.com/ansible-collections/news-for-maintainers in a timely manner,
+          # consider dropping testing against EOL versions and versions you don't support.
+          # ansible-core 2.15
+          - ansible: stable-2.15
+            python: '3.9'
+          - ansible: stable-2.15
+            python: '3.10'
+          - ansible: stable-2.15
+            python: '3.11'
+          # ansible-core 2.16
+          - ansible: stable-2.16
+            python: '3.10'
+          - ansible: stable-2.16
+            python: '3.11'
+          - ansible: stable-2.16
+            python: '3.12'
+          # ansible-core 2.17
+          - ansible: stable-2.17
+            python: '3.10'
+          - ansible: stable-2.17
+            python: '3.11'
+          - ansible: stable-2.17
+            python: '3.12'
     # start nginx as service to test validation via http-challenge local path
     services:
       nginx:
-        image: nginx
+        image: nginx@sha256:67682bda769fae1ccf5183192b8daf37b64cae99c6c3302650f6f8bf5f0f95df
         volumes:
           - /tmp:/usr/share/nginx/html
         ports:
@@ -90,9 +119,9 @@ jobs:
 
     steps:
       - name: Check out code to collections-folder, so ansible finds it
-        uses: actions/checkout@v3
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
-          path: ansible_collections/t_systems_mms/acme
+          path: ansible_collections/telekom_mms/acme
 
       - name: Run Pebble and challtestsrv
         run: curl https://raw.githubusercontent.com/letsencrypt/pebble/master/docker-compose.yml | docker-compose -f - up -d
@@ -109,7 +138,7 @@ jobs:
         run: docker restart ${{ job.services.nginx.id }}
 
       - name: Set up Python ${{ matrix.ansible }}
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@39cd14951b08e74b54015e9e001cdefcf80e669f # v5
         with:
           python-version: ${{ matrix.python }}
 
@@ -127,4 +156,4 @@ jobs:
 
       - name: Run integration tests
         run: ansible-test integration -v --color --retry-on-error --continue-on-error --diff --python ${{ matrix.python }} --requirements
-        working-directory: ./ansible_collections/t_systems_mms/acme
+        working-directory: ./ansible_collections/telekom_mms/acme
