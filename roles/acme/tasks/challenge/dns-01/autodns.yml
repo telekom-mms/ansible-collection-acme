@@ -9,7 +9,7 @@
         method: POST
         body_format: json
         body: { context: "4", user: "{{ acme_dns_user }}", password: "{{ acme_dns_password }}" }
-      register: login
+      register: acme_login
 
     - name: Add a new TXT record to the SAN domains
       ansible.builtin.uri:
@@ -33,7 +33,7 @@
             ]
           }
         headers:
-          Cookie: "{{ login.set_cookie }}"
+          Cookie: "{{ acme_login.set_cookie }}"
       loop: "{{ acme_domain.subject_alt_name }}"
       when:
         - acme_domain.subject_alt_name is defined
@@ -75,7 +75,7 @@
             ]
           }
         headers:
-          Cookie: "{{ login.set_cookie }}"
+          Cookie: "{{ acme_login.set_cookie }}"
       loop: "{{ acme_domain.subject_alt_name }}"
       when:
         - acme_domain.subject_alt_name is defined

@@ -14,7 +14,6 @@
     name: _acme-challenge.{{ item | replace('*.', '') }}.
     zone: "{{ acme_domain.zone }}."
   loop: "{{ acme_domain.subject_alt_name }}"
-  register: records
   when:
     - acme_domain.subject_alt_name is defined
     - acme_challenge['challenge_data'][item] is defined
