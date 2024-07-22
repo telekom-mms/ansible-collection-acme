@@ -9,7 +9,7 @@
         method: POST
         body_format: json
         body: { context: "4", user: "{{ acme_dns_user }}", password: "{{ acme_dns_password }}" }
-      register: acme_login_result
+      register: acme_login
 
     - name: Add a new TXT record to the SAN domains
       ansible.builtin.uri:

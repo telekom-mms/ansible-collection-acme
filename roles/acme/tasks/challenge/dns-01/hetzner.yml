@@ -8,7 +8,7 @@
         url: https://dns.hetzner.com/api/v1/zones?name={{ acme_domain.zone }}
         headers:
           Auth-API-Token: "{{ acme_hetzner_auth_token }}"
-      register: acme_lookup_zone_id_result
+      register: acme_lookup_zone_id
 
     - name: Add a new TXT record to the SAN domains
       ansible.builtin.uri:
@@ -22,12 +22,12 @@
             "ttl": 60,
             "type": "TXT",
             "value": "{{ acme_challenge['challenge_data'][item]['dns-01']['resource_value'] }}",
-            "zone_id": "{{ lookup_zone_id.json.zones[0].id }}",
+            "zone_id": "{{ acme_lookup_zone_id.json.zones[0].id }}",
           }
         headers:
           Auth-API-Token: "{{ acme_hetzner_auth_token }}"
       loop: "{{ acme_domain.subject_alt_name }}"
-      register: acme_records_result
+      register: acme_records
       when:
         - acme_domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
