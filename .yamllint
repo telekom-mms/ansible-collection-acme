@@ -17,3 +17,5 @@ rules:
   colons:
     max-spaces-before: -1
     max-spaces-after: 1
+skip_list:
+  - meta-runtime[unsupported-version]
