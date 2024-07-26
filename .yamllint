@@ -14,6 +14,6 @@ rules:
   brackets:
     min-spaces-inside: 0
     max-spaces-inside: 1
-  colons: 
+  colons:
     max-spaces-before: -1
     max-spaces-after: 1
