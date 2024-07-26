@@ -2,6 +2,7 @@
 extends: default
 ignore: |
   galaxy.yml
+  runtime.yml
 
 rules:
   line-length: disable
@@ -17,5 +18,3 @@ rules:
   colons:
     max-spaces-before: -1
     max-spaces-after: 1
-skip_list:
-  meta-runtime[unsupported-version]
