@@ -2,7 +2,6 @@
 extends: default
 ignore: |
   galaxy.yml
-  runtime.yml
 
 rules:
   line-length: disable

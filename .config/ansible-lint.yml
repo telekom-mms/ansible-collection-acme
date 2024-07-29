@@ -1,3 +1,5 @@
 ---
 exclude_paths:
   - .github/
+skip_list:
+  - meta-runtime[unsupported-version]
