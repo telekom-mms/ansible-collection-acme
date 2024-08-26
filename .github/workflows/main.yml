@@ -111,7 +111,7 @@ jobs:
     # start nginx as service to test validation via http-challenge local path
     services:
       nginx:
-        image: nginx@sha256:6af79ae5de407283dcea8b00d5c37ace95441fd58a8b1d2aa1ed93f5511bb18c
+        image: nginx@sha256:447a8665cc1dab95b1ca778e162215839ccbb9189104c79d7ec3a81e14577add
         volumes:
           - /tmp:/usr/share/nginx/html
         ports:
@@ -124,7 +124,7 @@ jobs:
           path: ansible_collections/telekom_mms/acme
 
       - name: Run Pebble and challtestsrv
-        run: curl https://raw.githubusercontent.com/letsencrypt/pebble/master/docker-compose.yml | docker-compose -f - up -d
+        run: curl https://raw.githubusercontent.com/letsencrypt/pebble/master/docker-compose.yml | docker compose -f - up -d
 
       - name: Set up Pebble
         run: curl --request POST --data '{"ip":"10.30.50.1"}' http://localhost:8055/set-default-ipv4
