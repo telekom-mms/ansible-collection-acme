@@ -27,3 +27,10 @@
     - challenge/dns-01/{{ acme_challenge_provider }}.yml
     - challenge/http-01/{{ acme_challenge_provider }}.yml
     - challenge-unknown.yml
+
+- name: Check if a acme_domain is set
+  ansible.builtin.assert:
+    that:
+      - acme_domain is defined
+      - acme_domain != []
+    fail_msg: You need to set acme_domain. See documentation for a list of possibilities.
