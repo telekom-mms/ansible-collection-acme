@@ -5,7 +5,7 @@
     - name: Create and upload Lets Encrypt certificates
       ansible.builtin.include_role:
         name: telekom_mms.acme.acme
-        public: yes
+        public: true
       vars:
         acme_domain:
           certificate_name: dns-pebble.example.com
