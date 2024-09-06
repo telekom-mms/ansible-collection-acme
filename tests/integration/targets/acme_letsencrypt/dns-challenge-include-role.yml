@@ -20,6 +20,9 @@
         acme_validate_certs: false
   post_tasks:
     - name: Validate certs
+      vars:
+        acme_domain:
+          certificate_name: dns-pebble.example.com
       community.crypto.x509_certificate_info:
         path: "{{ acme_cert_path }}"
       register: result
