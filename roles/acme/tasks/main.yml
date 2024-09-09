@@ -12,26 +12,21 @@
 - name: Run key generation
   ansible.builtin.include_tasks:
     file: create-keys.yml
-  # when: acme_domain | length > 0
 
 - name: Create csr
   ansible.builtin.include_tasks:
     file: create-csr.yml
-  # when: acme_domain | length > 0
 
 - name: Create challenge
   ansible.builtin.include_tasks:
     file: create-challenge.yml
-  # when: acme_domain | length > 0
 
 - name: Do challenge with provider {{ acme_challenge_provider }}
   ansible.builtin.include_tasks:
     file: "{{ acme_provider_path }}"
-  # when: acme_domain | length > 0
 
 - name: Convert certificate
   ansible.builtin.include_tasks:
     file: convert_certificate.yml
   when:
     - acme_convert_cert_to is defined
-    # - acme_domain | length > 0
