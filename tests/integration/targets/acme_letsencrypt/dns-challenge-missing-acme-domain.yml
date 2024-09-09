@@ -9,4 +9,4 @@
     acme_account_email: ssl-admin@example.com
     acme_staging_directory: https://localhost:14000/dir
     acme_validate_certs: false
-  ignore_errors: yes
+  ignore_errors: true
