@@ -1,6 +1,6 @@
 # Changelog
 
-## [4.0.1](https://github.com/telekom-mms/ansible-collection-acme/tree/4.0.1) (2024-11-13)
+## [4.0.1](https://github.com/telekom-mms/ansible-collection-acme/tree/4.0.1) (2024-11-14)
 
 [Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/4.0.0...4.0.1)
 
@@ -10,6 +10,7 @@
 
 **Merged pull requests:**
 
+- chore\(deps\): update ansible/ansible-lint action to v24.10.0 [\#156](https://github.com/telekom-mms/ansible-collection-acme/pull/156) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update nginx docker digest to bc5eac5 [\#155](https://github.com/telekom-mms/ansible-collection-acme/pull/155) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update actions/setup-python digest to 0b93645 [\#154](https://github.com/telekom-mms/ansible-collection-acme/pull/154) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update actions/checkout digest to 11bd719 [\#153](https://github.com/telekom-mms/ansible-collection-acme/pull/153) ([renovate[bot]](https://github.com/apps/renovate))
