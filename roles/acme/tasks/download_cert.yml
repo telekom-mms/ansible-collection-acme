@@ -5,6 +5,9 @@
     port: "{{ acme_cert_download_port | default('443') }}"
     server_name: "{{ acme_cert_san_name | default(acme_domain.subject_alt_name[0]) }}"
   register: certificate
+  retries: 10
+  delay: 30
+  until: certificate is not failed
 
 - name: Write fetched certificate to file
   ansible.builtin.copy:
