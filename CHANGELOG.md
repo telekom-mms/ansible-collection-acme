@@ -1,6 +1,6 @@
 # Changelog
 
-## [4.0.1](https://github.com/telekom-mms/ansible-collection-acme/tree/4.0.1) (2024-12-09)
+## [4.0.1](https://github.com/telekom-mms/ansible-collection-acme/tree/4.0.1) (2024-12-13)
 
 [Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/4.0.0...4.0.1)
 
@@ -10,6 +10,7 @@
 
 **Merged pull requests:**
 
+- chore\(deps\): update ansible/ansible-lint action to v24.12.2 [\#160](https://github.com/telekom-mms/ansible-collection-acme/pull/160) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update nginx docker digest to fb19759 [\#159](https://github.com/telekom-mms/ansible-collection-acme/pull/159) ([renovate[bot]](https://github.com/apps/renovate))
 - add retries to certificate download task [\#158](https://github.com/telekom-mms/ansible-collection-acme/pull/158) ([z-bsod](https://github.com/z-bsod))
 - chore\(deps\): update nginx docker digest to 0c86ddd [\#157](https://github.com/telekom-mms/ansible-collection-acme/pull/157) ([renovate[bot]](https://github.com/apps/renovate))
