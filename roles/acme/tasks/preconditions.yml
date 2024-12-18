@@ -10,7 +10,7 @@
   ansible.builtin.assert:
     that:
       - acme_domain is defined
-      - acme_domain != []
+      - acme_domain != {}
     fail_msg: You need to set acme_domain. See documentation for a list of possibilities.
 
 - name: Set fact for acme_directory depending on what is set in acme_use_live_directory
