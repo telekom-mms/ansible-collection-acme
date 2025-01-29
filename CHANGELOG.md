@@ -1,16 +1,17 @@
 # Changelog
 
-## [4.0.1](https://github.com/telekom-mms/ansible-collection-acme/tree/4.0.1) (2025-01-29)
+## [4.1.0](https://github.com/telekom-mms/ansible-collection-acme/tree/4.1.0) (2025-01-29)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/4.0.0...4.0.1)
+[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/4.0.0...4.1.0)
 
 **Implemented enhancements:**
 
 - \[Enhancement\] Support creating ECC Keys [\#87](https://github.com/telekom-mms/ansible-collection-acme/issues/87)
+- feat: also download chain when downloading an cert [\#164](https://github.com/telekom-mms/ansible-collection-acme/pull/164) ([neubi4](https://github.com/neubi4))
 
 **Merged pull requests:**
 
-- feat: also download chain when downloading an cert [\#164](https://github.com/telekom-mms/ansible-collection-acme/pull/164) ([neubi4](https://github.com/neubi4))
+- chore\(deps\): update actions/setup-python digest to 4237552 [\#165](https://github.com/telekom-mms/ansible-collection-acme/pull/165) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update nginx docker digest to 42e917a [\#161](https://github.com/telekom-mms/ansible-collection-acme/pull/161) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update ansible/ansible-lint action to v24.12.2 [\#160](https://github.com/telekom-mms/ansible-collection-acme/pull/160) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update nginx docker digest to fb19759 [\#159](https://github.com/telekom-mms/ansible-collection-acme/pull/159) ([renovate[bot]](https://github.com/apps/renovate))
