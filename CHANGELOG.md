@@ -8,6 +8,7 @@
 
 - \[Enhancement\] Support creating ECC Keys [\#87](https://github.com/telekom-mms/ansible-collection-acme/issues/87)
 - feat: also download chain when downloading an cert [\#164](https://github.com/telekom-mms/ansible-collection-acme/pull/164) ([neubi4](https://github.com/neubi4))
+- role should be usable via include\_role, vars should be possible via loop [\#145](https://github.com/telekom-mms/ansible-collection-acme/pull/145) ([michaelamattes](https://github.com/michaelamattes))
 
 **Merged pull requests:**
 
