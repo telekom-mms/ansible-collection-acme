@@ -5,18 +5,18 @@
   connection: local
   delegate_to: localhost
   vars:
-    relevant_domains: "{{ ([acme_domain.zone] + acme_domain.subject_alt_name | default([])) | ansible.builtin.unique }}"
+    relevant_domains: "{{ ([acme_domain.certificate_name] + acme_domain.subject_alt_name | default([])) | ansible.builtin.unique }}"
   block:
     - name: Add a new TXT record to the relevant domains (main and SAN)
       vars:
-        record_name: "_acme-challenge.{{ domain }}."
+        record_name: "_acme-challenge.{{ domain | replace('*.', '') }}."  # replace '*.' in the case of a wildcard
         record_data: "{{ acme_challenge['challenge_data'][domain]['dns-01']['resource_value'] }}"
       community.general.nsupdate:
-        key_name: "{{ acme_nsupdate_dns_key.name }}"
+        key_name: "{{ acme_nsupdate_dns_key.name | default('nsupdate_key') }}"
         key_secret: "{{ acme_nsupdate_dns_key.secret }}"
-        key_algorithm: "{{ acme_nsupdate_dns_key.algorithm }}"
+        key_algorithm: "{{ acme_nsupdate_dns_key.algorithm | default('hmac-sha512') }}"
         server: "{{ acme_nsupdate_server }}"
-        zone: "{{ acme_nsupdate_override_domain[domain] | default(domain) }}"
+        zone: "{{ acme_domain.zone | default(domain) }}"
         record: "{{ record_name }}"
         value: "{{ record_data }}"
         type: "TXT"
@@ -51,14 +51,14 @@
   always:
     - name: Remove the TXT record from the relevant domains (main and SAN)
       vars:
-        record_name: "_acme-challenge.{{ domain }}."
+        record_name: "_acme-challenge.{{ domain | replace('*.', '') }}."  # replace '*.' in the case of a wildcard
         record_data: "{{ acme_challenge['challenge_data'][domain]['dns-01']['resource_value'] }}"
       community.general.nsupdate:
-        key_name: "{{ acme_nsupdate_dns_key.name }}"
+        key_name: "{{ acme_nsupdate_dns_key.name | default('nsupdate_key') }}"
         key_secret: "{{ acme_nsupdate_dns_key.secret }}"
-        key_algorithm: "{{ acme_nsupdate_dns_key.algorithm }}"
+        key_algorithm: "{{ acme_nsupdate_dns_key.algorithm | default('hmac-sha512') }}"
         server: "{{ acme_nsupdate_server }}"
-        zone: "{{ acme_nsupdate_override_domain[domain] | default(domain) }}"
+        zone: "{{ acme_domain.zone | default(domain) }}"
         record: "{{ record_name }}"
         value: "{{ record_data }}"
         type: "TXT"
