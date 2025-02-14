@@ -1,8 +1,12 @@
 # Changelog
 
-## [4.1.1](https://github.com/telekom-mms/ansible-collection-acme/tree/4.1.1) (2025-02-08)
+## [4.2.0](https://github.com/telekom-mms/ansible-collection-acme/tree/4.2.0) (2025-02-14)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/4.1.0...4.1.1)
+[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/4.1.0...4.2.0)
+
+**Implemented enhancements:**
+
+- Adding nsupdate DNS challenge [\#169](https://github.com/telekom-mms/ansible-collection-acme/pull/169) ([diLLec](https://github.com/diLLec))
 
 **Merged pull requests:**
 
