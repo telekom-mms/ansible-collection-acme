@@ -30,5 +30,13 @@ acme_s3_install_prerequisites: true
 acme_local_validation_path: /var/www/html
 acme_azure_purge_state: absent
 
+### DNS nsupdate challenge parameters
+acme_nsupdate_replication_delay: 2
+acme_nsupdate_server: 192.168.1.1
+acme_nsupdate_dns_key:
+    name: 'nsupdate_key'
+    algorithm: hmac-sha512
+    secret: ""
+
 ### certificate download for non-persistent environments
 acme_download_cert: false

@@ -1,0 +1,76 @@
+---
+# include/role 3 - validate challenge
+- name: Validate challenge only if it is created or changed # noqa no-handler
+  when: acme_challenge is changed
+  connection: local
+  delegate_to: localhost
+  block:
+    - name: Add a new TXT record to the relevant domains
+      vars:
+        record_name: "_acme-challenge.{{ domain | replace('*.', '') }}."  # replace '*.' in the case of a wildcard
+        record_data: "{{ acme_challenge['challenge_data'][domain]['dns-01']['resource_value'] }}"
+      community.general.nsupdate:
+        key_name: "{{ acme_nsupdate_dns_key.name | default('nsupdate_key') }}"
+        key_secret: "{{ acme_nsupdate_dns_key.secret }}"
+        key_algorithm: "{{ acme_nsupdate_dns_key.algorithm | default('hmac-sha512') }}"
+        server: "{{ acme_nsupdate_server }}"
+        zone: "{{ acme_domain.zone | default(domain) }}"
+        record: "{{ record_name }}"
+        value: "{{ record_data }}"
+        type: "TXT"
+        ttl: "120"
+      loop: "{{ acme_domain.subject_alt_name }}"
+      loop_control:
+        label: "zone={{ domain }} rr={{ record_name }} (TXT) {{ record_data }}"
+        loop_var: "domain"
+      when:
+        - acme_domain.subject_alt_name is defined
+        # only runs if the challenge is run the first time, because then there is challenge_data
+        - acme_challenge['challenge_data'][domain] is defined
+
+    - name: Wait for DNS replication to catch up
+      ansible.builtin.pause:
+        seconds: "{{ acme_nsupdate_replication_delay }}"
+
+    - name: Let the challenge be validated and retrieve the cert and intermediate certificate
+      community.crypto.acme_certificate:
+        account_key_src: "{{ acme_account_key_path }}"
+        account_email: "{{ acme_account_email }}"
+        csr: "{{ acme_csr_path }}"
+        cert: "{{ acme_cert_path }}"
+        fullchain: "{{ acme_fullchain_path }}"
+        chain: "{{ acme_intermediate_path }}"
+        challenge: dns-01
+        force: "{{ acme_force_renewal | default(false) }}"
+        acme_directory: "{{ acme_directory }}"
+        acme_version: 2
+        terms_agreed: true
+        remaining_days: "{{ acme_remaining_days }}"
+        data: "{{ acme_challenge }}"
+      when:
+        - acme_certificate_enabled | default(true)
+
+  always:
+    - name: Remove the TXT record from the relevant domains
+      vars:
+        record_name: "_acme-challenge.{{ domain | replace('*.', '') }}."  # replace '*.' in the case of a wildcard
+        record_data: "{{ acme_challenge['challenge_data'][domain]['dns-01']['resource_value'] }}"
+      community.general.nsupdate:
+        key_name: "{{ acme_nsupdate_dns_key.name | default('nsupdate_key') }}"
+        key_secret: "{{ acme_nsupdate_dns_key.secret }}"
+        key_algorithm: "{{ acme_nsupdate_dns_key.algorithm | default('hmac-sha512') }}"
+        server: "{{ acme_nsupdate_server }}"
+        zone: "{{ acme_domain.zone | default(domain) }}"
+        record: "{{ record_name }}"
+        value: "{{ record_data }}"
+        type: "TXT"
+        ttl: "120"
+        state: absent
+      loop: "{{ acme_domain.subject_alt_name }}"
+      loop_control:
+        label: "zone={{ domain }} rr={{ record_name }} (TXT) {{ record_data }}"
+        loop_var: "domain"
+      when:
+        - acme_domain.subject_alt_name is defined
+        # only runs if the challenge is run the first time, because then there is challenge_data
+        - acme_challenge['challenge_data'][domain] is defined
