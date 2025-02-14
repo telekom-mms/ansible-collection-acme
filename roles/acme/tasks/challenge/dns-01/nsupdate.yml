@@ -4,8 +4,6 @@
   when: acme_challenge is changed
   connection: local
   delegate_to: localhost
-  vars:
-    relevant_domains: "{{ ([acme_domain.certificate_name] + acme_domain.subject_alt_name | default([])) | ansible.builtin.unique }}"
   block:
     - name: Add a new TXT record to the relevant domains (main and SAN)
       vars:
@@ -21,10 +19,14 @@
         value: "{{ record_data }}"
         type: "TXT"
         ttl: "120"
-      loop: "{{ relevant_domains }}"
+      loop: "{{ acme_domain.subject_alt_name }}"
       loop_control:
         label: "zone={{ domain }} rr={{ record_name }} (TXT) {{ record_data }}"
         loop_var: "domain"
+      when:
+        - acme_domain.subject_alt_name is defined
+        # only runs if the challenge is run the first time, because then there is challenge_data
+        - acme_challenge['challenge_data'][domain] is defined
 
     - name: Wait for DNS replication to catch up
       ansible.builtin.pause:
@@ -64,7 +66,11 @@
         type: "TXT"
         ttl: "120"
         state: absent
-      loop: "{{ relevant_domains }}"
+      loop: "{{ acme_domain.subject_alt_name }}"
       loop_control:
         label: "zone={{ domain }} rr={{ record_name }} (TXT) {{ record_data }}"
         loop_var: "domain"
+      when:
+        - acme_domain.subject_alt_name is defined
+        # only runs if the challenge is run the first time, because then there is challenge_data
+        - acme_challenge['challenge_data'][domain] is defined
