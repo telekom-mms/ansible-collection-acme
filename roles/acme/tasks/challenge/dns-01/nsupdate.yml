@@ -48,7 +48,7 @@
         remaining_days: "{{ acme_remaining_days }}"
         data: "{{ acme_challenge }}"
       when:
-        - acme_certificate_enabled | default(frue)
+        - acme_certificate_enabled | default(true)
 
   always:
     - name: Remove the TXT record from the relevant domains
