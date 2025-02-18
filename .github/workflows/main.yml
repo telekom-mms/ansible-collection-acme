@@ -67,7 +67,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Run Linting
-        uses: ansible/ansible-lint@9cf49a01ac6b34f45aab16f0bbac1196fcd681e5 # 25.1.2
+        uses: ansible/ansible-lint@49ded6a7e4f3acf6b1eb4b3aa2796d84b5faa63a # 25.1.3
 
   integration-tests:
     runs-on: ubuntu-latest
