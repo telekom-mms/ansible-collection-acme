@@ -1,20 +1,24 @@
 ---
-- name: Create a challenge using a account key file for {{ acme_domain.certificate_name }}
-  community.crypto.acme_certificate:
-    account_key_src: "{{ acme_account_key_path }}"
-    account_email: "{{ acme_account_email }}"
-    csr: "{{ acme_csr_path }}"
-    cert: "{{ acme_cert_path }}"
+- name: create-challenge block
+  vars:
     # e.g. acme_provider_path is "challenge/http-01/s3.yml" > dirname is "challenge/http-01" > basename is "http-01"
-    challenge: "{{ acme_provider_path | dirname | basename }}"
-    force: "{{ acme_force_renewal | default(false) }}"
-    acme_directory: "{{ acme_directory }}"
-    acme_version: 2
-    terms_agreed: true
-    remaining_days: "{{ acme_remaining_days }}"
-    validate_certs: "{{ acme_validate_certs | default(true) }}"
-  register: acme_challenge
+    challenge_type: "{{ acme_provider_path | dirname | basename }}"
+  block:
+    - name: Create a challenge using a account key file for {{ acme_domain.certificate_name }}
+      community.crypto.acme_certificate:
+        account_key_src: "{{ acme_account_key_path }}"
+        account_email: "{{ acme_account_email }}"
+        csr: "{{ acme_csr_path }}"
+        cert: "{{ acme_cert_path }}"
+        challenge: "{{ challenge_type }}"
+        force: "{{ acme_force_renewal | default(false) }}"
+        acme_directory: "{{ acme_directory }}"
+        acme_version: 2
+        terms_agreed: true
+        remaining_days: "{{ acme_remaining_days }}"
+        validate_certs: "{{ acme_validate_certs | default(true) }}"
+      register: acme_challenge
 
-- name: handle challenge data
-  set_fact:
-    acme_challenge_data: "{{ acme_challenge | find_challenges(acme_challenge_provider, acme_domain.subject_alt_name, acme_challenge_handling)"
+    - name: handle challenge data
+      set_fact:
+        acme_challenge_data: "{{ acme_challenge | telekom_mms.acme.find_challenges(challenge_type, acme_domain.subject_alt_name, acme_challenge_handling) }}"
