@@ -1,0 +1,244 @@
+---
+
+- name: Create the certificate for example.com with dns-challenge provider "pebble"
+  hosts: localhost
+  gather_facts: no
+  vars:
+    debug_tests: true
+    data_with_challenge_data:
+      account_uri: https://acme.npp.test.telesec.de/v2/...
+      authorizations:
+        blahtest1.example.org:
+          challenges:
+          - status: pending
+            token: Uwqt4U_l6lp04J2KW5nvgJ6LMPXvSrhr
+            type: dns-01
+            url: https://acme.npp.test.telesec.de/v2/...
+          - status: pending
+            token: ukTTEZIqv_KM9J0iEnysAaiiO31-Rpxg
+            type: http-01
+            url: https://acme.npp.test.telesec.de/v2/....
+          expires: '2025-03-26T09:00:45Z'
+          identifier:
+            type: dns
+            value: blahtest1.example.org
+          status: pending
+          uri: https://acme.npp.test.telesec.de/v2/...
+        blahtest2.example.org:
+          challenges:
+          - status: pending
+            token: WfZ7M6gF63LZjxyqhXKyDkb3pg2NlvjFKHFTOdgd
+            type: dns-01
+            url: https://acme.npp.test.telesec.de/v2/...
+          - status: pending
+            token: ALKOBSIHfEBtdeDVeGj3zROeyECNNry9CD4pqwci
+            type: http-01
+            url: https://acme.npp.test.telesec.de/v2/....
+          expires: '2025-03-26T09:00:45Z'
+          identifier:
+            type: dns
+            value: blahtest2.example.org
+          status: pending
+          uri: https://acme.npp.test.telesec.de/v2/...
+      cert_days: -1
+      challenge_data:
+       blahtest1.example.org:
+         dns-01:
+           record: _acme-challenge.blahtest1.example.org
+           resource: _acme-challenge
+           resource_value: bob4Yd3_SVv-7JET__3G5ZDVWaeGIOxAQmRf3SURbSY
+         http-01:
+           resource: .well-known/acme-challenge/ukTTEZIqv_KM9J0iEnysAaiiO31-Rpxg
+           resource_value: L0bB8aZyOyuw5LNDlslQptrKYBw5P0nPpmt6bGhTYyWP1wTogi9W3V.L0bB8aZyOyuw5LNDlslQptrKYBw5P0nPpmt6bGhTYyWP1wTogi9W3V
+       blahtest2.example.org:
+         dns-01:
+           record: _acme-challenge.blahtest2.example.org
+           resource: _acme-challenge
+           resource_value: eksnHDhxBOzrTlOgiDzKlUXZtccjSwKIhc
+         http-01:
+           resource: .well-known/acme-challenge/ukTTEZIqv_KM9J0iEnysAaiiO31-Rpxg
+           resource_value: 8fV3Wc5hIqxMohz4llcqLqHuCv7WriMrgWYRogPypoTY5KRT84sfeU.8fV3Wc5hIqxMohz4llcqLqHuCv7WriMrgWYRogPypoTY5KRT84sfeU
+      challenge_data_dns:
+        _acme-challenge.blahtest1.example.org:
+          - bob4Yd3_SVv-7JET__3G5ZDVWaeGIOxAQmRf3SURbSY
+        _acme-challenge.blahtest2.example.org:
+          - eksnHDhxBOzrTlOgiDzKlUXZtccjSwKIhc
+  pre_tasks:
+    - name: data_without_challenge_data
+      set_fact:
+        data_without_challenge_data: "{{ data_with_challenge_data | combine({'challenge_data': {}, 'challenge_data_dns': {}}) }}"
+    - name: print test data
+      when: "debug_tests"
+      block:
+        - debug: var=data_with_challenge_data
+        - debug: var=data_without_challenge_data
+  tasks:
+
+    # ---
+    - name: test block
+      block:
+        - name: "TEST-01 default / dns-01 / 2 domains"
+          debug:
+            msg: ""
+        - name: set test_challenge
+          ignore_errors: yes
+          set_fact:
+            test_challenge: "{{ data_with_challenge_data | find_challenges('dns-01', ['blahtest1.example.org', 'blahtest2.example.org'], 'default') }}"
+          register: set_fact_result
+        - debug:
+            var: test_challenge
+          when: "debug_tests"
+        - name: test assert
+          ansible.builtin.assert:
+            that:
+              - "set_fact_result is not failed"
+              - "'blahtest1.example.org' in test_challenge and 'blahtest2.example.org' in test_challenge"
+              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['dns-01']['record'] in test_challenge['blahtest1.example.org'].record"
+              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['dns-01']['resource'] in test_challenge['blahtest1.example.org'].resource"
+              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['dns-01']['resource_value'] in test_challenge['blahtest1.example.org'].resource_value"
+
+
+    - name: test block
+      block:
+        - name: "TEST-02 default / http-01 / 2 domains"
+          debug:
+            msg: ""
+        - name: set test_challenge
+          ignore_errors: yes
+          set_fact:
+            test_challenge: "{{ data_with_challenge_data | find_challenges('http-01', ['blahtest1.example.org', 'blahtest2.example.org'], 'default') }}"
+          register: set_fact_result
+        - debug:
+            var: test_challenge
+          when: "debug_tests"
+        - name: test assert
+          ansible.builtin.assert:
+            that:
+              - "set_fact_result is not failed"
+              - "'blahtest1.example.org' in test_challenge and 'blahtest2.example.org' in test_challenge"
+              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['http-01']['resource'] in test_challenge['blahtest1.example.org'].resource"
+              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['http-01']['resource_value'] in test_challenge['blahtest1.example.org'].resource_value"
+
+    - name: test block
+      block:
+        - name: "TEST-03 default / dns-01 / unexpected"
+          debug:
+            msg: ""
+        - name: set test_challenge
+          ignore_errors: yes
+          set_fact:
+            test_challenge: "{{ data_with_challenge_data | find_challenges('dns-01', ['blahtest1.example.org'], 'default') }}"
+          register: set_fact_result
+        - debug:
+            var: test_challenge
+          when: "debug_tests"
+        - name: test assert
+          ansible.builtin.assert:
+            that:
+              - "set_fact_result is failed"
+              - "'Unexpected challenges found:' in set_fact_result.msg"
+
+    - name: test block
+      block:
+        - name: "TEST-04 telesec / dns-01 / 2 domains / data_with_challenge_data"
+          debug:
+            msg: ""
+        - name: set test_challenge
+          ignore_errors: yes
+          set_fact:
+            test_challenge: "{{ data_with_challenge_data | find_challenges('dns-01', ['blahtest1.example.org', 'blahtest2.example.org'], 'telesec') }}"
+          register: set_fact_result
+        - debug:
+            var: test_challenge
+          when: "debug_tests"
+        - name: test assert
+          ansible.builtin.assert:
+            that:
+              - "set_fact_result is not failed"
+              - "'blahtest1.example.org' in test_challenge and 'blahtest2.example.org' in test_challenge"
+              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['dns-01']['record'] in test_challenge['blahtest1.example.org'].record"
+              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['dns-01']['resource'] in test_challenge['blahtest1.example.org'].resource"
+              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['dns-01']['resource_value'] in test_challenge['blahtest1.example.org'].resource_value"
+
+    - name: test block
+      block:
+        - name: "TEST-04 telesec / http-01 / 2 domains / data_with_challenge_data"
+          debug:
+            msg: ""
+        - name: set test_challenge
+          ignore_errors: yes
+          set_fact:
+            test_challenge: "{{ data_with_challenge_data | find_challenges('http-01', ['blahtest1.example.org', 'blahtest2.example.org'], 'telesec') }}"
+          register: set_fact_result
+        - debug:
+            var: test_challenge
+          when: "debug_tests"
+        - name: test assert
+          ansible.builtin.assert:
+            that:
+              - "set_fact_result is not failed"
+              - "'blahtest1.example.org' in test_challenge and 'blahtest2.example.org' in test_challenge"
+              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['http-01']['resource'] in test_challenge['blahtest1.example.org'].resource"
+              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['http-01']['resource_value'] in test_challenge['blahtest1.example.org'].resource_value"
+
+    - name: test block
+      block:
+        - name: "TEST-05 telesec / dns-01 / 2 domains / data_without_challenge_data"
+          debug:
+            msg: ""
+        - name: set test_challenge
+          ignore_errors: yes
+          set_fact:
+            test_challenge: "{{ data_without_challenge_data | find_challenges('dns-01', ['blahtest1.example.org', 'blahtest2.example.org'], 'telesec') }}"
+          register: set_fact_result
+        - debug:
+            var: test_challenge
+          when: "debug_tests"
+        - name: test assert
+          ansible.builtin.assert:
+            that:
+              - "set_fact_result is not failed"
+              - "'blahtest1.example.org' in test_challenge and 'blahtest2.example.org' in test_challenge"
+              - "data_with_challenge_data['authorizations']['blahtest1.example.org']['challenges'][0]['token'] in test_challenge['blahtest1.example.org'].resource_value"
+
+    - name: test block
+      block:
+        - name: "TEST-06 telesec / http-01 / 2 domains / data_without_challenge_data"
+          debug:
+            msg: ""
+        - name: set test_challenge
+          ignore_errors: yes
+          set_fact:
+            test_challenge: "{{ data_without_challenge_data | find_challenges('http-01', ['blahtest1.example.org', 'blahtest2.example.org'], 'telesec') }}"
+          register: set_fact_result
+        - debug:
+            var: test_challenge
+          when: "debug_tests"
+        - debug: msg="{{ data_without_challenge_data['authorizations']['blahtest1.example.org']['challenges'][0]['token'] }}"
+        - debug: msg="{{ test_challenge['blahtest1.example.org'].resource_value }}"
+        - name: test assert
+          ansible.builtin.assert:
+            that:
+              - "set_fact_result is not failed"
+              - "'blahtest1.example.org' in test_challenge and 'blahtest2.example.org' in test_challenge"
+              - "data_without_challenge_data['authorizations']['blahtest1.example.org']['challenges'][1]['token'] in test_challenge['blahtest1.example.org'].resource_value"
+
+    - name: test block
+      block:
+        - name: "TEST-07 telesec / http-01 / unexpected / data_without_challenge_data"
+          debug:
+            msg: ""
+        - name: set test_challenge
+          ignore_errors: yes
+          set_fact:
+            test_challenge: "{{ data_without_challenge_data | find_challenges('http-01', ['blahtest1.example.org'], 'telesec') }}"
+          register: set_fact_result
+        - debug:
+            var: test_challenge
+          when: "debug_tests"
+        - debug: msg="{{ data_without_challenge_data['authorizations']['blahtest1.example.org']['challenges'][0]['token'] }}"
+        - debug: msg="{{ test_challenge['blahtest1.example.org'].resource_value }}"
+        - name: test assert
+          ansible.builtin.assert:
+            that:
+              - "set_fact_result is failed"

@@ -10,13 +10,13 @@
     state: present
     recordset_type: txt
     records:
-      - "\"{{ acme_challenge['challenge_data'][item]['dns-01']['resource_value'] }}\""
+      - "\"{{ acme_challenge_data[item]['dns-01']['resource_value'] }}\""
     name: _acme-challenge.{{ item | replace('*.', '') }}.
     zone: "{{ acme_domain.zone }}."
   loop: "{{ acme_domain.subject_alt_name }}"
   when:
     - acme_domain.subject_alt_name is defined
-    - acme_challenge['challenge_data'][item] is defined
+    - acme_challenge_data[item] is defined
 
 - name: Let the challenge be validated and retrieve the cert and intermediate certificate
   community.crypto.acme_certificate:
@@ -48,4 +48,4 @@
   loop: "{{ acme_domain.subject_alt_name }}"
   when:
     - acme_domain.subject_alt_name is defined
-    - acme_challenge['challenge_data'][item] is defined
+    - acme_challenge_data[item] is defined

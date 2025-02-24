@@ -14,3 +14,7 @@
     remaining_days: "{{ acme_remaining_days }}"
     validate_certs: "{{ acme_validate_certs | default(true) }}"
   register: acme_challenge
+
+- name: handle challenge data
+  set_fact:
+    acme_challenge_data: "{{ acme_challenge | find_challenges(acme_challenge_provider, acme_domain.subject_alt_name, acme_challenge_handling)"
