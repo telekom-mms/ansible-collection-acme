@@ -67,7 +67,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Run Linting
-        uses: ansible/ansible-lint@4ce8e497d462cf73b4d4fac1e97b4ace4f317dcc # 24.12.2
+        uses: ansible/ansible-lint@49ded6a7e4f3acf6b1eb4b3aa2796d84b5faa63a # 25.1.3
 
   integration-tests:
     runs-on: ubuntu-latest
@@ -111,7 +111,7 @@ jobs:
     # start nginx as service to test validation via http-challenge local path
     services:
       nginx:
-        image: nginx@sha256:bc2f6a7c8ddbccf55bdb19659ce3b0a92ca6559e86d42677a5a02ef6bda2fcef
+        image: nginx@sha256:91734281c0ebfc6f1aea979cffeed5079cfe786228a71cc6f1f46a228cde6e34
         volumes:
           - /tmp:/usr/share/nginx/html
         ports:
