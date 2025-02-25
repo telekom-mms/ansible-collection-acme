@@ -6,40 +6,40 @@
   vars:
     debug_tests: true
     data_with_challenge_data:
-      account_uri: https://acme.npp.test.telesec.de/v2/...
+      account_uri: https://ACME.telesec.de/v2/...
       authorizations:
         blahtest1.example.org:
           challenges:
           - status: pending
             token: Uwqt4U_l6lp04J2KW5nvgJ6LMPXvSrhr
             type: dns-01
-            url: https://acme.npp.test.telesec.de/v2/...
+            url: https://ACME.telesec.de/v2/...
           - status: pending
             token: ukTTEZIqv_KM9J0iEnysAaiiO31-Rpxg
             type: http-01
-            url: https://acme.npp.test.telesec.de/v2/....
+            url: https://ACME.telesec.de/v2/....
           expires: '2025-03-26T09:00:45Z'
           identifier:
             type: dns
             value: blahtest1.example.org
           status: pending
-          uri: https://acme.npp.test.telesec.de/v2/...
+          uri: https://ACME.telesec.de/v2/...
         blahtest2.example.org:
           challenges:
           - status: pending
             token: WfZ7M6gF63LZjxyqhXKyDkb3pg2NlvjFKHFTOdgd
             type: dns-01
-            url: https://acme.npp.test.telesec.de/v2/...
+            url: https://ACME.telesec.de/v2/...
           - status: pending
             token: ALKOBSIHfEBtdeDVeGj3zROeyECNNry9CD4pqwci
             type: http-01
-            url: https://acme.npp.test.telesec.de/v2/....
+            url: https://ACME.telesec.de/v2/....
           expires: '2025-03-26T09:00:45Z'
           identifier:
             type: dns
             value: blahtest2.example.org
           status: pending
-          uri: https://acme.npp.test.telesec.de/v2/...
+          uri: https://ACME.telesec.de/v2/...
       cert_days: -1
       challenge_data:
        blahtest1.example.org:
@@ -93,9 +93,9 @@
             that:
               - "set_fact_result is not failed"
               - "'blahtest1.example.org' in test_challenge and 'blahtest2.example.org' in test_challenge"
-              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['dns-01']['record'] in test_challenge['blahtest1.example.org'].record"
-              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['dns-01']['resource'] in test_challenge['blahtest1.example.org'].resource"
-              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['dns-01']['resource_value'] in test_challenge['blahtest1.example.org'].resource_value"
+              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['dns-01']['record'] in test_challenge['blahtest1.example.org']['dns-01'].record"
+              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['dns-01']['resource'] in test_challenge['blahtest1.example.org']['dns-01'].resource"
+              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['dns-01']['resource_value'] in test_challenge['blahtest1.example.org']['dns-01'].resource_value"
 
 
     - name: test block
@@ -116,8 +116,8 @@
             that:
               - "set_fact_result is not failed"
               - "'blahtest1.example.org' in test_challenge and 'blahtest2.example.org' in test_challenge"
-              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['http-01']['resource'] in test_challenge['blahtest1.example.org'].resource"
-              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['http-01']['resource_value'] in test_challenge['blahtest1.example.org'].resource_value"
+              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['http-01']['resource'] in test_challenge['blahtest1.example.org']['http-01'].resource"
+              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['http-01']['resource_value'] in test_challenge['blahtest1.example.org']['http-01'].resource_value"
 
     - name: test block
       block:
@@ -156,9 +156,9 @@
             that:
               - "set_fact_result is not failed"
               - "'blahtest1.example.org' in test_challenge and 'blahtest2.example.org' in test_challenge"
-              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['dns-01']['record'] in test_challenge['blahtest1.example.org'].record"
-              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['dns-01']['resource'] in test_challenge['blahtest1.example.org'].resource"
-              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['dns-01']['resource_value'] in test_challenge['blahtest1.example.org'].resource_value"
+              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['dns-01']['record'] in test_challenge['blahtest1.example.org']['dns-01'].record"
+              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['dns-01']['resource'] in test_challenge['blahtest1.example.org']['dns-01'].resource"
+              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['dns-01']['resource_value'] in test_challenge['blahtest1.example.org']['dns-01'].resource_value"
 
     - name: test block
       block:
@@ -178,8 +178,8 @@
             that:
               - "set_fact_result is not failed"
               - "'blahtest1.example.org' in test_challenge and 'blahtest2.example.org' in test_challenge"
-              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['http-01']['resource'] in test_challenge['blahtest1.example.org'].resource"
-              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['http-01']['resource_value'] in test_challenge['blahtest1.example.org'].resource_value"
+              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['http-01']['resource'] in test_challenge['blahtest1.example.org']['http-01'].resource"
+              - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['http-01']['resource_value'] in test_challenge['blahtest1.example.org']['http-01'].resource_value"
 
     - name: test block
       block:
@@ -199,7 +199,7 @@
             that:
               - "set_fact_result is not failed"
               - "'blahtest1.example.org' in test_challenge and 'blahtest2.example.org' in test_challenge"
-              - "data_with_challenge_data['authorizations']['blahtest1.example.org']['challenges'][0]['token'] in test_challenge['blahtest1.example.org'].resource_value"
+              - "data_with_challenge_data['authorizations']['blahtest1.example.org']['challenges'][0]['token'] in test_challenge['blahtest1.example.org']['dns-01'].resource_value"
 
     - name: test block
       block:
@@ -214,14 +214,12 @@
         - debug:
             var: test_challenge
           when: "debug_tests"
-        - debug: msg="{{ data_without_challenge_data['authorizations']['blahtest1.example.org']['challenges'][0]['token'] }}"
-        - debug: msg="{{ test_challenge['blahtest1.example.org'].resource_value }}"
         - name: test assert
           ansible.builtin.assert:
             that:
               - "set_fact_result is not failed"
               - "'blahtest1.example.org' in test_challenge and 'blahtest2.example.org' in test_challenge"
-              - "data_without_challenge_data['authorizations']['blahtest1.example.org']['challenges'][1]['token'] in test_challenge['blahtest1.example.org'].resource_value"
+              - "data_without_challenge_data['authorizations']['blahtest1.example.org']['challenges'][1]['token'] in test_challenge['blahtest1.example.org']['http-01'].resource_value"
 
     - name: test block
       block:
@@ -236,8 +234,6 @@
         - debug:
             var: test_challenge
           when: "debug_tests"
-        - debug: msg="{{ data_without_challenge_data['authorizations']['blahtest1.example.org']['challenges'][0]['token'] }}"
-        - debug: msg="{{ test_challenge['blahtest1.example.org'].resource_value }}"
         - name: test assert
           ansible.builtin.assert:
             that:
