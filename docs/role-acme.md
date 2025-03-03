@@ -43,7 +43,7 @@ Feel free to contribute more DNS or HTTP APIs :)
 | acme_use_live_directory           | no       | false   | Choose if production certificates should be created, the staging directory of LE will be used by default
 | acme_force_renewal                | no       |         | Force renewal of certificate before `remaining_days` is reached
 | acme_challenge_provider           | yes      |         | Which DNS provider should be used. See "Usage" of provider for the correct keyword
-| acme_challenge_handling           | no       | default | Changes the handling of API response (see below)  
+| acme_challenge_handling           | no       | default | Changes the handling of API response (see below)  ('default', or 'with_authorizations')
 
 ## Variables for dns-challenge
 
@@ -140,11 +140,11 @@ ACME providers seam to have slightly different formats in the Response when vali
 for a domain. To be more flexible on that, this change adds the find_challenges filter plugin which parses the data 
 into a standardized format for the challenge provider task modules.
 
-## default handling
-The default handling will search the tokens for challenge validations alway in the `challenge_data` field. An 
+## default handling (acme_challenge_handling: 'default')
+The default handling will search the tokens for challenge validations always in the `challenge_data` field. An 
 AssertionError will be raised of the data is not present.
 
-### DTAG Telesec special handling ('telesec') 
+### Handling with 'authorizations' (acme_challenge_handling: 'with_authorizations')
 The DTAG Telesec API will only respond with the challenge data in the `challenge_data` field only if the certificate
 is new, or the due date has reached. The problem with that is, that if the ansible run fails or you want to renew
 the certificate prior to the due date, the role will fail as `challenge_data` is empty. In such cases the API will

@@ -6,40 +6,40 @@
   vars:
     debug_tests: true
     data_with_challenge_data:
-      account_uri: https://ACME.telesec.de/v2/...
+      account_uri: https://ACME.with_authorizations.de/v2/...
       authorizations:
         blahtest1.example.org:
           challenges:
             - status: pending
               token: Uwqt4U_l6lp04J2KW5nvgJ6LMPXvSrhr
               type: dns-01
-              url: https://ACME.telesec.de/v2/...
+              url: https://ACME.with_authorizations.de/v2/...
             - status: pending
               token: ukTTEZIqv_KM9J0iEnysAaiiO31-Rpxg
               type: http-01
-              url: https://ACME.telesec.de/v2/....
+              url: https://ACME.with_authorizations.de/v2/....
           expires: '2025-03-26T09:00:45Z'
           identifier:
             type: dns
             value: blahtest1.example.org
           status: pending
-          uri: https://ACME.telesec.de/v2/...
+          uri: https://ACME.with_authorizations.de/v2/...
         blahtest2.example.org:
           challenges:
             - status: pending
               token: WfZ7M6gF63LZjxyqhXKyDkb3pg2NlvjFKHFTOdgd
               type: dns-01
-              url: https://ACME.telesec.de/v2/...
+              url: https://ACME.with_authorizations.de/v2/...
             - status: pending
               token: ALKOBSIHfEBtdeDVeGj3zROeyECNNry9CD4pqwci
               type: http-01
-              url: https://ACME.telesec.de/v2/....
+              url: https://ACME.with_authorizations.de/v2/....
           expires: '2025-03-26T09:00:45Z'
           identifier:
             type: dns
             value: blahtest2.example.org
           status: pending
-          uri: https://ACME.telesec.de/v2/...
+          uri: https://ACME.with_authorizations.de/v2/...
       cert_days: -1
       challenge_data:
         blahtest1.example.org:
@@ -87,7 +87,7 @@
         - name: Set test_challenge
           ignore_errors: true
           ansible.builtin.set_fact:
-            test_challenge: "{{ data_with_challenge_data | find_challenges('dns-01', ['blahtest1.example.org', 'blahtest2.example.org'], 'default') }}"
+            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('dns-01', ['blahtest1.example.org', 'blahtest2.example.org'], 'default') }}"
           register: set_fact_result
         - name: Printout test challenge
           ansible.builtin.debug:
@@ -111,7 +111,7 @@
         - name: Set test_challenge
           ignore_errors: true
           ansible.builtin.set_fact:
-            test_challenge: "{{ data_with_challenge_data | find_challenges('http-01', ['blahtest1.example.org', 'blahtest2.example.org'], 'default') }}"
+            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('http-01', ['blahtest1.example.org', 'blahtest2.example.org'], 'default') }}"
           register: set_fact_result
         - name: Printout test challenge
           ansible.builtin.debug:
@@ -127,13 +127,13 @@
 
     - name: Test block
       block:
-        - name: "TEST-03 default / dns-01 / unexpected"
+        - name: "TEST-03-1 default / dns-01 / expect less then provided"
           ansible.builtin.debug:
             msg: ""
         - name: Set test_challenge
           ignore_errors: true
           ansible.builtin.set_fact:
-            test_challenge: "{{ data_with_challenge_data | find_challenges('dns-01', ['blahtest1.example.org'], 'default') }}"
+            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('dns-01', ['blahtest1.example.org'], 'default') }}"
           register: set_fact_result
         - name: Printout test challenge
           ansible.builtin.debug:
@@ -143,17 +143,37 @@
           ansible.builtin.assert:
             that:
               - "set_fact_result is failed"
-              - "'Unexpected challenges found:' in set_fact_result.msg"
+              - "'The API responded with dns-01 challenges for the following domains we did not expect:' in set_fact_result.msg"
 
     - name: Test block
       block:
-        - name: "TEST-04 telesec / dns-01 / 2 domains / data_with_challenge_data"
+        - name: "TEST-03-2 default / dns-01 / expect more than provided"
           ansible.builtin.debug:
             msg: ""
         - name: Set test_challenge
           ignore_errors: true
           ansible.builtin.set_fact:
-            test_challenge: "{{ data_with_challenge_data | find_challenges('dns-01', ['blahtest1.example.org', 'blahtest2.example.org'], 'telesec') }}"
+            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('dns-01', ['blahtest1.example.org', 'blahtest2.example.org', 'one.more.is.one.too.many'], 'default') }}"
+          register: set_fact_result
+        - name: Printout test challenge
+          ansible.builtin.debug:
+            var: test_challenge
+          when: "debug_tests"
+        - name: Test assert
+          ansible.builtin.assert:
+            that:
+              - "set_fact_result is failed"
+              - "'Expected dns-01 challenges for the following domains not found: one.more.is.one.too.many' in set_fact_result.msg"
+
+    - name: Test block
+      block:
+        - name: "TEST-04 with_authorizations / dns-01 / 2 domains / data_with_challenge_data"
+          ansible.builtin.debug:
+            msg: ""
+        - name: Set test_challenge
+          ignore_errors: true
+          ansible.builtin.set_fact:
+            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('dns-01', ['blahtest1.example.org', 'blahtest2.example.org'], 'with_authorizations') }}"
           register: set_fact_result
         - name: Printout test challenge
           ansible.builtin.debug:
@@ -170,13 +190,13 @@
 
     - name: Test block
       block:
-        - name: "TEST-04 telesec / http-01 / 2 domains / data_with_challenge_data"
+        - name: "TEST-04 with_authorizations / http-01 / 2 domains / data_with_challenge_data"
           ansible.builtin.debug:
             msg: ""
         - name: Set test_challenge
           ignore_errors: true
           ansible.builtin.set_fact:
-            test_challenge: "{{ data_with_challenge_data | find_challenges('http-01', ['blahtest1.example.org', 'blahtest2.example.org'], 'telesec') }}"
+            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('http-01', ['blahtest1.example.org', 'blahtest2.example.org'], 'with_authorizations') }}"
           register: set_fact_result
         - name: Printout test challenge
           ansible.builtin.debug:
@@ -192,13 +212,13 @@
 
     - name: Test block
       block:
-        - name: "TEST-05 telesec / dns-01 / 2 domains / data_without_challenge_data"
+        - name: "TEST-05 with_authorizations / dns-01 / 2 domains / data_without_challenge_data"
           ansible.builtin.debug:
             msg: ""
         - name: Set test_challenge
           ignore_errors: true
           ansible.builtin.set_fact:
-            test_challenge: "{{ data_without_challenge_data | find_challenges('dns-01', ['blahtest1.example.org', 'blahtest2.example.org'], 'telesec') }}"
+            test_challenge: "{{ data_without_challenge_data | telekom_mms.acme.find_challenges('dns-01', ['blahtest1.example.org', 'blahtest2.example.org'], 'with_authorizations') }}"
           register: set_fact_result
         - name: Printout test challenge
           ansible.builtin.debug:
@@ -213,13 +233,13 @@
 
     - name: Test block
       block:
-        - name: "TEST-06 telesec / http-01 / 2 domains / data_without_challenge_data"
+        - name: "TEST-06 with_authorizations / http-01 / 2 domains / data_without_challenge_data"
           ansible.builtin.debug:
             msg: ""
         - name: Set test_challenge
           ignore_errors: true
           ansible.builtin.set_fact:
-            test_challenge: "{{ data_without_challenge_data | find_challenges('http-01', ['blahtest1.example.org', 'blahtest2.example.org'], 'telesec') }}"
+            test_challenge: "{{ data_without_challenge_data | telekom_mms.acme.find_challenges('http-01', ['blahtest1.example.org', 'blahtest2.example.org'], 'with_authorizations') }}"
           register: set_fact_result
         - name: Printout test challenge
           ansible.builtin.debug:
@@ -234,13 +254,13 @@
 
     - name: Test block
       block:
-        - name: "TEST-07 telesec / http-01 / unexpected / data_without_challenge_data"
+        - name: "TEST-07 with_authorizations / http-01 / unexpected / data_without_challenge_data"
           ansible.builtin.debug:
             msg: ""
         - name: Set test_challenge
           ignore_errors: true
           ansible.builtin.set_fact:
-            test_challenge: "{{ data_without_challenge_data | find_challenges('http-01', ['blahtest1.example.org'], 'telesec') }}"
+            test_challenge: "{{ data_without_challenge_data | telekom_mms.acme.find_challenges('http-01', ['blahtest1.example.org'], 'with_authorizations') }}"
           register: set_fact_result
         - name: Printout test challenge
           ansible.builtin.debug:
