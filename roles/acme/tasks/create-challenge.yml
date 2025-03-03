@@ -1,5 +1,5 @@
 ---
-- name: create-challenge block
+- name: Create-challenge block
   vars:
     # e.g. acme_provider_path is "challenge/http-01/s3.yml" > dirname is "challenge/http-01" > basename is "http-01"
     challenge_type: "{{ acme_provider_path | dirname | basename }}"
@@ -19,6 +19,6 @@
         validate_certs: "{{ acme_validate_certs | default(true) }}"
       register: acme_challenge
 
-    - name: handle challenge data
-      set_fact:
+    - name: Handle challenge data
+      ansible.builtin.set_fact:
         acme_challenge_data: "{{ acme_challenge | telekom_mms.acme.find_challenges(challenge_type, acme_domain.subject_alt_name, acme_challenge_handling) }}"
