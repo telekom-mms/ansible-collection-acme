@@ -18,7 +18,7 @@
         record: "{{ record_name }}"
         value: "{{ record_data }}"
         type: "TXT"
-        ttl: "120"
+        ttl: "{{ acme_nsupdate_ttl }}"
       loop: "{{ acme_domain.subject_alt_name }}"
       loop_control:
         label: "zone={{ domain | replace('*.', '') }} rr={{ record_name }} (TXT) {{ record_data }}"
@@ -65,7 +65,7 @@
         record: "{{ record_name }}"
         value: "{{ record_data }}"
         type: "TXT"
-        ttl: "120"
+        ttl: "{{ acme_nsupdate_ttl }}"
         state: absent
       loop: "{{ acme_domain.subject_alt_name }}"
       loop_control:
