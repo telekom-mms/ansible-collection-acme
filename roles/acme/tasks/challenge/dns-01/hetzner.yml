@@ -21,7 +21,7 @@
                      {{ (item | replace('*.', '')).split('.')[:-2] | join('.') }}",
             "ttl": 60,
             "type": "TXT",
-            "value": "{{ acme_challenge['challenge_data'][item]['dns-01']['resource_value'] }}",
+            "value": "{{ acme_challenge_data[item]['dns-01']['resource_value'] }}",
             "zone_id": "{{ acme_lookup_zone_id.json.zones[0].id }}",
           }
         headers:
@@ -31,13 +31,14 @@
       when:
         - acme_domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
-        - acme_challenge['challenge_data'][item] is defined
+        - acme_challenge_data[item] is defined
 
     - name: Wait 20 seconds
       ansible.builtin.pause:
         seconds: 20
 
     - name: Let the challenge be validated and retrieve the cert and intermediate certificate
+      timeout: "{{ acme_challenge_timeout }}"
       community.crypto.acme_certificate:
         account_key_src: "{{ acme_account_key_path }}"
         account_email: "{{ acme_account_email }}"
