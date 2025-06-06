@@ -33,6 +33,7 @@
         mode: put
         region: "{{ acme_s3_config_region }}"
         permission: public-read
+        endpoint_url: "{{ acme_s3_endpoint_url | default(omit) }}"
       loop: "{{ acme_domain.subject_alt_name }}"
       when:
         - acme_domain.subject_alt_name is defined
