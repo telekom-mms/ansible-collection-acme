@@ -9,12 +9,12 @@
     state: present
     record_type: TXT
     records:
-      - entry: "{{ acme_challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
+      - entry: "{{ acme_challenge_data[item]['dns-01']['resource_value'] }}"
   loop: "{{ acme_domain.subject_alt_name.top_level }}"
   when:
     - acme_domain.subject_alt_name.top_level is defined
     # only runs if the challenge is run the first time, because then there is challenge_data
-    - acme_challenge['challenge_data'][item] is defined
+    - acme_challenge_data[item] is defined
 
 # split second_level for zone_name and if subdomain is defined add subdomain to relative_name
 - name: Add a new TXT record to the SAN second-level domains
@@ -26,14 +26,15 @@
     state: present
     record_type: TXT
     records:
-      - entry: "{{ acme_challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
+      - entry: "{{ acme_challenge_data[item]['dns-01']['resource_value'] }}"
   loop: "{{ acme_domain.subject_alt_name.second_level }}"
   when:
     - acme_domain.subject_alt_name.second_level is defined
     # only runs if the challenge is run the first time, because then there is challenge_data
-    - acme_challenge['challenge_data'][item] is defined
+    - acme_challenge_data[item] is defined
 
 - name: Let the challenge be validated and retrieve the cert and intermediate certificate
+  timeout: "{{ acme_challenge_timeout }}"
   community.crypto.acme_certificate:
     account_key_src: "{{ acme_account_key_path }}"
     account_email: "{{ acme_account_email }}"
@@ -58,12 +59,12 @@
     state: "{{ acme_azure_purge_state }}"
     record_type: TXT
     records:
-      - entry: "{{ acme_challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
+      - entry: "{{ acme_challenge_data[item]['dns-01']['resource_value'] }}"
   loop: "{{ acme_domain.subject_alt_name.top_level }}"
   when:
     - acme_domain.subject_alt_name.top_level is defined
     # only runs if the challenge is run the first time, because then there is challenge_data
-    - acme_challenge['challenge_data'][item] is defined
+    - acme_challenge_data[item] is defined
 
 - name: Remove created SAN second-level TXT records to keep DNS zone clean
   azure.azcollection.azure_rm_dnsrecordset:
@@ -74,9 +75,9 @@
     state: "{{ acme_azure_purge_state }}"
     record_type: TXT
     records:
-      - entry: "{{ acme_challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
+      - entry: "{{ acme_challenge_data[item]['dns-01']['resource_value'] }}"
   loop: "{{ acme_domain.subject_alt_name.second_level }}"
   when:
     - acme_domain.subject_alt_name.second_level is defined
     # only runs if the challenge is run the first time, because then there is challenge_data
-    - acme_challenge['challenge_data'][item] is defined
+    - acme_challenge_data[item] is defined
