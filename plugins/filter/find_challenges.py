@@ -1,9 +1,8 @@
 from ansible.errors import AnsibleError
 
 
-def find_challenges(challenge_response: dict, challenge_type: str, expected_domains: list,
-                    challenge_data_type: str = 'default') -> dict:
-    challenges = build_challenges(challenge_response, challenge_type, challenge_data_type)
+def find_challenges(challenge_response: dict, challenge_type: str, expected_domains: list) -> dict:
+    challenges = build_challenges(challenge_response, challenge_type)
 
     if set(challenges.keys()) == set(expected_domains):
         return challenges
@@ -23,28 +22,14 @@ def find_challenges(challenge_response: dict, challenge_type: str, expected_doma
             raise AnsibleError(" // ".join(errors))
 
 
-def build_challenges(challenge_response: dict, challenge_type: str, challenge_data_type: str = 'default') -> dict:
+def build_challenges(challenge_response: dict, challenge_type: str) -> dict:
     if challenge_type not in ['http-01', 'dns-01']:
         raise AssertionError(f"Unknown challenge_type ({challenge_type})")
 
-    if challenge_data_type == 'default':
-        if 'challenge_data' not in challenge_response:
-            raise AssertionError("'challenge_data' field not in response.")
-
+    if len(challenge_response['challenge_data']) > 0:
         return extract_challenges_from_challenge_data(challenge_response, challenge_type)
-
-    elif challenge_data_type == 'with_authorizations':
-        if 'challenge_data' not in challenge_response:
-            raise AssertionError("'challenge_data' missing in API response")
-        if 'authorizations' not in challenge_response:
-            raise AssertionError("'authorizations' missing in API response")
-
-        if len(challenge_response['challenge_data']) > 0:
-            return extract_challenges_from_challenge_data(challenge_response, challenge_type)
-        else:
-            return extract_challenges_from_authorizations_data(challenge_response, challenge_type)
     else:
-        raise AnsibleError(f"invalid challenge_data_type {challenge_data_type}")
+        return extract_challenges_from_authorizations_data(challenge_response, challenge_type)
 
 
 def extract_challenges_from_challenge_data(challenge_response: dict, challenge_type: str) -> dict:

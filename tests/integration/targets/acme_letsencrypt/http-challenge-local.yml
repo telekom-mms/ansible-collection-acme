@@ -21,7 +21,6 @@
     acme_account_email: ssl-admin@example.de
     acme_staging_directory: https://localhost:14000/dir
     acme_validate_certs: false
-    acme_debug: true
   post_tasks:
     - name: Validate certificate signing request
       community.crypto.openssl_csr_info:

@@ -4,7 +4,6 @@
   hosts: localhost
   gather_facts: false
   vars:
-    debug_tests: true
     data_with_challenge_data:
       account_uri: https://ACME.with_authorizations.de/v2/...
       authorizations:
@@ -67,32 +66,16 @@
     - name: Data_without_challenge_data
       ansible.builtin.set_fact:
         data_without_challenge_data: "{{ data_with_challenge_data | combine({'challenge_data': {}, 'challenge_data_dns': {}}) }}"
-    - name: Print test data
-      when: "debug_tests"
-      block:
-        - name: Printout test challenge
-          ansible.builtin.debug:
-            var: data_with_challenge_data
-        - name: Printout test challenge
-          ansible.builtin.debug:
-            var: data_without_challenge_data
   tasks:
 
     # ---
-    - name: Test block
+    - name: TEST-01 default / dns-01 / 2 domains
       block:
-        - name: "TEST-01 default / dns-01 / 2 domains"
-          ansible.builtin.debug:
-            msg: ""
         - name: Set test_challenge
           ignore_errors: true
           ansible.builtin.set_fact:
-            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('dns-01', ['blahtest1.example.org', 'blahtest2.example.org'], 'default') }}"
+            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('dns-01', ['blahtest1.example.org', 'blahtest2.example.org']) }}"
           register: set_fact_result
-        - name: Printout test challenge
-          ansible.builtin.debug:
-            var: test_challenge
-          when: "debug_tests"
         - name: Test assert
           ansible.builtin.assert:
             that:
@@ -103,20 +86,13 @@
               - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['dns-01']['resource_value'] in test_challenge['blahtest1.example.org']['dns-01'].resource_value"
 
 
-    - name: Test block
+    - name: TEST-02 default / http-01 / 2 domains
       block:
-        - name: "TEST-02 default / http-01 / 2 domains"
-          ansible.builtin.debug:
-            msg: ""
         - name: Set test_challenge
           ignore_errors: true
           ansible.builtin.set_fact:
-            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('http-01', ['blahtest1.example.org', 'blahtest2.example.org'], 'default') }}"
+            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('http-01', ['blahtest1.example.org', 'blahtest2.example.org']) }}"
           register: set_fact_result
-        - name: Printout test challenge
-          ansible.builtin.debug:
-            var: test_challenge
-          when: "debug_tests"
         - name: Test assert
           ansible.builtin.assert:
             that:
@@ -125,60 +101,39 @@
               - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['http-01']['resource'] in test_challenge['blahtest1.example.org']['http-01'].resource"
               - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['http-01']['resource_value'] in test_challenge['blahtest1.example.org']['http-01'].resource_value"
 
-    - name: Test block
+    - name: TEST-03-1 default / dns-01 / expect less then provided
       block:
-        - name: "TEST-03-1 default / dns-01 / expect less then provided"
-          ansible.builtin.debug:
-            msg: ""
         - name: Set test_challenge
           ignore_errors: true
           ansible.builtin.set_fact:
-            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('dns-01', ['blahtest1.example.org'], 'default') }}"
+            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('dns-01', ['blahtest1.example.org']) }}"
           register: set_fact_result
-        - name: Printout test challenge
-          ansible.builtin.debug:
-            var: test_challenge
-          when: "debug_tests"
         - name: Test assert
           ansible.builtin.assert:
             that:
               - "set_fact_result is failed"
               - "'The API responded with dns-01 challenges for the following domains we did not expect:' in set_fact_result.msg"
 
-    - name: Test block
+    - name: TEST-03-2 default / dns-01 / expect more than provided
       block:
-        - name: "TEST-03-2 default / dns-01 / expect more than provided"
-          ansible.builtin.debug:
-            msg: ""
         - name: Set test_challenge
           ignore_errors: true
           ansible.builtin.set_fact:
-            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('dns-01', ['blahtest1.example.org', 'blahtest2.example.org', 'one.more.is.one.too.many'], 'default') }}"
+            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('dns-01', ['blahtest1.example.org', 'blahtest2.example.org', 'one.more.is.one.too.many']) }}"
           register: set_fact_result
-        - name: Printout test challenge
-          ansible.builtin.debug:
-            var: test_challenge
-          when: "debug_tests"
         - name: Test assert
           ansible.builtin.assert:
             that:
               - "set_fact_result is failed"
               - "'Expected dns-01 challenges for the following domains not found: one.more.is.one.too.many' in set_fact_result.msg"
 
-    - name: Test block
+    - name: TEST-04 with_authorizations / dns-01 / 2 domains / data_with_challenge_data
       block:
-        - name: "TEST-04 with_authorizations / dns-01 / 2 domains / data_with_challenge_data"
-          ansible.builtin.debug:
-            msg: ""
         - name: Set test_challenge
           ignore_errors: true
           ansible.builtin.set_fact:
-            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('dns-01', ['blahtest1.example.org', 'blahtest2.example.org'], 'with_authorizations') }}"
+            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('dns-01', ['blahtest1.example.org', 'blahtest2.example.org']) }}"
           register: set_fact_result
-        - name: Printout test challenge
-          ansible.builtin.debug:
-            var: test_challenge
-          when: "debug_tests"
         - name: Test assert
           ansible.builtin.assert:
             that:
@@ -188,20 +143,13 @@
               - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['dns-01']['resource'] in test_challenge['blahtest1.example.org']['dns-01'].resource"
               - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['dns-01']['resource_value'] in test_challenge['blahtest1.example.org']['dns-01'].resource_value"
 
-    - name: Test block
+    - name: TEST-04 with_authorizations / http-01 / 2 domains / data_with_challenge_data
       block:
-        - name: "TEST-04 with_authorizations / http-01 / 2 domains / data_with_challenge_data"
-          ansible.builtin.debug:
-            msg: ""
         - name: Set test_challenge
           ignore_errors: true
           ansible.builtin.set_fact:
-            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('http-01', ['blahtest1.example.org', 'blahtest2.example.org'], 'with_authorizations') }}"
+            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('http-01', ['blahtest1.example.org', 'blahtest2.example.org']) }}"
           register: set_fact_result
-        - name: Printout test challenge
-          ansible.builtin.debug:
-            var: test_challenge
-          when: "debug_tests"
         - name: Test assert
           ansible.builtin.assert:
             that:
@@ -210,20 +158,13 @@
               - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['http-01']['resource'] in test_challenge['blahtest1.example.org']['http-01'].resource"
               - "data_with_challenge_data['challenge_data']['blahtest1.example.org']['http-01']['resource_value'] in test_challenge['blahtest1.example.org']['http-01'].resource_value"
 
-    - name: Test block
+    - name: TEST-05 with_authorizations / dns-01 / 2 domains / data_without_challenge_data
       block:
-        - name: "TEST-05 with_authorizations / dns-01 / 2 domains / data_without_challenge_data"
-          ansible.builtin.debug:
-            msg: ""
         - name: Set test_challenge
           ignore_errors: true
           ansible.builtin.set_fact:
-            test_challenge: "{{ data_without_challenge_data | telekom_mms.acme.find_challenges('dns-01', ['blahtest1.example.org', 'blahtest2.example.org'], 'with_authorizations') }}"
+            test_challenge: "{{ data_without_challenge_data | telekom_mms.acme.find_challenges('dns-01', ['blahtest1.example.org', 'blahtest2.example.org']) }}"
           register: set_fact_result
-        - name: Printout test challenge
-          ansible.builtin.debug:
-            var: test_challenge
-          when: "debug_tests"
         - name: Test assert
           ansible.builtin.assert:
             that:
@@ -231,20 +172,13 @@
               - "'blahtest1.example.org' in test_challenge and 'blahtest2.example.org' in test_challenge"
               - "data_with_challenge_data['authorizations']['blahtest1.example.org']['challenges'][0]['token'] in test_challenge['blahtest1.example.org']['dns-01'].resource_value"
 
-    - name: Test block
+    - name: TEST-06 with_authorizations / http-01 / 2 domains / data_without_challenge_data
       block:
-        - name: "TEST-06 with_authorizations / http-01 / 2 domains / data_without_challenge_data"
-          ansible.builtin.debug:
-            msg: ""
         - name: Set test_challenge
           ignore_errors: true
           ansible.builtin.set_fact:
-            test_challenge: "{{ data_without_challenge_data | telekom_mms.acme.find_challenges('http-01', ['blahtest1.example.org', 'blahtest2.example.org'], 'with_authorizations') }}"
+            test_challenge: "{{ data_without_challenge_data | telekom_mms.acme.find_challenges('http-01', ['blahtest1.example.org', 'blahtest2.example.org']) }}"
           register: set_fact_result
-        - name: Printout test challenge
-          ansible.builtin.debug:
-            var: test_challenge
-          when: "debug_tests"
         - name: Test assert
           ansible.builtin.assert:
             that:
@@ -252,20 +186,13 @@
               - "'blahtest1.example.org' in test_challenge and 'blahtest2.example.org' in test_challenge"
               - "data_without_challenge_data['authorizations']['blahtest1.example.org']['challenges'][1]['token'] in test_challenge['blahtest1.example.org']['http-01'].resource_value"
 
-    - name: Test block
+    - name: TEST-07 with_authorizations / http-01 / unexpected / data_without_challenge_data
       block:
-        - name: "TEST-07 with_authorizations / http-01 / unexpected / data_without_challenge_data"
-          ansible.builtin.debug:
-            msg: ""
         - name: Set test_challenge
           ignore_errors: true
           ansible.builtin.set_fact:
-            test_challenge: "{{ data_without_challenge_data | telekom_mms.acme.find_challenges('http-01', ['blahtest1.example.org'], 'with_authorizations') }}"
+            test_challenge: "{{ data_without_challenge_data | telekom_mms.acme.find_challenges('http-01', ['blahtest1.example.org']) }}"
           register: set_fact_result
-        - name: Printout test challenge
-          ansible.builtin.debug:
-            var: test_challenge
-          when: "debug_tests"
         - name: Test assert
           ansible.builtin.assert:
             that:

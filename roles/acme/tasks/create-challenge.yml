@@ -19,29 +19,7 @@
         validate_certs: "{{ acme_validate_certs | default(true) }}"
       register: acme_challenge
 
-    - name: Handle block
-      block:
-        - name: Handle challenge data # noqa no-handler
-          ansible.builtin.set_fact:
-            acme_challenge_data: "{{ acme_challenge | telekom_mms.acme.find_challenges(challenge_type, acme_domain.subject_alt_name, acme_challenge_handling) }}"
-          when: 'acme_challenge is changed'
-      rescue:
-        - name: Debug block
-          when: "acme_debug"
-          ignore_errors: true # noqa ignore-errors
-          block:
-            - name: Print data on failure
-              ansible.builtin.debug:
-                var: challenge_type
-            - name: Print data on failure
-              ansible.builtin.debug:
-                var: acme_challenge_handling
-            - name: Print data on failure
-              ansible.builtin.debug:
-                var: acme_domain
-            - name: Print data on failure
-              ansible.builtin.debug:
-                var: acme_challenge
-        - name: Fail on handler fail
-          ansible.builtin.fail:
-            msg: "Failed to handle API response on 'create challenge' request to api for certificate {{ acme_domain.certificate_name }}"
+    - name: Handle challenge data # noqa no-handler
+      ansible.builtin.set_fact:
+        acme_challenge_data: "{{ acme_challenge | telekom_mms.acme.find_challenges(challenge_type, acme_domain.subject_alt_name) }}"
+      when: 'acme_challenge is changed'
