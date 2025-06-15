@@ -30,3 +30,8 @@
         that:
           - "'DNS:example.de' in result.subject_alt_name"
           - "'Pebble Intermediate CA' in result.issuer.commonName"
+
+    - name: Remove account identifier, to avoid cache problems in CI
+      ansible.builtin.file:
+        path: "{{ acme_account_key_path }}"
+        state: absent
