@@ -1,18 +1,18 @@
 ---
-- name: Create the certificate for example.com with dns-challenge provider "pebble"
+- name: Create the certificate for example.de with dns-challenge provider "pebble"
   hosts: localhost
   roles:
     - telekom_mms.acme.acme
   vars:
     acme_domain:
-      certificate_name: dns-pebble.example.com
-      zone: example.com
-      email_address: ssl-admin@example.com
+      certificate_name: dns-pebble.example.de
+      zone: example.de
+      email_address: ssl-admin@example.de
       subject_alt_name:
-        - example.com
+        - example.de
     acme_challenge_provider: pebble
     acme_use_live_directory: false
-    acme_account_email: ssl-admin@example.com
+    acme_account_email: ssl-admin@example.de
     acme_staging_directory: https://localhost:14000/dir
     acme_validate_certs: false
   post_tasks:
@@ -28,5 +28,10 @@
     - name: Check if the certificate is correct
       ansible.builtin.assert:
         that:
-          - "'DNS:example.com' in result.subject_alt_name"
+          - "'DNS:example.de' in result.subject_alt_name"
           - "'Pebble Intermediate CA' in result.issuer.commonName"
+
+    - name: Remove account identifier, to avoid cache problems in CI
+      ansible.builtin.file:
+        path: "{{ acme_account_key_path }}"
+        state: absent
