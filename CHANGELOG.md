@@ -1,11 +1,16 @@
 # Changelog
 
-## [4.2.1](https://github.com/telekom-mms/ansible-collection-acme/tree/4.2.1) (2025-05-27)
+## [4.3.0](https://github.com/telekom-mms/ansible-collection-acme/tree/4.3.0) (2025-06-16)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/4.2.0...4.2.1)
+[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/4.2.0...4.3.0)
+
+**Implemented enhancements:**
+
+- Use challenge\_data and authorizations from ACME API validation response [\#171](https://github.com/telekom-mms/ansible-collection-acme/pull/171) ([diLLec](https://github.com/diLLec))
 
 **Merged pull requests:**
 
+- chore\(deps\): update nginx docker digest to 6784fb0 [\#183](https://github.com/telekom-mms/ansible-collection-acme/pull/183) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update ansible/ansible-lint action to v25.5.0 [\#182](https://github.com/telekom-mms/ansible-collection-acme/pull/182) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update nginx docker digest to fb39280 [\#181](https://github.com/telekom-mms/ansible-collection-acme/pull/181) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update nginx docker digest to c15da6c [\#180](https://github.com/telekom-mms/ansible-collection-acme/pull/180) ([renovate[bot]](https://github.com/apps/renovate))
