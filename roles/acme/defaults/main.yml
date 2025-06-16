@@ -23,6 +23,7 @@ acme_private_key_size: "4096"
 acme_private_key_type: "ECC"
 acme_private_key_curve: "secp384r1"
 acme_remaining_days: "30"
+acme_challenge_timeout: 3600
 
 ### provider specific config
 acme_s3_config_region: eu-west-1
@@ -33,6 +34,7 @@ acme_azure_purge_state: absent
 ### DNS nsupdate challenge parameters
 acme_nsupdate_replication_delay: 2
 acme_nsupdate_server: 192.168.1.1
+acme_nsupdate_ttl: 60
 acme_nsupdate_dns_key:
     name: 'nsupdate_key'
     algorithm: hmac-sha512

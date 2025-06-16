@@ -15,29 +15,30 @@
     - name: Create challenge file with SAN domain for s3 upload # noqa template-instead-of-copy
       ansible.builtin.copy:
         dest: acme-challenge.{{ item }}
-        content: "{{ acme_challenge['challenge_data'][item]['http-01']['resource_value'] }}"
+        content: "{{ acme_challenge_data[item]['http-01']['resource_value'] }}"
         mode: "0640"
       loop: "{{ acme_domain.subject_alt_name }}"
       when:
         - acme_domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
-        - acme_challenge['challenge_data'][item] is defined
+        - acme_challenge_data[item] is defined
 
     - name: Upload challenge file for SAN domain to s3 bucket
       amazon.aws.s3_object:
         access_key: "{{ acme_s3_access_key }}"
         secret_key: "{{ acme_s3_secret_key }}"
         bucket: "{{ acme_s3_bucket_name }}"
-        object: "{{ acme_challenge['challenge_data'][item]['http-01']['resource'] }}"
+        object: "{{ acme_challenge_data[item]['http-01']['resource'] }}"
         src: acme-challenge.{{ item }}
         mode: put
         region: "{{ acme_s3_config_region }}"
         permission: public-read
+        endpoint_url: "{{ acme_s3_endpoint_url | default(omit) }}"
       loop: "{{ acme_domain.subject_alt_name }}"
       when:
         - acme_domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
-        - acme_challenge['challenge_data'][item] is defined
+        - acme_challenge_data[item] is defined
 
     # validate certificate
     - name: Let the challenge be validated and retrieve the cert and intermediate certificate
@@ -61,14 +62,14 @@
         access_key: "{{ acme_s3_access_key }}"
         secret_key: "{{ acme_s3_secret_key }}"
         bucket: "{{ acme_s3_bucket_name }}"
-        object: "{{ acme_challenge['challenge_data'][item]['http-01']['resource'] }}"
+        object: "{{ acme_challenge_data[item]['http-01']['resource'] }}"
         mode: delobj
         region: "{{ acme_s3_config_region }}"
       loop: "{{ acme_domain.subject_alt_name }}"
       when:
         - acme_domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
-        - acme_challenge['challenge_data'][item] is defined
+        - acme_challenge_data[item] is defined
 
     - name: Remove challenge file for SAN domain from fs
       ansible.builtin.file:
@@ -78,4 +79,4 @@
       when:
         - acme_domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
-        - acme_challenge['challenge_data'][item] is defined
+        - acme_challenge_data[item] is defined

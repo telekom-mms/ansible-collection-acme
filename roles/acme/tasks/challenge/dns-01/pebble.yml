@@ -14,15 +14,16 @@
         body:
           {
             "host": "_acme-challenge.{{ item }}.",
-            "value": "{{ acme_challenge['challenge_data'][item]['dns-01']['resource_value'] }}"
+            "value": "{{ acme_challenge_data[item]['dns-01']['resource_value'] }}"
           }
       loop: "{{ acme_domain.subject_alt_name }}"
       when:
         - acme_domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
-        - acme_challenge['challenge_data'][item] is defined
+        - acme_challenge_data[item] is defined
 
     - name: Let the challenge be validated and retrieve the cert and intermediate certificate
+      timeout: "{{ acme_challenge_timeout }}"
       community.crypto.acme_certificate:
         account_key_src: "{{ acme_account_key_path }}"
         account_email: "{{ acme_account_email }}"

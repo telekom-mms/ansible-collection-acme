@@ -9,6 +9,7 @@
 | acme_nsupdate_dns_key: algorithm: | no       | hmac-sha512  | Hash algo of the key (i.e. hmac-sha512, hmac-sha256)                                                                                |
 | acme_nsupdate_dns_key: secret:    | yes      |              | The key                                                                                                                             |
 | acme_nsupdate_replication_delay   | no       | 2            | Wait time after the TXT record is issued, before the certificate is fetched via ACME                                                |
+| acme_nsupdate_ttl                 | no       | 60           | The TTL for the TXT record                                                                                                          |
 
 ## Usage
 
