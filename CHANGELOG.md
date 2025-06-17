@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.3.1](https://github.com/telekom-mms/ansible-collection-acme/tree/4.3.1) (2025-06-17)
+
+[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/4.3.0...4.3.1)
+
+**Fixed bugs:**
+
+- \[Bug\] Handle half validated requests with multiple domains [\#185](https://github.com/telekom-mms/ansible-collection-acme/pull/185) ([diLLec](https://github.com/diLLec))
+
 ## [4.3.0](https://github.com/telekom-mms/ansible-collection-acme/tree/4.3.0) (2025-06-16)
 
 [Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/4.2.0...4.3.0)
