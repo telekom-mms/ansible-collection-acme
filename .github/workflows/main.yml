@@ -44,7 +44,7 @@ jobs:
           path: ansible_collections/telekom_mms/acme
 
       - name: Set up Python ${{ matrix.ansible }}
-        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: ${{ matrix.python }}
 
@@ -67,7 +67,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Run Linting
-        uses: ansible/ansible-lint@49ded6a7e4f3acf6b1eb4b3aa2796d84b5faa63a # 25.1.3
+        uses: ansible/ansible-lint@4114ad63edbc25dcd9afc4f41b29dbcbebdf21ca # 25.5.0
 
   integration-tests:
     runs-on: ubuntu-latest
@@ -111,7 +111,7 @@ jobs:
     # start nginx as service to test validation via http-challenge local path
     services:
       nginx:
-        image: nginx@sha256:9d6b58feebd2dbd3c56ab5853333d627cc6e281011cfd6050fa4bcf2072c9496
+        image: nginx@sha256:6784fb0834aa7dbbe12e3d7471e69c290df3e6ba810dc38b34ae33d3c1c05f7d
         volumes:
           - /tmp:/usr/share/nginx/html
         ports:
@@ -138,7 +138,7 @@ jobs:
         run: docker restart ${{ job.services.nginx.id }}
 
       - name: Set up Python ${{ matrix.ansible }}
-        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: ${{ matrix.python }}
 
