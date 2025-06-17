@@ -197,3 +197,71 @@
           ansible.builtin.assert:
             that:
               - "set_fact_result is failed"
+
+    - name: TEST-08 with_mixed_challenge_and_authorizations / http-01
+      vars:
+        # blahtest1 is "valid" and therefore can't be found in the "challenge_data"
+        data_with_mixed_challenge_data:
+          account_uri: https://ACME.with_authorizations.de/v2/...
+          authorizations:
+            blahtest1.example.org:
+              challenges:
+                - status: valid
+                  token: Uwqt4U_l6lp04J2KW5nvgJ6LMPXvSrhr
+                  type: dns-01
+                  url: https://ACME.with_authorizations.de/v2/...
+                - status: valid
+                  token: ukTTEZIqv_KM9J0iEnysAaiiO31-Rpxg
+                  type: http-01
+                  url: https://ACME.with_authorizations.de/v2/....
+              expires: '2025-03-26T09:00:45Z'
+              identifier:
+                type: dns
+                value: blahtest1.example.org
+              status: pending
+              uri: https://ACME.with_authorizations.de/v2/...
+            blahtest2.example.org:
+              challenges:
+                - status: pending
+                  token: WfZ7M6gF63LZjxyqhXKyDkb3pg2NlvjFKHFTOdgd
+                  type: dns-01
+                  url: https://ACME.with_authorizations.de/v2/...
+                - status: pending
+                  token: ALKOBSIHfEBtdeDVeGj3zROeyECNNry9CD4pqwci
+                  type: http-01
+                  url: https://ACME.with_authorizations.de/v2/....
+              expires: '2025-03-26T09:00:45Z'
+              identifier:
+                type: dns
+                value: blahtest2.example.org
+              status: pending
+              uri: https://ACME.with_authorizations.de/v2/...
+          cert_days: -1
+          challenge_data:
+            blahtest2.example.org:
+              dns-01:
+                record: _acme-challenge.blahtest2.example.org
+                resource: _acme-challenge
+                resource_value: eksnHDhxBOzrTlOgiDzKlUXZtccjSwKIhc
+              http-01:
+                resource: .well-known/acme-challenge/ukTTEZIqv_KM9J0iEnysAaiiO31-Rpxg
+                resource_value: 8fV3Wc5hIqxMohz4llcqLqHuCv7WriMrgWYRogPypoTY5KRT84sfeU.8fV3Wc5hIqxMohz4llcqLqHuCv7WriMrgWYRogPypoTY5KRT84sfeU
+          challenge_data_dns:
+            _acme-challenge.blahtest1.example.org:
+              - bob4Yd3_SVv-7JET__3G5ZDVWaeGIOxAQmRf3SURbSY
+            _acme-challenge.blahtest2.example.org:
+              - eksnHDhxBOzrTlOgiDzKlUXZtccjSwKIhc
+      block:
+        - name: Set test_challenge
+          ignore_errors: true
+          ansible.builtin.set_fact:
+            test_challenge: "{{ data_with_mixed_challenge_data | telekom_mms.acme.find_challenges('http-01', ['blahtest1.example.org', 'blahtest2.example.org']) }}"
+          register: set_fact_result
+        - name: Test assert TEST-08
+          ansible.builtin.assert:
+            that:
+              - "set_fact_result is not failed"
+              - "'blahtest1.example.org' in test_challenge and 'blahtest2.example.org' in test_challenge"
+              - "data_with_mixed_challenge_data['authorizations']['blahtest1.example.org']['challenges'][1]['token'] in test_challenge['blahtest1.example.org']['http-01'].resource_value"
+              - "data_with_mixed_challenge_data['challenge_data']['blahtest2.example.org']['http-01'].resource_value in test_challenge['blahtest2.example.org']['http-01'].resource_value"
+
