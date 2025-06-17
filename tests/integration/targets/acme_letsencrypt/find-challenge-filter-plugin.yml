@@ -264,4 +264,3 @@
               - "'blahtest1.example.org' in test_challenge and 'blahtest2.example.org' in test_challenge"
               - "data_with_mixed_challenge_data['authorizations']['blahtest1.example.org']['challenges'][1]['token'] in test_challenge['blahtest1.example.org']['http-01'].resource_value"
               - "data_with_mixed_challenge_data['challenge_data']['blahtest2.example.org']['http-01'].resource_value in test_challenge['blahtest2.example.org']['http-01'].resource_value"
-

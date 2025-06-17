@@ -29,6 +29,7 @@ def find_challenges(challenge_response: dict, challenge_type: str, expected_doma
 
     return dict()
 
+
 def find_domains_in_response(challenge_response: dict, challenge_type: str) -> set:
     """
     find the domains in the response for which the API responded with a challenge of the specified challenge_type
@@ -44,6 +45,7 @@ def find_domains_in_response(challenge_response: dict, challenge_type: str) -> s
                 domains.add(domain)
 
     return domains
+
 
 def build_challenges(challenge_response: dict, challenge_type: str, expected_domains: list) -> dict:
     """
