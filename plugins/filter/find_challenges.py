@@ -12,7 +12,7 @@ def find_challenges(challenge_response: dict, challenge_type: str, expected_doma
         raise AssertionError(f"Unknown challenge_type ({challenge_type})")
 
     if 'challenge_data' not in challenge_response or 'authorizations' not in challenge_response:
-        raise AssertionError(f"Bogus API response: 'challenge_data'/'authorizations' missing.")
+        raise AssertionError("Bogus API response: 'challenge_data'/'authorizations' missing.")
 
     challenges = build_challenges(challenge_response, challenge_type, expected_domains)
     domains_in_response = find_domains_in_response(challenge_response, challenge_type)
