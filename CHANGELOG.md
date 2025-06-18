@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.3.2](https://github.com/telekom-mms/ansible-collection-acme/tree/4.3.2) (2025-06-18)
+
+[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/4.3.1...4.3.2)
+
+**Merged pull requests:**
+
+- Optimize assertions for API responses [\#186](https://github.com/telekom-mms/ansible-collection-acme/pull/186) ([diLLec](https://github.com/diLLec))
+
 ## [4.3.1](https://github.com/telekom-mms/ansible-collection-acme/tree/4.3.1) (2025-06-17)
 
 [Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/4.3.0...4.3.1)
