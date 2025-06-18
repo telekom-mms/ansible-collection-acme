@@ -8,6 +8,12 @@ def find_challenges(challenge_response: dict, challenge_type: str, expected_doma
        challenge_data and authorizations fields
        {'<domain>': {[http-01/dns-01]: 'resource': <http path/dns record'> resource_value': <token>}}
     """
+    if challenge_type not in ['http-01', 'dns-01']:
+        raise AssertionError(f"Unknown challenge_type ({challenge_type})")
+
+    if 'challenge_data' not in challenge_response or 'authorizations' not in challenge_response:
+        raise AssertionError("Bogus API response: 'challenge_data'/'authorizations' missing.")
+
     challenges = build_challenges(challenge_response, challenge_type, expected_domains)
     domains_in_response = find_domains_in_response(challenge_response, challenge_type)
     errors = []
@@ -52,9 +58,6 @@ def build_challenges(challenge_response: dict, challenge_type: str, expected_dom
     try to extract the challenge for all expected_domains from the challenge_data field (first)0
     and then from the authorization field, if not found
     """
-    if challenge_type not in ['http-01', 'dns-01']:
-        raise AssertionError(f"Unknown challenge_type ({challenge_type})")
-
     extracted_challenges = {}
     for domain in expected_domains:
         extracted_challenges[domain] = {}
@@ -93,7 +96,7 @@ def extract_challenge_from_authorizations_data(domain, challenge_response: dict,
             elif challenge_type == 'http-01':
                 return {challenge_type: build_data_from_authorizations_http01(challenge['token'], domain)}
 
-    raise AssertionError(f"challenge_type '{challenge_type}' not in 'authorizations'")
+    raise AssertionError(f"challenge_type '{challenge_type}' not in 'authorizations' for domain '{domain}'")
 
 
 def build_data_from_authorizations_dns01(token: str, domain: str) -> dict:
