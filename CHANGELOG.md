@@ -1,11 +1,12 @@
 # Changelog
 
-## [4.3.2](https://github.com/telekom-mms/ansible-collection-acme/tree/4.3.2) (2025-06-18)
+## [4.3.2](https://github.com/telekom-mms/ansible-collection-acme/tree/4.3.2) (2025-06-20)
 
 [Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/4.3.1...4.3.2)
 
 **Merged pull requests:**
 
+- chore\(deps\): update ansible/ansible-lint action to v25.6.1 [\#187](https://github.com/telekom-mms/ansible-collection-acme/pull/187) ([renovate[bot]](https://github.com/apps/renovate))
 - Optimize assertions for API responses [\#186](https://github.com/telekom-mms/ansible-collection-acme/pull/186) ([diLLec](https://github.com/diLLec))
 
 ## [4.3.1](https://github.com/telekom-mms/ansible-collection-acme/tree/4.3.1) (2025-06-17)
