@@ -1,8 +1,12 @@
 # Changelog
 
-## [4.3.2](https://github.com/telekom-mms/ansible-collection-acme/tree/4.3.2) (2025-06-20)
+## [4.3.2](https://github.com/telekom-mms/ansible-collection-acme/tree/4.3.2) (2025-06-26)
 
 [Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/4.3.1...4.3.2)
+
+**Fixed bugs:**
+
+- Fixing missing endpoint\_url on S3 remove task [\#189](https://github.com/telekom-mms/ansible-collection-acme/pull/189) ([diLLec](https://github.com/diLLec))
 
 **Merged pull requests:**
 
