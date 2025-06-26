@@ -65,6 +65,7 @@
         object: "{{ acme_challenge_data[item]['http-01']['resource'] }}"
         mode: delobj
         region: "{{ acme_s3_config_region }}"
+        endpoint_url: "{{ acme_s3_endpoint_url | default(omit) }}"
       loop: "{{ acme_domain.subject_alt_name }}"
       when:
         - acme_domain.subject_alt_name is defined
