@@ -16,6 +16,7 @@ Feel free to contribute more DNS or HTTP APIs :)
   * [Azure](/docs/dns-challenge/azure.md)
   * [Domain Offensive](/docs/dns-challenge/domain-offensive.md)
   * [hetzner](/docs/dns-challenge/hetzner.md)
+  * [nsupdate](/docs/dns-challenge/nsupdate.md)
   * [openstack](/docs/dns-challenge/openstack.md)
   * [pebble](/docs/dns-challenge/pebble.md)
 * HTTP-01
