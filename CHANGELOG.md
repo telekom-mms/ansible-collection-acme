@@ -1,11 +1,12 @@
 # Changelog
 
-## [4.3.3](https://github.com/telekom-mms/ansible-collection-acme/tree/4.3.3) (2025-07-03)
+## [4.3.3](https://github.com/telekom-mms/ansible-collection-acme/tree/4.3.3) (2025-07-07)
 
 [Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/4.3.2...4.3.3)
 
 **Merged pull requests:**
 
+- chore: add missing link to nsupdate doc [\#193](https://github.com/telekom-mms/ansible-collection-acme/pull/193) ([neubi4](https://github.com/neubi4))
 - chore\(deps\): update nginx docker digest to 93230cd [\#190](https://github.com/telekom-mms/ansible-collection-acme/pull/190) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update nginx docker digest to dc53c8f [\#188](https://github.com/telekom-mms/ansible-collection-acme/pull/188) ([renovate[bot]](https://github.com/apps/renovate))
 
