@@ -31,5 +31,5 @@ build_ignore:
   - .ansible-lint
   - .gitattributes
   - .github
-  - .yamllint.cfg
+  - .yamllint
   - tests
