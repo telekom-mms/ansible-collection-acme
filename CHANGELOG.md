@@ -6,10 +6,12 @@
 
 **Merged pull requests:**
 
+- chore\(deps\): update nginx docker digest to 029d446 [\#202](https://github.com/telekom-mms/ansible-collection-acme/pull/202) ([renovate[bot]](https://github.com/apps/renovate))
 - Update Ansible versions to current, fix tests [\#201](https://github.com/telekom-mms/ansible-collection-acme/pull/201) ([schurzi](https://github.com/schurzi))
 - chore\(deps\): update nginx docker digest to d5f28ef [\#200](https://github.com/telekom-mms/ansible-collection-acme/pull/200) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update actions/setup-python action to v6 [\#199](https://github.com/telekom-mms/ansible-collection-acme/pull/199) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update actions/checkout action to v5 [\#197](https://github.com/telekom-mms/ansible-collection-acme/pull/197) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update ansible/ansible-lint action to v25.9.2 [\#196](https://github.com/telekom-mms/ansible-collection-acme/pull/196) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update nginx docker digest to 33e0bbc [\#195](https://github.com/telekom-mms/ansible-collection-acme/pull/195) ([renovate[bot]](https://github.com/apps/renovate))
 - chore: add missing link to nsupdate doc [\#193](https://github.com/telekom-mms/ansible-collection-acme/pull/193) ([neubi4](https://github.com/neubi4))
 - chore\(deps\): update nginx docker digest to 93230cd [\#190](https://github.com/telekom-mms/ansible-collection-acme/pull/190) ([renovate[bot]](https://github.com/apps/renovate))
