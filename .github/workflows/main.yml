@@ -36,7 +36,7 @@ jobs:
       # .../ansible_collections/NAMESPACE/COLLECTION_NAME/
 
       - name: Check out code
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
         with:
           path: ansible_collections/telekom_mms/acme
 
@@ -61,7 +61,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
 
       - name: Run Linting
         uses: ansible/ansible-lint@36075fad72d67ca74facfb2e5436a2428a4b5d5d # 25.12.0
@@ -104,7 +104,7 @@ jobs:
 
     steps:
       - name: Check out code to collections-folder, so ansible finds it
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
         with:
           path: ansible_collections/telekom_mms/acme
 
