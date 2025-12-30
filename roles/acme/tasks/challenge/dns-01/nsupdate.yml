@@ -49,7 +49,7 @@
         remaining_days: "{{ acme_remaining_days }}"
         data: "{{ acme_challenge }}"
       when:
-        - acme_certificate_enabled | default(true)
+        - acme_certificate_enabled is not defined or acme_certificate_enabled | bool
 
   always:
     - name: Remove the TXT record from the relevant domains

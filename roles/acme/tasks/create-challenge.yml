@@ -22,4 +22,4 @@
     - name: Handle challenge data # noqa no-handler
       ansible.builtin.set_fact:
         acme_challenge_data: "{{ acme_challenge | telekom_mms.acme.find_challenges(challenge_type, acme_domain.subject_alt_name) }}"
-      when: 'acme_challenge is changed'
+      when: acme_challenge is changed
