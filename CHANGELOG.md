@@ -1,11 +1,12 @@
 # Changelog
 
-## [4.3.3](https://github.com/telekom-mms/ansible-collection-acme/tree/4.3.3) (2025-12-30)
+## [4.3.3](https://github.com/telekom-mms/ansible-collection-acme/tree/4.3.3) (2026-01-01)
 
 [Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/4.3.2...4.3.3)
 
 **Merged pull requests:**
 
+- chore\(deps\): update nginx docker digest to ca871a8 [\#216](https://github.com/telekom-mms/ansible-collection-acme/pull/216) ([renovate[bot]](https://github.com/apps/renovate))
 - fix: Ansible 12 broken conditionals [\#215](https://github.com/telekom-mms/ansible-collection-acme/pull/215) ([neubi4](https://github.com/neubi4))
 - chore\(deps\): update ansible/ansible-lint action to v25.12.2 [\#214](https://github.com/telekom-mms/ansible-collection-acme/pull/214) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update nginx docker digest to fb01117 [\#213](https://github.com/telekom-mms/ansible-collection-acme/pull/213) ([renovate[bot]](https://github.com/apps/renovate))
