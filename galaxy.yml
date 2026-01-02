@@ -1,7 +1,7 @@
 ---
 namespace: telekom_mms
 name: acme
-version: 4.3.2
+version: 4.3.3
 readme: README.md
 authors:
   - Sebastian Gumprich <sebastian.gumprich@telekom.de>
