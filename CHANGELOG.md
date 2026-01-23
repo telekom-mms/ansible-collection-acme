@@ -1,11 +1,12 @@
 # Changelog
 
-## [4.3.4](https://github.com/telekom-mms/ansible-collection-acme/tree/4.3.4) (2026-01-15)
+## [4.3.4](https://github.com/telekom-mms/ansible-collection-acme/tree/4.3.4) (2026-01-23)
 
 [Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/4.3.3...4.3.4)
 
 **Merged pull requests:**
 
+- chore\(deps\): update actions/setup-python digest to a309ff8 [\#220](https://github.com/telekom-mms/ansible-collection-acme/pull/220) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update nginx docker digest to c881927 [\#219](https://github.com/telekom-mms/ansible-collection-acme/pull/219) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update nginx docker digest to 7272239 [\#218](https://github.com/telekom-mms/ansible-collection-acme/pull/218) ([renovate[bot]](https://github.com/apps/renovate))
 
@@ -107,7 +108,7 @@
 
 - \[Enhancement\] Support creating ECC Keys [\#87](https://github.com/telekom-mms/ansible-collection-acme/issues/87)
 - feat: also download chain when downloading an cert [\#164](https://github.com/telekom-mms/ansible-collection-acme/pull/164) ([neubi4](https://github.com/neubi4))
-- role should be usable via include\_role, vars should be possible via loop [\#145](https://github.com/telekom-mms/ansible-collection-acme/pull/145) ([michaelamattes](https://github.com/michaelamattes))
+- role should be usable via include\_role, vars should be possible via loop [\#145](https://github.com/telekom-mms/ansible-collection-acme/pull/145) ([mikaEz](https://github.com/mikaEz))
 
 **Merged pull requests:**
 
@@ -329,7 +330,7 @@
 
 **Implemented enhancements:**
 
-- all chains should be included after convert [\#60](https://github.com/telekom-mms/ansible-collection-acme/pull/60) ([michaelamattes](https://github.com/michaelamattes))
+- all chains should be included after convert [\#60](https://github.com/telekom-mms/ansible-collection-acme/pull/60) ([mikaEz](https://github.com/mikaEz))
 
 ## [2.2.0](https://github.com/telekom-mms/ansible-collection-acme/tree/2.2.0) (2021-07-09)
 
@@ -350,7 +351,7 @@
 **Implemented enhancements:**
 
 - add hetzner dns tests [\#54](https://github.com/telekom-mms/ansible-collection-acme/pull/54) ([rndmh3ro](https://github.com/rndmh3ro))
-- add possibility to keep and purge challenge record in Azure [\#52](https://github.com/telekom-mms/ansible-collection-acme/pull/52) ([michaelamattes](https://github.com/michaelamattes))
+- add possibility to keep and purge challenge record in Azure [\#52](https://github.com/telekom-mms/ansible-collection-acme/pull/52) ([mikaEz](https://github.com/mikaEz))
 
 **Closed issues:**
 
@@ -515,7 +516,7 @@
 
 **Merged pull requests:**
 
-- Add Azure dns provider challenge [\#8](https://github.com/telekom-mms/ansible-collection-acme/pull/8) ([michaelamattes](https://github.com/michaelamattes))
+- Add Azure dns provider challenge [\#8](https://github.com/telekom-mms/ansible-collection-acme/pull/8) ([mikaEz](https://github.com/mikaEz))
 
 ## [0.0.2](https://github.com/telekom-mms/ansible-collection-acme/tree/0.0.2) (2020-11-06)
 
