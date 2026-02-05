@@ -6,6 +6,7 @@
 
 **Merged pull requests:**
 
+- chore\(deps\): update nginx docker digest to b17697e [\#222](https://github.com/telekom-mms/ansible-collection-acme/pull/222) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update actions/checkout digest to de0fac2 [\#221](https://github.com/telekom-mms/ansible-collection-acme/pull/221) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update actions/setup-python digest to a309ff8 [\#220](https://github.com/telekom-mms/ansible-collection-acme/pull/220) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update nginx docker digest to c881927 [\#219](https://github.com/telekom-mms/ansible-collection-acme/pull/219) ([renovate[bot]](https://github.com/apps/renovate))
