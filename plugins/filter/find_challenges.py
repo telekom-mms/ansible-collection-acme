@@ -121,6 +121,7 @@ def build_data_from_authorizations_http01(token: str, domain: str) -> dict:
         "resource_value": token
     }
 
+
 def handle_wildcard_challenge_data_dns01(challenges: dict) -> dict:
     """
     merges the challenge_data if the root domain is defined as an alternative_name for a wildcard certificate (for DNS-01)
@@ -167,6 +168,7 @@ def modify_challenges(challenges: dict, domains_to_remove: list, domains_to_add:
     challenges.update(domains_to_add)
 
     return challenges
+
 
 class FilterModule(object):
     """ utility filters for operating on dictionary """
