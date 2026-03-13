@@ -8,13 +8,13 @@
     - name: Add a new TXT record to the relevant domains
       vars:
         record_name: "_acme-challenge.{{ domain | replace('*.', '') }}."  # replace '*.' in the case of a wildcard
-        record_data: "{{ acme_challenge_data[domain]['dns-01']['resource_value'] }}"
+        record_data: "{{ acme_challenge_data[domain | replace('*.', '')]['dns-01']['resource_value'] }}"
       community.general.nsupdate:
         key_name: "{{ acme_nsupdate_dns_key.name | default('nsupdate_key') }}"
         key_secret: "{{ acme_nsupdate_dns_key.secret }}"
         key_algorithm: "{{ acme_nsupdate_dns_key.algorithm | default('hmac-sha512') }}"
         server: "{{ acme_nsupdate_server }}"
-        zone: "{{ acme_domain.zone | default(domain) }}"
+        zone: "{{ acme_domain.zone | default(domain | replace('*.', '')) }}"
         record: "{{ record_name }}"
         value: "{{ record_data }}"
         type: "TXT"
@@ -25,8 +25,7 @@
         loop_var: "domain"
       when:
         - acme_domain.subject_alt_name is defined
-        # only runs if the challenge is run the first time, because then there is challenge_data
-        - domain in acme_challenge_data
+        - (domain | replace('*.', '')) in acme_challenge_data
 
     - name: Wait for DNS replication to catch up
       ansible.builtin.pause:
@@ -55,13 +54,13 @@
     - name: Remove the TXT record from the relevant domains
       vars:
         record_name: "_acme-challenge.{{ domain | replace('*.', '') }}."  # replace '*.' in the case of a wildcard
-        record_data: "{{ acme_challenge_data[domain]['dns-01']['resource_value'] }}"
+        record_data: "{{ acme_challenge_data[domain | replace('*.', '')]['dns-01']['resource_value'] }}"
       community.general.nsupdate:
         key_name: "{{ acme_nsupdate_dns_key.name | default('nsupdate_key') }}"
         key_secret: "{{ acme_nsupdate_dns_key.secret }}"
         key_algorithm: "{{ acme_nsupdate_dns_key.algorithm | default('hmac-sha512') }}"
         server: "{{ acme_nsupdate_server }}"
-        zone: "{{ acme_domain.zone | default(domain) }}"
+        zone: "{{ acme_domain.zone | default(domain | replace('*.', '')) }}"
         record: "{{ record_name }}"
         value: "{{ record_data }}"
         type: "TXT"
@@ -73,5 +72,4 @@
         loop_var: "domain"
       when:
         - acme_domain.subject_alt_name is defined
-        # only runs if the challenge is run the first time, because then there is challenge_data
-        - domain in acme_challenge_data
+        - (domain | replace('*.', '')) in acme_challenge_data
