@@ -1,17 +1,22 @@
 # Changelog
 
-## [4.3.4](https://github.com/telekom-mms/ansible-collection-acme/tree/4.3.4) (2026-02-07)
+## [4.3.4](https://github.com/telekom-mms/ansible-collection-acme/tree/4.3.4) (2026-03-12)
 
 [Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/4.3.3...4.3.4)
 
 **Merged pull requests:**
 
+- chore\(deps\): update nginx docker digest to bc45d24 [\#228](https://github.com/telekom-mms/ansible-collection-acme/pull/228) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update ansible/ansible-lint action to v26.3.0 [\#227](https://github.com/telekom-mms/ansible-collection-acme/pull/227) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update ansible/ansible-lint action to v26.2.0 [\#226](https://github.com/telekom-mms/ansible-collection-acme/pull/226) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update nginx docker digest to 0236ee0 [\#225](https://github.com/telekom-mms/ansible-collection-acme/pull/225) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update nginx docker digest to 341bf0f [\#223](https://github.com/telekom-mms/ansible-collection-acme/pull/223) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update nginx docker digest to b17697e [\#222](https://github.com/telekom-mms/ansible-collection-acme/pull/222) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update actions/checkout digest to de0fac2 [\#221](https://github.com/telekom-mms/ansible-collection-acme/pull/221) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update actions/setup-python digest to a309ff8 [\#220](https://github.com/telekom-mms/ansible-collection-acme/pull/220) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update nginx docker digest to c881927 [\#219](https://github.com/telekom-mms/ansible-collection-acme/pull/219) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update nginx docker digest to 7272239 [\#218](https://github.com/telekom-mms/ansible-collection-acme/pull/218) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update ansible/ansible-lint action to v26 [\#217](https://github.com/telekom-mms/ansible-collection-acme/pull/217) ([renovate[bot]](https://github.com/apps/renovate))
 
 ## [4.3.3](https://github.com/telekom-mms/ansible-collection-acme/tree/4.3.3) (2026-01-01)
 
