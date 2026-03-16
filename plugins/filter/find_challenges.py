@@ -1,7 +1,7 @@
 from ansible.errors import AnsibleError
 
 
-def find_challenges(challenge_response: dict, challenge_type: str, expected_domains: list) -> dict:
+def find_challenges(challenge_response: dict, challenge_type: str, challenge_provider: str, expected_domains: list) -> dict:
     """
     1. check if all the expected domains are present in the challenge response
     2. construct and return the following dictionary out of the API response
@@ -19,7 +19,7 @@ def find_challenges(challenge_response: dict, challenge_type: str, expected_doma
     errors = []
 
     if domains_in_response == set(expected_domains):
-        if challenge_type == 'dns-01':
+        if challenge_provider == 'nsupdate':
             handle_wildcard_challenge_data_dns01(challenges)
         return challenges
     else:
