@@ -1,6 +1,6 @@
 ---
 
-- name: Create the certificate for example.com with dns-challenge provider "pebble"
+- name: Create the certificate for example.com"
   hosts: localhost
   gather_facts: false
   vars:
@@ -62,6 +62,56 @@
           - bob4Yd3_SVv-7JET__3G5ZDVWaeGIOxAQmRf3SURbSY
         _acme-challenge.blahtest2.example.org:
           - eksnHDhxBOzrTlOgiDzKlUXZtccjSwKIhc
+    wildcard_data_different_token_with_challenge_data:
+      account_uri: https://ACME.with_authorizations.de/v2/...
+      authorizations:
+        '*.example.org':
+          challenges:
+            - status: pending
+              token: Uwqt4U_l6lp04J2KW5nvgJ6LMPXvSrhr
+              type: dns-01
+              url: https://ACME.with_authorizations.de/v2/...
+          expires: '2025-03-26T09:00:45Z'
+          identifier:
+            type: dns
+            value: example.org
+          status: pending
+          uri: https://ACME.with_authorizations.de/v2/...
+        example.org:
+          challenges:
+            - status: pending
+              token: WfZ7M6gF63LZjxyqhXKyDkb3pg2NlvjFKHFTOdgd
+              type: dns-01
+              url: https://ACME.with_authorizations.de/v2/...
+            - status: pending
+              token: ALKOBSIHfEBtdeDVeGj3zROeyECNNry9CD4pqwci
+              type: http-01
+              url: https://ACME.with_authorizations.de/v2/....
+          expires: '2025-03-26T09:00:45Z'
+          identifier:
+            type: dns
+            value: example.org
+          status: pending
+          uri: https://ACME.with_authorizations.de/v2/...
+      cert_days: -1
+      challenge_data:
+        '*.example.org':
+          dns-01:
+            record: _acme-challenge.example.org
+            resource: _acme-challenge
+            resource_value: bob4Yd3_SVv-7JET__3G5ZDVWaeGIOxAQmRf3SURbSY
+        example.org:
+          dns-01:
+            record: _acme-challenge.example.org
+            resource: _acme-challenge
+            resource_value: eksnHDhxBOzrTlOgiDzKlUXZtccjSwKIhc
+          http-01:
+            resource: .well-known/acme-challenge/ukTTEZIqv_KM9J0iEnysAaiiO31-Rpxg
+            resource_value: 8fV3Wc5hIqxMohz4llcqLqHuCv7WriMrgWYRogPypoTY5KRT84sfeU.8fV3Wc5hIqxMohz4llcqLqHuCv7WriMrgWYRogPypoTY5KRT84sfeU
+      challenge_data_dns:
+        _acme-challenge.example.org:
+          - bob4Yd3_SVv-7JET__3G5ZDVWaeGIOxAQmRf3SURbSY
+          - eksnHDhxBOzrTlOgiDzKlUXZtccjSwKIhc
   pre_tasks:
     - name: Data_without_challenge_data
       ansible.builtin.set_fact:
@@ -74,7 +124,7 @@
         - name: Set test_challenge
           ignore_errors: true
           ansible.builtin.set_fact:
-            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('dns-01', ['blahtest1.example.org', 'blahtest2.example.org']) }}"
+            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('dns-01', 'autodns', ['blahtest1.example.org', 'blahtest2.example.org']) }}"
           register: set_fact_result
         - name: Test assert TEST-01
           ansible.builtin.assert:
@@ -91,7 +141,7 @@
         - name: Set test_challenge
           ignore_errors: true
           ansible.builtin.set_fact:
-            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('http-01', ['blahtest1.example.org', 'blahtest2.example.org']) }}"
+            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('http-01', 'autodns', ['blahtest1.example.org', 'blahtest2.example.org']) }}"
           register: set_fact_result
         - name: Test assert TEST-02
           ansible.builtin.assert:
@@ -106,7 +156,7 @@
         - name: Set test_challenge
           ignore_errors: true
           ansible.builtin.set_fact:
-            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('dns-01', ['blahtest1.example.org']) }}"
+            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('dns-01', 'autodns', ['blahtest1.example.org']) }}"
           register: set_fact_result
         - name: Test assert TEST-03-1
           ansible.builtin.assert:
@@ -119,7 +169,7 @@
         - name: Set test_challenge
           ignore_errors: true
           ansible.builtin.set_fact:
-            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('dns-01', ['blahtest1.example.org', 'blahtest2.example.org', 'one.more.is.one.too.many']) }}"
+            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('dns-01', 'autodns', ['blahtest1.example.org', 'blahtest2.example.org', 'one.more.is.one.too.many']) }}"
           register: set_fact_result
         - name: Test assert TEST-03-2
           ansible.builtin.assert:
@@ -132,7 +182,7 @@
         - name: Set test_challenge
           ignore_errors: true
           ansible.builtin.set_fact:
-            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('dns-01', ['blahtest1.example.org', 'blahtest2.example.org']) }}"
+            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('dns-01', 'autodns', ['blahtest1.example.org', 'blahtest2.example.org']) }}"
           register: set_fact_result
         - name: Test assert TEST-04-1
           ansible.builtin.assert:
@@ -148,7 +198,7 @@
         - name: Set test_challenge
           ignore_errors: true
           ansible.builtin.set_fact:
-            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('http-01', ['blahtest1.example.org', 'blahtest2.example.org']) }}"
+            test_challenge: "{{ data_with_challenge_data | telekom_mms.acme.find_challenges('http-01', 'autodns', ['blahtest1.example.org', 'blahtest2.example.org']) }}"
           register: set_fact_result
         - name: Test assert TEST-04-2
           ansible.builtin.assert:
@@ -163,7 +213,7 @@
         - name: Set test_challenge
           ignore_errors: true
           ansible.builtin.set_fact:
-            test_challenge: "{{ data_without_challenge_data | telekom_mms.acme.find_challenges('dns-01', ['blahtest1.example.org', 'blahtest2.example.org']) }}"
+            test_challenge: "{{ data_without_challenge_data | telekom_mms.acme.find_challenges('dns-01', 'autodns', ['blahtest1.example.org', 'blahtest2.example.org']) }}"
           register: set_fact_result
         - name: Test assert TEST-05
           ansible.builtin.assert:
@@ -177,7 +227,7 @@
         - name: Set test_challenge
           ignore_errors: true
           ansible.builtin.set_fact:
-            test_challenge: "{{ data_without_challenge_data | telekom_mms.acme.find_challenges('http-01', ['blahtest1.example.org', 'blahtest2.example.org']) }}"
+            test_challenge: "{{ data_without_challenge_data | telekom_mms.acme.find_challenges('http-01', 'autodns', ['blahtest1.example.org', 'blahtest2.example.org']) }}"
           register: set_fact_result
         - name: Test assert TEST-06
           ansible.builtin.assert:
@@ -191,7 +241,7 @@
         - name: Set test_challenge
           ignore_errors: true
           ansible.builtin.set_fact:
-            test_challenge: "{{ data_without_challenge_data | telekom_mms.acme.find_challenges('http-01', ['blahtest1.example.org']) }}"
+            test_challenge: "{{ data_without_challenge_data | telekom_mms.acme.find_challenges('http-01', 'autodns', ['blahtest1.example.org']) }}"
           register: set_fact_result
         - name: Test assert TEST-07
           ansible.builtin.assert:
@@ -255,7 +305,7 @@
         - name: Set test_challenge
           ignore_errors: true
           ansible.builtin.set_fact:
-            test_challenge: "{{ data_with_mixed_challenge_data | telekom_mms.acme.find_challenges('http-01', ['blahtest1.example.org', 'blahtest2.example.org']) }}"
+            test_challenge: "{{ data_with_mixed_challenge_data | telekom_mms.acme.find_challenges('http-01', 'autodns', ['blahtest1.example.org', 'blahtest2.example.org']) }}"
           register: set_fact_result
         - name: Test assert TEST-08
           ansible.builtin.assert:
@@ -264,3 +314,140 @@
               - "'blahtest1.example.org' in test_challenge and 'blahtest2.example.org' in test_challenge"
               - "data_with_mixed_challenge_data['authorizations']['blahtest1.example.org']['challenges'][1]['token'] in test_challenge['blahtest1.example.org']['http-01'].resource_value"
               - "data_with_mixed_challenge_data['challenge_data']['blahtest2.example.org']['http-01'].resource_value in test_challenge['blahtest2.example.org']['http-01'].resource_value"
+
+    - name: TEST-09-1 / dns-01 / nsupdate / wildcard with root domain / same token
+      vars:
+        wildcard_data_same_token_with_challenge_data:
+          account_uri: https://ACME.with_authorizations.de/v2/...
+          authorizations:
+            '*.example.org':
+              challenges:
+                - status: pending
+                  token: WfZ7M6gF63LZjxyqhXKyDkb3pg2NlvjFKHFTOdgd
+                  type: dns-01
+                  url: https://ACME.with_authorizations.de/v2/...
+              expires: '2025-03-26T09:00:45Z'
+              identifier:
+                type: dns
+                value: example.org
+              status: pending
+              uri: https://ACME.with_authorizations.de/v2/...
+            example.org:
+              challenges:
+                - status: pending
+                  token: WfZ7M6gF63LZjxyqhXKyDkb3pg2NlvjFKHFTOdgd
+                  type: dns-01
+                  url: https://ACME.with_authorizations.de/v2/...
+                - status: pending
+                  token: ALKOBSIHfEBtdeDVeGj3zROeyECNNry9CD4pqwci
+                  type: http-01
+                  url: https://ACME.with_authorizations.de/v2/....
+              expires: '2025-03-26T09:00:45Z'
+              identifier:
+                type: dns
+                value: example.org
+              status: pending
+              uri: https://ACME.with_authorizations.de/v2/...
+          cert_days: -1
+          challenge_data:
+            '*.example.org':
+              dns-01:
+                record: _acme-challenge.example.org
+                resource: _acme-challenge
+                resource_value: eksnHDhxBOzrTlOgiDzKlUXZtccjSwKIhc
+            example.org:
+              dns-01:
+                record: _acme-challenge.example.org
+                resource: _acme-challenge
+                resource_value: eksnHDhxBOzrTlOgiDzKlUXZtccjSwKIhc
+              http-01:
+                resource: .well-known/acme-challenge/ukTTEZIqv_KM9J0iEnysAaiiO31-Rpxg
+                resource_value: 8fV3Wc5hIqxMohz4llcqLqHuCv7WriMrgWYRogPypoTY5KRT84sfeU.8fV3Wc5hIqxMohz4llcqLqHuCv7WriMrgWYRogPypoTY5KRT84sfeU
+          challenge_data_dns:
+            _acme-challenge.example.org:
+              - eksnHDhxBOzrTlOgiDzKlUXZtccjSwKIhc
+              - eksnHDhxBOzrTlOgiDzKlUXZtccjSwKIhc
+      block:
+        - name: Set test_challenge
+          ansible.builtin.set_fact:
+            test_challenge: "{{ wildcard_data_same_token_with_challenge_data | telekom_mms.acme.find_challenges('dns-01', 'nsupdate', ['*.example.org', 'example.org']) }}"
+          register: set_fact_result
+        - name: Test assert TEST-09-1
+          ansible.builtin.assert:
+            that:
+              - "set_fact_result is not failed"
+              - "'example.org' in test_challenge"
+              - "'*.example.org' not in test_challenge"
+              - "wildcard_data_same_token_with_challenge_data['challenge_data']['*.example.org']['dns-01'].resource_value == test_challenge['example.org']['dns-01'].resource_value"
+
+    - name: TEST-09-2 / dns-01 / nsupdate / wildcard with root domain / different token
+      block:
+        - name: Set test_challenge
+          ansible.builtin.set_fact:
+            test_challenge: "{{ wildcard_data_different_token_with_challenge_data | telekom_mms.acme.find_challenges('dns-01', 'nsupdate', ['*.example.org', 'example.org']) }}"
+          register: set_fact_result
+        - name: Test assert TEST-09-2
+          ansible.builtin.assert:
+            that:
+              - "set_fact_result is not failed"
+              - "'example.org' in test_challenge"
+              - "'*.example.org' not in test_challenge"
+              - "wildcard_data_different_token_with_challenge_data['challenge_data']['*.example.org']['dns-01'].resource_value in test_challenge['example.org']['dns-01'].resource_value"
+              - "wildcard_data_different_token_with_challenge_data['challenge_data']['example.org']['dns-01'].resource_value in test_challenge['example.org']['dns-01'].resource_value"
+              - "test_challenge['example.org']['dns-01'].resource_value | length == 2"
+
+    - name: TEST-09-3 / dns-01 / nsupdate / wildcard without root domain
+      vars:
+        wildcard_data_without_root_with_challenge_data:
+          account_uri: https://ACME.with_authorizations.de/v2/...
+          authorizations:
+            '*.example.org':
+              challenges:
+                - status: pending
+                  token: Uwqt4U_l6lp04J2KW5nvgJ6LMPXvSrhr
+                  type: dns-01
+                  url: https://ACME.with_authorizations.de/v2/...
+              expires: '2025-03-26T09:00:45Z'
+              identifier:
+                type: dns
+                value: example.org
+              status: pending
+              uri: https://ACME.with_authorizations.de/v2/...
+          cert_days: -1
+          challenge_data:
+            '*.example.org':
+              dns-01:
+                record: _acme-challenge.example.org
+                resource: _acme-challenge
+                resource_value: bob4Yd3_SVv-7JET__3G5ZDVWaeGIOxAQmRf3SURbSY
+          challenge_data_dns:
+            _acme-challenge.example.org:
+              - bob4Yd3_SVv-7JET__3G5ZDVWaeGIOxAQmRf3SURbSY
+      block:
+        - name: Set test_challenge
+          ansible.builtin.set_fact:
+            test_challenge: "{{ wildcard_data_without_root_with_challenge_data | telekom_mms.acme.find_challenges('dns-01', 'nsupdate', ['*.example.org']) }}"
+          register: set_fact_result
+        - name: Test assert TEST-09-3
+          ansible.builtin.assert:
+            that:
+              - "set_fact_result is not failed"
+              - "'example.org' in test_challenge"
+              - "'*.example.org' not in test_challenge"
+              - "wildcard_data_without_root_with_challenge_data['challenge_data']['*.example.org']['dns-01'].resource_value == test_challenge['example.org']['dns-01'].resource_value"
+
+      # Test 09-1 to 09-3 covers the special case of wildcards via nsupdate. This test is representative of all other challenge providers
+    - name: TEST-09-4 / dns-01 / autodns / wildcard with root domain / different token
+      block:
+        - name: Set test_challenge
+          ansible.builtin.set_fact:
+            test_challenge: "{{ wildcard_data_different_token_with_challenge_data | telekom_mms.acme.find_challenges('dns-01', 'autodns', ['*.example.org', 'example.org']) }}"
+          register: set_fact_result
+        - name: Test assert TEST-09-4
+          ansible.builtin.assert:
+            that:
+              - "set_fact_result is not failed"
+              - "'example.org' in test_challenge"
+              - "'*.example.org' in test_challenge"
+              - "wildcard_data_different_token_with_challenge_data['challenge_data']['*.example.org']['dns-01'].resource_value == test_challenge['*.example.org']['dns-01'].resource_value"
+              - "wildcard_data_different_token_with_challenge_data['challenge_data']['example.org']['dns-01'].resource_value == test_challenge['example.org']['dns-01'].resource_value"
