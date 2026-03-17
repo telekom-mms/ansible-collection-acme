@@ -1,8 +1,12 @@
 # Changelog
 
-## [4.3.4](https://github.com/telekom-mms/ansible-collection-acme/tree/4.3.4) (2026-03-12)
+## [4.3.4](https://github.com/telekom-mms/ansible-collection-acme/tree/4.3.4) (2026-03-17)
 
 [Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/4.3.3...4.3.4)
+
+**Fixed bugs:**
+
+- Fix nsupdate provider to support requesting wildcard and apex domains in one challenge [\#224](https://github.com/telekom-mms/ansible-collection-acme/pull/224) ([ivro23](https://github.com/ivro23))
 
 **Merged pull requests:**
 
