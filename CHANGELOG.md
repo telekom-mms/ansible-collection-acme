@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.3.5](https://github.com/telekom-mms/ansible-collection-acme/tree/4.3.5) (2026-03-18)
+
+[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/4.3.4...4.3.5)
+
+**Merged pull requests:**
+
+- chore\(deps\): update nginx docker digest to dec7a90 [\#229](https://github.com/telekom-mms/ansible-collection-acme/pull/229) ([renovate[bot]](https://github.com/apps/renovate))
+
 ## [4.3.4](https://github.com/telekom-mms/ansible-collection-acme/tree/4.3.4) (2026-03-17)
 
 [Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/4.3.3...4.3.4)
