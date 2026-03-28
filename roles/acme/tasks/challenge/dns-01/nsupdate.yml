@@ -2,8 +2,6 @@
 # include/role 3 - validate challenge
 - name: Validate challenge only if it is created or changed # noqa no-handler
   when: acme_challenge is changed
-  connection: local
-  delegate_to: localhost
   block:
     - name: Add a new TXT record to the relevant domains
       vars:
