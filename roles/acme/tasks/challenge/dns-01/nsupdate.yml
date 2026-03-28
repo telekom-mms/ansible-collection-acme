@@ -20,7 +20,6 @@
         ttl: "{{ acme_nsupdate_ttl }}"
       loop: "{{ acme_domain.subject_alt_name }}"
       loop_control:
-        label: "zone={{ domain | replace('*.', '') }} rr={{ record_name }} (TXT) {{ record_data }}"
         loop_var: "domain"
       when:
         - acme_domain.subject_alt_name is defined
@@ -68,7 +67,6 @@
         state: absent
       loop: "{{ acme_domain.subject_alt_name }}"
       loop_control:
-        label: "zone={{ domain | replace('*.', '') }} rr={{ record_name }} (TXT) {{ record_data }}"
         loop_var: "domain"
       when:
         - acme_domain.subject_alt_name is defined
