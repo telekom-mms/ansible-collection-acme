@@ -4,6 +4,7 @@
 |-----------------------------------|----------|--------------|-------------------------------------------------------------------------------------------------------------------------------------|
 |                                   |          |              |                                                                                                                                     |
 | acme_nsupdate_server              | yes      |              | The IPv4/IPv6 address of the DNS server where nsupdate manages the _acme-challenge TXT records. (can also be a DNS name, see below) |
+| acme_nsupdate_port                | no       |              | Use this TCP port when connecting to server.                                                                                        |
 | acme_nsupdate_dns_key:            | yes      |              | The acme_nsupdate_dns_key dictionary mirrors the settings of a bind DNS keyfile.                                                    |
 | acme_nsupdate_dns_key: name:      | no       | nsupdate_key | Name of the                                                                                                                         |
 | acme_nsupdate_dns_key: algorithm: | no       | hmac-sha512  | Hash algo of the key (i.e. hmac-sha512, hmac-sha256)                                                                                |
