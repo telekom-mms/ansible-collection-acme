@@ -8,6 +8,10 @@
 
 - allow to set port of dns server when using nsupdate [\#231](https://github.com/telekom-mms/ansible-collection-acme/pull/231) ([neubi4](https://github.com/neubi4))
 
+**Fixed bugs:**
+
+- replace home dir lookup from env with tilde [\#232](https://github.com/telekom-mms/ansible-collection-acme/pull/232) ([neubi4](https://github.com/neubi4))
+
 **Merged pull requests:**
 
 - chore\(deps\): update nginx docker digest to 7150b3a [\#230](https://github.com/telekom-mms/ansible-collection-acme/pull/230) ([renovate[bot]](https://github.com/apps/renovate))
