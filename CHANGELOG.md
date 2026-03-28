@@ -10,6 +10,7 @@
 
 **Fixed bugs:**
 
+- remove loop label from nsupdate tasks [\#234](https://github.com/telekom-mms/ansible-collection-acme/pull/234) ([neubi4](https://github.com/neubi4))
 - nsupdate tasks should not be delegated to localhost [\#233](https://github.com/telekom-mms/ansible-collection-acme/pull/233) ([neubi4](https://github.com/neubi4))
 - replace home dir lookup from env with tilde [\#232](https://github.com/telekom-mms/ansible-collection-acme/pull/232) ([neubi4](https://github.com/neubi4))
 
