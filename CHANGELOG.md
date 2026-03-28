@@ -1,8 +1,12 @@
 # Changelog
 
-## [4.3.5](https://github.com/telekom-mms/ansible-collection-acme/tree/4.3.5) (2026-03-26)
+## [4.4.0](https://github.com/telekom-mms/ansible-collection-acme/tree/4.4.0) (2026-03-28)
 
-[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/4.3.4...4.3.5)
+[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/4.3.4...4.4.0)
+
+**Implemented enhancements:**
+
+- allow to set port of dns server when using nsupdate [\#231](https://github.com/telekom-mms/ansible-collection-acme/pull/231) ([neubi4](https://github.com/neubi4))
 
 **Merged pull requests:**
 
