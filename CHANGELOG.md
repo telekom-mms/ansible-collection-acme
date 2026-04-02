@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.4.1](https://github.com/telekom-mms/ansible-collection-acme/tree/4.4.1) (2026-04-02)
+
+[Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/4.4.0...4.4.1)
+
+**Merged pull requests:**
+
+- chore\(deps\): update ansible/ansible-lint action to v26.4.0 [\#235](https://github.com/telekom-mms/ansible-collection-acme/pull/235) ([renovate[bot]](https://github.com/apps/renovate))
+
 ## [4.4.0](https://github.com/telekom-mms/ansible-collection-acme/tree/4.4.0) (2026-03-28)
 
 [Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/4.3.4...4.4.0)
