@@ -35,8 +35,8 @@
     remaining_days: "{{ acme_remaining_days }}"
     data: "{{ acme_challenge }}"
   register: acme_certificate_validation
-  retries: 10
-  delay: 30
+  retries: "{{ acme_certificate_validation_retries }}"
+  delay: "{{ acme_certificate_validation_delay }}"
   until: acme_certificate_validation is not failed
 
 - name: Remove TXT records from DNS zone

@@ -41,8 +41,8 @@
         data: "{{ acme_challenge }}"
         validate_certs: "{{ acme_validate_certs | default(true) }}"
       register: acme_certificate_validation
-      retries: 10
-      delay: 30
+      retries: "{{ acme_certificate_validation_retries }}"
+      delay: "{{ acme_certificate_validation_delay }}"
       until: acme_certificate_validation is not failed
 
     - name: Remove challenge/hash files for SAN domains from fs
