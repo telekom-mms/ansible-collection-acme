@@ -56,6 +56,10 @@
         terms_agreed: true
         remaining_days: "{{ acme_remaining_days }}"
         data: "{{ acme_challenge }}"
+      register: acme_certificate_validation
+      retries: "{{ acme_certificate_validation_retries }}"
+      delay: "{{ acme_certificate_validation_delay }}"
+      until: acme_certificate_validation is not failed
 
     - name: Remove challenge file for SAN domain from s3 bucket
       amazon.aws.s3_object:

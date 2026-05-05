@@ -39,3 +39,7 @@
         remaining_days: "{{ acme_remaining_days }}"
         data: "{{ acme_challenge }}"
         validate_certs: "{{ acme_validate_certs | default(true) }}"
+      register: acme_certificate_validation
+      retries: "{{ acme_certificate_validation_retries }}"
+      delay: "{{ acme_certificate_validation_delay }}"
+      until: acme_certificate_validation is not failed

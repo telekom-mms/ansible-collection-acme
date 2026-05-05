@@ -24,6 +24,8 @@ acme_private_key_type: "ECC"
 acme_private_key_curve: "secp384r1"
 acme_remaining_days: "30"
 acme_challenge_timeout: 3600
+acme_certificate_validation_retries: 3
+acme_certificate_validation_delay: 30
 
 ### provider specific config
 acme_s3_config_region: eu-west-1
