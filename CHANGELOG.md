@@ -1,11 +1,16 @@
 # Changelog
 
-## [4.4.1](https://github.com/telekom-mms/ansible-collection-acme/tree/4.4.1) (2026-05-05)
+## [4.4.1](https://github.com/telekom-mms/ansible-collection-acme/tree/4.4.1) (2026-05-11)
 
 [Full Changelog](https://github.com/telekom-mms/ansible-collection-acme/compare/4.4.0...4.4.1)
 
+**Implemented enhancements:**
+
+- add option to rerun validation if dns lookup hangs [\#58](https://github.com/telekom-mms/ansible-collection-acme/issues/58)
+
 **Merged pull requests:**
 
+- Update nginx Docker digest to 1881968 [\#240](https://github.com/telekom-mms/ansible-collection-acme/pull/240) ([renovate[bot]](https://github.com/apps/renovate))
 - add retry to all certificate download tasks in challenge modules [\#239](https://github.com/telekom-mms/ansible-collection-acme/pull/239) ([z-bsod](https://github.com/z-bsod))
 - Update nginx Docker digest to 6e23479 [\#238](https://github.com/telekom-mms/ansible-collection-acme/pull/238) ([renovate[bot]](https://github.com/apps/renovate))
 - Pin telekom-mms/.github action to 988f434 [\#237](https://github.com/telekom-mms/ansible-collection-acme/pull/237) ([renovate[bot]](https://github.com/apps/renovate))
