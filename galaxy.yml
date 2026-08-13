@@ -23,6 +23,7 @@ dependencies:
   amazon.aws: ">=5.0.0"
   azure.azcollection: ">=1.14.0"
   community.general: ">10.3.0"
+  community.dns: ">=4.1.0"
 repository: https://github.com/telekom-mms/ansible-collection-acme
 documentation: https://github.com/telekom-mms/ansible-collection-acme
 homepage: https://github.com/telekom-mms/ansible-collection-acme
