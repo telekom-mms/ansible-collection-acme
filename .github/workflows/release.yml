@@ -11,6 +11,6 @@ jobs:
   release:
     # docs: https://github.com/telekom-mms/.github#release
     if: github.repository != '$TEMPLATE_REPOSITORY'
-    uses: telekom-mms/.github/.github/workflows/release.yml@9505ee0cc15f59a93d52e6b04eefa2c600a21fc0 # main
+    uses: telekom-mms/.github/.github/workflows/release.yml@28b71d78b05f1904475fcffde45040c8a45dccf8 # main
     secrets:
       GH_BRANCH_PROTECTION_APP_TOKEN: ${{ secrets.GH_BRANCH_PROTECTION_APP_TOKEN }}
