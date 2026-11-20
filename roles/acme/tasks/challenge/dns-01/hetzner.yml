@@ -3,31 +3,18 @@
 - name: Validate challenge only if it is created or changed # noqa no-handler
   when: acme_challenge is changed
   block:
-    - name: Lookup the zone_id using the acme_domain.zone
-      ansible.builtin.uri:
-        url: https://dns.hetzner.com/api/v1/zones?name={{ acme_domain.zone }}
-        headers:
-          Auth-API-Token: "{{ acme_hetzner_auth_token }}"
-      register: acme_lookup_zone_id
-
     - name: Add a new TXT record to the SAN domains
-      ansible.builtin.uri:
-        url: https://dns.hetzner.com/api/v1/records
-        method: POST
-        body_format: json
-        body:
-          {
-            "name": "{{ '_acme-challenge' }}{{ '' if item | replace('*.', '') == (item.split('.')[-2:] | join('.')) else '.' }}\
-                     {{ (item | replace('*.', '')).split('.')[:-2] | join('.') }}",
-            "ttl": 60,
-            "type": "TXT",
-            "value": "{{ acme_challenge_data[item]['dns-01']['resource_value'] }}",
-            "zone_id": "{{ acme_lookup_zone_id.json.zones[0].id }}",
-          }
-        headers:
-          Auth-API-Token: "{{ acme_hetzner_auth_token }}"
+      community.dns.hetzner_dns_record:
+        state: present
+        zone: "{{ acme_domain.zone }}"
+        # if wildcard, prefix is '' else simply the zone subdomain
+        prefix: "{{ '_acme-challenge' }}{{ '' if item | replace('*.', '') == (item.split('.')[-2:] | join('.')) else '.' ~ (item | replace('*.', '')).split('.')[:-2] | join('.') }}"
+        ttl: 60
+        type: TXT
+        value: "{{ acme_challenge_data[item]['dns-01']['resource_value'] }}"
+        hetzner_api_token: "{{ acme_hetzner_auth_token }}"
       loop: "{{ acme_domain.subject_alt_name }}"
-      register: acme_records
+      register: acme_record_info
       when:
         - acme_domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
@@ -41,7 +28,7 @@
       timeout: "{{ acme_challenge_timeout }}"
       community.crypto.acme_certificate:
         account_key_src: "{{ acme_account_key_path }}"
-        account_email: "{{ acme_account_email }}"
+        modify_account: false
         csr: "{{ acme_csr_path }}"
         cert: "{{ acme_cert_path }}"
         fullchain: "{{ acme_fullchain_path }}"
@@ -50,7 +37,6 @@
         force: "{{ acme_force_renewal | default(false) }}"
         acme_directory: "{{ acme_directory }}"
         acme_version: 2
-        terms_agreed: true
         remaining_days: "{{ acme_remaining_days }}"
         data: "{{ acme_challenge }}"
       register: acme_certificate_validation
@@ -59,12 +45,15 @@
       until: acme_certificate_validation is not failed
 
     - name: Remove created SAN TXT records to keep DNS zone clean
-      ansible.builtin.uri:
-        url: https://dns.hetzner.com/api/v1/records/{{ item }}
-        method: DELETE
-        headers:
-          Auth-API-Token: "{{ acme_hetzner_auth_token }}"
-      loop: "{{ acme_records | json_query('results[*].json.record.id') }}"
+      community.dns.hetzner_dns_record:
+        state: absent
+        zone_id: "{{ item.zone_id }}"
+        # if wildcard, prefix is '' else simply the zone subdomain
+        prefix: "{{ '_acme-challenge' }}{{ '' if item.item | replace('*.', '') == (item.item.split('.')[-2:] | join('.')) else '.' ~ (item.item | replace('*.', '')).split('.')[:-2] | join('.') }}"
+        type: TXT
+        value: "{{ acme_challenge_data[item.item]['dns-01']['resource_value'] }}"
+        hetzner_api_token: "{{ acme_hetzner_auth_token }}"
+      loop: "{{ acme_record_info.results }}"
       when:
         - acme_domain.subject_alt_name is defined
         # only runs if the challenge is run the first time, because then there is challenge_data
