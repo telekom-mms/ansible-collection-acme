@@ -27,6 +27,7 @@
     - name: Check if the certificate has correct data
       ansible.builtin.assert:
         that:
-          - result.subject.commonName == "{{ acme_domain.certificate_name }}"
-          - "'DNS:{{ acme_domain.certificate_name }}' in result.subject_alt_name"
-          - "'(STAGING) Artificial Apricot R3' in result.issuer.commonName"
+          - result.subject.commonName == acme_domain.certificate_name
+          - "'DNS:' ~ acme_domain.certificate_name in result.subject_alt_name"
+          # NOTE: due to changing issuers, the only commonality is the string '(STAGING)'.
+          - "'(STAGING)' in result.issuer.commonName"
